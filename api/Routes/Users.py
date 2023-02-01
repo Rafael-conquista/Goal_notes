@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import request
 from sql_alchemy import banco
-from models import Users
+from models.Users_model import UsersModel
 
 atributes = reqparse.RequestParser()
 
@@ -12,16 +12,10 @@ class Users(Resource):
 
 class User_register(Resource):
     def post(self):
+        infos = atributes.parse_args()
         dados = request.get_json()
-        name = dados['name']
-        surname = dados['surname']
-        password = dados['password']
-        birthday = dados['birthday']
-
-        user.save_user()
-        #criar controller para salvar o post
+        user = UsersModel(dados)
+        UsersModel.save_user(user)
         return{'message': 'the user has been created'}, 201
-        pass
-        import ipdb; ipdb.set_trace()
 
 

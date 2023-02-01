@@ -7,14 +7,14 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banco.db'
 api = Api(app)
-db = SQLAlchemy(app)
+banco = SQLAlchemy(app)
 
 @app.before_first_request
 def create_database():
-    db.create_all()
+    banco.create_all()
 
 api.add_resource(Users, "/users")
-api.add_resource(User_register, "/User_register")
+api.add_resource(User_register, "/register")
 
 if __name__ == "__main__":
     from sql_alchemy import banco
