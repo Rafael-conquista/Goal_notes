@@ -18,12 +18,18 @@ class Users(Resource):
         return users
 
 
-# falta criar seção para login
+class User_login(Resource):
+    def post(self):
+        login_request = request.get_json()
+        login = UsersModel(login_request)
+        is_logged = UsersModel.verify_login(self, login)
+        if is_logged:
+            return {"message": "logged successfully"}
+        return {"message": "wrong login"}
 
 
 class User_register(Resource):
     def post(self):
-        infos = atributes.parse_args()
         dados = request.get_json()
         user = UsersModel(dados)
         UsersModel.save_user(user)

@@ -1,6 +1,5 @@
 import random
 from sql_alchemy import banco
-from sqlalchemy.ext.declarative import declarative_base
 
 
 class UsersModel(banco.Model):
@@ -8,15 +7,15 @@ class UsersModel(banco.Model):
 
     id = banco.Column(banco.Integer, primary_key=True)
     name = banco.Column(banco.String(100))
-    surname = banco.column(banco.String(50))
-    password = banco.column(banco.String(25))
+    surname = banco.Column(banco.String(50))
+    password = banco.Column(banco.String(25))
 
     def __init__(self, dados):
         self.id = random.randint(1, 5000)
         # modificar para verificar se o id sorteado já existe
-        self.name = dados["name"]
-        self.surname = dados["surname"]
-        self.password = dados["password"]
+        self.name = dados["name"] if "name" in dados.keys() else None
+        self.surname = dados["surname"] if "surname" in dados.keys() else None
+        self.password = dados["password"] if "password" in dados.keys() else None
 
     def save_user(self):
         banco.session.add(self)
@@ -44,5 +43,16 @@ class UsersModel(banco.Model):
 
     def find_user(cls, id):
         user = banco.session.query(UsersModel).filter(UsersModel.id == id).first()
-
         return {"id": user.id, "name": user.name}
+
+    def verify_login(self, login):
+        login_surname = login.surname
+        login_password = login.password
+        user = (
+            banco.session.query(UsersModel)
+            .filter(UsersModel.surname == login.surname)
+            .first()
+        )
+        if user.password == login_password and user.surname == login_surname:
+            return True
+        return False
