@@ -32,11 +32,11 @@ class UsersModel(banco.Model):
             name = user.name
             user_list.append({"name": name, "id": id})
 
-        return {"users": user_list}
+        return {"users": user_list}, 200
 
     def find_user(cls, id):
         user = banco.session.query(UsersModel).filter(UsersModel.id == id).first()
-        return {"id": user.id, "name": user.name}
+        return {"id": user.id, "name": user.name}, 200
 
     def verify_login(self, login):
         login_surname = login.surname
@@ -47,9 +47,9 @@ class UsersModel(banco.Model):
             .first()
         )
         if user.logged:
-            return {"message": "user is already logged in"}
+            return {"message": "user is already logged in"}, 400
         if user.password == login_password and user.surname == login_surname:
             user.logged = True
             UsersModel.save_user(user)
-            return {"message": "user logged successfully"}
-        return {"message": "login not found: wrong password or surname"}
+            return {"message": "user logged successfully"}, 200
+        return {"message": "login not found: wrong password or surname"}, 404
