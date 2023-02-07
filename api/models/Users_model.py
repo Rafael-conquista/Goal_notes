@@ -6,9 +6,10 @@ class UsersModel(banco.Model):
     __tablename__ = "Users"
 
     id = banco.Column(banco.Integer, primary_key=True)
-    name = banco.Column(banco.String(100))
-    surname = banco.Column(banco.String(50))
-    password = banco.Column(banco.String(25))
+    name = banco.Column(banco.String(100), nullable=False)
+    surname = banco.Column(banco.String(50), nullable=False)
+    password = banco.Column(banco.String(25), nullable=False)
+    logged = banco.Column(banco.Boolean, default=False)
 
     def __init__(self, dados):
         self.id = random.randint(1, 5000)
@@ -16,20 +17,12 @@ class UsersModel(banco.Model):
         self.name = dados["name"] if "name" in dados.keys() else None
         self.surname = dados["surname"] if "surname" in dados.keys() else None
         self.password = dados["password"] if "password" in dados.keys() else None
+        self.logged = dados["logged"] if "logged" in dados.keys() else False
 
     def save_user(self):
         banco.session.add(self)
         banco.session.commit()
         banco.session.close()
-
-    def json(self):
-        return {
-            "id": self.user_id,
-            "name": self.login,
-            "birthday": self.birthday,
-            "surname": self.surname,
-            "password": self.password,
-        }
 
     def find_all_users(cls):
         users = banco.session.query(UsersModel).all()
@@ -53,6 +46,10 @@ class UsersModel(banco.Model):
             .filter(UsersModel.surname == login.surname)
             .first()
         )
+        if user.logged:
+            return {"message": "user is already logged in"}
         if user.password == login_password and user.surname == login_surname:
-            return True
-        return False
+            user.logged = True
+            UsersModel.save_user(user)
+            return {"message": "user logged successfully"}
+        return {"message": "login not found: wrong password or surname"}
