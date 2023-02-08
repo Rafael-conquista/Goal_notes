@@ -28,14 +28,30 @@ class UsersModel(banco.Model):
         banco.session.query(UsersModel).filter(UsersModel.id == user_id).delete()
         banco.session.commit()
         banco.session.close()
-        
+
+    def update_user(self, user_id, dados):
+        try:
+            user = (
+                banco.session.query(UsersModel).filter(UsersModel.id == user_id).first()
+            )
+            user.name = dados["name"] if "name" in dados.keys() else user.name
+            user.surname = (
+                dados["surname"] if "surname" in dados.keys() else user.surname
+            )
+            user.password = (
+                dados["password"] if "password" in dados.keys() else user.password
+            )
+            UsersModel.save_user(user)
+            return {"message": "user updated successfully"}, 200
+        except Exception as error:
+            return {"message": error}, 400
 
     def find_all_users(cls):
         users = banco.session.query(UsersModel).all()
         user_list = []
         for user in users:
             id = user.id
-            name = user.name
+            password = user.name
             user_list.append({"name": name, "id": id})
 
         return {"users": user_list}, 200
@@ -74,4 +90,3 @@ class UsersModel(banco.Model):
             UsersModel.save_user(user)
             return {"message": "user logged out successfully"}, 200
         return {"message": "error unlocked, please report us"}
-
