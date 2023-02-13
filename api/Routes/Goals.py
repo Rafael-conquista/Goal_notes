@@ -1,7 +1,9 @@
 from datetime import date
 from flask_restful import Resource
 from flask import request
+
 from models.Goals_model import GoalsModel
+from utils.format_date import format_datetime
 
 class Goal(Resource):
     def get(self, goal_id):
@@ -19,8 +21,8 @@ class Goal(Resource):
     def post(self):
         dados = request.get_json()
         goal = GoalsModel(dados)
-        # para tratar datas, vai ser necessário realizar uma verificação para deixar o formato como o abaixo
-        #goal.initial_data = date(2023,2,13)
+        goal.initial_data = format_datetime(goal.initial_data)
+        #criar verificações sobre a existencias dos campos de datas e formata-los como no exemplo acima
         import ipdb; ipdb.set_trace()
         GoalsModel.save_goal(goal)
         return {"message": "the goal has been created"}, 201
