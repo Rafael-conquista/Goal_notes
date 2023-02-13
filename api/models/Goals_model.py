@@ -7,13 +7,13 @@ class GoalsModel(banco.Model):
 
     goals_id = banco.Column(banco.Integer, primary_key=True)
     name = banco.Column(banco.String(100), nullable=False)
-    obs = banco.Column(banco.String(200),)
-    importance_degree = banco.Column(banco.Integer, nullable=False)
+    obs = banco.Column(banco.String(200))
+    importance_degree = banco.Column(banco.Integer)
     current_progress = banco.Column(banco.Float, default=0)
     initial_data = banco.Column(banco.Date)
     end_date = banco.Column(banco.Date)
     expected_data = banco.Column(banco.Date)
-    user_id = banco.Column(banco.Integer, ForeignKey("Users.id"))
+    user_id = banco.Column(banco.Integer, ForeignKey("Users.id"), nullable=False)
 
     def __init__(self, dados):
         self.id = random.randint(1, 5000)
@@ -26,3 +26,10 @@ class GoalsModel(banco.Model):
         self.end_date = dados["end_date"] if "end_date" in dados.keys() else None
         self.expected_data = dados["expected_data"] if "expected_data" in dados.keys() else None
         self.user_id = dados["user_id"] if "user_id" in dados.keys() else None
+
+    def save_goal(self):
+        banco.session.add(self)
+        banco.session.commit()
+        banco.session.close()
+    # create a get and post route
+    # possible problems -> create the row of the tables and insert Date type rows

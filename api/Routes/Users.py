@@ -1,6 +1,5 @@
-from flask_restful import Resource, reqparse
+from flask_restful import Resource
 from flask import request
-from sql_alchemy import banco
 from models.Users_model import UsersModel
 
 class User(Resource):
