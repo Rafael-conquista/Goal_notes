@@ -6,6 +6,5 @@ def format_datetime(date_request):
     day = int(group_date.group(3))
     month = int(group_date.group(2))
     year = int(group_date.group(1))
-    import ipdb; ipdb.set_trace()
     formated_date = date(year, month, day)
     return formated_date
