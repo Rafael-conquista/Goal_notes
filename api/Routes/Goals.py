@@ -1,22 +1,3 @@
-from datetime import date
-from flask_restful import Resource
-from flask import request
-
-from models.Goals_model import GoalsModel
-from utils.format_date import format_datetime
-
-class Goal(Resource):
-    def get(self, id):
-        goal = GoalsModel.find_goal(self, id)
-        return goal
-
-    def delete(self, user_id):
-        GoalsModel.delete_user(self, user_id)
-
-    def put(self, goals_id):
-        dados = request.get_json()
-        message = GoalsModel.update_user(self, goals_id, dados)
-        return message
 
     def post(self):
         dados = request.get_json()
@@ -30,10 +11,3 @@ class Goal(Resource):
             return{"message": "the progress is not correct"}, 500
         GoalsModel.save_goal(goal)
         return {"message": "the goal has been created"}, 201
-    
-class Goals_by_user(Resource):
-    def get(self, user_id):
-        #encontrar se o user existe na base
-        #filtrar os goals que sejam relacionados a ele
-        #organizar o retorno e refatorar todas as datas
-        #adicionar a rota ao App.py
