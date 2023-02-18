@@ -18,7 +18,7 @@ class User(Resource):
 
 class Users(Resource):
     def get(self):
-        users = UsersModel.find_all_users(self)
+        users = UsersModel.find_all_users()
         return users
 
 

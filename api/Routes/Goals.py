@@ -31,8 +31,8 @@ class Goal(Resource):
         GoalsModel.save_goal(goal)
         return {"message": "the goal has been created"}, 201
     
-class Goals_by_user(Resource):
-    def get(self, user_id):
+#class Goals_by_user(Resource):
+#    def get(self, user_id):
         #encontrar se o user existe na base
         #filtrar os goals que sejam relacionados a ele
         #organizar o retorno e refatorar todas as datas
