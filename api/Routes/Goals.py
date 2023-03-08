@@ -5,6 +5,11 @@ from flask import request
 from models.Goals_model import GoalsModel
 from utils.format_date import format_datetime
 
+class Goals(Resource):
+    def get(self):
+        goals = GoalsModel.find_all_goals()
+        return goals
+
 class Goal(Resource):
     def get(self, id):
         goal = GoalsModel.find_goal(self, id)

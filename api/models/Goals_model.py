@@ -31,5 +31,17 @@ class GoalsModel(banco.Model):
         banco.session.add(self)
         banco.session.commit()
         banco.session.close()
+
+    @classmethod
+    def find_all_goals(cls):
+        goals = banco.session.query(GoalsModel).all()
+        goal_list = []
+        for goal in goals:
+            #if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
+            import ipdb; ipdb.set_trace()
+            id = goal.goals_id
+            name = goal.name
+            goal_list.append({"name": name, "id": id})
+
+        return {"goals": goal_list}, 200
     # create a get and post route
-    # possible problems -> create the row of the tables and insert Date type rows
