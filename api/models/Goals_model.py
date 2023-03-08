@@ -44,4 +44,19 @@ class GoalsModel(banco.Model):
             goal_list.append({"name": name, "id": id})
 
         return {"goals": goal_list}, 200
+    
+    def find_goal(cls, id):
+        goal = banco.session.query(GoalsModel).filter(GoalsModel.goals_id == id).first()
+        return {
+            "id": goal.goals_id, 
+            "name": goal.name,
+            "importance_degree": goal.importance_degree,
+            "name": goal.name,
+            "initial_data": goal.initial_data,
+            "expected_data": goal.expected_data,
+            "current_progress": goal.current_progress,
+            "obs": goal.obs,
+            "end_date": goal.end_date,
+            "user_id": goal.user_id
+        }, 200
     # create a get and post route

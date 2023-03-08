@@ -11,8 +11,8 @@ class Goals(Resource):
         return goals
 
 class Goal(Resource):
-    def get(self, id):
-        goal = GoalsModel.find_goal(self, id)
+    def get(self, goals_id):
+        goal = GoalsModel.find_goal(self, goals_id)
         return goal
 
     def delete(self, user_id):

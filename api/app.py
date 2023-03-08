@@ -20,7 +20,7 @@ api.add_resource(User_login, "/login")
 api.add_resource(User_logoff, "/logoff")
 
 api.add_resource(Goals, "/goals")
-api.add_resource(Goal, "/goal")
+api.add_resource(Goal, "/goal/<int:goals_id>")
 
 if __name__ == "__main__":
     from sql_alchemy import banco
