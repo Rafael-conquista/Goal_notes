@@ -3,6 +3,7 @@ from sqlalchemy import ForeignKey
 from utils.format_date import format_to_string, format_datetime
 import random
 
+
 class GoalsModel(banco.Model):
     __tablename__ = "Goals"
 
@@ -21,11 +22,19 @@ class GoalsModel(banco.Model):
         # modificar para verificar se o id sorteado já existe
         self.name = dados["name"] if "name" in dados.keys() else None
         self.obs = dados["obs"] if "obs" in dados.keys() else None
-        self.importance_degree = dados["importance_degree"] if "importance_degree" in dados.keys() else None
-        self.current_progress = dados["current_progress"] if "current_progress" in dados.keys() else False
-        self.initial_data = dados["initial_data"] if "initial_data" in dados.keys() else None
+        self.importance_degree = (
+            dados["importance_degree"] if "importance_degree" in dados.keys() else None
+        )
+        self.current_progress = (
+            dados["current_progress"] if "current_progress" in dados.keys() else False
+        )
+        self.initial_data = (
+            dados["initial_data"] if "initial_data" in dados.keys() else None
+        )
         self.end_date = dados["end_date"] if "end_date" in dados.keys() else None
-        self.expected_data = dados["expected_data"] if "expected_data" in dados.keys() else None
+        self.expected_data = (
+            dados["expected_data"] if "expected_data" in dados.keys() else None
+        )
         self.user_id = dados["user_id"] if "user_id" in dados.keys() else None
 
     def save_goal(self):
@@ -38,17 +47,17 @@ class GoalsModel(banco.Model):
         goals = banco.session.query(GoalsModel).all()
         goal_list = []
         for goal in goals:
-            #if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
+            # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
             id = goal.goals_id
             name = goal.name
             goal_list.append({"name": name, "id": id})
 
         return {"goals": goal_list}, 200
-    
+
     def find_goal(cls, id):
         goal = banco.session.query(GoalsModel).filter(GoalsModel.goals_id == id).first()
         return {
-            "id": goal.goals_id, 
+            "id": goal.goals_id,
             "name": goal.name,
             "importance_degree": goal.importance_degree,
             "initial_data": format_to_string(goal.initial_data),
@@ -56,21 +65,43 @@ class GoalsModel(banco.Model):
             "current_progress": goal.current_progress,
             "obs": goal.obs,
             "end_date": format_to_string(goal.end_date),
-            "user_id": goal.user_id
+            "user_id": goal.user_id,
         }, 200
-    
+
     def update_goal(cls, goals_id, dados):
         try:
             goal = (
-                banco.session.query(GoalsModel).filter(GoalsModel.goals_id == goals_id).first()
+                banco.session.query(GoalsModel)
+                .filter(GoalsModel.goals_id == goals_id)
+                .first()
             )
             goal.name = dados["name"] if "name" in dados.keys() else goal.name
-            goal.importance_degree = dados["importance_degree"] if "importance_degree" in dados.keys() else goal.importance_degree
-            goal.current_progress = dados["current_progress"] if "current_progress" in dados.keys() else goal.current_progress
+            goal.importance_degree = (
+                dados["importance_degree"]
+                if "importance_degree" in dados.keys()
+                else goal.importance_degree
+            )
+            goal.current_progress = (
+                dados["current_progress"]
+                if "current_progress" in dados.keys()
+                else goal.current_progress
+            )
             goal.obs = dados["obs"] if "obs" in dados.keys() else goal.obs
-            goal.initial_data = format_datetime(dados["initial_data"]) if 'initial_data' in dados.keys() else None
-            goal.end_date = format_datetime(dados["end_date"]) if 'end_date' in dados.keys() else None
-            goal.expected_data = format_datetime(dados["expected_data"]) if 'expected_data' in dados.keys() else None
+            goal.initial_data = (
+                format_datetime(dados["initial_data"])
+                if "initial_data" in dados.keys()
+                else None
+            )
+            goal.end_date = (
+                format_datetime(dados["end_date"])
+                if "end_date" in dados.keys()
+                else None
+            )
+            goal.expected_data = (
+                format_datetime(dados["expected_data"])
+                if "expected_data" in dados.keys()
+                else None
+            )
             GoalsModel.save_goal(goal)
             return {"message": "user updated successfully"}, 200
         except Exception as error:

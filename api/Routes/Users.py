@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request
 from models.Users_model import UsersModel
 
+
 class User(Resource):
     def get(self, user_id):
         user = UsersModel.find_user(self, user_id)
