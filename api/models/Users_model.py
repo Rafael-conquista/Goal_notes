@@ -45,6 +45,7 @@ class UsersModel(banco.Model):
             return {"message": "user updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
+
     @classmethod
     def find_all_users(cls):
         users = banco.session.query(UsersModel).all()

@@ -20,7 +20,7 @@ class Goal(Resource):
 
     def put(self, goals_id):
         dados = request.get_json()
-        message = GoalsModel.update_user(self, goals_id, dados)
+        message = GoalsModel.update_goal(self, goals_id, dados)
         return message
 
     def post(self):
