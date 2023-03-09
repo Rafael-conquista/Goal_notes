@@ -22,7 +22,7 @@ api.add_resource(User_register, "/register")
 api.add_resource(User_login, "/login")
 api.add_resource(User_logoff, "/logoff")
 # users and Goals related Routes
-api.add_resource(Goals_by_user, "/user/<int:goals_id>")
+api.add_resource(Goals_by_user, "/usergoals/<int:user_id>")
 # Goals related Routes
 api.add_resource(Goals, "/goals")
 api.add_resource(Goal, "/goal/<int:goals_id>")

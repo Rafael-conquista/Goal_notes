@@ -3,14 +3,18 @@ from flask_restful import Resource
 from flask import request
 
 from models.Goals_model import GoalsModel
+from models.Users_model import UsersModel
 from utils.format_date import format_datetime
 
 
 class Goals_by_user(Resource):
-    def get(self):
-        import ipdb
-
-        ipdb.set_trace()
+    def get(self, user_id):
+        try:
+            user = UsersModel.find_user(self, user_id)
+            import ipdb;ipdb.set_trace()
+            id = user[0].get("id")
+        except:
+            return{"message": "the user doesn't exist"}, 400
 
 
 class Goals(Resource):
