@@ -5,14 +5,17 @@ from flask import request
 from models.Goals_model import GoalsModel
 from models.Users_model import UsersModel
 from utils.format_date import format_datetime
+from sql_alchemy import banco
 
 
 class Goals_by_user(Resource):
     def get(self, user_id):
         try:
             user = UsersModel.find_user(self, user_id)
-            import ipdb;ipdb.set_trace()
             id = user[0].get("id")
+            #criar uma query que procure todas as goals que tenham o user_id igual ao id de usuario e retorna-los
+            goals = banco.session.query(GoalsModel).filter(GoalsModel.user_id == id).all()
+            import ipdb;ipdb.set_trace()
         except:
             return{"message": "the user doesn't exist"}, 400
 

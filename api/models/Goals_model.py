@@ -75,18 +75,10 @@ class GoalsModel(banco.Model):
                 .filter(GoalsModel.goals_id == goals_id)
                 .first()
             )
-            goal.name = dados["name"] if "name" in dados.keys() else goal.name
-            goal.importance_degree = (
-                dados["importance_degree"]
-                if "importance_degree" in dados.keys()
-                else goal.importance_degree
-            )
-            goal.current_progress = (
-                dados["current_progress"]
-                if "current_progress" in dados.keys()
-                else goal.current_progress
-            )
-            goal.obs = dados["obs"] if "obs" in dados.keys() else goal.obs
+            goal.name = dados.get("name", goal.name)
+            goal.importance_degree = dados.get("importance_degree", goal.importance_degree)
+            goal.current_progress = dados.get("current_progress", goal.current_progress)
+            goal.obs = dados.get("obs", goal.obs)
             goal.initial_data = (
                 format_datetime(dados["initial_data"])
                 if "initial_data" in dados.keys()
@@ -103,6 +95,6 @@ class GoalsModel(banco.Model):
                 else None
             )
             GoalsModel.save_goal(goal)
-            return {"message": "user updated successfully"}, 200
+            return {"message": "Goal updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
