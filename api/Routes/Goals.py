@@ -18,6 +18,9 @@ class Goals_by_user(Resource):
             import ipdb;ipdb.set_trace()
         except:
             return{"message": "the user doesn't exist"}, 400
+        
+
+        #diojadouiwdihandjuinawuidjnaiojdniaodniuwqdbni
 
 
 class Goals(Resource):
