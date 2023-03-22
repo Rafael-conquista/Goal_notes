@@ -13,14 +13,19 @@ class Goals_by_user(Resource):
         try:
             user = UsersModel.find_user(self, user_id)
             id = user[0].get("id")
-            #criar uma query que procure todas as goals que tenham o user_id igual ao id de usuario e retorna-los
-            goals = banco.session.query(GoalsModel).filter(GoalsModel.user_id == id).all()
-            import ipdb;ipdb.set_trace()
-        except:
-            return{"message": "the user doesn't exist"}, 400
-        
+            if id:
+                goals = (
+                    banco.session.query(GoalsModel)
+                    .filter(GoalsModel.user_id == id)
+                    .all()
+                )
+                goals_formatted = GoalsModel.parser_goals_infos(self, goals)
+                return goals_formatted
+            else:
+                return {"message": "the user doesn't exist in database"}, 400
 
-        #diojadouiwdihandjuinawuidjnaiojdniaodniuwqdbni
+        except:
+            return {"message": "something went wrong during request"}, 400
 
 
 class Goals(Resource):
@@ -64,11 +69,3 @@ class Goal(Resource):
             return {"message": "the progress is not correct"}, 500
         GoalsModel.save_goal(goal)
         return {"message": "the goal has been created"}, 201
-
-
-# class Goals_by_user(Resource):
-#    def get(self, user_id):
-# encontrar se o user existe na base
-# filtrar os goals que sejam relacionados a ele
-# organizar o retorno e refatorar todas as datas
-# adicionar a rota ao App.py

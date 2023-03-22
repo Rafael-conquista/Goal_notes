@@ -76,7 +76,9 @@ class GoalsModel(banco.Model):
                 .first()
             )
             goal.name = dados.get("name", goal.name)
-            goal.importance_degree = dados.get("importance_degree", goal.importance_degree)
+            goal.importance_degree = dados.get(
+                "importance_degree", goal.importance_degree
+            )
             goal.current_progress = dados.get("current_progress", goal.current_progress)
             goal.obs = dados.get("obs", goal.obs)
             goal.initial_data = (
@@ -98,3 +100,22 @@ class GoalsModel(banco.Model):
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
+
+    def parser_goals_infos(cls, goals):
+        organized_goals = {}
+        cont = 0
+        for goal in goals:
+            goal_object = {
+                "goals_id": goal.goals_id,
+                "name": goal.name,
+                "current_progress": goal.current_progress,
+                "end_date": format_to_string(goal.end_date),
+                "initial_data": format_to_string(goal.initial_data),
+                "expected_data": format_to_string(goal.expected_data),
+                "user_id": goal.user_id,
+                "obs": goal.obs,
+            }
+            organized_goals.update({cont: goal_object})
+            cont = cont + 1
+
+        return organized_goals, 200
