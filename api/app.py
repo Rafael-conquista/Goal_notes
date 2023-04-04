@@ -28,8 +28,8 @@ api.add_resource(Goals_by_user, "/usergoals/<int:user_id>")
 api.add_resource(Goals, "/goals")
 api.add_resource(Goal, "/goal/<int:goals_id>")
 # types related Routes
-api.add_resource(Goals, "/types")
-api.add_resource(Goal, "/view_type/<int:id>")
+api.add_resource(Types, "/types")
+api.add_resource(Type, "/view_type/<int:id>")
 
 if __name__ == "__main__":
     from sql_alchemy import banco
