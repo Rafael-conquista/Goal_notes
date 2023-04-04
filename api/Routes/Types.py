@@ -11,6 +11,7 @@ class Types(Resource):
 
 
 class Type(Resource):
+    #types that will be usefull in goals 
     def get(self, id):
         type = TypesModel.find_type(self, id)
         return type
