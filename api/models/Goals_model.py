@@ -1,6 +1,7 @@
 from sql_alchemy import banco
 from sqlalchemy import ForeignKey
 from utils.format_date import format_to_string, format_datetime
+from models.Types_model import TypesModel
 import random
 
 
@@ -16,6 +17,7 @@ class GoalsModel(banco.Model):
     end_date = banco.Column(banco.Date)
     expected_data = banco.Column(banco.Date)
     user_id = banco.Column(banco.Integer, ForeignKey("Users.id"), nullable=False)
+    type_id = banco.Column(banco.Integer, ForeignKey("Types.id"))
 
     def __init__(self, dados):
         self.id = random.randint(1, 5000)
@@ -36,6 +38,7 @@ class GoalsModel(banco.Model):
             dados["expected_data"] if "expected_data" in dados.keys() else None
         )
         self.user_id = dados["user_id"] if "user_id" in dados.keys() else None
+        self.type_id = dados["type_id"] if "type_id" in dados.keys() else None
 
     def save_goal(self):
         banco.session.add(self)
@@ -48,14 +51,39 @@ class GoalsModel(banco.Model):
         goal_list = []
         for goal in goals:
             # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
-            id = goal.goals_id
-            name = goal.name
-            goal_list.append({"name": name, "id": id})
+            if goal.type_id:
+                type_name = GoalsModel.find_goal_type(cls, type_id=goal.type_id)
+            else:
+                type_name = "tipo não declarado"
+
+            goal_list.append(
+                {
+                    "id": goal.goals_id,
+                    "name": goal.name,
+                    "importance_degree": goal.importance_degree,
+                    "initial_data": format_to_string(goal.initial_data),
+                    "expected_data": format_to_string(goal.expected_data),
+                    "current_progress": goal.current_progress,
+                    "obs": goal.obs,
+                    "end_date": format_to_string(goal.end_date),
+                    "user_id": goal.user_id,
+                    "type_name": type_name
+                }
+            )
 
         return {"goals": goal_list}, 200
+    
+    def find_goal_type(cls, type_id):
+        type = (banco.session.query(TypesModel).filter(TypesModel.id == type_id).first()).name
+        return type
 
     def find_goal(cls, id):
         goal = banco.session.query(GoalsModel).filter(GoalsModel.goals_id == id).first()
+        if goal.type_id:
+            type_name = GoalsModel.find_goal_type(cls, type_id=goal.type_id)
+        else:
+            type_name = "tipo não declarado"
+
         return {
             "id": goal.goals_id,
             "name": goal.name,
@@ -66,6 +94,7 @@ class GoalsModel(banco.Model):
             "obs": goal.obs,
             "end_date": format_to_string(goal.end_date),
             "user_id": goal.user_id,
+            "type_name": type_name
         }, 200
 
     def update_goal(cls, goals_id, dados):
