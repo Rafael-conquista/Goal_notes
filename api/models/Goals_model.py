@@ -48,7 +48,7 @@ class GoalsModel(banco.Model):
         for goal in goals:
             # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
             if goal.type_id:
-                type_name = GoalsModel.find_goal_type(cls, type_id=goal.type_id)
+                type_name = main_queries.find_query(TypesModel, goal.type_id).name
             else:
                 type_name = "tipo não declarado"
 
@@ -69,18 +69,15 @@ class GoalsModel(banco.Model):
 
         return {"goals": goal_list}, 200
 
-    def find_goal_type(cls, type_id):
-        type = (
-            banco.session.query(TypesModel).filter(TypesModel.id == type_id).first()
-        ).name
-        return type
-
     def find_goal(cls, id):
-        goal = banco.session.query(GoalsModel).filter(GoalsModel.goals_id == id).first()
-        if goal.type_id:
-            type_name = GoalsModel.find_goal_type(cls, type_id=goal.type_id)
-        else:
-            type_name = "tipo não declarado"
+        try:
+            goal = main_queries.find_query(GoalsModel, id)
+            if goal.type_id:
+                type_name = main_queries.find_query(TypesModel, goal.type_id).name
+            else:
+                type_name = "tipo não declarado"
+        except Exception as ex:
+            return {"message": ex}
 
         return {
             "id": goal.goals_id,
@@ -97,11 +94,7 @@ class GoalsModel(banco.Model):
 
     def update_goal(cls, goals_id, dados):
         try:
-            goal = (
-                banco.session.query(GoalsModel)
-                .filter(GoalsModel.goals_id == goals_id)
-                .first()
-            )
+            goal = main_queries.find_query(GoalsModel, id)
             goal.name = dados.get("name", goal.name)
             goal.importance_degree = dados.get(
                 "importance_degree", goal.importance_degree
@@ -133,7 +126,7 @@ class GoalsModel(banco.Model):
         cont = 0
         for goal in goals:
             if goal.type_id:
-                type_name = GoalsModel.find_goal_type(cls, type_id=goal.type_id)
+                type_name = main_queries.find_query(TypesModel, goal.type_id).name
             else:
                 type_name = "tipo não declarado"
 
@@ -152,3 +145,5 @@ class GoalsModel(banco.Model):
             cont = cont + 1
 
         return organized_goals, 200
+    
+    #criar um método para verificar se existe um type_id

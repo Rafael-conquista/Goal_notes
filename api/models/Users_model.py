@@ -27,9 +27,7 @@ class UsersModel(banco.Model):
 
     def update_user(self, user_id, dados):
         try:
-            user = (
-                banco.session.query(UsersModel).filter(UsersModel.id == user_id).first()
-            )
+            user = main_queries.find_query(UsersModel, user_id)
             user.name = dados["name"] if "name" in dados.keys() else user.name
             user.surname = (
                 dados["surname"] if "surname" in dados.keys() else user.surname
@@ -54,8 +52,11 @@ class UsersModel(banco.Model):
         return {"users": user_list}, 200
 
     def find_user(cls, id):
-        user = banco.session.query(UsersModel).filter(UsersModel.id == id).first()
-        return {"id": user.id, "name": user.name}, 200
+        try:
+            user = main_queries.find_query(UsersModel, id)
+            return {"id": user.id, "name": user.name}, 200
+        except Exception as ex:
+            return {"message": ex}
 
     def verify_login(self, login):
         login_surname = login.surname
