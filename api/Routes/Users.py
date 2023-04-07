@@ -1,6 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from models.Users_model import UsersModel
+from utils import main_queries
 
 
 class User(Resource):
@@ -43,7 +44,7 @@ class User_register(Resource):
     def post(self):
         dados = request.get_json()
         user = UsersModel(dados)
-        UsersModel.save_user(user)
+        main_queries.save_query(user)
         return {"message": "the user has been created"}, 201
 
 

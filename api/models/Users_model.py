@@ -1,5 +1,6 @@
 import random
 from sql_alchemy import banco
+from utils import main_queries
 
 
 class UsersModel(banco.Model):
@@ -19,11 +20,6 @@ class UsersModel(banco.Model):
         self.password = dados["password"] if "password" in dados.keys() else None
         self.logged = dados["logged"] if "logged" in dados.keys() else False
 
-    def save_user(self):
-        banco.session.add(self)
-        banco.session.commit()
-        banco.session.close()
-
     def delete_user(self, user_id):
         banco.session.query(UsersModel).filter(UsersModel.id == user_id).delete()
         banco.session.commit()
@@ -41,7 +37,7 @@ class UsersModel(banco.Model):
             user.password = (
                 dados["password"] if "password" in dados.keys() else user.password
             )
-            UsersModel.save_user(user)
+            main_queries.save_query(user)
             return {"message": "user updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
@@ -73,7 +69,7 @@ class UsersModel(banco.Model):
             return {"message": "user is already logged in"}, 400
         if user.password == login_password and user.surname == login_surname:
             user.logged = True
-            UsersModel.save_user(user)
+            main_queries.save_query(user)
             return {"message": "user logged in successfully"}, 200
         return {"message": "login not found: wrong password or surname"}, 404
 
@@ -88,6 +84,6 @@ class UsersModel(banco.Model):
             return {"message": "user is already logged out"}, 400
         if user.surname == logoff.surname:
             user.logged = False
-            UsersModel.save_user(user)
+            main_queries.save_query(user)
             return {"message": "user logged out successfully"}, 200
         return {"message": "error unlocked, please report us"}

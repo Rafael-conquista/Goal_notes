@@ -1,6 +1,7 @@
 from sql_alchemy import banco
 from sqlalchemy import ForeignKey
 from utils.format_date import format_to_string, format_datetime
+from utils import main_queries
 from models.Types_model import TypesModel
 import random
 
@@ -40,11 +41,6 @@ class GoalsModel(banco.Model):
         self.user_id = dados["user_id"] if "user_id" in dados.keys() else None
         self.type_id = dados["type_id"] if "type_id" in dados.keys() else None
 
-    def save_goal(self):
-        banco.session.add(self)
-        banco.session.commit()
-        banco.session.close()
-
     @classmethod
     def find_all_goals(cls):
         goals = banco.session.query(GoalsModel).all()
@@ -67,14 +63,16 @@ class GoalsModel(banco.Model):
                     "obs": goal.obs,
                     "end_date": format_to_string(goal.end_date),
                     "user_id": goal.user_id,
-                    "type_name": type_name
+                    "type_name": type_name,
                 }
             )
 
         return {"goals": goal_list}, 200
-    
+
     def find_goal_type(cls, type_id):
-        type = (banco.session.query(TypesModel).filter(TypesModel.id == type_id).first()).name
+        type = (
+            banco.session.query(TypesModel).filter(TypesModel.id == type_id).first()
+        ).name
         return type
 
     def find_goal(cls, id):
@@ -94,7 +92,7 @@ class GoalsModel(banco.Model):
             "obs": goal.obs,
             "end_date": format_to_string(goal.end_date),
             "user_id": goal.user_id,
-            "type_name": type_name
+            "type_name": type_name,
         }, 200
 
     def update_goal(cls, goals_id, dados):
@@ -125,7 +123,7 @@ class GoalsModel(banco.Model):
                 if "expected_data" in dados.keys()
                 else None
             )
-            GoalsModel.save_goal(goal)
+            main_queries.save_query(goal)
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
@@ -148,7 +146,7 @@ class GoalsModel(banco.Model):
                 "expected_data": format_to_string(goal.expected_data),
                 "user_id": goal.user_id,
                 "obs": goal.obs,
-                "type_name": type_name
+                "type_name": type_name,
             }
             organized_goals.update({cont: goal_object})
             cont = cont + 1

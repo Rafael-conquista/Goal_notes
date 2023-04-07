@@ -5,6 +5,7 @@ from flask import request
 from models.Goals_model import GoalsModel
 from models.Users_model import UsersModel
 from utils.format_date import format_datetime
+from utils import main_queries
 from sql_alchemy import banco
 
 
@@ -67,5 +68,5 @@ class Goal(Resource):
             return {"message": "the importance degree must be less than 5"}, 500
         if goal.current_progress < 0 or goal.current_progress > 100:
             return {"message": "the progress is not correct"}, 500
-        GoalsModel.save_goal(goal)
+        main_queries.save_query(goal)
         return {"message": "the goal has been created"}, 201

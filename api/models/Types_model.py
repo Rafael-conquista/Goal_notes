@@ -1,5 +1,6 @@
 from sql_alchemy import banco
 from sqlalchemy import ForeignKey
+from utils import main_queries
 
 
 class TypesModel(banco.Model):
@@ -13,11 +14,6 @@ class TypesModel(banco.Model):
         # self.id = random.randint(1, 5000)
         self.name = dados["name"] if "name" in dados.keys() else None
         self.obs = dados["obs"] if "obs" in dados.keys() else None
-
-    def save_type(self):
-        banco.session.add(self)
-        banco.session.commit()
-        banco.session.close()
 
     @classmethod
     def find_all_types(cls):
@@ -45,11 +41,11 @@ class TypesModel(banco.Model):
             type = banco.session.query(TypesModel).filter(TypesModel.id == id).first()
             type.name = dados.get("name", type.name)
             type.obs = dados.get("obs", type.obs)
-            TypesModel.save_type(type)
+            main_queries.save_query(type)
             return {"message": "Type updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
-        
+
     def delete_type(self, id):
         banco.session.query(TypesModel).filter(TypesModel.id == id).delete()
         banco.session.commit()

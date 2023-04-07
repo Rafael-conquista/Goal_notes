@@ -2,6 +2,7 @@ from sql_alchemy import banco
 from flask_restful import Resource
 from flask import request
 from models.Types_model import TypesModel
+from utils import main_queries
 
 
 class Types(Resource):
@@ -11,7 +12,6 @@ class Types(Resource):
 
 
 class Type(Resource):
-    #types that will be usefull in goals 
     def get(self, id):
         type = TypesModel.find_type(self, id)
         return type
@@ -24,10 +24,11 @@ class Type(Resource):
         dados = request.get_json()
         message = TypesModel.update_type(self, id, dados)
         return message
-    
+
+
 class Type_register(Resource):
     def post(self):
         dados = request.get_json()
         type = TypesModel(dados)
-        TypesModel.save_type(type)
+        main_queries.save_query(type)
         return {"message": "the type has been created"}, 201
