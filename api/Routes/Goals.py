@@ -47,7 +47,7 @@ class Goal(Resource):
         message = GoalsModel.update_goal(self, goals_id, dados)
         return message
 
-    def post(self):
+    def post(self, goals_id):
         dados = request.get_json()
         goal = GoalsModel(dados)
         goal.initial_data = (

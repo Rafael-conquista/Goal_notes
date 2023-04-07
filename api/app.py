@@ -38,4 +38,3 @@ if __name__ == "__main__":
     banco.init_app(app)
     app.run(debug=True)
 
-# create group goals by user route
