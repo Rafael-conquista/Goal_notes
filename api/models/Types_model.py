@@ -17,7 +17,7 @@ class TypesModel(banco.Model):
 
     @classmethod
     def find_all_types(cls):
-        types = banco.session.query(TypesModel).all()
+        types = main_queries.find_all_query(TypesModel)
         type_list = []
         for type in types:
             # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
@@ -29,24 +29,22 @@ class TypesModel(banco.Model):
         return {"types": type_list}, 200
 
     def find_type(cls, id):
-        type = banco.session.query(TypesModel).filter(TypesModel.id == id).first()
-        return {
-            "id": type.id,
-            "name": type.name,
-            "obs": type.obs,
-        }, 200
+        try:
+            type = main_queries.find_query(TypesModel, id)
+            return {
+                "id": type.id,
+                "name": type.name,
+                "obs": type.obs,
+            }, 200
+        except Exception as ex:
+            return {"message": ex}
 
     def update_type(cls, id, dados):
         try:
-            type = banco.session.query(TypesModel).filter(TypesModel.id == id).first()
+            type = main_queries.find_query(TypesModel, id)
             type.name = dados.get("name", type.name)
             type.obs = dados.get("obs", type.obs)
             main_queries.save_query(type)
             return {"message": "Type updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
-
-    def delete_type(self, id):
-        banco.session.query(TypesModel).filter(TypesModel.id == id).delete()
-        banco.session.commit()
-        banco.session.close()

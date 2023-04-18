@@ -17,7 +17,8 @@ class GoalsModel(banco.Model):
     initial_data = banco.Column(banco.Date)
     end_date = banco.Column(banco.Date)
     expected_data = banco.Column(banco.Date)
-    user_id = banco.Column(banco.Integer, ForeignKey("Users.id"), nullable=False)
+    user_id = banco.Column(
+        banco.Integer, ForeignKey("Users.id"), nullable=False)
     type_id = banco.Column(banco.Integer, ForeignKey("Types.id"))
 
     def __init__(self, dados):
@@ -34,7 +35,8 @@ class GoalsModel(banco.Model):
         self.initial_data = (
             dados["initial_data"] if "initial_data" in dados.keys() else None
         )
-        self.end_date = dados["end_date"] if "end_date" in dados.keys() else None
+        self.end_date = dados["end_date"] if "end_date" in dados.keys(
+        ) else None
         self.expected_data = (
             dados["expected_data"] if "expected_data" in dados.keys() else None
         )
@@ -43,14 +45,11 @@ class GoalsModel(banco.Model):
 
     @classmethod
     def find_all_goals(cls):
-        goals = banco.session.query(GoalsModel).all()
+        goals = main_queries.find_all_query(GoalsModel)
         goal_list = []
         for goal in goals:
             # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
-            if goal.type_id:
-                type_name = GoalsModel.find_goal_type(cls, type_id=goal.type_id)
-            else:
-                type_name = "tipo não declarado"
+            type_name = GoalsModel.find_type_name(goal)
 
             goal_list.append(
                 {
@@ -69,18 +68,12 @@ class GoalsModel(banco.Model):
 
         return {"goals": goal_list}, 200
 
-    def find_goal_type(cls, type_id):
-        type = (
-            banco.session.query(TypesModel).filter(TypesModel.id == type_id).first()
-        ).name
-        return type
-
     def find_goal(cls, id):
-        goal = banco.session.query(GoalsModel).filter(GoalsModel.goals_id == id).first()
-        if goal.type_id:
-            type_name = GoalsModel.find_goal_type(cls, type_id=goal.type_id)
-        else:
-            type_name = "tipo não declarado"
+        try:
+            goal = main_queries.find_query(GoalsModel, id)
+            type_name = GoalsModel.find_type_name(goal)
+        except Exception as ex:
+            return {"message": ex}
 
         return {
             "id": goal.goals_id,
@@ -97,16 +90,13 @@ class GoalsModel(banco.Model):
 
     def update_goal(cls, goals_id, dados):
         try:
-            goal = (
-                banco.session.query(GoalsModel)
-                .filter(GoalsModel.goals_id == goals_id)
-                .first()
-            )
+            goal = main_queries.find_query(GoalsModel, id)
             goal.name = dados.get("name", goal.name)
             goal.importance_degree = dados.get(
                 "importance_degree", goal.importance_degree
             )
-            goal.current_progress = dados.get("current_progress", goal.current_progress)
+            goal.current_progress = dados.get(
+                "current_progress", goal.current_progress)
             goal.obs = dados.get("obs", goal.obs)
             goal.initial_data = (
                 format_datetime(dados["initial_data"])
@@ -132,10 +122,7 @@ class GoalsModel(banco.Model):
         organized_goals = {}
         cont = 0
         for goal in goals:
-            if goal.type_id:
-                type_name = GoalsModel.find_goal_type(cls, type_id=goal.type_id)
-            else:
-                type_name = "tipo não declarado"
+            type_name = GoalsModel.find_type_name(goal)
 
             goal_object = {
                 "goals_id": goal.goals_id,
@@ -152,3 +139,11 @@ class GoalsModel(banco.Model):
             cont = cont + 1
 
         return organized_goals, 200
+
+    def find_type_name(goal):
+        if goal.type_id:
+            type_name = main_queries.find_query(TypesModel, goal.type_id).name
+        else:
+            type_name = "tipo não declarado"
+        return type_name
+    # criar um método para verificar se existe um type_id
