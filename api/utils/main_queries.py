@@ -13,3 +13,10 @@ def find_query(table, id):
         return result
     result = banco.session.query(table).filter(table.id == id).first()
     return result
+
+
+def find_all_query(table):
+    result = banco.session.query(table).all()
+    return result
+
+#delete

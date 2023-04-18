@@ -17,7 +17,7 @@ class TypesModel(banco.Model):
 
     @classmethod
     def find_all_types(cls):
-        types = banco.session.query(TypesModel).all()
+        types = main_queries.find_all_query(TypesModel)
         type_list = []
         for type in types:
             # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__

@@ -43,7 +43,7 @@ class GoalsModel(banco.Model):
 
     @classmethod
     def find_all_goals(cls):
-        goals = banco.session.query(GoalsModel).all()
+        goals = main_queries.find_all_query(GoalsModel)
         goal_list = []
         for goal in goals:
             # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__

@@ -42,7 +42,7 @@ class UsersModel(banco.Model):
 
     @classmethod
     def find_all_users(cls):
-        users = banco.session.query(UsersModel).all()
+        users = main_queries.find_all_query(UsersModel)
         user_list = []
         for user in users:
             id = user.id
