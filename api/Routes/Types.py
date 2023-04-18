@@ -17,7 +17,7 @@ class Type(Resource):
         return type
 
     def delete(self, id):
-        TypesModel.delete_type(self, id)
+        main_queries.delete_query(TypesModel, id)
         return {"message": "the type has been deleted"}, 202
 
     def put(self, id):

@@ -17,19 +17,19 @@ class UsersModel(banco.Model):
         # modificar para verificar se o id sorteado já existe
         self.name = dados["name"] if "name" in dados.keys() else None
         self.surname = dados["surname"] if "surname" in dados.keys() else None
-        self.password = dados["password"] if "password" in dados.keys() else None
+        self.password = dados["password"] if "password" in dados.keys(
+        ) else None
         self.logged = dados["logged"] if "logged" in dados.keys() else False
 
     def delete_user(self, user_id):
-        banco.session.query(UsersModel).filter(UsersModel.id == user_id).delete()
+        banco.session.query(UsersModel).filter(
+            UsersModel.id == user_id).delete()
         banco.session.commit()
         banco.session.close()
 
     def update_user(self, user_id, dados):
         try:
-            user = (
-                banco.session.query(UsersModel).filter(UsersModel.id == user_id).first()
-            )
+            user = main_queries.find_query(UsersModel, user_id)
             user.name = dados["name"] if "name" in dados.keys() else user.name
             user.surname = (
                 dados["surname"] if "surname" in dados.keys() else user.surname
@@ -44,7 +44,7 @@ class UsersModel(banco.Model):
 
     @classmethod
     def find_all_users(cls):
-        users = banco.session.query(UsersModel).all()
+        users = main_queries.find_all_query(UsersModel)
         user_list = []
         for user in users:
             id = user.id
@@ -54,8 +54,11 @@ class UsersModel(banco.Model):
         return {"users": user_list}, 200
 
     def find_user(cls, id):
-        user = banco.session.query(UsersModel).filter(UsersModel.id == id).first()
-        return {"id": user.id, "name": user.name}, 200
+        try:
+            user = main_queries.find_query(UsersModel, id)
+            return {"id": user.id, "name": user.name}, 200
+        except Exception as ex:
+            return {"message": ex}
 
     def verify_login(self, login):
         login_surname = login.surname

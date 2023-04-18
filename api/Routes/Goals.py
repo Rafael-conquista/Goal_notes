@@ -40,8 +40,9 @@ class Goal(Resource):
         goal = GoalsModel.find_goal(self, goals_id)
         return goal
 
-    def delete(self, user_id):
-        GoalsModel.delete_user(self, user_id)
+    def delete(self, goals_id):
+        main_queries.delete_query(GoalsModel, goals_id)
+        return {"message": "it has been delete"}
 
     def put(self, goals_id):
         dados = request.get_json()
@@ -57,7 +58,8 @@ class Goal(Resource):
             else None
         )
         goal.end_date = (
-            format_datetime(goal.end_date) if "end_date" in dados.keys() else None
+            format_datetime(
+                goal.end_date) if "end_date" in dados.keys() else None
         )
         goal.expected_data = (
             format_datetime(goal.expected_data)
