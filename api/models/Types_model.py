@@ -48,8 +48,3 @@ class TypesModel(banco.Model):
             return {"message": "Type updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
-
-    def delete_type(self, id):
-        banco.session.query(TypesModel).filter(TypesModel.id == id).delete()
-        banco.session.commit()
-        banco.session.close()

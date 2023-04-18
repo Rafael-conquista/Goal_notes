@@ -17,11 +17,13 @@ class UsersModel(banco.Model):
         # modificar para verificar se o id sorteado já existe
         self.name = dados["name"] if "name" in dados.keys() else None
         self.surname = dados["surname"] if "surname" in dados.keys() else None
-        self.password = dados["password"] if "password" in dados.keys() else None
+        self.password = dados["password"] if "password" in dados.keys(
+        ) else None
         self.logged = dados["logged"] if "logged" in dados.keys() else False
 
     def delete_user(self, user_id):
-        banco.session.query(UsersModel).filter(UsersModel.id == user_id).delete()
+        banco.session.query(UsersModel).filter(
+            UsersModel.id == user_id).delete()
         banco.session.commit()
         banco.session.close()
 

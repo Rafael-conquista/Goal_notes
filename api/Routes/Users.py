@@ -10,7 +10,8 @@ class User(Resource):
         return user
 
     def delete(self, user_id):
-        UsersModel.delete_user(self, user_id)
+        main_queries.delete_query(UsersModel, id)
+        return {"message": "it has been delete"}
 
     def put(self, user_id):
         dados = request.get_json()
