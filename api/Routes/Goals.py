@@ -52,6 +52,7 @@ class Goal(Resource):
     def post(self, goals_id):
         dados = request.get_json()
         goal = GoalsModel(dados)
+        #if()
         goal.initial_data = (
             format_datetime(goal.initial_data)
             if "initial_data" in dados.keys()
