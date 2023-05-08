@@ -90,7 +90,7 @@ class GoalsModel(banco.Model):
 
     def update_goal(cls, goals_id, dados):
         try:
-            goal = main_queries.find_query(GoalsModel, id)
+            goal = main_queries.find_query(GoalsModel, goals_id)
             goal.name = dados.get("name", goal.name)
             goal.importance_degree = dados.get(
                 "importance_degree", goal.importance_degree
@@ -146,4 +146,3 @@ class GoalsModel(banco.Model):
         else:
             type_name = "tipo não declarado"
         return type_name
-    # criar um método para verificar se existe um type_id

@@ -51,6 +51,13 @@ class Goal(Resource):
 
     def post(self, goals_id):
         dados = request.get_json()
+        user_id = dados['user_id']
+        user = main_queries.find_query(UsersModel, user_id)
+        if not user:
+            return {
+                "message": "user id unavailable"
+            }
+
         goal = GoalsModel(dados)
         goal.initial_data = (
             format_datetime(goal.initial_data)
