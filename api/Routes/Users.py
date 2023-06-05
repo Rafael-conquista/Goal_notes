@@ -10,7 +10,7 @@ class User(Resource):
         return user
 
     def delete(self, user_id):
-        main_queries.delete_query(UsersModel, id)
+        main_queries.delete_query(UsersModel, user_id)
         return {"message": "it has been delete"}
 
     def put(self, user_id):
@@ -48,5 +48,3 @@ class User_register(Resource):
         main_queries.save_query(user)
         return {"message": "the user has been created"}, 201
 
-
-# User_update
