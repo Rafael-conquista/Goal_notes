@@ -1,4 +1,3 @@
-import './App.css';
 import Initial from "./pages/initial_page/initial_page"
 import Home from "./pages/homepage/homepage"
 import Goals from "./pages/goals/goals"
