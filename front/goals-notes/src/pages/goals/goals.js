@@ -1,18 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
+import { getAllGoals } from '../../services/api_requests'
 var goals = []
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
   async function getGoals(){
     goals = []
-    let response = await fetch('http://127.0.0.1:5000/goals')
-    let goalsData = await response.json()
-    const dados = goalsData.goals
+    const dados = await getAllGoals()
     dados.forEach(element => {
       goals.push(element)
     });
-    console.log(goals)
     setLoaded(true)
   }
   return (
@@ -25,18 +23,18 @@ function Goals (){
               {
                 goals.map((goal,key) =>{
                   return(
-                    <div>
+                    <div key={key}>
                       <hr></hr>
-                      <p>{goal.id}</p>
-                      <p>{goal.name}</p>
-                      <p>{goal.importance_degree}</p>
-                      <p>{goal.initial_date}</p>
-                      <p>{goal.expected_date}</p>
-                      <p>{goal.end_date}</p>
-                      <p>{goal.type_name}</p>
-                      <p>{goal.user_id}</p>
-                      <p>{goal.obs}</p>
-                      <p>{goal.current_progress}</p>
+                      <p>id: {goal.id}</p>
+                      <p>name: {goal.name}</p>
+                      <p>importance_degree: {goal.importance_degree}</p>
+                      <p>initial_date: {goal.initial_date}</p>
+                      <p>expected_date: {goal.expected_date}</p>
+                      <p>end_date: {goal.end_date}</p>
+                      <p>type_name: {goal.type_name}</p>
+                      <p>user_id: {goal.user_id}</p>
+                      <p>obs: {goal.obs}</p>
+                      <p>current_progress:{goal.current_progress}</p>
                       <hr></hr>
                     </div>
                   )
