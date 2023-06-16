@@ -1,12 +1,9 @@
 import React from 'react';
 
 const Initial = () =>{
-  var myHeaders = new Headers();
-  myHeaders.append("Access-Control-Allow-Origin", "no-cors");
 
   var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
   };
   fetch("http://127.0.0.1:5000/goals", requestOptions)
   .then(response => response.text())
