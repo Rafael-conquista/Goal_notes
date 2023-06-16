@@ -1,24 +1,50 @@
 import React from 'react';
+import { useState } from 'react'
 
 const Initial = () =>{
-
-  var requestOptions = {
-  method: 'GET',
-  };
-  fetch("http://127.0.0.1:5000/goals", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  const[name, setName] = useState()
+  const[surname, setSurname] = useState()
+  const[password, setPassword] = useState()
+  const[confirm, setConfirm] = useState()
+  const nameChange = (e) =>{
+    setName(e.target.value)
+  }
+  const surnameChange = (e) =>{
+    setSurname(e.target.value)
+  }
+  const passwordChange = (e) =>{
+    setPassword(e.target.value)
+  }
+  const confirmChange = (e) =>{
+    setConfirm(e.target.value)
+  }
+  console.log('nome: '+name)
+  console.log('apelido: '+surname)
+  console.log('password: '+password)
+  console.log('confirma senha: '+confirm)
   return (
-    <div>
-      <h1>Está será a tela inicial</h1>
-      <p>
-        serei responsável por dar a opção para logar ou registrar
-        assim como outras possíveis opções para não logados
-      </p>
-      <p>dentro desta página, deverá existir componentes para login e se registrar</p>
-      <p>pensar em uma forma de forçar a pessoa só conseguir acessar outras páginas se estiver logado</p>
-    </div>
+    <form>
+      <div>
+          <label for="name">Nome: </label>
+          <input type="text" onChange={nameChange} id="name" />
+      </div>
+      <div>
+          <label for="surname">apelido: </label>
+          <input type="text" onChange={surnameChange} id="surname" />
+      </div>
+      <div>
+          <label for="password">senha: </label>
+          <input type="password" onChange={passwordChange} id="password" />
+      </div>
+      <div>
+          <label for="confirm_password">confirme sua senha: </label>
+          <input type="password" id="confirm_password" onChange={confirmChange}></input>
+      </div>
+
+      <div>
+        <button type="submit">registrar-se</button>
+      </div>
+    </form>
   );
 }
 
