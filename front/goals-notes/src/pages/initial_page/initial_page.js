@@ -1,49 +1,92 @@
 import React from 'react';
 import { useState } from 'react'
+import { register } from '../../services/api_requests'
 
-const Initial = () =>{
-  const[name, setName] = useState()
-  const[surname, setSurname] = useState()
-  const[password, setPassword] = useState()
-  const[confirm, setConfirm] = useState()
-  const nameChange = (e) =>{
+const Initial = () => {
+  const [name, setName] = useState()
+  const [surname, setSurname] = useState()
+  const [password, setPassword] = useState()
+  const [confirm, setConfirm] = useState()
+  const [message, setMessage] = useState('')
+  const nameChange = (e) => {
     setName(e.target.value)
   }
-  const surnameChange = (e) =>{
+  const surnameChange = (e) => {
     setSurname(e.target.value)
   }
-  const passwordChange = (e) =>{
+  const passwordChange = (e) => {
     setPassword(e.target.value)
   }
-  const confirmChange = (e) =>{
+  const confirmChange = (e) => {
     setConfirm(e.target.value)
   }
-  console.log('nome: '+name)
-  console.log('apelido: '+surname)
-  console.log('password: '+password)
-  console.log('confirma senha: '+confirm)
+  async function register_user(event) {
+    event.preventDefault();
+    if (password !== confirm) {
+      setMessage('Sua senha e sua confirmação de senha não coincidem')
+      return
+    }
+    const user_json = {
+      "name": name,
+      "surname": surname,
+      "password": password
+    }
+    const response = await register(user_json)
+    if (response.message === "the user has been created"){
+      setMessage("usuário criado com sucesso")
+    } else{
+      setMessage("Ocorreu um erro durante a criação do usuário")
+    }
+  }
   return (
-    <form>
+    <form onSubmit={register_user}>
       <div>
-          <label for="name">Nome: </label>
-          <input type="text" onChange={nameChange} id="name" />
+        <h3>Nome: </h3>
+        <input
+          type="text"
+          required="required"
+          onChange={nameChange}
+          id="name"
+          placeholder='Informe o seu nome'
+        />
       </div>
       <div>
-          <label for="surname">apelido: </label>
-          <input type="text" onChange={surnameChange} id="surname" />
+        <h3>apelido: </h3>
+        <input
+          type="text"
+          required="required"
+          onChange={surnameChange}
+          id="surname"
+          placeholder='Informe o seu apelido'
+        />
       </div>
       <div>
-          <label for="password">senha: </label>
-          <input type="password" onChange={passwordChange} id="password" />
+        <h3>senha: </h3>
+        <input
+          type="password"
+          required="required"
+          onChange={passwordChange}
+          id="password"
+          placeholder='Insira sua senha'
+        />
       </div>
       <div>
-          <label for="confirm_password">confirme sua senha: </label>
-          <input type="password" id="confirm_password" onChange={confirmChange}></input>
+        <h3>confirme sua senha: </h3>
+        <input
+          type="password"
+          id="confirm_password"
+          required="required"
+          onChange={confirmChange}
+          placeholder="confirme a sua senha"
+        />
       </div>
 
       <div>
         <button type="submit">registrar-se</button>
       </div>
+      {
+        message ? <h3>{message}</h3> : ''
+      }
     </form>
   );
 }
