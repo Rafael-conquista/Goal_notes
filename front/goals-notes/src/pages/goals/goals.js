@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react'
 import { getAllGoals } from '../../services/api_requests'
+import Navbar from '../../components/navbar'
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
@@ -12,6 +13,7 @@ function Goals (){
   }
   return (
     <div>
+      <Navbar/>
 				<p>clique para ver todos as metas já criadas:</p>
 				<button onClick={getGoals} >CLICK</button>
         {loaded ? 
