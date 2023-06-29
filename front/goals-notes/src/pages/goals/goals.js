@@ -1,16 +1,13 @@
 import React from 'react';
 import { useState } from 'react'
 import { getAllGoals } from '../../services/api_requests'
-var goals = []
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
+  const [goals,setGoals] = useState([])
   async function getGoals(){
-    goals = []
     const dados = await getAllGoals()
-    dados.forEach(element => {
-      goals.push(element)
-    });
+    setGoals(dados)
     setLoaded(true)
   }
   return (

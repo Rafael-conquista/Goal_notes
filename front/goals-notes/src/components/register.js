@@ -8,6 +8,7 @@ function RegisterComponent(){
     const [password, setPassword] = useState()
     const [confirm, setConfirm] = useState()
     const [message, setMessage] = useState('')
+
     const nameChange = (e) => {
       setName(e.target.value)
       console.log(e.target.value)

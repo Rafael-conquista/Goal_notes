@@ -20,7 +20,6 @@ class UsersModel(banco.Model):
         self.password = dados["password"] if "password" in dados.keys(
         ) else None
         self.logged = dados["logged"] if "logged" in dados.keys() else False
-        import ipdb; ipdb.set_trace()
 
     def delete_user(self, user_id):
         banco.session.query(UsersModel).filter(

@@ -5,6 +5,7 @@ const Initial = () => {
   return (
     <div>
       <RegisterComponent/>
+      <hr></hr>
     </div>
   );
 }
