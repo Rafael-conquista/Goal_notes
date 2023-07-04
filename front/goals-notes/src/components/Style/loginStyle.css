@@ -1,0 +1,79 @@
+.card {
+    display: grid;
+    position: relative;
+    border-radius: 3px;
+    background-color: rgba(220, 220, 220, 0.7);
+    align-items: center;
+    transition: 0.5s;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  }
+.form-login{
+    background: linear-gradient(302deg, rgba(0,87,198,0.24413515406162467) 29%, rgba(25,233,213,0.4009978991596639) 61%);
+    text-align: center;
+}
+
+.form-register{
+    background: linear-gradient(302deg, rgba(0,87,198,0.24413515406162467) 29%, rgba(25,233,213,0.4009978991596639) 61%);
+    text-align: center;
+}
+
+.button{
+    background-color:  rgba(220, 220, 220, 1);
+    text-align: center;
+    height: 100%;
+    width:100%;
+}
+
+.fade-in {
+animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+from {
+    opacity: 0;
+}
+
+to {
+    opacity: 1;
+}
+}
+
+@media screen and (max-width:300px){
+    .grid{
+        flex-direction: row;
+        grid-template-columns: repeat(1, 2fr);
+    }
+    }
+    
+    @media screen and (min-width:301px){
+    .grid{
+        flex-direction: row;
+        grid-template-columns: repeat(2, 3fr);
+    }
+    }
+
+@keyframes go-back {
+    100% {
+        transform: translateX(0);
+    }
+    0% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes go-in {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.quadrado {
+    animation: go-back 1.5s;
+}
+
+.quadrado2 {
+    animation: go-in 1.5s;
+}

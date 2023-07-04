@@ -1,11 +1,10 @@
 import React from 'react';
-import RegisterComponent from '../../components/register'
-
+import LoginSlider from '../../components/loginSlider'
 const Initial = () => {
   return (
     <div>
-      <RegisterComponent/>
-      <hr></hr>
+      <LoginSlider/>
+      <br></br>
     </div>
   );
 }

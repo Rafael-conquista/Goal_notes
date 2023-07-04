@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react'
 import { getAllGoals } from '../../services/api_requests'
 import Navbar from '../../components/navbar'
+import Spinner from 'react-bootstrap/Spinner';
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
@@ -41,7 +42,11 @@ function Goals (){
               }
             </div>
           </div>
-        : <p>carregando...</p>}
+        : <div>
+          <Spinner animation="grow" size="sm" variant="secondary"/>
+        </div>
+        
+        }
 			</div>
   );
 }
