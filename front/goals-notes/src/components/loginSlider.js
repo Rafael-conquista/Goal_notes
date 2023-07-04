@@ -19,18 +19,18 @@ function LoginSlider() {
             {
                 displayLogin ?
                     <>
-                        <div class='card grid'>
+                        <div class='card grid fade-in'>
                             <div onClick={displayLoginHandler} class='button quadrado2'>
                                 <p>botão</p>
                             </div>
-                            <div class='form-login'>
+                            <div class='form-login fade-in'>
                                 <RegisterComponent />
                             </div>
                         </div>
                     </>
                     :
-                    <div class='card grid'>
-                        <div class='form-register'>
+                    <div class='card grid fade-in'>
+                        <div class='form-register fade-in'>
                             <RegisterComponent />
                         </div>
                         <div onClick={displayLoginHandler} class='button quadrado'>
