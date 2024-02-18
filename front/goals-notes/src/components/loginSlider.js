@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import RegisterComponent from './register'
+import LoginComponent from './login'
 import Container from 'react-bootstrap/Container';
 import './Style/loginStyle.css'
 
@@ -19,19 +20,19 @@ function LoginSlider() {
             {
                 displayLogin ?
                     <>
-                        <div class='card grid fade-in'>
+                        <div class='card grid'>
                             <div onClick={displayLoginHandler} class='button quadrado2'>
                                 <p>botão</p>
                             </div>
-                            <div class='form-login fade-in'>
+                            <div class='form-login'>
                                 <RegisterComponent />
                             </div>
                         </div>
                     </>
                     :
-                    <div class='card grid fade-in'>
-                        <div class='form-register fade-in'>
-                            <RegisterComponent />
+                    <div class='card grid '>
+                        <div class='form-register'>
+                            <LoginComponent />
                         </div>
                         <div onClick={displayLoginHandler} class='button quadrado'>
                             <p>botão</p>

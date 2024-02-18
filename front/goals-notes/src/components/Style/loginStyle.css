@@ -85,9 +85,9 @@ to {
 }
 
 .quadrado {
-    animation: go-back 1.5s;
+    animation: go-back 0.2s;
 }
 
 .quadrado2 {
-    animation: go-in 1.5s;
+    animation: go-in 0.2s;
 }
