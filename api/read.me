@@ -1,7 +1,8 @@
 Guia para instalação básica:
   1. entrar no repositório raiz(goals_notes)
   2. python -m venv goals_env  
-  3. para entrar na env criada basta usar o comando goals_env/Script/activate(para retirar a env basta escrever deactivate)
+  3. para entrar na env criada basta usar o comando goals_env/Script/activate(para retirar a env basta escrever deactivate) --> sempre deverá entrar na venv
+  4. Entre no repositório "api"
   4. pip install -r requirements.txt
 Para rodar a Api:
   1. estar no repositório "api"
@@ -11,3 +12,14 @@ Requisitos para usar a api:
   1. utilizar algum software para realizar as requisições(Ex: Postman)
   2. após isso apenas requisitar a rota desejada, informar o método http e caso seja necessário, enviar o payload/headers
 Obs: sempre que quiser testar algo, deverá fazer a requisição que passará por onde deseja testar
+
+INTALAÇÃO E UTILIZAÇÃO COM DOCKER (recomendado):
+  1. Siga o passo a passo para a instalação do docker:https://balta.io/blog/docker-instalacao-configuracao-e-primeiros-passos#criando-a-conta
+  2. Entre no repositório "api" e utilize o comando "docker build -t api ."
+    - Este comando irá criar uma imagem docker para conseguir rodar a api(apenas referente á api)
+  3. utilize o comando --> docker run -d -p 5000:5000 -v "${PWD}:/app" api
+    - Este comando irá criar um container e um volume docker para a aplicação, neste caso em específico o volume é o próprio repositório do código, desta forma, toda e qualquer alteração do código será reproduzida no container docker.
+  4. Se ocorreu tudo corretamente, seu ambiente já está configurado e a aplicação já está rodando em sua máquina
+
+  Informações adicionais:
+    - para melhor acompanhamento de seus containers, instale o docker hub
