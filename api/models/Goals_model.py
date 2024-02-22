@@ -42,10 +42,3 @@ class GoalsModel(banco.Model):
         )
         self.user_id = dados["user_id"] if "user_id" in dados.keys() else None
         self.type_id = dados["type_id"] if "type_id" in dados.keys() else None
-
-    def find_type_name(goal):
-        if goal.type_id:
-            type_name = main_queries.find_query(TypesModel, goal.type_id).name
-        else:
-            type_name = "tipo não declarado"
-        return type_name

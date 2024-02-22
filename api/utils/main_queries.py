@@ -11,8 +11,8 @@ def find_query(table, id):
     if table.__tablename__ == "Goals":
         result = banco.session.query(table).filter(
             table.goals_id == id).first()
-        return result
-    result = banco.session.query(table).filter(table.id == id).first()
+    else:
+        result = banco.session.query(table).filter(table.id == id).first()
     return result
 
 
@@ -26,5 +26,9 @@ def delete_query(table, id):
         banco.session.query(table).filter(table.goals_id == id).delete()
     else:
         banco.session.query(table).filter(table.id == id).delete()
+    close_conection()
+
+
+def close_conection():
     banco.session.commit()
     banco.session.close()

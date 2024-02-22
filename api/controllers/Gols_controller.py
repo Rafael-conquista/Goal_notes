@@ -13,7 +13,7 @@ class GoalsController():
         goal_list = []
         for goal in goals:
             # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
-            type_name = GoalsModel.find_type_name(goal)
+            type_name = GoalsController.find_type_name(goal)
 
             goal_list.append(
                 {
@@ -29,16 +29,16 @@ class GoalsController():
                     "type_name": type_name,
                 }
             )
-
+        main_queries.close_conection()
         return {"goals": goal_list}, 200
 
     def find_goal(id):
         try:
             goal = main_queries.find_query(GoalsModel, id)
-            type_name = GoalsModel.find_type_name(goal)
+            type_name = GoalsController.find_type_name(goal)
         except Exception as ex:
             return {"message": ex}
-
+        
         return {
             "id": goal.goals_id,
             "name": goal.name,
@@ -133,7 +133,7 @@ class GoalsController():
         organized_goals = {}
         cont = 0
         for goal in goals:
-            type_name = GoalsModel.find_type_name(goal)
+            type_name = GoalsController.find_type_name(goal)
 
             goal_object = {
                 "goals_id": goal.goals_id,
@@ -150,3 +150,10 @@ class GoalsController():
             cont = cont + 1
 
         return organized_goals, 200
+    
+    def find_type_name(goal):
+        if goal.type_id:
+            type_name = main_queries.find_query(TypesModel, goal.type_id).name
+        else:
+            type_name = "tipo não declarado"
+        return type_name

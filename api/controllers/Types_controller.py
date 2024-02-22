@@ -11,7 +11,7 @@ class TypesController():
             name = type.name
             obs = type.obs
             type_list.append({"name": name, "id": id, "obs": obs})
-
+        main_queries.close_conection()
         return {"types": type_list}, 200
 
     def find_type(id):
@@ -31,6 +31,7 @@ class TypesController():
             type.name = dados.get("name", type.name)
             type.obs = dados.get("obs", type.obs)
             main_queries.save_query(type)
+            main_queries.close_conection()
             return {"message": "Type updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
