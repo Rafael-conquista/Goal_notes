@@ -48,7 +48,6 @@ class UsersController():
         )
         if user.password == login_password and user.surname == login_surname:
             token = jwt_methods.jwt_create_token(login.surname)
-            import ipdb; ipdb.set_trace()
             main_queries.save_query(user)
             return {"message": "user logged in successfully", "token": token}, 200
         return {"message": "login not found: wrong password or surname"}, 404
