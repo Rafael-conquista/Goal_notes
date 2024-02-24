@@ -10,7 +10,6 @@ class UsersModel(banco.Model):
     name = banco.Column(banco.String(100), nullable=False)
     surname = banco.Column(banco.String(50), nullable=False)
     password = banco.Column(banco.String(25), nullable=False)
-    logged = banco.Column(banco.Boolean, default=False)
 
     def __init__(self, dados):
         self.id = random.randint(1, 5000)
@@ -19,4 +18,3 @@ class UsersModel(banco.Model):
         self.surname = dados["surname"] if "surname" in dados.keys() else None
         self.password = dados["password"] if "password" in dados.keys(
         ) else None
-        self.logged = dados["logged"] if "logged" in dados.keys() else False

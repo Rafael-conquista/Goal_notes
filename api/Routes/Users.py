@@ -34,14 +34,6 @@ class User_login(Resource):
         return login_message
 
 
-class User_logoff(Resource):
-    def post(self):
-        logoff_request = request.get_json()
-        logoff = UsersModel(logoff_request)
-        loggof_message = UsersController.verify_logoff(logoff)
-        return {"message": "finalizado"}
-
-
 class User_register(Resource):
     def post(self):
         dados = request.get_json()

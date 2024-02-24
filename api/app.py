@@ -1,6 +1,7 @@
-from Routes.Users import User, Users, User_register, User_login, User_logoff
+from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
+from Routes.VerifyJWT import VerifyJWT
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_restful import Api
@@ -13,7 +14,6 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = '*'
 api = Api(app)
 
-
 @app.before_first_request
 def cria_banco():
     banco.create_all()
@@ -24,7 +24,6 @@ api.add_resource(Users, "/users")
 api.add_resource(User, "/user/<int:user_id>")
 api.add_resource(User_register, "/register")
 api.add_resource(User_login, "/login")
-api.add_resource(User_logoff, "/logoff")
 # users and Goals related Routes
 api.add_resource(Goals_by_user, "/usergoals/<int:user_id>")
 # Goals related Routes
@@ -34,6 +33,8 @@ api.add_resource(Goal, "/goal/<int:goals_id>")
 api.add_resource(Types, "/types")
 api.add_resource(Type, "/type/<int:id>")
 api.add_resource(Type_register, "/type_register")
+#verify JWT token
+api.add_resource(VerifyJWT, '/verify_token')
 
 if __name__ == "__main__":
     from sql_alchemy import banco

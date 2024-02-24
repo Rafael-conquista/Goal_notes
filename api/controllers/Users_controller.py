@@ -1,5 +1,5 @@
 from sql_alchemy import banco
-from utils import main_queries
+from utils import main_queries, jwt_methods
 from models.Users_model import UsersModel
 
 
@@ -46,12 +46,10 @@ class UsersController():
             .filter(UsersModel.surname == login.surname)
             .first()
         )
-        if user.logged:
-            return {"message": "user is already logged in"}, 400
         if user.password == login_password and user.surname == login_surname:
-            user.logged = True
+            token = jwt_methods.jwt_create_token(login.surname)
             main_queries.save_query(user)
-            return {"message": "user logged in successfully"}, 200
+            return {"message": "user logged in successfully", "token": token}, 200
         return {"message": "login not found: wrong password or surname"}, 404
     
     def verify_logoff(logoff):
