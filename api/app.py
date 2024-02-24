@@ -13,7 +13,6 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = '*'
 api = Api(app)
 
-
 @app.before_first_request
 def cria_banco():
     banco.create_all()
