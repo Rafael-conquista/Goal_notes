@@ -1,4 +1,4 @@
-from Routes.Users import User, Users, User_register, User_login, User_logoff
+from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
 from Routes.VerifyJWT import VerifyJWT
