@@ -8,9 +8,6 @@ class VerifyJWT(Resource):
         try:
             dados = request.get_json()
             token = dados.get('token', None)
-            payload = jwt_methods.jwt_decode_token(token)
-            payload = payload.get("username", None)
-            return{"is_token_active": True}, 200
+            return jwt_methods.jwt_decode_token(token)
         except Exception:
             return{"message": False}, 404
-        

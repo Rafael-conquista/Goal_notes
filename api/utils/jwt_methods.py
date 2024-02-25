@@ -9,4 +9,16 @@ def jwt_create_token(username):
     return jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
 def jwt_decode_token(token):
-    return jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+    payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+    expiration = datetime.fromtimestamp(payload['exp'])
+    username = payload['username']
+    time_difference = expiration - datetime.utcnow()
+    if time_difference < timedelta(minutes=5):
+        token = jwt_create_token(username)
+        return {
+            "message": "token expiring, update the session token",
+            "token": token, 
+            "username":username
+        }, 200
+    else:
+        return {"message": "token lifetime stil valid", "username": username}, 200
