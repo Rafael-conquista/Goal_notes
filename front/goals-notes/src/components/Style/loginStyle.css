@@ -1,93 +1,244 @@
-.card {
-    display: grid;
-    position: relative;
-    border-radius: 3px;
-    background: linear-gradient(302deg, rgba(0,87,198,0.24413515406162467) 29%, rgba(25,233,213,0.4009978991596639) 61%);
+html {
+    overflow: hidden;
+}
+
+body {    
+    height: 100vh;
+    background: white;
+    display: flex;
     align-items: center;
-    transition: 0.5s;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-  }
-.form-login{
-    background: linear-gradient(302deg, rgba(0,87,198,0.24413515406162467) 29%, rgba(25,233,213,0.4009978991596639) 61%);
+    justify-content: center;
+    display: flex;
+}
+
+h1 {
+    font-size: 4.5rem;
     text-align: center;
+    font-weight: bold !important;
 }
 
-.form-register{
-    background: linear-gradient(302deg, rgba(0,87,198,0.24413515406162467) 29%, rgba(25,233,213,0.4009978991596639) 61%);
+h2 {
+    padding: 0 100px;
     text-align: center;
+    margin: 50px 0px;
+    font-size: 1.5rem;
 }
 
-.button{
-    background-color:  rgba(220, 220, 220, 1);
+input {
+    cursor: text !important;
+    margin-top: 50px;
+    background-color: #28B49810;
+    color: #000;
+    border-radius: 80px;
+    border-style: ridge;
+    padding: 20px;
+    width: 80%;
+}
+
+::placeholder {
+    color: #000;
+}
+
+::-ms-input-placeholder { /* Edge 12 -18 */
+    color: #000;
+}
+
+.sectionLoginForm {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.logoCapivara {
+    height: 100px;
+    position: fixed;
+}
+
+.LoginForm {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+}
+
+/*#1f1324*/
+.registroLogin, .registroSenha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.botaoLogar {
+    transition: 0.3s;
+    margin-top: 50px;
+    height: 50px;
+    width: 40%;
+    border-radius: 100px;
+    color: white;
+    text-shadow: 0px 0px 3px #000;
+    border: none;
+    background: #28B498;
+}
+
+.botaoLogar:hover {
+    box-shadow: 0px 0px 5px #28B498;
+}
+
+.botaoLogar:active {
+    background: #24a38a;
+}
+
+.cardLogin {
+    width: 65vw;
+    display: flex;
+    color: black;
+    text-shadow: 0 0 5px white;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardRegister {
+    width: 35vw;
+    display: flex;
+    color: white;
+    text-shadow: 0 0 5px black;
+    background: #131F24;
+    justify-content: center;
+    align-items: center;
+}
+
+.textos {
+    cursor: default;
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.alertaLogin {
+    height: 60px;
+    width: 65vw;
+    font-size: 1.5rem;
+    background-color: darkred;
+    color: white;
+    text-shadow: none;
     text-align: center;
-    height: 100%;
-    width:100%;
+    font-family: "Varela Round", sans-serif;
+    position: fixed;
+    bottom: 0px;
+    animation: subir 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.fade-in {
-animation: fadeIn 1s;
+.alertaRegistro {
+    height: 60px;
+    width: 35vw;
+    font-size: 1.5rem;
+    background-color: darkred;
+    color: white;
+    text-shadow: none;
+    text-align: center;
+    font-family: "Varela Round", sans-serif;
+    position: fixed;
+    bottom: 0px;
+    animation: subir 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.fade-out {
-    animation: fadeOut 2s;
-}
-
-@keyframes fadeIn {
-from {
-    opacity: 0;
-}
-
-to {
-    opacity: 1;
-}
-}
-
-@keyframes fadeOut {
+@keyframes subir {
     from {
-        opacity: 1;
+        bottom: -60px;
     }
-    
     to {
-        opacity: 0;
-    }
-    }
-
-@media screen and (max-width:300px){
-    .grid{
-        flex-direction: row;
-        grid-template-columns: repeat(1, 2fr);
-    }
-    }
-    
-    @media screen and (min-width:301px){
-    .grid{
-        flex-direction: row;
-        grid-template-columns: repeat(2, 3fr);
-    }
-    }
-
-@keyframes go-back {
-    100% {
-        transform: translateX(0);
-    }
-    0% {
-        transform: translateX(-100%);
+        bottom: 0px;
     }
 }
 
-@keyframes go-in {
-    0% {
-        transform: translateX(100%);
+.esqueciSenha {
+    margin-top: 10px;
+    cursor: pointer;
+    width: 80%;
+}
+
+.registroUsuario {
+    align-items: center;
+    display: grid;
+    justify-items: center;
+}
+
+.formRegistroUsuario {
+    display: flex;
+    width: 80%;
+}
+
+.registroUsuario input {
+    color: white;
+    margin: 0px 10px 50px;
+}
+
+.registroUsuario ::placeholder {
+    color: #FFF;
+}
+
+.registroUsuario ::-ms-input-placeholder { /* Edge 12 -18 */
+    color: #FFF;
+}
+
+
+.capivaraOlha {
+    height: 300px;
+}
+  
+  .eyes {
+    left: 150px;
+    top: 120px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: 50px;
+    border: black;
+    border-style: solid;
+    border-radius: 100px;
+    height: 50px;
+  }
+  
+  .eye {
+    width: 25px;
+    height: 25px;
+    background-color: black;
+    border-radius: 50%;
+    border: 3px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  
+
+.fecha {
+    background: #B97A57;
+    animation: fechar;
+}
+
+
+@keyframes fechar {
+    from {
+        bottom: -60px;
     }
-    100% {
-        transform: translateX(0);
+    to {
+        bottom: 0px;
     }
 }
 
-.quadrado {
-    animation: go-back 0.2s;
-}
-
-.quadrado2 {
-    animation: go-in 0.2s;
-}
+.fecha .eye {
+    width: 25px;
+    height: 25px;
+    background-color: #0000;
+    border-radius: 50%;
+    border: 3px solid #0000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
