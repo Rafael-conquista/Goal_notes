@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginComponent from '../../components/login.js';
 import RegisterComponent from '../../components/register.js';
 import Container from 'react-bootstrap/Container';
-import '../../components/Style/loginStyle.css'
+import '../../components/Style/loginStyle.css';
 
 const Initial = () => {
+  const [telaMaiorCelular, setTelaMaiorCelular] = useState(window.innerWidth > 1000);
+
+  useEffect(() => {
+    const verificarTamanhoDaTela = () => {
+      setTelaMaiorCelular(window.innerWidth > 1000);
+    };
+
+    window.addEventListener('resize', verificarTamanhoDaTela);
+
+    return () => {
+      window.removeEventListener('resize', verificarTamanhoDaTela);
+    };
+  }, []);
+
   return (
     <section className='sectionLoginForm'>
-      <img className='logoCapivara capivaraOlha' src='/content/capivaraSemOlhos.png' alt="capivaraSemOlhos" />
-      <div id='cap' className="eyes">
-          <div className="eye" id="leftEye"></div>
-      </div>
-      <div className='cardLogin grid'>
+      { telaMaiorCelular &&(
+        <>
+          <img className='logoCapivara capivaraOlha' src='/content/capivaraSemOlhos.png' alt="capivaraSemOlhos"></img>
+          <div id='cap' className="eyes">
+            <div className="eye" id="leftEye"></div>
+          </div>
+        </>
+      )}
+      <div id='login' className='cardLogin grid'>
           <LoginComponent />
       </div>
-      <div className='cardRegister grid'>
+      <div id='registro' className='cardRegister grid'>
           <RegisterComponent />
       </div>
     </section>
