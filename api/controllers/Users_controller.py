@@ -25,22 +25,13 @@ class UsersController():
     def update_user(user_id, dados):
         try:
             user = main_queries.find_query(UsersModel, user_id)
-            user.name = dados["name"] if "name" in dados.keys() else user.name
-            user.surname = (
-                dados["surname"] if "surname" in dados.keys() else user.surname
-            )
-            user.password = (
-                dados["password"] if "password" in dados.keys() else user.password
-            )
-            user.age = (
-                dados["age"] if "age" in dados.keys() else user.age
-            )
-            user.capCoins = (
-                dados["capCoins"] if "capCoins" in dados.keys() else user.capCoins
-            )
-            user.excluido = (
-                dados["excluido"] if "excluido" in dados.keys() else user.excluido
-            )
+            user.name = dados.get("name", user.name)
+            user.surname = dados.get("surname", user.surname)
+            user.password = dados.get("password", user.password)
+            user.age = dados.get("age", user.age)
+            #adaptar user.age para pegar a data de nascimento
+            user.capCoins = dados.get("capCoins", user.capCoins)
+            user.excluido = dados.get("excluido", user.excluido)
             user.dataAlteracao = banco.func.now()
             main_queries.save_query(user)
             return {"message": "user updated successfully"}, 200

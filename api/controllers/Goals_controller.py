@@ -5,7 +5,6 @@ from models.Types_model import TypesModel
 from models.Goals_model import GoalsModel
 from models.Users_model import UsersModel
 from controllers.Users_controller import UsersController
-import random
 from datetime import datetime, timedelta
 
 class GoalsController():
@@ -80,6 +79,8 @@ class GoalsController():
                 goal.expected_data = data_final
             else:
                 goal.expected_data = None
+
+            goal.dataAlteracao = banco.func.now()
             main_queries.save_query(goal)
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:
@@ -107,10 +108,8 @@ class GoalsController():
             if "expected_data" in dados.keys()
             else None
         )
-        if goal.importance_degree > 5:
-            return {"message": "the importance degree must be less than 5"}, 500
-        if goal.current_progress < 0 or goal.current_progress > 100:
-            return {"message": "the progress is not correct"}, 500
+        goal.importance_degree = dados.get("importance_degree", 1)
+        goal.user_id = user_id
         main_queries.save_query(goal)
         return {"message": "the goal has been created"}, 201
     

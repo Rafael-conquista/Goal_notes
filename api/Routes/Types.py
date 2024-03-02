@@ -28,6 +28,7 @@ class Type_register(Resource):
         try:
             dados = request.get_json()
             type = TypesModel(dados)
+            import ipdb; ipdb.set_trace()
             main_queries.save_query(type)
             return {"message": "the type has been created"}, 201
         except:

@@ -20,9 +20,8 @@ class UsersModel(banco.Model):
 
 
     def __init__(self, dados):
-        self.name = dados["name"] if "name" in dados.keys() else None
-        self.surname = dados["surname"] if "surname" in dados.keys() else None
-        self.password = dados["password"] if "password" in dados.keys() else None
-        self.email = dados["email"] if "email" in dados.keys() else None
-        self.age = dados["age"] if "age" in dados.keys() else None
-        self.codCapivara = dados["codCapivara"] if "codCapivara" in dados.keys() else None
+        self.name = dados.get("name", None)
+        self.surname = dados.get("surname", None)
+        self.password = dados.get("password", None)
+        self.email = dados.get("email", None)
+        self.age = dados.get("age", None)

@@ -3,7 +3,7 @@ from flask_restful import Resource
 from flask import request
 
 from models.Goals_model import GoalsModel
-from api.controllers.Goals_controller import GoalsController
+from controllers.Goals_controller import GoalsController
 from models.Users_model import UsersModel
 from utils.format_date import format_datetime
 from utils import main_queries

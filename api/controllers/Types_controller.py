@@ -1,4 +1,5 @@
 from utils import main_queries
+from sql_alchemy import banco
 from models.Types_model import TypesModel
 
 class TypesController():
@@ -30,6 +31,8 @@ class TypesController():
             type = main_queries.find_query(TypesModel, id)
             type.name = dados.get("name", type.name)
             type.obs = dados.get("obs", type.obs)
+            type.excluido = dados.get("obs", type.excluido)
+            type.dataAlteracao = banco.func.now()
             main_queries.save_query(type)
             main_queries.close_conection()
             return {"message": "Type updated successfully"}, 200
