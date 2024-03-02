@@ -3,6 +3,7 @@ from flask import request
 from models.Users_model import UsersModel
 from controllers.Users_controller import UsersController
 from utils import main_queries
+from utils import jwt_methods
 
 
 class User(Resource):
@@ -35,5 +36,6 @@ class User_register(Resource):
         dados = request.get_json()
         user = UsersModel(dados)
         main_queries.save_query(user)
-        return {"message": "the user has been created"}, 201
+        token = jwt_methods.jwt_create_token(user.surname)
+        return {"message": "the user has been created", "token": token}, 201
 

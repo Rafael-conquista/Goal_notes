@@ -3,9 +3,6 @@ from sql_alchemy import banco
 
 def save_query(self):
     banco.session.add(self)
-    banco.session.commit()
-    banco.session.close()
-
 
 def find_query(table, id):
     if table.__tablename__ == "Goals":
