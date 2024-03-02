@@ -17,6 +17,7 @@ class UsersController():
                 "surname": user.surname,
                 "capCoins": user.capCoins,
                 "dataCadastro": format_to_string(user.dataCadastro),
+                "age": format_to_string(user.age),
                 "excluido": user.excluido,
             })
         main_queries.close_conection()
@@ -48,6 +49,7 @@ class UsersController():
                 "surname": user.surname,
                 "capCoins": user.capCoins,
                 "dataCadastro": format_to_string(user.dataCadastro),
+                "age": format_to_string(user.age),
                 "excluido": user.excluido
             }, 200
         except Exception as ex:
