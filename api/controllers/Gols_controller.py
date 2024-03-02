@@ -4,7 +4,9 @@ from utils import main_queries
 from models.Types_model import TypesModel
 from models.Goals_model import GoalsModel
 from models.Users_model import UsersModel
+from controllers.Users_controller import UsersController
 import random
+from datetime import datetime, timedelta
 
 class GoalsController():
 
@@ -72,11 +74,12 @@ class GoalsController():
                 if "end_date" in dados.keys()
                 else None
             )
-            goal.expected_data = (
-                format_datetime(dados["expected_data"])
-                if "expected_data" in dados.keys()
-                else None
-            )
+            if "expected_data" in dados.keys():
+                data_atual = datetime.now()
+                data_final = data_atual + timedelta(days=dados["expected_data"])
+                goal.expected_data = data_final
+            else:
+                goal.expected_data = None
             main_queries.save_query(goal)
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:
@@ -113,7 +116,8 @@ class GoalsController():
     
     def goals_by_user(self, user_id):
         try:
-            user = UsersModel.find_user(self, user_id)
+            import ipdb; ipdb.set_trace()
+            user = UsersController.find_user(user_id)
             id = user[0].get("id")
             if id:
                 goals = (

@@ -10,10 +10,6 @@ class User(Resource):
         user = UsersController.find_user(user_id)
         return user
 
-    def delete(self, user_id):
-        main_queries.delete_query(UsersModel, user_id)
-        return {"message": "it has been delete"}
-
     def put(self, user_id):
         dados = request.get_json()
         message = UsersController.update_user(user_id, dados)

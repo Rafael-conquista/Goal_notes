@@ -18,7 +18,6 @@ class UsersController():
                 "capCoins": user.capCoins,
                 "dataCadastro": format_to_string(user.dataCadastro),
                 "excluido": user.excluido,
-                "codCapivara": user.codCapivara
             })
         main_queries.close_conection()
         return {"users": user_list}, 200
@@ -42,9 +41,7 @@ class UsersController():
             user.excluido = (
                 dados["excluido"] if "excluido" in dados.keys() else user.excluido
             )
-            user.codCapivara = (
-                dados["codCapivara"] if "codCapivara" in dados.keys() else user.codCapivara
-            )
+            user.dataAlteracao = banco.func.now()
             main_queries.save_query(user)
             return {"message": "user updated successfully"}, 200
         except Exception as error:
@@ -60,8 +57,7 @@ class UsersController():
                 "surname": user.surname,
                 "capCoins": user.capCoins,
                 "dataCadastro": format_to_string(user.dataCadastro),
-                "excluido": user.excluido,
-                "codCapivara": user.codCapivara
+                "excluido": user.excluido
             }, 200
         except Exception as ex:
             return {"message": "Not found"}

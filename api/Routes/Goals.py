@@ -26,10 +26,6 @@ class Goal(Resource):
         goal = GoalsController.find_goal(goals_id)
         return goal
 
-    def delete(self, goals_id):
-        main_queries.delete_query(GoalsModel, goals_id)
-        return {"message": "it has been delete"}
-
     def put(self, goals_id):
         dados = request.get_json()
         message = GoalsController.update_goal(goals_id, dados)

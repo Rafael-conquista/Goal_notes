@@ -1,8 +1,7 @@
 from sql_alchemy import banco
 from sqlalchemy import ForeignKey
-from utils.format_date import format_to_string, format_datetime
-from utils import main_queries
-from models.Types_model import TypesModel
+from datetime import datetime, timedelta
+from utils.format_date import format_to_string
 import random
 
 
@@ -13,10 +12,12 @@ class GoalsModel(banco.Model):
     name = banco.Column(banco.String(100), nullable=False)
     obs = banco.Column(banco.String(200))
     importance_degree = banco.Column(banco.Integer)
-    current_progress = banco.Column(banco.Float, default=0)
-    initial_data = banco.Column(banco.Date)
-    end_date = banco.Column(banco.Date)
-    expected_data = banco.Column(banco.Date)
+    current_progress = banco.Column(banco.Integer, default=0)
+    initial_data = banco.Column(banco.DateTime, default=banco.func.now())
+    update_data = banco.Column(banco.DateTime, default=banco.func.now())
+    end_date = banco.Column(banco.Date, default=None)
+    expected_data = banco.Column(banco.DateTime, default=None)
+    dataExcluido = banco.Column(banco.Date, default=None)
     user_id = banco.Column(
         banco.Integer, ForeignKey("Users.id"), nullable=False)
     type_id = banco.Column(banco.Integer, ForeignKey("Types.id"))
@@ -42,3 +43,9 @@ class GoalsModel(banco.Model):
         )
         self.user_id = dados["user_id"] if "user_id" in dados.keys() else None
         self.type_id = dados["type_id"] if "type_id" in dados.keys() else None
+        if "expected_data" in dados.keys():
+            data_atual = datetime.now()
+            data_final = data_atual + timedelta(days=dados["expected_data"])
+            self.expected_data = format_to_string(data_final)
+        else:
+            self.expected_data = None

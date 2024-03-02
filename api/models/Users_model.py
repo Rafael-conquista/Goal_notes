@@ -12,7 +12,6 @@ class UsersModel(banco.Model):
     email = banco.Column(banco.String(120), unique=True, nullable=False)
     age = banco.Column(banco.Integer, nullable=False)
     admin = banco.Column(banco.Boolean, default=False)
-    codCapivara = banco.Column(banco.Integer, unique=True, autoincrement=True)
     capCoins = banco.Column(banco.Integer, default=0)
     password = banco.Column(banco.String(25), nullable=False)
     dataCadastro = banco.Column(banco.DateTime, default=banco.func.now())
