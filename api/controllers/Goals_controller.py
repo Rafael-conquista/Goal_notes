@@ -4,7 +4,8 @@ from utils import main_queries
 from models.Types_model import TypesModel
 from models.Goals_model import GoalsModel
 from models.Users_model import UsersModel
-import random
+from controllers.Users_controller import UsersController
+from datetime import datetime, timedelta
 
 class GoalsController():
 
@@ -72,11 +73,14 @@ class GoalsController():
                 if "end_date" in dados.keys()
                 else None
             )
-            goal.expected_data = (
-                format_datetime(dados["expected_data"])
-                if "expected_data" in dados.keys()
-                else None
-            )
+            if "expected_data" in dados.keys():
+                data_atual = datetime.now()
+                data_final = data_atual + timedelta(days=dados["expected_data"])
+                goal.expected_data = data_final
+            else:
+                goal.expected_data = None
+
+            goal.dataAlteracao = banco.func.now()
             main_queries.save_query(goal)
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:
@@ -104,16 +108,14 @@ class GoalsController():
             if "expected_data" in dados.keys()
             else None
         )
-        if goal.importance_degree > 5:
-            return {"message": "the importance degree must be less than 5"}, 500
-        if goal.current_progress < 0 or goal.current_progress > 100:
-            return {"message": "the progress is not correct"}, 500
+        goal.importance_degree = dados.get("importance_degree", 1)
+        goal.user_id = user_id
         main_queries.save_query(goal)
         return {"message": "the goal has been created"}, 201
     
     def goals_by_user(self, user_id):
         try:
-            user = UsersModel.find_user(self, user_id)
+            user = UsersController.find_user(user_id)
             id = user[0].get("id")
             if id:
                 goals = (

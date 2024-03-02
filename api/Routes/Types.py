@@ -18,11 +18,6 @@ class Type(Resource):
         main_queries.close_conection()
         return type
 
-    def delete(self, id):
-        main_queries.delete_query(TypesModel, id)
-        main_queries.close_conection()
-        return {"message": "the type has been deleted"}, 202
-
     def put(self, id):
         dados = request.get_json()
         main_queries.close_conection()

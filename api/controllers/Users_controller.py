@@ -1,6 +1,7 @@
 from sql_alchemy import banco
 from utils import main_queries, jwt_methods
 from models.Users_model import UsersModel
+from utils.format_date import format_to_string
 
 
 class UsersController():
@@ -9,22 +10,30 @@ class UsersController():
         users = main_queries.find_all_query(UsersModel)
         user_list = []
         for user in users:
-            id = user.id
-            name = user.name
-            user_list.append({"name": name, "id": id})
+            user_list.append({
+                "name": user.name,
+                "id": user.id,
+                "email": user.email,
+                "surname": user.surname,
+                "capCoins": user.capCoins,
+                "dataCadastro": format_to_string(user.dataCadastro),
+                "age": format_to_string(user.age),
+                "excluido": user.excluido,
+            })
         main_queries.close_conection()
         return {"users": user_list}, 200
 
     def update_user(user_id, dados):
         try:
             user = main_queries.find_query(UsersModel, user_id)
-            user.name = dados["name"] if "name" in dados.keys() else user.name
-            user.surname = (
-                dados["surname"] if "surname" in dados.keys() else user.surname
-            )
-            user.password = (
-                dados["password"] if "password" in dados.keys() else user.password
-            )
+            user.name = dados.get("name", user.name)
+            user.surname = dados.get("surname", user.surname)
+            user.password = dados.get("password", user.password)
+            user.age = dados.get("age", user.age)
+            #adaptar user.age para pegar a data de nascimento
+            user.capCoins = dados.get("capCoins", user.capCoins)
+            user.excluido = dados.get("excluido", user.excluido)
+            user.dataAlteracao = banco.func.now()
             main_queries.save_query(user)
             return {"message": "user updated successfully"}, 200
         except Exception as error:
@@ -33,7 +42,16 @@ class UsersController():
     def find_user(id):
         try:
             user = main_queries.find_query(UsersModel, id)
-            return {"id": user.id, "name": user.name}, 200
+            return {
+                "name": user.name,
+                "id": user.id,
+                "email": user.email,
+                "surname": user.surname,
+                "capCoins": user.capCoins,
+                "dataCadastro": format_to_string(user.dataCadastro),
+                "age": format_to_string(user.age),
+                "excluido": user.excluido
+            }, 200
         except Exception as ex:
             return {"message": "Not found"}
         
@@ -51,18 +69,3 @@ class UsersController():
             main_queries.save_query(user)
             return {"message": "user logged in successfully", "token": token}, 200
         return {"message": "login not found: wrong password or surname"}, 404
-    
-    def verify_logoff(logoff):
-        logoff_surname = logoff.surname
-        user = (
-            banco.session.query(UsersModel)
-            .filter(UsersModel.surname == logoff.surname)
-            .first()
-        )
-        if user.logged == False:
-            return {"message": "user is already logged out"}, 400
-        if user.surname == logoff.surname:
-            user.logged = False
-            main_queries.save_query(user)
-            return {"message": "user logged out successfully"}, 200
-        return {"message": "error unlocked, please report us"}
