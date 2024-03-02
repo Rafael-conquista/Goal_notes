@@ -13,7 +13,7 @@ class UsersModel(banco.Model):
     age = banco.Column(banco.Integer, nullable=False)
     admin = banco.Column(banco.Boolean, default=False)
     codCapivara = banco.Column(banco.Integer, unique=True, autoincrement=True)
-    capCoins = banco.Column(banco.Integer)
+    capCoins = banco.Column(banco.Integer, default=0)
     password = banco.Column(banco.String(25), nullable=False)
     dataCadastro = banco.Column(banco.DateTime, default=banco.func.now())
     dataAlteracao = banco.Column(banco.DateTime, default=banco.func.now())
