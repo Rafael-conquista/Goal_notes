@@ -1,6 +1,7 @@
 from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
+from Routes.Posts import Post, Posts, PostCreator
 from Routes.VerifyJWT import VerifyJWT
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
@@ -35,6 +36,10 @@ api.add_resource(Type, "/type/<int:id>")
 api.add_resource(Type_register, "/type_register")
 #verify JWT token
 api.add_resource(VerifyJWT, '/verify_token')
+#verify JWT token
+api.add_resource(Posts, "/posts")
+api.add_resource(Post, "/post/<int:id>")
+api.add_resource(PostCreator, "/create_post")
 
 if __name__ == "__main__":
     from sql_alchemy import banco
