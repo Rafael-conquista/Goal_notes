@@ -20,7 +20,7 @@ class UsersController():
                 "age": format_to_string(user.age),
                 "excluido": user.excluido,
             })
-        main_queries.close_conection()
+
         return {"users": user_list}, 200
 
     def update_user(user_id, dados):
