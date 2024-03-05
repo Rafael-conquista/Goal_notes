@@ -1,13 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import LoginComponent from '../../components/login.js';
 import RegisterComponent from '../../components/register.js';
-import Container from 'react-bootstrap/Container';
+import { token_verify } from '../../services/api_requests.js';
 import '../../components/Style/loginStyle.css';
+import { remove_token } from '../../utils/token_verify.js';
 
 const Initial = () => {
   const [telaMaiorCelular, setTelaMaiorCelular] = useState(window.innerWidth > 1000);
 
+  async function verify(token) {
+    try {
+      const response = await token_verify(token)
+      const email = response.email
+      if (email) {
+        window.location.href = `/goals`;
+      } else {
+        console.log('é necessário realizar o login')
+        remove_token()
+      }
+    } catch {
+      console.log('validation error')
+    }
+  }
+
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      verify(token)
+    }
+  }, []);
+
+
+  useEffect(() => {
+
     const verificarTamanhoDaTela = () => {
       setTelaMaiorCelular(window.innerWidth > 1000);
     };
