@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { token_storage } from '../utils/token_verify';
 import { register } from '../services/api_requests'
 
 function RegisterComponent(){
@@ -50,6 +51,7 @@ function RegisterComponent(){
         setMessage("usuário criado com sucesso")
         setPrimeiraVez(false);
         setloading(false);
+        token_storage(response.token)
       } else {
         setMessage("Ocorreu um erro durante a criação do usuário")
         setPrimeiraVez(false);
