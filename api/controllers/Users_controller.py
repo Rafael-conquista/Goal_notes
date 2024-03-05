@@ -57,15 +57,14 @@ class UsersController():
         
 
     def verify_login(login):
-        login_surname = login.surname
+        login_email = login.email
         login_password = login.password
         user = (
             banco.session.query(UsersModel)
-            .filter(UsersModel.surname == login.surname)
+            .filter(UsersModel.email == login_email)
             .first()
         )
-        if user.password == login_password and user.surname == login_surname:
-            token = jwt_methods.jwt_create_token(login.surname)
-            main_queries.save_query(user)
+        if user.password == login_password and user.email == login_email:
+            token = jwt_methods.jwt_create_token(login.email)
             return {"message": "user logged in successfully", "token": token}, 200
         return {"message": "login not found: wrong password or surname"}, 404
