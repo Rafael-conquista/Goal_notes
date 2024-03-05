@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { token_storage } from '../utils/token_verify';
 import { login } from '../services/api_requests';
 
 function LoginComponent() {
-    const [surname, setsurname] = useState();
+    const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [message, setMessage] = useState('');
     const [primeiraVez, setPrimeiraVez] = useState(true);
     const [loading, setloading] = useState(false);
 
-    const surnameChange = (e) => {
-        setsurname(e.target.value);
+    const emailChange = (e) => {
+        setEmail(e.target.value);
     };
 
     const passwordChange = (e) => {
@@ -33,7 +34,7 @@ function LoginComponent() {
         setloading(true);
         event.preventDefault();
         const user_json = {
-            "surname": surname,
+            "email": email,
             "password": password
         };
         const response = await login(user_json);
@@ -42,12 +43,13 @@ function LoginComponent() {
             setMessage("usuário já se encontra logado");
             setPrimeiraVez(false);
             setloading(false);
-        } else if (response.message === "login not found: wrong password or surname" || response === false) {
+        } else if (response.message === "login not found: wrong password or email" || response === false) {
             setMessage("login Incorreto, por favor, verifique sua senha ou seu nickname");
             setPrimeiraVez(false);
             setloading(false);
         } else if (response.message === "user logged in successfully") {
             setMessage("logado com sucesso"); //adicionar aqui um redirect para a página home
+            token_storage(response.token)
             setloading(false);
         } else {
             setMessage("erro inexperado");
@@ -87,9 +89,9 @@ function LoginComponent() {
                             className='textos'
                             type="text"
                             required="required"
-                            onChange={surnameChange}
-                            id="surname"
-                            placeholder="Informe o E-mail ou nome de usuário"
+                            onChange={emailChange}
+                            id="email"
+                            placeholder="Informe o E-mail"
                         />
                     </div>
                     {!telaMaiorCelular &&(
@@ -139,8 +141,8 @@ function LoginComponent() {
                             className='textos'
                             type="text"
                             required="required"
-                            onChange={surnameChange}
-                            id="surname"
+                            onChange={emailChange}
+                            id="email"
                             placeholder="Informe o E-mail ou nome de usuário"
                         />
                     </div>

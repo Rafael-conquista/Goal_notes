@@ -13,7 +13,6 @@ export async function register(data){
   try{
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    console.log(data)
     var raw = JSON.stringify({
       "email": data.email,
       "name": data.name,
@@ -43,7 +42,7 @@ export async function login(data){
     myHeaders.append("Content-Type", "application/json");
   
     var raw = JSON.stringify({
-      "surname": data.surname,
+      "email": data.email,
       "password": data.password
     });
   
