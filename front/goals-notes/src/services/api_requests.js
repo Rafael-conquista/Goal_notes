@@ -13,9 +13,11 @@ export async function register(data){
   try{
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-  
+    console.log(data)
     var raw = JSON.stringify({
+      "email": data.email,
       "name": data.name,
+      "age": data.age,
       "surname": data.surname,
       "password": data.password
     });
