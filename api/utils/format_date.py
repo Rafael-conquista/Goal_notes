@@ -6,7 +6,6 @@ def format_datetime(date_request):
     group_date = regex.search(
         "(?P<year>\d{4})-(?P<mounth>\d{1,2})-(?P<day>\d{2})", date_request
     )
-    import ipdb; ipdb.set_trace()
     day = int(group_date.group(3))
     month = int(group_date.group(2))
     year = int(group_date.group(1))
