@@ -1,6 +1,7 @@
 from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
+from Routes.Items import Item, Items, Item_register
 from Routes.VerifyJWT import VerifyJWT
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
@@ -33,6 +34,10 @@ api.add_resource(Goal, "/goal/<int:goals_id>")
 api.add_resource(Types, "/types")
 api.add_resource(Type, "/type/<int:id>")
 api.add_resource(Type_register, "/type_register")
+# Items related Routes
+api.add_resource(Items, "/items")
+api.add_resource(Item, "/item/<int:id>")
+api.add_resource(Item_register, "/item_register")
 #verify JWT token
 api.add_resource(VerifyJWT, '/verify_token')
 
