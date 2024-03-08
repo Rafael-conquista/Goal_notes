@@ -5,6 +5,7 @@ from Routes.Posts import Post, Posts, PostCreator
 from Routes.PostComments import PostComment, Comment, Comments
 from Routes.VerifyJWT import VerifyJWT
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS, cross_origin
 from flask import Flask
 from flask_restful import Api
 

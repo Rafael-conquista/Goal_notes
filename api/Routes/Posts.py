@@ -17,7 +17,7 @@ class Post(Resource):
         dados = request.get_json()
         return PostsController.update_post(id, dados)
 
-class PostCreator(Resource):
+class PostCreator(Resource): 
     def post(self):
         dados = request.get_json()
         user_id = dados['id_user']

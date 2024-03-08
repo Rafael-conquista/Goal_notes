@@ -57,7 +57,6 @@ class PostsController():
     def update_post(id, dados):
         try:
             post = main_queries.find_query(PostsModel, id)
-            import ipdb; ipdb.set_trace()
             post.desc = dados.get("desc", post.desc)
             post.numLikes = dados.get("numLikes", post.numLikes)
             post.excluido = dados.get("excluido", post.excluido)
