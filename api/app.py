@@ -19,7 +19,6 @@ api = Api(app)
 def cria_banco():
     banco.create_all()
 
-
 # Users related Routes
 api.add_resource(Users, "/users")
 api.add_resource(User, "/user/<int:user_id>")

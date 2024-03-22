@@ -31,6 +31,7 @@ class Item(Resource):
 class Item_register(Resource):
     def post(self):
         try:
+            import ipdb; ipdb.set_trace()
             dados = request.get_json() # Pegar os dados de entrada
             item = ItemsModel(dados) # Organiza os dados seguindo o ItemsModel
             main_queries.save_query(item) # Vai salvar a requisição
