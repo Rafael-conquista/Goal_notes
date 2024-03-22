@@ -2,12 +2,14 @@ from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
 from Routes.Posts import Post, Posts, PostCreator
+from Routes.Items import Items, Item, Items_register
 from Routes.PostComments import PostComment, Comment, Comments
 from Routes.VerifyJWT import VerifyJWT
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
 from flask import Flask
 from flask_restful import Api
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///banco.db"
@@ -44,6 +46,10 @@ api.add_resource(PostCreator, "/create_post")
 api.add_resource(Comments, "/comments")
 api.add_resource(Comment, "/comment/<int:id>")
 api.add_resource(PostComment, "/post_comment")
+# items routes
+api.add_resource(Items, "/items")
+api.add_resource(Item, "/item/<int:id>")
+api.add_resource(Items_register, "/item_register")
 
 if __name__ == "__main__":
     from sql_alchemy import banco
