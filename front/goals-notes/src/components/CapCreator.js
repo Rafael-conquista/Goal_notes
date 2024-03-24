@@ -4,14 +4,14 @@ import { EscritaAutomatica } from '../utils/EscritaAutomatica';
 
 function CapCreatorComponent(){
     const first_interaction = [
-        {tempo: 45, text:"Olá! 🌟 Bem-vindo ao meu cantinho virtual, Sou a Cap!"}, 
-        {tempo: 45, text:"Estou pronta para compartilhar sorrisos e alegria contigo. 🌿✨"},
-        {tempo: 45, text:"Antes de começarmos nossa conversa, poderia me dizer como devo chama-lo? 😊👋"},
-        {tempo: 45, text:"Que nome Lindo!"},
-        {tempo: 45, text:"Adoraria ter um nome que combine comigo! 😊 "},
-        {tempo: 45, text:"Como você gostaria de me chamar? Estou ansiosa para saber! 💖🌸"},
-        {tempo: 45, text:"Adorei este Apelido!"},
-        {tempo: 45, text:`Perfeito! Prometo que não irei esquecer!` }
+        {tempo: 25, text:"Olá! 🌟 Bem-vindo ao meu cantinho virtual, Sou a Cap!"}, 
+        {tempo: 25, text:"Estou pronta para compartilhar sorrisos e alegria contigo. 🌿✨"},
+        {tempo: 25, text:"Antes de começarmos nossa conversa, poderia me dizer como devo chama-lo? 😊👋"},
+        {tempo: 25, text:"Que nome Lindo!"},
+        {tempo: 25, text:"Adoraria ter um nome que combine comigo! 😊 "},
+        {tempo: 25, text:"Como você gostaria de me chamar? Estou ansiosa para saber! 💖🌸"},
+        {tempo: 25, text:"Adorei este Apelido!"},
+        {tempo: 25, text:`Perfeito! Prometo que não irei esquecer!` }
     ]
     
     const [showInput, setShowInput] = useState(false)
@@ -24,14 +24,14 @@ function CapCreatorComponent(){
     const [capName, setCapName] = useState()
 
     const confirm_interaction = [
-        {tempo: 45, text:`Só para eu decorar, então seu nome é ${nickname} e meu apelido é ${capName} ?` },
-        {tempo: 45, text: "Tudo bem, pode me dizer quais são os nomes corretos?"}
+        {tempo: 25, text:`Só para eu decorar, então seu nome é ${nickname} e meu apelido é ${capName} ?` },
+        {tempo: 25, text: "Tudo bem, pode me dizer quais são os nomes corretos?"}
     ]
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
           setShowInput(true);
-        }, 3900);
+        }, 2400);
     
         return () => clearTimeout(timeoutId);
       }, [showInput])
