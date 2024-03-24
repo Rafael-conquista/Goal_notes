@@ -127,15 +127,6 @@ function RegisterComponent(){
               placeholder='Nome do Usuário'
             />
             )}
-            {!telaMaiorCelular &&(
-              <input className='textos'
-              type="date"
-              required="required"
-              onChange={ageChange}
-              id="age"
-              placeholder='data de nascimento'
-            />
-            )}
             {telaMaiorCelular &&(
               <input className='textos'
                 type="text"
@@ -145,6 +136,13 @@ function RegisterComponent(){
                 placeholder='Informe o seu nome de usuário'
               />
             )}
+            <input className='textos'
+              type="date"
+              required="required"
+              onChange={ageChange}
+              id="age"
+              placeholder='data de nascimento'
+            />
         </div>
         <div className='formRegistroUsuario'>
           {!telaMaiorCelular &&(
