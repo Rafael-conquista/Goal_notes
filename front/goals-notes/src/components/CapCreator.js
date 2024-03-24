@@ -100,18 +100,22 @@ function CapCreatorComponent(){
                             />
                         </p>
                     </div>
-                    {showInput && !showTextInput && !showCapInput && !confirmNames &&<button onClick={handleInput}>Clique para continuar</button>}
+                    {showInput && !showTextInput && !showCapInput && !confirmNames &&<button className='button' onClick={handleInput}><span>Continuar</span></button>}
                     {showTextInput && <input type='text' placeholder='Digite como deseja ser chamado!' onChange={nicnameChange} onKeyPress={nicnameChange}/>}
                     {showCapInput && <input type='text' placeholder='Digite o apelido da cap!' onChange={capNameChange} onKeyPress={capNameChange}/>}
                     {
                         confirmNames && 
-                        <div>
-                            <button id='confirm' onClick={confirmChange}>
-                                Sim, está tudo correto!
-                            </button>
-                            <button id='deny' onClick={confirmChange}>
-                                Não, acho que me confundi...
-                            </button>
+                        <div className='confirm_button'>    
+                            <div className='margin_confirm'>
+                                <button className='button' id='confirm' onClick={confirmChange}>
+                                    <span>Sim, está tudo correto!</span>
+                                </button>
+                            </div>
+                            <div className='margin_confirm'>
+                                <button className='button' id='deny' onClick={confirmChange}>
+                                    <span>Não, acho que me confundi...</span>
+                                </button>
+                            </div>
                         </div>
                     }
                 </div>
