@@ -3,22 +3,22 @@ import jwt
 
 SECRET_KEY = 'generic-secret-word'
 
-def jwt_create_token(email):
+def jwt_create_token(id):
     expiration = datetime.utcnow() + timedelta(hours=1)
-    payload = {'email': email, 'exp': expiration}
+    payload = {'id': id, 'exp': expiration}
     return jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
 def jwt_decode_token(token):
     payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
     expiration = datetime.fromtimestamp(payload['exp'])
-    email = payload['email']
+    id = payload['id']
     time_difference = expiration - datetime.utcnow()
     if time_difference < timedelta(minutes=5) and time_difference.total_seconds() > 0:
-        token = jwt_create_token(email)
+        token = jwt_create_token(id)
         return {
             "message": "token expiring, update the session token",
             "token": token, 
-            "email":email
+            "id":id
         }, 200
     else:
-        return {"message": "token lifetime stil valid", "email": email}, 200
+        return {"message": "token lifetime stil valid", "id": id, "token": token}, 200

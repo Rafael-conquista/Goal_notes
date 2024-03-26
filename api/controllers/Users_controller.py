@@ -65,6 +65,6 @@ class UsersController():
             .first()
         )
         if user.password == login_password and user.email == login_email:
-            token = jwt_methods.jwt_create_token(login.email)
+            token = jwt_methods.jwt_create_token(user.id)
             return {"message": "user logged in successfully", "token": token}, 200
         return {"message": "login not found: wrong password or surname"}, 404

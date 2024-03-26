@@ -11,8 +11,9 @@ const Initial = () => {
   async function verify(token) {
     try {
       const response = await token_verify(token)
-      const email = response.email
-      if (email) {
+      const id = response.id
+      if (id) {
+        //quando tivermos a página inicial, passar o id para a url
         window.location.href = `/goals`;
       } else {
         console.log('é necessário realizar o login')
