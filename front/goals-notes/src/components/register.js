@@ -52,6 +52,8 @@ function RegisterComponent(){
         setPrimeiraVez(false);
         setloading(false);
         token_storage(response.token)
+        sessionStorage.setItem('first_acess', true)
+        window.location.href = '/capCreate'
       } else {
         setMessage("Ocorreu um erro durante a criação do usuário")
         setPrimeiraVez(false);
@@ -127,15 +129,6 @@ function RegisterComponent(){
               placeholder='Nome do Usuário'
             />
             )}
-            {!telaMaiorCelular &&(
-              <input className='textos'
-              type="date"
-              required="required"
-              onChange={ageChange}
-              id="age"
-              placeholder='data de nascimento'
-            />
-            )}
             {telaMaiorCelular &&(
               <input className='textos'
                 type="text"
@@ -145,6 +138,13 @@ function RegisterComponent(){
                 placeholder='Informe o seu nome de usuário'
               />
             )}
+            <input className='textos'
+              type="date"
+              required="required"
+              onChange={ageChange}
+              id="age"
+              placeholder='data de nascimento'
+            />
         </div>
         <div className='formRegistroUsuario'>
           {!telaMaiorCelular &&(
