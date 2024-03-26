@@ -52,6 +52,8 @@ function RegisterComponent(){
         setPrimeiraVez(false);
         setloading(false);
         token_storage(response.token)
+        sessionStorage.setItem('first_acess', true)
+        window.location.href = '/capCreate'
       } else {
         setMessage("Ocorreu um erro durante a criação do usuário")
         setPrimeiraVez(false);

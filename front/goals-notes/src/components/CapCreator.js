@@ -29,6 +29,16 @@ function CapCreatorComponent(){
     ]
 
     useEffect(() => {
+        const first_acess = sessionStorage.getItem('first_acess')
+        if (first_acess) {
+            console.log("tem token")
+        }
+        else {
+            console.log('não tem token, redirecionando...');
+            window.location.href = '/';
+        }
+    }, [])
+    useEffect(() => {
         const timeoutId = setTimeout(() => {
           setShowInput(true);
         }, 2400);
