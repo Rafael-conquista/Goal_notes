@@ -1,6 +1,7 @@
 from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
+from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer
 from Routes.Posts import Post, Posts, PostCreator
 from Routes.PostComments import PostComment, Comment, Comments
 from Routes.VerifyJWT import VerifyJWT
@@ -35,6 +36,13 @@ api.add_resource(Goal, "/goal/<int:goals_id>")
 api.add_resource(Types, "/types")
 api.add_resource(Type, "/type/<int:id>")
 api.add_resource(Type_register, "/type_register")
+#verify JWT token
+api.add_resource(VerifyJWT, '/verify_token')
+# Amigos related Routes
+api.add_resource(Amigos_registro, '/Amigos_registro')
+api.add_resource(Amigos, '/Amigos')
+api.add_resource(Amigo, '/Amigo')
+api.add_resource(Amigo_desfazer, '/Amigo_desfazer')
 # verify JWT token
 api.add_resource(VerifyJWT, "/verify_token")
 # posts related Routes
