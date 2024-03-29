@@ -15,7 +15,7 @@ class GoalsController():
         for goal in goals:
             # if you need to take a look at the sqlAlchemy object fields --> goal.__dict__
             type_name = GoalsController.find_type_name(goal)
-
+            import ipdb; ipdb.set_trace()
             goal_list.append(
                 {
                     "id": goal.goals_id,
@@ -30,6 +30,7 @@ class GoalsController():
                     "type_name": type_name,
                 }
             )
+
         main_queries.close_conection()
         return {"goals": goal_list}, 200
 
@@ -79,8 +80,6 @@ class GoalsController():
                 goal.expected_data = data_final
             else:
                 goal.expected_data = None
-
-            goal.dataAlteracao = banco.func.now()
             main_queries.save_query(goal)
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:

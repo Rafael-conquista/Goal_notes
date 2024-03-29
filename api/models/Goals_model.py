@@ -14,7 +14,7 @@ class GoalsModel(banco.Model):
     importance_degree = banco.Column(banco.Integer, default=1)
     current_progress = banco.Column(banco.Integer, default=0)
     initial_data = banco.Column(banco.DateTime, default=banco.func.now())
-    update_data = banco.Column(banco.DateTime, default=banco.func.now())
+    update_data = banco.Column(banco.DateTime, onupdate=banco.func.now())
     end_date = banco.Column(banco.Date, default=None)
     expected_data = banco.Column(banco.DateTime, default=None)
     dataExcluido = banco.Column(banco.Date, default=None)

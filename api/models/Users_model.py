@@ -15,7 +15,7 @@ class UsersModel(banco.Model):
     capCoins = banco.Column(banco.Integer, default=0)
     password = banco.Column(banco.String(25), nullable=False)
     dataCadastro = banco.Column(banco.DateTime, default=banco.func.now())
-    dataAlteracao = banco.Column(banco.DateTime, default=banco.func.now())
+    dataAlteracao = banco.Column(banco.DateTime, onupdate=banco.func.now())
     excluido = banco.Column(banco.Boolean, default=False)
 
 

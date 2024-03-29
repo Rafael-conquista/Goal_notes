@@ -9,7 +9,7 @@ class TypesModel(banco.Model):
     name = banco.Column(banco.String(100), nullable=False)
     obs = banco.Column(banco.String(200))
     dataCadastro = banco.Column(banco.DateTime, default=banco.func.now())
-    dataAlteracao = banco.Column(banco.DateTime, default=banco.func.now())
+    dataAlteracao = banco.Column(banco.DateTime, onupdate=banco.func.now())
     excluido = banco.Column(banco.Boolean, default=False)
 
     def __init__(self, dados):

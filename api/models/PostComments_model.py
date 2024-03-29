@@ -11,7 +11,7 @@ class PostsCommentsModel(banco.Model):
     id_user = banco.Column(banco.Integer, ForeignKey("Users.id"), nullable=False)
     id_post = banco.Column(banco.Integer, ForeignKey("Goals.goals_id"), nullable=False)
     dataCadastro = banco.Column(banco.DateTime, default=banco.func.now())
-    dataAlteracao = banco.Column(banco.DateTime, default=banco.func.now())
+    dataAlteracao = banco.Column(banco.DateTime, onupdate=banco.func.now())
     excluido = banco.Column(banco.Boolean, default=False)
 
     def __init__(self, dados):
