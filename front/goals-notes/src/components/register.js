@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { token_storage } from '../utils/token_verify';
 import { register } from '../services/api_requests'
 
 function RegisterComponent(){
-    const [name, setName] = useState()
+    const [email, setEmail] = useState()
+    const [age, setAge] = useState()
     const [surname, setSurname] = useState()
     const [password, setPassword] = useState()
     const [confirm, setConfirm] = useState()
@@ -10,8 +12,8 @@ function RegisterComponent(){
     const [loading, setloading] = useState(false);
     const [primeiraVez, setPrimeiraVez] = useState(true);
 
-    const nameChange = (e) => {
-      setName(e.target.value)
+    const emailChange = (e) => {
+      setEmail(e.target.value)
       console.log(e.target.value)
     }
     const surnameChange = (e) => {
@@ -23,6 +25,10 @@ function RegisterComponent(){
     const confirmChange = (e) => {
       setConfirm(e.target.value)
     }
+    const ageChange = (e) => {
+      setAge(e.target.value)
+    }
+    
     async function register_user(event) {
       setloading(true);
       event.preventDefault();
@@ -33,15 +39,21 @@ function RegisterComponent(){
         return
       }
       const user_json = {
-        "name": name,
+        "email": email,
+        "name": surname,
+        "age": age,
         "surname": surname,
         "password": password
       }
       const response = await register(user_json)
+      console.log(response)
       if (response.message === "the user has been created") {
         setMessage("usuário criado com sucesso")
         setPrimeiraVez(false);
         setloading(false);
+        token_storage(response.token)
+        sessionStorage.setItem('first_acess', true)
+        window.location.href = '/capCreate'
       } else {
         setMessage("Ocorreu um erro durante a criação do usuário")
         setPrimeiraVez(false);
@@ -104,8 +116,8 @@ function RegisterComponent(){
             <input
               type="text"
               required="required"
-              onChange={nameChange}
-              id="name"
+              onChange={emailChange}
+              id="email"
               placeholder='Informe o E-mail'
             />
             {!telaMaiorCelular &&(
@@ -126,6 +138,13 @@ function RegisterComponent(){
                 placeholder='Informe o seu nome de usuário'
               />
             )}
+            <input className='textos'
+              type="date"
+              required="required"
+              onChange={ageChange}
+              id="age"
+              placeholder='data de nascimento'
+            />
         </div>
         <div className='formRegistroUsuario'>
           {!telaMaiorCelular &&(
