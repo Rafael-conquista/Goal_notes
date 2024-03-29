@@ -18,7 +18,6 @@ class UsersModel(banco.Model):
     dataAlteracao = banco.Column(banco.DateTime, onupdate=banco.func.now())
     excluido = banco.Column(banco.Boolean, default=False)
 
-
     def __init__(self, dados):
         self.name = dados.get("name", None)
         self.surname = dados.get("surname", None)

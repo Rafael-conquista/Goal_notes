@@ -18,8 +18,7 @@ class GoalsModel(banco.Model):
     end_date = banco.Column(banco.Date, default=None)
     expected_data = banco.Column(banco.DateTime, default=None)
     dataExcluido = banco.Column(banco.Date, default=None)
-    user_id = banco.Column(
-        banco.Integer, ForeignKey("Users.id"), nullable=False)
+    user_id = banco.Column(banco.Integer, ForeignKey("Users.id"), nullable=False)
     type_id = banco.Column(banco.Integer, ForeignKey("Types.id"))
 
     def __init__(self, dados):

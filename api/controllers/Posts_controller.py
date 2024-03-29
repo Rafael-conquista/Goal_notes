@@ -4,24 +4,21 @@ from models.Posts_model import PostsModel
 from models.Users_model import UsersModel
 from models.Goals_model import GoalsModel
 
-class PostsController():
+
+class PostsController:
     def make_post(dados, user_id):
         user = main_queries.find_query(UsersModel, user_id)
-        goal = main_queries.find_query(
-            GoalsModel, dados.get('id_goal', None)
-        )
+        goal = main_queries.find_query(GoalsModel, dados.get("id_goal", None))
         if not user or not goal:
-            return {
-                "message": "incorret user or goal id"
-            }
+            return {"message": "incorret user or goal id"}
 
         post = PostsModel(dados)
         post.user_id = user_id
-        post.goal_id = dados.get('goal_id', None)
+        post.goal_id = dados.get("goal_id", None)
         main_queries.save_query(post)
-        
+
         return {"message": "the post has been created"}, 201
-    
+
     def find_post(id):
         try:
             post = main_queries.find_query(PostsModel, id)
@@ -30,12 +27,12 @@ class PostsController():
                 "id_goal": post.id_goal,
                 "id": post.id,
                 "id_user": post.id_user,
-                "numLikes": post.numLikes
+                "numLikes": post.numLikes,
             }
             return post_json, 200
         except Exception as e:
-            return{"message": e}
-        
+            return {"message": e}
+
     def find_all_posts():
         posts = main_queries.find_all_query(PostsModel)
         post_list = []
@@ -48,12 +45,12 @@ class PostsController():
                     "id_goal": post.id_goal,
                     "id": post.id,
                     "id_user": post.id_user,
-                    "numLikes": post.numLikes
+                    "numLikes": post.numLikes,
                 }
             )
         main_queries.close_conection()
         return {"posts": post_list}, 200
-    
+
     def update_post(id, dados):
         try:
             post = main_queries.find_query(PostsModel, id)

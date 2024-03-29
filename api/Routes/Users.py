@@ -38,4 +38,3 @@ class User_register(Resource):
         main_queries.save_query(user)
         token = jwt_methods.jwt_create_token(user.id)
         return {"message": "the user has been created", "token": token}, 201
-

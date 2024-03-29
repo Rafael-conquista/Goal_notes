@@ -4,22 +4,24 @@ from models.Users_model import UsersModel
 from utils.format_date import format_to_string
 
 
-class UsersController():
+class UsersController:
 
     def find_all_users():
         users = main_queries.find_all_query(UsersModel)
         user_list = []
         for user in users:
-            user_list.append({
-                "name": user.name,
-                "id": user.id,
-                "email": user.email,
-                "surname": user.surname,
-                "capCoins": user.capCoins,
-                "dataCadastro": format_to_string(user.dataCadastro),
-                "age": format_to_string(user.age),
-                "excluido": user.excluido,
-            })
+            user_list.append(
+                {
+                    "name": user.name,
+                    "id": user.id,
+                    "email": user.email,
+                    "surname": user.surname,
+                    "capCoins": user.capCoins,
+                    "dataCadastro": format_to_string(user.dataCadastro),
+                    "age": format_to_string(user.age),
+                    "excluido": user.excluido,
+                }
+            )
 
         return {"users": user_list}, 200
 
@@ -30,7 +32,7 @@ class UsersController():
             user.surname = dados.get("surname", user.surname)
             user.password = dados.get("password", user.password)
             user.age = dados.get("age", user.age)
-            #adaptar user.age para pegar a data de nascimento
+            # adaptar user.age para pegar a data de nascimento
             user.capCoins = dados.get("capCoins", user.capCoins)
             user.excluido = dados.get("excluido", user.excluido)
             user.dataAlteracao = banco.func.now()
@@ -38,7 +40,7 @@ class UsersController():
             return {"message": "user updated successfully"}, 200
         except Exception as error:
             return {"message": error}, 400
-        
+
     def find_user(id):
         try:
             user = main_queries.find_query(UsersModel, id)
@@ -50,11 +52,10 @@ class UsersController():
                 "capCoins": user.capCoins,
                 "dataCadastro": format_to_string(user.dataCadastro),
                 "age": format_to_string(user.age),
-                "excluido": user.excluido
+                "excluido": user.excluido,
             }, 200
         except Exception as ex:
             return {"message": "Not found"}
-        
 
     def verify_login(login):
         login_email = login.email

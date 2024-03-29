@@ -33,6 +33,6 @@ class Goal(Resource):
 
     def post(self, goals_id):
         dados = request.get_json()
-        user_id = dados['user_id']
+        user_id = dados["user_id"]
 
         return GoalsController.post_goal(dados, user_id)

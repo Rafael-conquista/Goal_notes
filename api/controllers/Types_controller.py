@@ -2,7 +2,8 @@ from utils import main_queries
 from sql_alchemy import banco
 from models.Types_model import TypesModel
 
-class TypesController():
+
+class TypesController:
     def find_all_types():
         types = main_queries.find_all_query(TypesModel)
         type_list = []
@@ -25,7 +26,7 @@ class TypesController():
             }, 200
         except Exception as ex:
             return {"message": ex}
-        
+
     def update_type(id, dados):
         try:
             type = main_queries.find_query(TypesModel, id)

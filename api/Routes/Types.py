@@ -23,6 +23,7 @@ class Type(Resource):
         main_queries.close_conection()
         return TypesController.update_type(id, dados)
 
+
 class Type_register(Resource):
     def post(self):
         try:
@@ -31,5 +32,4 @@ class Type_register(Resource):
             main_queries.save_query(type)
             return {"message": "the type has been created"}, 201
         except:
-            return{'message': "that was not possible to add this type"}
-
+            return {"message": "that was not possible to add this type"}
