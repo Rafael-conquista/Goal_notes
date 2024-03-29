@@ -1,6 +1,7 @@
 from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
+from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer
 from Routes.VerifyJWT import VerifyJWT
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
@@ -35,6 +36,11 @@ api.add_resource(Type, "/type/<int:id>")
 api.add_resource(Type_register, "/type_register")
 #verify JWT token
 api.add_resource(VerifyJWT, '/verify_token')
+# Amigos related Routes
+api.add_resource(Amigos_registro, '/Amigos_registro')
+api.add_resource(Amigos, '/Amigos')
+api.add_resource(Amigo, '/Amigo')
+api.add_resource(Amigo_desfazer, '/Amigo_desfazer')
 
 if __name__ == "__main__":
     from sql_alchemy import banco
