@@ -6,7 +6,7 @@ from utils import main_queries
 class ItemsModel(banco.Model):
     __tablename__ = "Items"
 
-    cod = banco.Column(banco.Integer, primary_key=True, unique=True, autoincrement=True)
+    id = banco.Column(banco.Integer, primary_key=True, unique=True, autoincrement=True)
     goal_id = banco.Column(banco.Integer, ForeignKey("Goals.goals_id"))
     desc = banco.Column(banco.String(250), nullable=False)
     ativo = banco.Column(banco.Boolean, default=False)
