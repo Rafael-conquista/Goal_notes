@@ -11,11 +11,11 @@ class ItemsController():
         # Percorre os tipos existentes.
         for item in items:
             # Grava os valores em variáveis de ambiente.
-            cod = item.cod
+            id = item.id
             goal_id = item.goal_id
             desc = item.desc
             # Adiciona na lista vazia que será exibida para o usuário.
-            item_list.append({"cod_item": cod, "goal_id": goal_id, "desc": desc})
+            item_list.append({"item_id": id, "goal_id": goal_id, "desc": desc})
         # Fecha a conexão com o banco de dados.
         main_queries.close_conection()
         # Retorna os valores para o usuário, junto ao status da busca.
@@ -29,7 +29,7 @@ class ItemsController():
             item = main_queries.find_query(ItemsModel, id)
             # Encontrando valores, eles serão exibidos aqui nesse formato.
             return {
-                "cod": item.cod,
+                "id": item.id,
                 "goal_id": item.goal_id,
                 "desc": item.desc
             }, 200
@@ -43,7 +43,7 @@ class ItemsController():
             # Obtém o item a ser atualizado do banco de dados com base no ID fornecido.
             item = main_queries.find_query(ItemsModel, id)
             # Atualiza o código do item, se um novo valor for fornecido em "dados".
-            item.cod = dados.get("name", item.cod)
+            item.id = dados.get("name", item.id)
             # Atualiza o código das metas do item, se um novo valor for fornecido em "dados".
             item.goal_id = dados.get("goal_id", item.goal_id)
             # Salva as alterações no banco de dados.
