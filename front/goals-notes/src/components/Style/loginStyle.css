@@ -11,6 +11,16 @@ body {
     display: flex;
 }
 
+@media screen and (max-width: 1000px) {
+    body {    
+        height: auto;
+        overflow-y: auto;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+}
+
 h1 {
     font-size: 4.5rem;
     text-align: center;
@@ -22,6 +32,16 @@ h2 {
     text-align: center;
     margin: 50px 0px;
     font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1000px) {
+    h1{
+        font-size: 3rem;
+    }
+    
+    h2 {
+        padding: 0 10px;
+    }
 }
 
 input {
@@ -44,9 +64,16 @@ input {
 }
 
 .sectionLoginForm {
-    width: 100vw;
     height: 100vh;
+    width: 100vw;
     display: flex;
+}
+
+@media screen and (max-width: 1000px) {
+    .sectionLoginForm {
+        height: auto;
+        flex-direction: column;
+    }
 }
 
 .logoCapivara {
@@ -80,6 +107,13 @@ input {
     background: #28B498;
 }
 
+@media screen and (max-width: 1000px) {
+    .botaoLogar {
+        font-size: 1.5rem;
+        width: 80vw;
+    }
+}
+
 .botaoLogar:hover {
     box-shadow: 0px 0px 5px #28B498;
 }
@@ -97,6 +131,13 @@ input {
     align-items: center;
 }
 
+@media screen and (max-width: 1000px) {
+    .cardLogin {
+        height: 100vh;
+        width: 100vw;
+    }
+}
+
 .cardRegister {
     width: 35vw;
     display: flex;
@@ -105,6 +146,13 @@ input {
     background: #131F24;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .cardRegister {
+        height: 100vh;
+        width: 100vw;
+    }
 }
 
 .textos {
@@ -131,9 +179,16 @@ input {
     justify-content: center;
 }
 
+@media screen and (max-width: 1000px) {
+    .alertaLogin {
+        height: 100px;
+    }
+}
+
 .alertaRegistro {
     height: 60px;
     width: 35vw;
+    padding: 0px 10px;
     font-size: 1.5rem;
     background-color: darkred;
     color: white;
@@ -146,6 +201,62 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .alertaRegistro {
+        height: 100px;
+    }
+}
+
+.coletaneaBotoesLogar {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.botaoCriarUsuario {
+    background-color: #131F24;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botaoUsuarUsuario {
+    background-color: #000;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .alertaLogin {
+        width: 100vw;
+    }
+    
+    .alertaRegistro {
+        width: 100vw;
+    }
+    
+    .botaoCriarUsuario:hover {
+        box-shadow: 0px 0px 5px #131F24;
+    }
+
+    .botaoCriarUsuario:active {
+        background: #000000;
+    }
+    
+    .botaoUsuarUsuario:hover {
+        box-shadow: 0px 0px 5px #000;
+    }
+    
+    .botaoUsuarUsuario:active {
+        background: #000;
+    }
 }
 
 @keyframes subir {
@@ -163,6 +274,12 @@ input {
     width: 80%;
 }
 
+@media screen and (max-width: 1000px) {
+    .esqueciSenha {
+        text-align: center;
+    }
+}
+
 .registroUsuario {
     align-items: center;
     display: grid;
@@ -172,6 +289,12 @@ input {
 .formRegistroUsuario {
     display: flex;
     width: 80%;
+}
+
+@media screen and (max-width: 1000px) {
+    .formRegistroUsuario {
+        width: 100%;
+    }
 }
 
 .registroUsuario input {
@@ -241,4 +364,41 @@ input {
     position: absolute;
     top: 50%;
     left: 50%;
-  }
+}
+
+@keyframes rodar {
+    to {
+        rotate: 360deg;
+    }
+}
+
+.loading {
+    transition: 1s;
+    position: fixed;
+    display: flex;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: #0006;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.loadingRodar {
+    width: 250px;
+    height: 250px;
+    border-style: outset;
+    border-color: white;
+    border-radius: 100%;
+    border-width: thick;
+    animation: rodar 2s ease-out infinite;
+}
+
+@media screen and (max-width: 1000px) {
+    .loadingRodar {
+        width: 50px;
+        height: 50px;
+    }
+}

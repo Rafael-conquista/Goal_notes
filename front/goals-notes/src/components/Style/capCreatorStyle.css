@@ -1,0 +1,166 @@
+.cap_component {
+    position: absolute;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 70vw;
+    height: 80vh;
+    border-radius: 30px;
+    background-color: #131f24ec;
+}
+
+.capScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../images/paisagem.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cap_welcome_page {
+    border-radius: 100px;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
+}
+
+.cap_txt_box_grid{
+    display: grid;
+    gap: 20px;  
+    grid-template-columns: repeat(1, 2fr);
+    margin: 0 auto;
+    height: fit-content;
+    width: max-content;
+    margin-top: 15vh;
+}
+
+.cap_txt_box{
+    background-color: rgba(177, 235, 235, 0.801);
+    border-radius: 20px;
+    text-align: left;
+    margin-top: 2vh;
+    width: 55vw;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding: 2vh;
+}
+
+.cap_component input::placeholder{
+    color: white;
+    text-align: center;
+}
+
+.cap_component input{
+    color: white;
+    border-color: #28B498;
+    margin: 0 auto;
+}
+
+.button{
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #28B498;
+    border-radius: 20px;
+    outline: none;
+    transition: 1s ease-in-out;
+    margin: 0 auto;
+}
+
+.button:hover{
+    transition: 1s ease-in-out;
+    background: #28B498;
+}
+
+.confirm_button{
+    margin: 0 auto;
+}
+
+.margin_confirm{
+    padding: 10px;
+}
+
+.button span{
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+@media screen and (max-width: 1300px) {
+    .cap_txt_box{
+        width: 50vw;
+    }
+
+    .cap_txt_box_grid{
+        grid-template-columns: repeat(1, 2fr);
+        margin: 0 auto;
+        margin-top: 15vh;
+    }
+    .cap_welcome_page {
+        border-radius: 100px;
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+        margin-top: 2vh;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .cap_component {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    .cap_txt_box{
+        width: 70vw;
+        padding: 2vh;
+    }
+    .cap_txt_box_grid{
+        grid-template-columns: repeat(1, 2fr);
+        margin: 0 auto;
+        margin-top: 20vh;
+    }
+    .cap_welcome_page {
+        border-radius: 100px;
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+        margin-top: 2vh;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .cap_welcome_page { 
+        border-radius: 100px;
+        width: 90px;
+        height: 90px;
+    }
+    .cap_txt_box_grid{
+        display: grid;
+        gap: 5px;  
+        grid-template-columns: repeat(1, 2fr);
+        height: fit-content;
+        margin: 0 auto;
+        margin-top: 20vh;
+    }
+    .cap_welcome_page {
+        border-radius: 100px;
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+        margin-top: 2vh;
+    }
+    .cap_component input::placeholder{
+        color: white;
+        font-size: 12px;
+    }
+}
