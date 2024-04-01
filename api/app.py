@@ -22,6 +22,7 @@ api = Api(app)
 def cria_banco():
     banco.create_all()
 
+
 # Users related Routes
 api.add_resource(Users, "/users")
 api.add_resource(User, "/user/<int:user_id>")
@@ -40,13 +41,11 @@ api.add_resource(Type_register, "/type_register")
 api.add_resource(Items, "/items")
 api.add_resource(Item, "/item/<int:id>")
 api.add_resource(Item_register, "/item_register")
-#verify JWT token
-api.add_resource(VerifyJWT, '/verify_token')
 # Amigos related Routes
-api.add_resource(Amigos_registro, '/Amigos_registro')
-api.add_resource(Amigos, '/Amigos')
-api.add_resource(Amigo, '/Amigo')
-api.add_resource(Amigo_desfazer, '/Amigo_desfazer')
+api.add_resource(Amigos_registro, "/Amigos_registro")
+api.add_resource(Amigos, "/Amigos")
+api.add_resource(Amigo, "/Amigo")
+api.add_resource(Amigo_desfazer, "/Amigo_desfazer")
 # verify JWT token
 api.add_resource(VerifyJWT, "/verify_token")
 # posts related Routes
