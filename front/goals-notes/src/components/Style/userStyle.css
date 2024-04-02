@@ -1,0 +1,35 @@
+.user_container{
+    background-color: #131f24f6;
+    height: 100vh;
+    width: 100vw;
+}
+
+.user_container h3{
+    color: white;
+}
+
+.submit_buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.submit_comment_button{
+    margin-right: 30px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background-color: #71bb00;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+}
