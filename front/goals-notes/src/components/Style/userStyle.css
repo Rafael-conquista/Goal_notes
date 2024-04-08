@@ -68,3 +68,45 @@ input{
     cursor: pointer;
     color: white;
 }
+
+.delete_button {
+    margin-right: 30px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background-color: #bb0000;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.submit_comment_button:hover, .delete_button:hover, .return_button:hover{
+    transform: scale(1.2);
+    transition: 0.5s;
+}
+
+.submit_comment_button, .delete_button, .return_button{
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 500px) {
+    .info_input input{
+        margin: 20px 3vw;
+        width: 90vw;
+    }
+    .return_button{
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+    }
+    .info_input{
+        padding-top: 20px;
+        padding-right: 20px;
+    }
+}
