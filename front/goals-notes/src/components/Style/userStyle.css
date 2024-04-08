@@ -2,6 +2,8 @@
     background-color: #131f24f6;
     height: 100vh;
     width: 100vw;
+    padding-top: 30px;
+    padding-left: 20px;
 }
 
 .user_container h3{
@@ -9,12 +11,20 @@
 }
 
 .submit_buttons {
-    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin-top: 30px;
+    margin-left: 20px;
     color: white;
     cursor: pointer;
+}
+
+input::placeholder{
+    color: white;
+}
+
+input{
+    color: white;
 }
 
 .submit_comment_button{
@@ -32,4 +42,29 @@
     text-align: center;
     color: #ffffff;
     cursor: pointer;
+}
+
+.info_input {
+    display: grid; 
+    align-items: center;
+    justify-content: center; 
+    padding-top: 50px;
+}
+
+.info_input input {
+    margin: 20px 3vw;
+    width: 450px;
+}
+
+.return_button{
+    width: 70px;
+    height: 70px;
+    font-size: 50px;
+    border-radius: 50px;
+    background-color: #71bb00;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;
+    color: white;
 }
