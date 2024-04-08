@@ -1,0 +1,112 @@
+.user_container{
+    background-color: #131f24f6;
+    height: 100vh;
+    width: 100vw;
+    padding-top: 30px;
+    padding-left: 20px;
+}
+
+.user_container h3{
+    color: white;
+}
+
+.submit_buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+input::placeholder{
+    color: white;
+}
+
+input{
+    color: white;
+}
+
+.submit_comment_button{
+    margin-right: 30px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background-color: #71bb00;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.info_input {
+    display: grid; 
+    align-items: center;
+    justify-content: center; 
+    padding-top: 50px;
+}
+
+.info_input input {
+    margin: 20px 3vw;
+    width: 450px;
+}
+
+.return_button{
+    width: 70px;
+    height: 70px;
+    font-size: 50px;
+    border-radius: 50px;
+    background-color: #71bb00;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;
+    color: white;
+}
+
+.delete_button {
+    margin-right: 30px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background-color: #bb0000;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.submit_comment_button:hover, .delete_button:hover, .return_button:hover{
+    transform: scale(1.2);
+    transition: 0.5s;
+}
+
+.submit_comment_button, .delete_button, .return_button{
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 500px) {
+    .info_input input{
+        margin: 20px 3vw;
+        width: 90vw;
+    }
+    .return_button{
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+    }
+    .info_input{
+        padding-top: 20px;
+        padding-right: 20px;
+    }
+}

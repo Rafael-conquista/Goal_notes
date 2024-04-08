@@ -2,6 +2,7 @@ import Initial from "./pages/initial_page/initial_page"
 import Home from "./pages/homepage/homepage"
 import Goals from "./pages/goals/goals"
 import CapCreate from "./pages/CapCreate/CapCreate";
+import UserUpdate from "./pages/userUpdate/userUpdate"
 import { Route,Routes, BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,6 +14,7 @@ function App() {
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/Goals" element={<Goals />}></Route>
           <Route path="/CapCreate" element={<CapCreate />}></Route>
+          <Route path="/UserUpdate" element={<UserUpdate />}></Route>
         </Routes>
     </BrowserRouter>
   );
