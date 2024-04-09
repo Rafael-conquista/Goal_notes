@@ -10,6 +10,13 @@
     color: white;
 }
 
+.user_container p{
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
 .submit_buttons {
     display: flex;
     justify-content: center;
