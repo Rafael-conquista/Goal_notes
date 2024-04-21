@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { token_storage } from '../utils/token_verify';
+import { token_verify } from '../services/api_requests.js'
+import { remove_token } from '../utils/token_verify.js';
 import { login } from '../services/api_requests';
 
 function LoginComponent() {
@@ -8,6 +10,22 @@ function LoginComponent() {
     const [message, setMessage] = useState('');
     const [primeiraVez, setPrimeiraVez] = useState(true);
     const [loading, setloading] = useState(false);
+
+    async function verify(token) {
+        try {
+          const response = await token_verify(token)
+          const id = response.id
+          if (id) {
+            //quando tivermos a página inicial, passar o id para a url
+            window.location.href = `${id}/goals`;
+          } else {
+            console.log('é necessário realizar o login')
+            remove_token()
+          }
+        } catch {
+          console.log('validation error')
+        }
+      }
 
     const emailChange = (e) => {
         setEmail(e.target.value);
@@ -51,6 +69,7 @@ function LoginComponent() {
             setMessage("logado com sucesso"); //adicionar aqui um redirect para a página home
             token_storage(response.token)
             setloading(false);
+            verify(response.token)
         } else {
             setMessage("erro inexperado");
             setPrimeiraVez(false);

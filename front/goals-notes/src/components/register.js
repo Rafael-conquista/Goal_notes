@@ -194,7 +194,7 @@ function RegisterComponent(){
         {!telaMaiorCelular &&(
             <div className='coletaneaBotoesLogar'>
                 <button className='textos botaoLogar' type="submit" value="entar">Registrar-se</button>
-                <a className='textos botaoLogar botaoUsuarUsuario' onClick={() => primeiraVezAtualizar(true)} href="#login">Usuar Usuário</a>
+                <a className='textos botaoLogar botaoUsuarUsuario' onClick={() => primeiraVezAtualizar(true)} href="#login">Logar Usuário</a>
             </div>
         )}
         {!primeiraVez && (

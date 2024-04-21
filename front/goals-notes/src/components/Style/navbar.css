@@ -1,0 +1,90 @@
+.navbar_view {
+    background-color: #131F24;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    position: fixed !important;
+    justify-content: center;
+}
+
+.burguer_menu {
+    color: #28B498;
+    font-size: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.menu_title {
+    color: white;
+    cursor: pointer;
+    text-align: justify;
+}
+
+.offcanvas-header{
+    display: flex;
+    display: flexbox;
+    padding: var(--bs-offcanvas-padding-y) var(--bs-offcanvas-padding-x);
+}
+
+.menu_title:hover {
+    -webkit-animation: swing 1s ease;
+    animation: swing 1s ease infinite;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+
+@keyframes swing {
+    15% {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+
+    30% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+
+    50% {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+
+    65% {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+
+    80% {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+.offcanvas {
+    background-color: #131F24 !important;
+    align-items: baseline !important;
+    padding-left: 1vw;
+}
+
+.menu_item_nav {
+    font-size: 1.2em;
+    color: #fff;
+    display: flex;
+    transition: 0.5s;
+    margin: 15px 0px;
+    text-decoration: none;
+    padding-top: 20px;
+    padding-left: 2vw;
+}
+
+.button {
+    max-width: 20vw;
+    max-height: 30vh;
+}

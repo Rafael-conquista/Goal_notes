@@ -1,12 +1,19 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { getAllGoals } from '../../services/api_requests'
+import { verify } from '../../utils/token_verify.js';
 import Navbar from '../../components/navbar'
 import Spinner from 'react-bootstrap/Spinner';
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
   const [goals,setGoals] = useState([])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    verify(token)
+  }, []);
+
   async function getGoals(){
     const dados = await getAllGoals()
     setGoals(dados)

@@ -14,7 +14,7 @@ const Initial = () => {
       const id = response.id
       if (id) {
         //quando tivermos a página inicial, passar o id para a url
-        window.location.href = `/goals`;
+        window.location.href = `${id}/goals`;
       } else {
         console.log('é necessário realizar o login')
         remove_token()
