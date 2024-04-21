@@ -15,7 +15,9 @@ export async function verify(token){
         const id = response.id
         console.log(id)
         if (!id) {
-        window.location.href = `/`;
+            window.location.href = `/`;
+        }else{
+            return response.id
         }
     } catch {
         console.log('validation error')

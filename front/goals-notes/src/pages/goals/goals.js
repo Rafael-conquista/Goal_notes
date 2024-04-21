@@ -8,10 +8,22 @@ import Spinner from 'react-bootstrap/Spinner';
 function Goals (){
   const [loaded, setLoaded] = useState(false)
   const [goals,setGoals] = useState([])
+  const [id, setId] = useState()
+
+  async function verify_user(token){
+    const token_id = await verify(token)
+    const url = new URL(window.location.href);
+    if(url.href.includes(token_id)){
+      console.log('token válido')
+    }else{
+      console.log('usuário não condiz com a url informada')
+      window.location.href = `/`;
+    }
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    verify(token)
+    verify_user(token)
   }, []);
 
   async function getGoals(){
