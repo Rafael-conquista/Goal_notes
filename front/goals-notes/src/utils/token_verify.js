@@ -13,7 +13,6 @@ export async function verify(token){
     try {
         const response = await token_verify(token)
         const id = response.id
-        console.log(id)
         if (!id) {
             window.location.href = `/`;
         }else{
