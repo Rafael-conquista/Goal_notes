@@ -4,7 +4,7 @@ import regex
 
 def format_datetime(date_request):
     group_date = regex.search(
-        "(?P<year>\d{4})-(?P<mounth>\d{1,2})-(?P<day>\d{2})", date_request
+        "(?P<year>\d{4})-(?P<mounth>\d{1,2})-(?P<day>\d{1,2})", date_request
     )
     day = int(group_date.group(3))
     month = int(group_date.group(2))
