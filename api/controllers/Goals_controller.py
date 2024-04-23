@@ -136,6 +136,7 @@ class GoalsController:
                 "goals_id": goal.goals_id,
                 "name": goal.name,
                 "current_progress": goal.current_progress,
+                "importance_degree": goal.importance_degree,
                 "end_date": format_to_string(goal.end_date),
                 "initial_data": format_to_string(goal.initial_data),
                 "expected_data": format_to_string(goal.expected_data),
