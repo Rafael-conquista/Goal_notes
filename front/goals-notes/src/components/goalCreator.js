@@ -13,6 +13,7 @@ function GoalCreator({ id }) {
     const [priority, setPriority] = useState(1);
     const [type, setType] = useState(1);
     const [days, setDays] = useState(30);
+    const [message, setMessage] = useState('');
 
     const nameChange = (e) => {
         setName(e.target.value)
@@ -43,19 +44,23 @@ function GoalCreator({ id }) {
     };
 
     async function verify_and_save_goal(){
-        const goal_json = {
-            "name": name,
-            "obs": obs,
-            "importance_degree": Number(priority),
-            "user_id": Number(id), //pegar dinamicamente de algum lugar
-            "type_id": Number(type),
-            "expected_data": days
-        };
-        const response = await createGoal(goal_json)
-        if(response.message === "the goal has been created"){
-            handleClose()
-        }
-
+        if(!name || !obs || !days){
+            setMessage("Valores não podem estar vazios")
+        }else{
+            const goal_json = {
+                "name": name,
+                "obs": obs,
+                "importance_degree": Number(priority),
+                "user_id": Number(id), //pegar dinamicamente de algum lugar
+                "type_id": Number(type),
+                "expected_data": days
+            };
+            const response = await createGoal(goal_json)
+            if(response.message === "the goal has been created"){
+                setMessage("meta criada com sucesso!")
+                handleClose()
+            }
+        }  
     }
 
     return (
@@ -109,6 +114,9 @@ function GoalCreator({ id }) {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
+                    {message ? 
+                        <div>{message}</div> : <div></div>
+                    }
                 </Modal.Body>
                 <Modal.Footer className='modal_footer'>
                     <div className='buttons'>
