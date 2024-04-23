@@ -11,6 +11,7 @@ import '../../components/Style/goals_container.css'
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
+  const [mayUpdate, setMayUpdate] = useState(false)
   const [goals, setGoals] = useState([])
   const [id, setId] = useState()
   const [name, setName] = useState('')
@@ -41,9 +42,10 @@ function Goals (){
       getGoals(id).then((dados) =>{
         setGoals(dados)
         setLoaded(true)
+        setMayUpdate(false)
       })
     }
-  }, [id]);
+  }, [id, mayUpdate]);
 
   async function getGoals(id){
     const dados = await getAllGoals(id)
@@ -57,6 +59,8 @@ function Goals (){
           <GoalsContainer
             goals={goals}
             id = {id}
+            mayUpdate={mayUpdate}
+            setMayUpdate={setMayUpdate}
           />
         : <div>
           <Spinner animation="grow" size="sm" variant="secondary"/>

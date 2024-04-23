@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import GoalCreator from './goalCreator';
 import './Style/goals_container.css'
 
-function GoalsContainer({ goals, id }) {
+function GoalsContainer({ goals, id, mayUpdate, setMayUpdate }) {
     const [empty, setEmpty] = useState(true);
 
     useEffect(() => {
         if (Object.keys(goals).length > 0) {
             setEmpty(false);
         }
+        console.log("atualizei ")
     }, [goals]);
 
     // Converte o objeto de metas em um array de metas
@@ -16,7 +17,7 @@ function GoalsContainer({ goals, id }) {
 
     return (
         <div className='goals_view' style={{ overflowX: 'hidden' }}>
-            <GoalCreator id={id}/>
+            <GoalCreator id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate}/>
             <div>
                 {empty ?
                     <div>

@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { createGoal } from '../services/goals_request';
 import './Style/goals_container.css'
 
-function GoalCreator({ id }) {
+function GoalCreator({ id, mayUpdate, setMayUpdate }) {
     const [showModal, setShowModal] = useState(false);
     const [createSubtasks, setCreateSubtasks] = useState(false);
     const [name, setName] = useState('');
@@ -51,7 +51,7 @@ function GoalCreator({ id }) {
                 "name": name,
                 "obs": obs,
                 "importance_degree": Number(priority),
-                "user_id": Number(id), //pegar dinamicamente de algum lugar
+                "user_id": Number(id),
                 "type_id": Number(type),
                 "expected_data": days
             };
@@ -60,6 +60,7 @@ function GoalCreator({ id }) {
                 setMessage("meta criada com sucesso!")
                 handleClose()
             }
+            setMayUpdate(true)
         }  
     }
 
