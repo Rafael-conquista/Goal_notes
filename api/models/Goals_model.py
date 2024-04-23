@@ -23,14 +23,14 @@ class GoalsModel(banco.Model):
 
     def __init__(self, dados):
         self.name = dados.get("name", None)
-        self.name = dados.get("obs", None)
-        self.name = dados.get("importance_degree", 1)
-        self.name = dados.get("current_progress", None)
-        self.name = dados.get("initial_data", None)
-        self.name = dados.get("end_date", None)
-        self.name = dados.get("expected_data", None)
-        self.name = dados.get("user_id", None)
-        self.name = dados.get("type_id", None)
+        self.obs = dados.get("obs", None)
+        self.importance_degree = dados.get("importance_degree", 1)
+        self.current_progress = dados.get("current_progress", None)
+        self.initial_data = dados.get("initial_data", None)
+        self.end_date = dados.get("end_date", None)
+        self.expected_data = dados.get("expected_data", None)
+        self.user_id = dados.get("user_id", None)
+        self.type_id = dados.get("type_id", None)
         if "expected_data" in dados.keys():
             data_atual = datetime.now()
             data_final = data_atual + timedelta(days=dados["expected_data"])
