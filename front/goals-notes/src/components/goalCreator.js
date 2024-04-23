@@ -2,16 +2,17 @@ import { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IoMdClose } from "react-icons/io";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { createGoal } from '../services/goals_request';
 import './Style/goals_container.css'
 
-function GoalCreator() {
+function GoalCreator({ id }) {
     const [showModal, setShowModal] = useState(false);
     const [createSubtasks, setCreateSubtasks] = useState(false);
     const [name, setName] = useState('');
     const [obs, setObs] = useState('');
-    const [priority, setPriority] = useState();
-    const [type, setType] = useState();
-    const [days, setDays] = useState();
+    const [priority, setPriority] = useState(1);
+    const [type, setType] = useState(1);
+    const [days, setDays] = useState(30);
 
     const nameChange = (e) => {
         setName(e.target.value)
@@ -41,6 +42,22 @@ function GoalCreator() {
         setShowModal(false);
     };
 
+    async function verify_and_save_goal(){
+        const goal_json = {
+            "name": name,
+            "obs": obs,
+            "importance_degree": Number(priority),
+            "user_id": Number(id), //pegar dinamicamente de algum lugar
+            "type_id": Number(type),
+            "expected_data": days
+        };
+        const response = await createGoal(goal_json)
+        if(response.message === "the goal has been created"){
+            handleClose()
+        }
+
+    }
+
     return (
         <div>
             <h1>
@@ -62,11 +79,11 @@ function GoalCreator() {
                                 Grau de prioridade
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => handlePriority("1")}>1</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handlePriority("2")}>2</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handlePriority("3")}>3</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handlePriority("4")}>4</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handlePriority("5")}>5</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handlePriority(1)}>1</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handlePriority(2)}>2</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handlePriority(3)}>3</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handlePriority(4)}>4</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handlePriority(5)}>5</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         <input type='text' placeholder='observações' maxLength={200} onChange={obsChange} />
@@ -76,10 +93,10 @@ function GoalCreator() {
                                 Qual é a categoria?
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => handleType("1")}>1</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleType("1")}>2</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleType("1")}>3</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleType("1")}>...</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleType(1)}>1</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleType(1)}>2</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleType(1)}>3</Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleType(1)}>...</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         <Dropdown>
@@ -98,7 +115,7 @@ function GoalCreator() {
                         <div className='botao close' onClick={handleClose}>
                             <span>Fechar</span>
                         </div>
-                        <div className='botao' onClick={handleClose}>
+                        <div className='botao' onClick={verify_and_save_goal}>
                             <span>Salvar</span>
                         </div>
                     </div>

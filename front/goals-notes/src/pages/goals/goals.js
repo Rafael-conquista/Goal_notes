@@ -56,11 +56,11 @@ function Goals (){
         {loaded ? 
           <GoalsContainer
             goals={goals}
+            id = {id}
           />
         : <div>
           <Spinner animation="grow" size="sm" variant="secondary"/>
         </div>
-        
         }
 			</div>
   );

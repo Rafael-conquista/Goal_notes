@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GoalCreator from './goalCreator';
 import './Style/goals_container.css'
 
-function GoalsContainer({ goals }) {
+function GoalsContainer({ goals, id }) {
     const [empty, setEmpty] = useState(true);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ function GoalsContainer({ goals }) {
 
     return (
         <div className='goals_view' style={{ overflowX: 'hidden' }}>
-            <GoalCreator/>
+            <GoalCreator id={id}/>
             <div>
                 {empty ?
                     <div>
