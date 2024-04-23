@@ -5,7 +5,9 @@ import { verify } from '../../utils/token_verify.js';
 import { get_user } from '../../services/user_requests.js'
 import Navbar from '../../components/navbar'
 import GoalsContainer from '../../components/GoalsContainers.js';
+import GoalCreator from '../../components/goalCreator.js';
 import Spinner from 'react-bootstrap/Spinner';
+import '../../components/Style/goals_container.css'
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
@@ -16,7 +18,7 @@ function Goals (){
   async function verify_user(token){
     const token_id = await verify(token)
     const url = new URL(window.location.href);
-    if(url.href.includes(token_id)){
+    if(url.href.includes(`/${token_id}/`)){
       console.log('token válido')
     }else{
       console.log('usuário não condiz com a url informada')
@@ -47,8 +49,9 @@ function Goals (){
     const dados = await getAllGoals(id)
     return dados
   }
+  //criar um componente de criação de novas metas e estilizar o de listagem
   return (
-    <div>
+    <div className='goal_creator_buttons'>
       <Navbar/>
         {loaded ? 
           <GoalsContainer

@@ -1,0 +1,114 @@
+.goals_view{
+    width: 95vw;
+    padding-left: 20px;
+    margin-top: 150px;
+}
+
+.goal_creator_buttons{
+    margin-top: 100px;
+}
+
+.buttons{
+    display: flex;
+    padding-right: 2vw;
+  }
+
+.new_goal_button{
+    background: #86b3aa;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.modal-content {
+    background-color: #e8ffec !important;
+  }
+  
+  .modal-header{
+    border-bottom: var(--bs-modal-header-border-width) solid #48ff00 !important;
+    justify-content: space-around;
+  }
+  
+  .modal-footer{
+    border-top: var(--bs-modal-header-border-width) solid #48ff00 !important;
+  }
+  
+  .modal_title{
+    color: rgb(45, 59, 50)  ;
+  }
+
+  .close_button{
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 3em;
+    transition: 0.5s;
+  }
+  
+  .close_button:hover{
+    color: #ff0000;
+  }
+
+  .botao {
+    width: 180px;
+    height: 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid rgb(81, 252, 65);
+    border-radius: 20px;
+    outline: none;
+    transition: 0.5s ease-in-out;
+    text-align: center;
+    margin-right: 2vw;
+  }
+
+  .botao span {
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    font-weight: 100;
+  }
+  
+  .botao a{
+    text-decoration: none;
+  }
+  
+  .botao:hover {
+    transition: 0.5s ease-in-out;
+    background: rgb(6, 199, 54);
+    transform: scale(1.05);
+  }
+
+  .close:hover{
+    background: rgb(255, 0, 0);
+  }
+
+  .modal_position{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form_grid{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(1, 2fr);
+    justify-items: center;
+  }
+  
+  @media screen and (min-width:1000px) {
+    .form_grid {
+      flex-direction: column;
+      grid-template-columns: repeat(2, 2fr);
+      gap: 5px;
+    }
+    .form_grid input{
+        margin-top: 0px !important;
+    }
+  }
+
+  .form_grid input{
+    margin-top: 10px !important;
+    color: black;
+  }
+
+  .form_grid input::placeholder{
+    color: rgb(187, 186, 186);
+  }

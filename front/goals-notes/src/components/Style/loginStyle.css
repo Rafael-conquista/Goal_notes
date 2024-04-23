@@ -1,17 +1,12 @@
-html {
-    overflow: hidden;
-}
-
-body {    
+/* body {    
     height: 100vh;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-}
+} */
 
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
     body {    
         height: auto;
         overflow-y: auto;
@@ -19,7 +14,7 @@ body {
         justify-content: center;
         display: flex;
     }
-}
+} */
 
 h1 {
     font-size: 4.5rem;
@@ -61,6 +56,10 @@ input {
 
 ::-ms-input-placeholder { /* Edge 12 -18 */
     color: #000;
+}
+
+.no-scroll {
+    overflow: hidden !important;
 }
 
 .sectionLoginForm {
