@@ -26,17 +26,22 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate }) {
                     :
                     goalsArray.map((goal, key) => {
                         return (
-                            <div key={key}>
-                                <hr></hr>
-                                <p>name: {goal.name}</p>
-                                <p>importance_degree: {goal.importance_degree}</p>
+                            <div key={key} className='goal_card'>
+                                <div className='goal_title'>
+                                    <input type='checkbox'/>
+                                    <p>{goal.name}</p>
+                                    <p>{goal.importance_degree}★</p>
+                                </div>
+                                
+                                <p>current_progress: {goal.current_progress}%</p>
+                                <p>{goal.obs}</p>
                                 <p>initial_data: {goal.initial_data}</p>
-                                <p>expected_data: {goal.expected_data}</p>
-                                <p>end_date: {goal.end_date}</p>
+                                <p>expectativa de finalização: {goal.expected_data}</p>
                                 <p>type_name: {goal.type_name}</p>
-                                <p>obs: {goal.obs}</p>
-                                <p>current_progress: {goal.current_progress}</p>
-                                <hr></hr>
+                                <p>data de finalização: {goal.end_date} aparecer somente se já foi finalizada</p>
+                                <div className='edit_button'>
+                                    Clique para visualizar sua meta completa ou para edita-la
+                                </div>
                             </div>
                         )
                     })
