@@ -26,7 +26,6 @@ class ItemsController:
         try:
 
             item = main_queries.find_query(ItemsModel, id)
-
             return {"id": item.id, "goals_id": item.goals_id, "desc": item.desc}, 200
 
         except Exception as ex:

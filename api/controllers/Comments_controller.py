@@ -39,9 +39,6 @@ class CommentsController:
     def find_comment(id):
         try:
             comment = main_queries.find_query(PostsCommentsModel, id)
-            import ipdb
-
-            ipdb.set_trace()
             post_json = {
                 "comentario": comment.comentario,
                 "id_post": comment.id_post,
@@ -55,9 +52,6 @@ class CommentsController:
     def update_comment(id, dados):
         try:
             comment = main_queries.find_query(CommentsController, id)
-            import ipdb
-
-            ipdb.set_trace()
             comment.comentario = dados.get("comentario", comment.comentario)
             comment.numLikes = dados.get("numLikes", comment.numLikes)
             comment.excluido = dados.get("excluido", comment.excluido)
