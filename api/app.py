@@ -5,7 +5,7 @@ from Routes.Items import Item, Items, Item_register
 from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer
 from Routes.Posts import Post, Posts, PostCreator
 from Routes.PostComments import PostComment, Comment, Comments
-from Routes.Caps import Cap_register, Cap
+from Routes.Caps import Cap_register, Cap, Users_cap
 from Routes.VerifyJWT import VerifyJWT
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
@@ -60,6 +60,7 @@ api.add_resource(PostComment, "/post_comment")
 #caps related Routes
 api.add_resource(Cap, "/cap/<int:id>")
 api.add_resource(Cap_register, "/cap_register")
+api.add_resource(Users_cap, "/users_cap/<int:id>")
 
 if __name__ == "__main__":
     from sql_alchemy import banco

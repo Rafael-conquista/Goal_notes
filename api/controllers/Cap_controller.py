@@ -4,11 +4,14 @@ from models.Users_model import UsersModel
 from sql_alchemy import banco
 
 class CapController:
+    def find_users_cap(user):
+        return banco.session.query(CapModel).filter(CapModel.id_user == user.id).first()
+
     def post_cap(dados):
         user = main_queries.find_query(UsersModel, dados['id_user'])
         if not user:
             return {"message": "user id unavailable"} 
-        result = banco.session.query(CapModel).filter(CapModel.id_user == user.id).first()
+        result = CapController.find_users_cap(user)
         if result:
             return {"message": "this user already have a cap friend"}, 405
         cap = CapModel(dados)
@@ -33,7 +36,7 @@ class CapController:
 
             main_queries.close_conection()
 
-            return {"message": "Item updated successfully"}, 200
+            return {"message": "Cap updated successfully"}, 200
 
         except Exception as error:
             return {"message": error}, 400
