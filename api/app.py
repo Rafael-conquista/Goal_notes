@@ -6,6 +6,7 @@ from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer
 from Routes.Posts import Post, Posts, PostCreator
 from Routes.PostComments import PostComment, Comment, Comments
 from Routes.Caps import Cap_register, Cap, Users_cap
+from Routes.Store import Store_skins, Store, Store_register
 from Routes.VerifyJWT import VerifyJWT
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
@@ -61,6 +62,10 @@ api.add_resource(PostComment, "/post_comment")
 api.add_resource(Cap, "/cap/<int:id>")
 api.add_resource(Cap_register, "/cap_register")
 api.add_resource(Users_cap, "/users_cap/<int:id>")
+#Store related Routes
+api.add_resource(Store_skins,"/stores")
+api.add_resource(Store, "/store/<int:id>")
+api.add_resource(Store_register, "/skin_register")
 
 if __name__ == "__main__":
     from sql_alchemy import banco
