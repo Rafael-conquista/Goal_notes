@@ -18,3 +18,4 @@ class StoreModel(banco.Model):
         self.price = dados.get("price", None)
         self.initial_data = dados.get("initial_data", None)
         self.end_date = dados.get("end_date", None)
+        self.active = dados.get("active", None)

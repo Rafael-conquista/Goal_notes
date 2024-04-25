@@ -63,7 +63,7 @@ api.add_resource(Cap, "/cap/<int:id>")
 api.add_resource(Cap_register, "/cap_register")
 api.add_resource(Users_cap, "/users_cap/<int:id>")
 #Store related Routes
-api.add_resource(Store_skins,"/stores")
+api.add_resource(Store_skins,"/skins")
 api.add_resource(Store, "/store/<int:id>")
 api.add_resource(Store_register, "/skin_register")
 
