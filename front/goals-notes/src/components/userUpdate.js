@@ -2,7 +2,7 @@ import './Style/userStyle.css'
 import React, { useState, useEffect } from 'react';
 import { FaAngleLeft } from "react-icons/fa6";
 import cap_default from '../images/cap_default.jpg';
-import { update_user } from '../services/api_requests';
+import { update_user } from '../services/user_requests';
 
 function UserUpdateComponent() {
     const [nickname, setNickname] = useState('')

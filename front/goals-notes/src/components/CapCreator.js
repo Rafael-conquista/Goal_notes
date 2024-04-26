@@ -84,8 +84,8 @@ function CapCreatorComponent(){
         }
       }
 
-      const confirmChange = (e) => {
-        if(e.target.id === "confirm"){
+      const confirmChange = (answer) => {
+        if(answer){
             setConfirmNames(false)
             handleInput()
         }else{
@@ -117,12 +117,12 @@ function CapCreatorComponent(){
                         confirmNames && 
                         <div className='confirm_button'>    
                             <div className='margin_confirm'>
-                                <button className='button' id='confirm' onClick={confirmChange}>
+                                <button className='button' id='confirm' onClick={() =>{confirmChange(true)}}>
                                     <span>Sim, está tudo correto!</span>
                                 </button>
                             </div>
                             <div className='margin_confirm'>
-                                <button className='button' id='deny' onClick={confirmChange}>
+                                <button className='button' id='deny' onClick={() =>{confirmChange(false)}}>
                                     <span>Não, acho que me confundi...</span>
                                 </button>
                             </div>
