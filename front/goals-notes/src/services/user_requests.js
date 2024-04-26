@@ -25,7 +25,7 @@ export async function get_user(id){
         redirect: 'follow'
       };
     
-      let response = await fetch("http://127.0.0.1:5000/user/1", requestOptions)
+      let response = await fetch("http://127.0.0.1:5000/user/1", requestOptions)//tirar do id 1 como fixo
       return response.json()
     } catch(e){
         console.log(e)

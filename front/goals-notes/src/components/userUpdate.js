@@ -51,24 +51,8 @@ function UserUpdateComponent() {
         };
         const response = await update_user(user_json);
         setMessage(response.message)
-        // if (response.message === "user is already logged in") {
-        //     setMessage("usuário já se encontra logado");
-        //     setPrimeiraVez(false);
-        //     setloading(false);
-        // } else if (response.message === "login not found: wrong password or email" || response === false) {
-        //     setMessage("login Incorreto, por favor, verifique sua senha ou seu nickname");
-        //     setPrimeiraVez(false);
-        //     setloading(false);
-        // } else if (response.message === "user logged in successfully") {
-        //     setMessage("logado com sucesso"); //adicionar aqui um redirect para a página home
-        //     token_storage(response.token)
-        //     setloading(false);
-        // } else {
-        //     setMessage("erro inexperado");
-        //     setPrimeiraVez(false);
-        //     setloading(false);
-        // }
     }
+
     return (
         <div className="user_container">
             <div className='return_button'>
