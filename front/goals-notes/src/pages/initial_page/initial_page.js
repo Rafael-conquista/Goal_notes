@@ -12,7 +12,9 @@ const Initial = () => {
     try {
       const response = await token_verify(token)
       const id = response.id
-      if (id) {
+      if (sessionStorage.getItem("first_acess")){
+        window.location.href = `/CapCreate`;
+      }else if (id) {
         //quando tivermos a página inicial, passar o id para a url
         window.location.href = `${id}/goals`;
       } else {

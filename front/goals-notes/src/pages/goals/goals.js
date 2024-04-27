@@ -19,6 +19,10 @@ function Goals (){
   async function verify_user(token){
     const token_id = await verify(token)
     const url = new URL(window.location.href);
+
+    if (sessionStorage.getItem("first_acess")){
+      window.location.href = `/CapCreate`;
+    }
     if(url.href.includes(`/${token_id}/`)){
       console.log('token válido')
     }else{

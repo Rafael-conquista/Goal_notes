@@ -12,6 +12,7 @@ export function remove_token(){
 export async function verify(token){
     try {
         const response = await token_verify(token)
+        token_storage(token)
         const id = response.id
         if (!id) {
             window.location.href = `/`;
