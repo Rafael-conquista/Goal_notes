@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import cap_default from '../images/cap_default.jpg';
 import { EscritaAutomatica } from '../utils/EscritaAutomatica';
 import { update_user } from '../services/user_requests';
+import { register_cap } from '../services/api_requests';
+import { verify } from '../utils/token_verify';
 
 function CapCreatorComponent(){
     const first_interaction = [
@@ -15,6 +17,7 @@ function CapCreatorComponent(){
         {tempo: 25, text:`Perfeito! Prometo que não irei esquecer!` }
     ]
     
+    const [id, setId] = useState()
     const [showInput, setShowInput] = useState(false)
     const [noInput, setNoInput] = useState(false)
     const [showTextInput, setShowTextInput] = useState(false)
@@ -30,6 +33,11 @@ function CapCreatorComponent(){
         {tempo: 25, text: "Tudo bem, pode me dizer quais são os nomes corretos?"}
     ]
 
+    async function verify_token(){
+        const token_id = await verify(localStorage.getItem('token'))
+        return token_id
+    }
+
     useEffect(() => {
         const first_acess = sessionStorage.getItem('first_acess')
         if (first_acess) {
@@ -39,6 +47,9 @@ function CapCreatorComponent(){
             console.log('não tem token, redirecionando...');
             window.location.href = '/';
         }
+        verify_token().then((id) => {
+            setId(id)
+        });
     }, [])
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -102,9 +113,13 @@ function CapCreatorComponent(){
     async function user_update() {
         const user_json = {
             "surname": nickname,
-        };
-        const response = await update_user(user_json); //e mandar o id do token e redirecionar para a página inicial com o id correto
-        setMessage(response.message)
+        }
+        const cap_json = {
+            "name": capName
+        }
+        const user_response = await update_user(user_json, id);
+        const cap_response = await register_cap(cap_json, id);
+        window.location.href = `/${id}/Goals`
     }
 
     return(
