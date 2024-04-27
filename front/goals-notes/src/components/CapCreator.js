@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import cap_default from '../images/cap_default.jpg';
 import { EscritaAutomatica } from '../utils/EscritaAutomatica';
+import { update_user } from '../services/user_requests';
+import { register_cap } from '../services/api_requests';
+import { verify } from '../utils/token_verify';
 
 function CapCreatorComponent(){
     const first_interaction = [
@@ -14,7 +17,9 @@ function CapCreatorComponent(){
         {tempo: 25, text:`Perfeito! Prometo que não irei esquecer!` }
     ]
     
+    const [id, setId] = useState()
     const [showInput, setShowInput] = useState(false)
+    const [noInput, setNoInput] = useState(false)
     const [showTextInput, setShowTextInput] = useState(false)
     const [showCapInput, setShowCapInput] = useState(false)
     const [confirmNames, setConfirmNames] = useState(false)
@@ -28,6 +33,11 @@ function CapCreatorComponent(){
         {tempo: 25, text: "Tudo bem, pode me dizer quais são os nomes corretos?"}
     ]
 
+    async function verify_token(){
+        const token_id = await verify(localStorage.getItem('token'))
+        return token_id
+    }
+
     useEffect(() => {
         const first_acess = sessionStorage.getItem('first_acess')
         if (first_acess) {
@@ -37,6 +47,9 @@ function CapCreatorComponent(){
             console.log('não tem token, redirecionando...');
             window.location.href = '/';
         }
+        verify_token().then((id) => {
+            setId(id)
+        });
     }, [])
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -65,7 +78,6 @@ function CapCreatorComponent(){
         if(interaction === 5){
             setShowCapInput(true)
         } 
-        
       }
 
       const nicnameChange = (e) => {
@@ -88,14 +100,27 @@ function CapCreatorComponent(){
         if(answer){
             setConfirmNames(false)
             handleInput()
+            setNoInput(true)
         }else{
             setShowCapInput(true)
             setShowTextInput(true)
             setConfirmNames(false)
             setMessage(confirm_interaction[1])
-            //adicionar redirect para outra página
+            setNoInput(true)
         }
       }
+
+    async function user_update() {
+        const user_json = {
+            "surname": nickname,
+        }
+        const cap_json = {
+            "name": capName
+        }
+        const user_response = await update_user(user_json, id);
+        const cap_response = await register_cap(cap_json, id);
+        window.location.href = `/${id}/Goals`
+    }
 
     return(
         <>
@@ -110,7 +135,8 @@ function CapCreatorComponent(){
                             />
                         </p>
                     </div>
-                    {showInput && !showTextInput && !showCapInput && !confirmNames &&<button className='button' onClick={handleInput}><span>Continuar</span></button>}
+                    {showInput && !showTextInput && !showCapInput && !confirmNames && !noInput &&<button className='button' onClick={handleInput}><span>Continuar</span></button>}
+                    {noInput &&<button className='button' onClick={user_update}><span>Continuar</span></button>}
                     {showTextInput && <input type='text' placeholder='Digite como deseja ser chamado!' onChange={nicnameChange} onKeyPress={nicnameChange}/>}
                     {showCapInput && <input type='text' placeholder='Digite o apelido da cap!' onChange={capNameChange} onKeyPress={capNameChange}/>}
                     {
