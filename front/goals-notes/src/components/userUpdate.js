@@ -5,11 +5,9 @@ import cap_default from '../images/cap_default.jpg';
 import { update_user } from '../services/user_requests';
 import { verify } from '../utils/token_verify';
 import { Modal } from 'react-bootstrap';
-import { IoMdClose } from "react-icons/io";
 
 function UserUpdateComponent() {
     const [showModal, setShowModal] = useState(false);
-    const [excluir, setExcluir] = useState(false);
     const [nickname, setNickname] = useState()
     const [id, setId] = useState()
     const [password, setPassword] = useState()
@@ -55,17 +53,21 @@ function UserUpdateComponent() {
         const user_json = {
             "surname": nickname,
             "password": password,
-            "excluir": excluir
         };
         const response = await update_user(user_json, id);
         setMessage(response.message)
     }
 
+    async function del_update(excluir=false) {
+            const user_json = {
+                "excluir":true
+            };
+            const response = await update_user(user_json, id);
+            setMessage(response.message)
+    }
+
     async function delete_user() {
-        setExcluir(true)
-        user_update()
-        localStorage.removeItem('token')
-        window.location.href = `/`;
+        del_update()
     }
 
     async function verify_token(){
@@ -116,7 +118,10 @@ function UserUpdateComponent() {
                             <span>Não</span>
                         </div>
                         <div className='botao close' onClick={() => {
-                            delete_user()
+                            delete_user().then(() =>{
+                                localStorage.removeItem('token')
+                                window.location.href = `/`;
+                            })
                         }}>
                             <span>Sim, por favor...</span>
                         </div>
@@ -129,4 +134,4 @@ function UserUpdateComponent() {
     )
 }
 
-export default UserUpdateComponent
+export default UserUpdateComponent;

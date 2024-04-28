@@ -3,9 +3,13 @@ import { token_storage } from '../utils/token_verify';
 import { token_verify } from '../services/api_requests.js'
 import { remove_token } from '../utils/token_verify.js';
 import { login } from '../services/api_requests';
+import { Modal } from 'react-bootstrap';
+import { update_user } from '../services/user_requests.js';
 
 function LoginComponent() {
+    const [id, set_id] = useState();
     const [email, setEmail] = useState();
+    const [showModal, setShowModal] = useState(false);
     const [password, setPassword] = useState();
     const [message, setMessage] = useState('');
     const [primeiraVez, setPrimeiraVez] = useState(true);
@@ -47,6 +51,12 @@ function LoginComponent() {
     const primeiraVezAtualizar = (event) => {
         setPrimeiraVez(true);
     }
+    async function active_user(){
+        const user_json = {
+            "excluir": false
+        };
+        const response = await update_user(user_json, id);
+    }
 
     async function login_user(event) {
         setloading(true);
@@ -56,7 +66,6 @@ function LoginComponent() {
             "password": password
         };
         const response = await login(user_json);
-        console.log(response);
         if (response.message === "user is already logged in") {
             setMessage("usuário já se encontra logado");
             setPrimeiraVez(false);
@@ -66,10 +75,15 @@ function LoginComponent() {
             setPrimeiraVez(false);
             setloading(false);
         } else if (response.message === "user logged in successfully") {
-            setMessage("logado com sucesso"); //adicionar aqui um redirect para a página home
+            setMessage("logado com sucesso"); 
             token_storage(response.token)
             setloading(false);
             verify(response.token)
+        }else if (response.message === "this user is deleted") {
+            setMessage("Usuário deletado");
+            set_id(response.id)
+            handleModal()
+            setloading(false);
         } else {
             setMessage("erro inexperado");
             setPrimeiraVez(false);
@@ -78,6 +92,14 @@ function LoginComponent() {
     }
 
     const [telaMaiorCelular, setTelaMaiorCelular] = useState(window.innerWidth > 1000);
+
+    const handleModal = () => {
+        setShowModal(true);
+    };
+
+    const handleClose = () => {
+        setShowModal(false);
+    };
 
     useEffect(() => {
       const verificarTamanhoDaTela = () => {
@@ -205,6 +227,30 @@ function LoginComponent() {
                     {message ? <div className='textos alertaLogin'>{message}</div> : ''}
                 </form>
             )}
+            <Modal show={showModal} onHide={handleClose} centered size="xl">
+                <Modal.Header>
+                    <div className='form_grid'>
+                        Este usuário foi deletado, deseja reativa-lo?
+                        <p>
+                            realize o login novamente após realizar a reativação!
+                        </p>
+                    </div>
+                </Modal.Header>
+                <Modal.Footer className='modal_footer'>
+                    <div className='buttons'>
+                        <div className='botao close' onClick={handleClose}>
+                            <span>Não</span>
+                        </div>
+                        <div className='botao' onClick={() => {
+                            active_user()
+                            handleClose()
+                        }}>
+                            <span>Sim, por favor...</span>
+                        </div>
+                    </div>
+
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

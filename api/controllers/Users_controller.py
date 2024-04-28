@@ -65,7 +65,9 @@ class UsersController:
             .filter(UsersModel.email == login_email)
             .first()
         )
-        if user.password == login_password and user.email == login_email:
+        if user.excluido:
+            return {"message": "this user is deleted", "id": user.id}, 200
+        elif user.password == login_password and user.email == login_email:
             token = jwt_methods.jwt_create_token(user.id)
             return {"message": "user logged in successfully", "token": token}, 200
         return {"message": "login not found: wrong password or surname"}, 404
