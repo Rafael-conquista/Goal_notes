@@ -12,10 +12,12 @@ export async function get_user(id){
     try{
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
+  
       var raw = JSON.stringify({
         "email": data.email,
         "surname": data.surname,
-        "password": data.password
+        "password": data.password,
+        "excluido": data.excluir
       });
     
       var requestOptions = {
