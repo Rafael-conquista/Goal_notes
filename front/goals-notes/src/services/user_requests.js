@@ -19,7 +19,6 @@ export async function get_user(id){
         "password": data.password,
         "excluido": data.excluir
       });
-    
       var requestOptions = {
         method: 'PUT',
         headers: myHeaders,

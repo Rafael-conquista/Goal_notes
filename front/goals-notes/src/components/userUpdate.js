@@ -10,11 +10,11 @@ import { IoMdClose } from "react-icons/io";
 function UserUpdateComponent() {
     const [showModal, setShowModal] = useState(false);
     const [excluir, setExcluir] = useState(false);
-    const [nickname, setNickname] = useState('')
+    const [nickname, setNickname] = useState()
     const [id, setId] = useState()
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState()
     const [message, setMessage] = useState('Para alterar seu usuário, basta alterar os respectivos campos e nos informar sua senha!')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState()
 
     const nicknameChange = (e) => {
         setNickname(e.target.value)
