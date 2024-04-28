@@ -87,7 +87,9 @@ function UserUpdateComponent() {
 
     return (
         <div className="user_container">
-            <div className='return_button'>
+            <div className='return_button' onClick={()=>{
+                window.history.back();
+            }}>
                 <FaAngleLeft />
             </div>
             <div className='info_input'>
