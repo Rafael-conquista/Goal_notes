@@ -54,7 +54,7 @@
 }
 
 .cap_component input::placeholder{
-    color: white;
+    color: #fff9;
     text-align: center;
 }
 
@@ -62,6 +62,7 @@
     color: white;
     border-color: #28B498;
     margin: 0 auto;
+    text-align: center;
 }
 
 .button{
@@ -72,12 +73,12 @@
     border: 1px solid #28B498;
     border-radius: 20px;
     outline: none;
-    transition: 1s ease-in-out;
+    transition: 0.3s ease-in-out;
     margin: 0 auto;
 }
 
 .button:hover{
-    transition: 1s ease-in-out;
+    transition: 0.3s ease-in-out;
     background: #28B498;
 }
 

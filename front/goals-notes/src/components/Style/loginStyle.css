@@ -184,12 +184,11 @@ input {
     }
 }
 
-.alertaRegistro {
+.alertaRegistro, .alertaRegistroSucesso {
     height: 60px;
     width: 35vw;
     padding: 0px 10px;
     font-size: 1.5rem;
-    background-color: darkred;
     color: white;
     text-shadow: none;
     text-align: center;
@@ -202,8 +201,16 @@ input {
     justify-content: center;
 }
 
+.alertaRegistro {
+    background-color: darkred;
+}
+
+.alertaRegistroSucesso {
+    background-color: green;
+}
+
 @media screen and (max-width: 1000px) {
-    .alertaRegistro {
+    .alertaRegistro, .alertaRegistroSucesso {
         height: 100px;
     }
 }
@@ -237,7 +244,7 @@ input {
         width: 100vw;
     }
     
-    .alertaRegistro {
+    .alertaRegistro, .alertaRegistroSucesso {
         width: 100vw;
     }
     
@@ -268,6 +275,7 @@ input {
 }
 
 .esqueciSenha {
+    color: blue !important;
     margin-top: 10px;
     cursor: pointer;
     width: 80%;
@@ -314,33 +322,54 @@ input {
     height: 300px;
 }
   
-  .eyes {
-    left: 150px;
-    top: 120px;
+.eyes {
+    left: 130px;
+    top: 140px;
     position: absolute;
     transform: translate(-50%, -50%);
-    background: white;
-    width: 50px;
-    border: black;
-    border-style: solid;
-    border-radius: 100px;
-    height: 50px;
-  }
+    background: #ffffff;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(0, 0, 0, 0.05); 
+    border: 2px solid #000;
+}
   
-  .eye {
+.eye {
     width: 25px;
     height: 25px;
-    background-color: black;
+    background-color: #333;
     border-radius: 50%;
-    border: 3px solid black;
     position: absolute;
     top: 50%;
     left: 50%;
-  }
+    transform: translate(-50%, -50%);
+    box-shadow: none; 
+}
   
+.eye::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.7;
+}
 
-.fecha {
-    background: #B97A57;
+.registroLogin .textos, .registroSenha .textos {
+    color: #000;
+}
+
+.registroLogin .textos::placeholder, .registroSenha .textos::placeholder {
+    color: #000;
+}
+
+.fecha, .fecha .eye::after {
+    background-color: #d98851;
     animation: fechar;
 }
 
