@@ -11,6 +11,7 @@ function RegisterComponent(){
     const [message, setMessage] = useState('')
     const [loading, setloading] = useState(false);
     const [primeiraVez, setPrimeiraVez] = useState(true);
+    const [sucesso, setSucesso] = useState(false);
 
     const emailChange = (e) => {
       setEmail(e.target.value)
@@ -49,9 +50,11 @@ function RegisterComponent(){
       console.log(response)
       if (response.message === "the user has been created") {
         setMessage("usuário criado com sucesso")
+        setSucesso(true);
         setPrimeiraVez(false);
         setloading(false);
         token_storage(response.token)
+        
         sessionStorage.setItem('first_acess', true)
         window.location.href = '/capCreate'
       } else {
@@ -197,8 +200,11 @@ function RegisterComponent(){
                 <a className='textos botaoLogar botaoUsuarUsuario' onClick={() => primeiraVezAtualizar(true)} href="#login">Logar Usuário</a>
             </div>
         )}
-        {!primeiraVez && (
+        {!primeiraVez && !sucesso && (
           message ? <div className='alertaRegistro'>{message}</div> : ''
+        )}
+        {!primeiraVez && sucesso && (
+          message ? <div className='alertaRegistroSucesso'>{message}</div> : ''
         )}
       </form>
     )
