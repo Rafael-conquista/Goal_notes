@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { createGoal } from '../services/goals_request';
 import './Style/goals_container.css'
 
-function GoalCreator({ id, mayUpdate, setMayUpdate }) {
+function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
     const [showModal, setShowModal] = useState(false);
     const [createSubtasks, setCreateSubtasks] = useState(false);
     const [name, setName] = useState('');
@@ -64,6 +64,12 @@ function GoalCreator({ id, mayUpdate, setMayUpdate }) {
         }  
     }
 
+    const renderedTypes = types.types.map((item) => {
+        return (
+            <Dropdown.Item onClick={() => handleType(item.id)}><p>{item.name}</p></Dropdown.Item>
+        );
+      });
+
     return (
         <div>
             <h1>
@@ -99,10 +105,7 @@ function GoalCreator({ id, mayUpdate, setMayUpdate }) {
                                 Qual é a categoria?
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => handleType(1)}>1</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleType(1)}>2</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleType(1)}>3</Dropdown.Item>
-                                <Dropdown.Item onClick={() => handleType(1)}>...</Dropdown.Item>
+                                {renderedTypes}
                             </Dropdown.Menu>
                         </Dropdown>
                         <Dropdown>

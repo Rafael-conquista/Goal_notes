@@ -97,3 +97,13 @@ export async function register_cap(data, id){
     return false
   }
 }
+
+export async function getAllTypes(){
+  try{
+    let response = await fetch(`http://127.0.0.1:5000/types`)
+    let types= await response.json()
+    return types
+  } catch(e){
+    console.log(e)
+  }
+}

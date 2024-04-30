@@ -13,14 +13,13 @@ export async function getAllGoals(id){
     try{
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      console.log(data.name)
       var raw = JSON.stringify({
         "name": data.name,
         "obs": data.obs,
-        "importance_degree": data.priority,
+        "importance_degree": data.importance_degree,
         "user_id": data.user_id,
-        "type_id": data.type,
-        "expected_data": data.days
+        "type_id": data.type_id,
+        "expected_data": Number(data.expected_data)
       });
     
       var requestOptions = {
