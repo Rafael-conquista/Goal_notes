@@ -86,7 +86,7 @@ function Navbar() {
                         <p className="text_menu">Metas</p>
                     </a>
                     <a className="option" href="jogarDados.html">
-                        <p className="text_menu">Amgios</p>
+                        <p className="text_menu">Amigos</p>
                     </a>
                     <a className="option">
                         <p className="text_menu">Perfil</p>
