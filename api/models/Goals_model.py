@@ -26,7 +26,6 @@ class GoalsModel(banco.Model):
         self.obs = dados.get("obs", None)
         self.importance_degree = dados.get("importance_degree", 1)
         self.current_progress = dados.get("current_progress", None)
-        self.initial_data = dados.get("initial_data", None)
         self.end_date = dados.get("end_date", None)
         self.expected_data = dados.get("expected_data", None)
         self.user_id = dados.get("user_id", None)

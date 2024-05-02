@@ -58,16 +58,12 @@ class GoalsController:
         try:
             goal = main_queries.find_query(GoalsModel, goals_id)
             goal.name = dados.get("name", goal.name)
+            goal.type_id = dados.get("type_id", goal.type_id)
             goal.importance_degree = dados.get(
                 "importance_degree", goal.importance_degree
             )
             goal.current_progress = dados.get("current_progress", goal.current_progress)
             goal.obs = dados.get("obs", goal.obs)
-            goal.initial_data = (
-                format_datetime(dados["initial_data"])
-                if "initial_data" in dados.keys()
-                else None
-            )
             goal.end_date = (
                 format_datetime(dados["end_date"])
                 if "end_date" in dados.keys()
@@ -79,6 +75,7 @@ class GoalsController:
                 goal.expected_data = data_final
             else:
                 goal.expected_data = None
+
             main_queries.save_query(goal)
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:
