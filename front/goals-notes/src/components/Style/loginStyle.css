@@ -172,7 +172,6 @@ input {
     font-family: "Varela Round", sans-serif;
     position: fixed;
     bottom: 0px;
-    animation: subir 0.5s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -195,7 +194,6 @@ input {
     font-family: "Varela Round", sans-serif;
     position: fixed;
     bottom: 0px;
-    animation: subir 0.5s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -265,14 +263,6 @@ input {
     }
 }
 
-@keyframes subir {
-    from {
-        bottom: -60px;
-    }
-    to {
-        bottom: 0px;
-    }
-}
 
 .esqueciSenha {
     color: blue !important;
@@ -370,17 +360,6 @@ input {
 
 .fecha, .fecha .eye::after {
     background-color: #d98851;
-    animation: fechar;
-}
-
-
-@keyframes fechar {
-    from {
-        bottom: -60px;
-    }
-    to {
-        bottom: 0px;
-    }
 }
 
 .fecha .eye {

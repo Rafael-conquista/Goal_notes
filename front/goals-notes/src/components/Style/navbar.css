@@ -88,15 +88,27 @@
 }
 
 .indicator {
+    transition: 0.5s;
     height: 3px;
     background-color: #3498db;
     position: absolute;
     bottom: 0;
-    transition: transform 0.3s ease;
     width: 150px;
     box-sizing: border-box;
     left: 0;
-  }
+    border-radius: 10px 10px 0px 0px;
+    transform: translateX(50vw);
+}
+
+.navbarGeral:active .indicator {
+    transition: 0.5s;
+    height: 100%;
+} 
+
+.option:active .text_menu {
+    z-index: 1000;
+    color: black;
+}
 
 .option{
     transition: 0.15s;
@@ -108,12 +120,7 @@
     text-decoration: none;
     width: 150px;
     justify-content: center;
-}
-
-.option:active{
-    background-color: #1c282e;
-    border-radius: 10px;
-    padding: 45px;
+    z-index: 100;
 }
 
 .option p {
@@ -131,5 +138,7 @@
 }
 
 .text_menu {
+    z-index: 10000;
+    transition: 0.5s;
     font-size: 1.5rem;
 }

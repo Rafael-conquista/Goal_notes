@@ -1,0 +1,85 @@
+
+
+.cap_component_perfil {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100vw;
+    height: calc(100vh - 110px) !important;
+    border-radius: 0px;
+    background-color: #131f24ec;
+    color: white;
+}
+
+.cap_component_perfil h1 {
+    font-size: 2.5rem;
+}
+
+.component_cap {
+    display: flex;
+    width: 50vw;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+}
+
+.border_direita {
+    border-right: 1px solid #131f24ec;
+}
+
+.border_esquerda {
+    border-left: 1px solid #131f24ec;
+}
+
+.component_cap_main {
+    width: 100vw;
+    display: flex;
+    height: 50vh;
+}
+
+.component_cap h1 {
+    font-size: 2rem;
+}
+
+.component_cap img {
+    width: auto;
+}
+
+.user_info_main {
+    display: flex;
+}
+
+.user_info_main input, .user_info input, label {
+    margin-top: 0px;
+    font-size: 1.5rem;
+}
+
+.user_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.component_amigos_main {
+    height: 100%;
+    background-color: #131f24ec;
+}
+
+.amigo_main {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50%;
+    align-items: center;
+}
+
+.amigo {   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
