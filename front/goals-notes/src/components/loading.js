@@ -17,7 +17,6 @@ function LoginComponent() {
             			<div class="hamster__limb hamster__limb--fl"></div>
             			<div class="hamster__limb hamster__limb--br"></div>
             			<div class="hamster__limb hamster__limb--bl"></div>
-            			<div class="hamster__tail"></div>
             		</div>
             	</div>
             	<div class="spoke"></div>
