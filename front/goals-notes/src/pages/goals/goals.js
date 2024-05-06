@@ -58,7 +58,7 @@ function Goals (){
   //criar um componente de criação de novas metas e estilizar o de listagem
   return (
     <div className='goal_creator_buttons'>
-      <Navbar/>
+      <Navbar currentPage="metas" />
         {loaded ? 
           <GoalsContainer
             goals={goals}

@@ -13,26 +13,34 @@ const Homepage = () => {
         <div className="cap_component_perfil">
           <section className='component_cap_main'>
             <div className='component_cap border_direita'>
-              <h1>Modifique sua Capivarinha</h1>
-              <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-              <div className='user_info'>
-                <label for='cap_name'>Nome Capivara</label>
-                <input readOnly id='cap_name'></input>
-              </div>
-            </div>
+	            <div class="card_esq">
+	            	<div class="text">
+                  <h1>Modifique sua Capivarinha</h1>
+                  <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                  <div className='user_info'>
+                    <label for='cap_name'>Nome Capivara</label>
+                    <input readOnly id='cap_name'></input>
+                  </div>
+                </div>
+	            	</div>
+	            </div>
             <div className='component_cap border_esquerda'>
-              <h1>Modifique seu perfil</h1>
-              <img src={user_default} alt='vazio' className="cap_welcome_page" />
-              <div className='user_info_main'>
-                <div className='user_info'>
-                  <label for='email'>E-mail</label>
-                  <input readOnly id='email'></input>
-                </div>
-                <div className='user_info'>
-                  <label for='nome'>Nome</label>
-                  <input readOnly id='nome'></input>
-                </div>
-              </div>
+	            <div class="card">
+	            	<div class="text">
+                  <h1>Modifique seu perfil</h1>
+                  <img src={user_default} alt='vazio' className="cap_welcome_page" />
+                  <div className='user_info_main'>
+                    <div className='user_info'>
+                      <label for='email'>E-mail</label>
+                      <input readOnly id='email'></input>
+                    </div>
+                    <div className='user_info'>
+                      <label for='nome'>Nome</label>
+                      <input readOnly id='nome'></input>
+                    </div>
+                  </div>
+	            	</div>
+	            </div>
             </div>
           </section>
           <section className='component_amigos_main'>
