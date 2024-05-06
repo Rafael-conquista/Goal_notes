@@ -6,85 +6,96 @@ function Navbar({ currentPage }) {
   const [telaMaiorCelular, setTelaMaiorCelular] = useState(window.innerWidth > 1000);
   const [dropdown, setDropdown] = useState(false);
 
+  // Este useEffect maneja a atualização do estado 'atual' baseado na prop 'currentPage'
   useEffect(() => {
-    if (typeof currentPage === 'string') {
-      switch (currentPage) {
-        case 'home':
-          setAtual(0);
-          break;
-        case 'metas':
-          setAtual(1);
-          break;
-        case 'amigos':
-          setAtual(2);
-          break;
-        case 'perfil':
-          setAtual(3);
-          break;
-        default:
-          setAtual(0);
-      }
+    switch (currentPage) {
+      case 'home':
+        setAtual(0);
+        break;
+      case 'metas':
+        setAtual(1);
+        break;
+      case 'amigos':
+        setAtual(2);
+        break;
+      case 'perfil':
+        setAtual(3);
+        break;
+      default:
+        setAtual(0);
     }
   }, [currentPage]);
 
   function moveIndicator(item) {
-    let navItems = document.querySelectorAll('.option');
-    let indicator = document.querySelector('.indicator');
-    if (navItems && navItems.length > atual && indicator) {
-      let offsetLeft = item.offsetLeft;
+    const navItems = document.querySelectorAll('.option');
+    const offsetLeft = item.offsetLeft;
+    const indicator = document.querySelector('.indicator');
+    if (indicator) {
       indicator.style.transform = `translateX(${offsetLeft}px)`;
       mudarCor(Array.from(navItems).indexOf(item));
     }
   }
 
   function resetIndicator() {
-    let navItems = document.querySelectorAll('.option');
-    let indicator = document.querySelector('.indicator');
-    if (navItems && navItems.length > atual && indicator) {
-      let offsetLeft = navItems[atual].offsetLeft;
+    const navItems = document.querySelectorAll('.option');
+    const indicator = document.querySelector('.indicator');
+    if (navItems[atual] && indicator) {
+      const offsetLeft = navItems[atual].offsetLeft;
       indicator.style.transform = `translateX(${offsetLeft}px)`;
       mudarCor(atual);
     }
   }
 
   function mudarCor(numeroCor) {
-    let indicator = document.querySelector('.indicator');
+    const indicator = document.querySelector('.indicator');
     if (indicator) {
       switch (numeroCor) {
         case 0:
           indicator.style.backgroundColor = '#228B22';
+          break;
         case 1:
           indicator.style.backgroundColor = '#87CEEB';
+          break;
         case 2:
           indicator.style.backgroundColor = '#8B4513';
+          break;
         case 3:
           indicator.style.backgroundColor = '#FFD700';
+          break;
         default:
           indicator.style.backgroundColor = '#6A5ACD';
       }
     }
   }
 
+  // Consolidado para reduzir duplicação
   useEffect(() => {
     const verificarTamanhoDaTela = () => {
       resetIndicator();
-      setTelaMaiorCelular(window.innerWidth > 850);
+      setTelaMaiorCelular(window.innerWidth > 1000);
     };
 
     window.addEventListener('resize', verificarTamanhoDaTela);
+    resetIndicator(); // Chama ao montar e ao ajustar o tamanho da tela
+
+    const navItems = document.querySelectorAll('.option');
+    const header = document.querySelector('.menu');
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => moveIndicator(item));
+    });
+    header.addEventListener('mouseleave', resetIndicator);
 
     return () => {
       window.removeEventListener('resize', verificarTamanhoDaTela);
+      navItems.forEach(item => {
+        item.removeEventListener('mouseenter', () => moveIndicator(item));
+      });
+      header.removeEventListener('mouseleave', resetIndicator);
     };
-  }, [atual]);
+  }, [atual]); // Dependências ajustadas
 
   function handleCheckboxClick() {
-    if (!telaMaiorCelular) {
-      setDropdown(!dropdown);
-    }
-    else if (telaMaiorCelular) {
-      setDropdown(dropdown);
-    }
+    setDropdown(!dropdown);
   }
 
   return (
