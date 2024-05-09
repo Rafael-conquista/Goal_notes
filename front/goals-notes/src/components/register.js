@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { token_storage } from '../utils/token_verify';
 import { register } from '../services/api_requests'
+import Loading from './loading.js';
 
 function RegisterComponent(){
     const [email, setEmail] = useState()
@@ -104,109 +105,108 @@ function RegisterComponent(){
   }
   
     return(
-    <form className='registroUsuario' onSubmit={register_user}>
+      <div>
         {loading && (
-          <div className='loading'>
-            <div fluid className='loadingRodar'>
-            </div>
-          </div>
+          <Loading/> 
         )}
-        <div>
-          <h1 className='textos'>Novo Aqui?</h1>
-          <h2 className='textos'>Cadastre-se agora para poder organizar sua rotina e ter uma amiga "capivarinha" para te acompanhar nessa jornada!</h2>
-        </div>
-        <div className='formRegistroUsuario'>
-            <input
-              type="text"
-              required="required"
-              onChange={emailChange}
-              id="email"
-              placeholder='Informe o E-mail'
-            />
-            {!telaMaiorCelular &&(
-              <input className='textos'
-              type="text"
-              required="required"
-              onChange={surnameChange}
-              id="surname"
-              placeholder='Nome do Usuário'
-            />
-            )}
-            {telaMaiorCelular &&(
-              <input className='textos'
+        <form className='registroUsuario' onSubmit={register_user}>
+          <div>
+            <h1 className='textos'>Novo Aqui?</h1>
+            <h2 className='textos'>Cadastre-se agora para poder organizar sua rotina e ter uma amiga "capivarinha" para te acompanhar nessa jornada!</h2>
+          </div>
+          <div className='formRegistroUsuario'>
+              <input
+                type="text"
+                required="required"
+                onChange={emailChange}
+                id="email"
+                placeholder='Informe o E-mail'
+              />
+              {!telaMaiorCelular &&(
+                <input className='textos'
                 type="text"
                 required="required"
                 onChange={surnameChange}
                 id="surname"
-                placeholder='Informe o seu nome de usuário'
+                placeholder='Nome do Usuário'
               />
+              )}
+              {telaMaiorCelular &&(
+                <input className='textos'
+                  type="text"
+                  required="required"
+                  onChange={surnameChange}
+                  id="surname"
+                  placeholder='Informe o seu nome de usuário'
+                />
+              )}
+              <input className='textos'
+                type="date"
+                required="required"
+                onChange={ageChange}
+                id="age"
+                placeholder='data de nascimento'
+              />
+          </div>
+          <div className='formRegistroUsuario'>
+            {!telaMaiorCelular &&(
+              <>
+                <input className='textos'
+                  type="password"
+                  required="required"
+                  onChange={passwordChange}
+                  id="password"
+                  placeholder='Insira sua Senha'
+                />
+                <input className='textos'
+                  type="password"
+                  id="confirm_password"
+                  required="required"
+                  onChange={confirmChange}
+                  placeholder="Confirme a Senha"
+                />
+              </>
             )}
-            <input className='textos'
-              type="date"
-              required="required"
-              onChange={ageChange}
-              id="age"
-              placeholder='data de nascimento'
-            />
-        </div>
-        <div className='formRegistroUsuario'>
-          {!telaMaiorCelular &&(
-            <>
-              <input className='textos'
-                type="password"
-                required="required"
-                onChange={passwordChange}
-                id="password"
-                placeholder='Insira sua Senha'
-              />
-              <input className='textos'
-                type="password"
-                id="confirm_password"
-                required="required"
-                onChange={confirmChange}
-                placeholder="Confirme a Senha"
-              />
-            </>
-          )}
+            {telaMaiorCelular &&(
+              <>
+                <input className='textos'
+                  type="password"
+                  required="required"
+                  onChange={passwordChange}
+                  onFocus={() => capivaraOlhos(true)}
+                  onBlur={() => capivaraOlhos(false)}
+                  id="password"
+                  placeholder='Insira sua Senha'
+                />
+                <input className='textos'
+                  type="password"
+                  id="confirm_password"
+                  required="required"
+                  onChange={confirmChange}
+                  onFocus={() => capivaraOlhos(true)}
+                  onBlur={() => capivaraOlhos(false)}
+                  placeholder="confirme a Senha"
+                />
+              </>
+            )}
+          </div>
           {telaMaiorCelular &&(
-            <>
-              <input className='textos'
-                type="password"
-                required="required"
-                onChange={passwordChange}
-                onFocus={() => capivaraOlhos(true)}
-                onBlur={() => capivaraOlhos(false)}
-                id="password"
-                placeholder='Insira sua Senha'
-              />
-              <input className='textos'
-                type="password"
-                id="confirm_password"
-                required="required"
-                onChange={confirmChange}
-                onFocus={() => capivaraOlhos(true)}
-                onBlur={() => capivaraOlhos(false)}
-                placeholder="confirme a Senha"
-              />
-            </>
+              <button className='textos botaoRegistrar' type="submit" value="entar">Entrar</button>
           )}
-        </div>
-        {telaMaiorCelular &&(
-            <button className='textos botaoLogar' type="submit" value="entar">Entrar</button>
-        )}
-        {!telaMaiorCelular &&(
-            <div className='coletaneaBotoesLogar'>
-                <button className='textos botaoLogar' type="submit" value="entar">Registrar-se</button>
-                <a className='textos botaoLogar botaoUsuarUsuario' onClick={() => primeiraVezAtualizar(true)} href="#login">Logar Usuário</a>
-            </div>
-        )}
-        {!primeiraVez && !sucesso && (
-          message ? <div className='alertaRegistro'>{message}</div> : ''
-        )}
-        {!primeiraVez && sucesso && (
-          message ? <div className='alertaRegistroSucesso'>{message}</div> : ''
-        )}
-      </form>
+          {!telaMaiorCelular &&(
+              <div className='coletaneaBotoesLogar'>
+                  <button className='textos botaoRegistrar' type="submit" value="entar">Registrar-se</button>
+                  <a className='textos botaoRegistrar botaoUsuarUsuario' onClick={() => primeiraVezAtualizar(true)} href="#login">Logar Usuário</a>
+              </div>
+          )}
+          {!primeiraVez && !sucesso && (
+            message ? <div className='alertaRegistro'>{message}</div> : ''
+          )}
+          {!primeiraVez && sucesso && (
+            message ? <div className='alertaRegistroSucesso'>{message}</div> : ''
+          )}
+        </form>
+      </div>
     )
 }
 

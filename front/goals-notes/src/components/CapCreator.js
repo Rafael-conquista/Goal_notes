@@ -64,7 +64,7 @@ function CapCreatorComponent(){
             setShowInput(false)
             setShowCapInput(false)
             setInteraction(interaction+1)
-            if(interaction===6){
+            if(interaction>6){
                 setMessage(confirm_interaction[0])
                 setConfirmNames(true)
             }else{

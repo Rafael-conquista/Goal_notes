@@ -5,6 +5,7 @@ import { remove_token } from '../utils/token_verify.js';
 import { login } from '../services/api_requests';
 import { Modal } from 'react-bootstrap';
 import { update_user } from '../services/user_requests.js';
+import Loading from './loading.js';
 
 function LoginComponent() {
     const [id, set_id] = useState();
@@ -117,10 +118,7 @@ function LoginComponent() {
     return (
         <div>
             {loading && (
-                <div className='loading'>
-                    <div fluid className='loadingRodar'>
-                    </div>
-                </div>
+                <Loading/> 
             )}
             {primeiraVez && (
                 <form className='LoginForm' onSubmit={login_user}>
@@ -145,7 +143,9 @@ function LoginComponent() {
                                 id="password"
                                 placeholder="informe a sua senha"
                             />
-                            <a className='textos esqueciSenha'>Esqueceu a senha?</a>
+                            <div className='bot_esqueceu_senha'>
+                                <a className='textos esqueciSenha'>Esqueceu a senha?</a>
+                            </div>
                         </div>
                     )}
                     {telaMaiorCelular &&(
@@ -160,7 +160,9 @@ function LoginComponent() {
                                 id="password"
                                 placeholder="informe a sua senha"
                             />
-                            <a className='textos esqueciSenha'>Esqueceu a senha?</a>
+                            <div className='bot_esqueceu_senha'>
+                                <a className='textos esqueciSenha'>Esqueceu a senha?</a>
+                            </div>
                         </div>
                     )}
                     {telaMaiorCelular &&(
@@ -212,7 +214,9 @@ function LoginComponent() {
                                 id="password"
                                 placeholder="informe a sua senha"
                             />
-                            <a className='textos esqueciSenha'>Esqueceu a senha?</a>
+                            <div className='bot_esqueceu_senha'>
+                                <a className='textos esqueciSenha'>Esqueceu a senha?</a>
+                            </div>
                         </div>
                     )}
                     {telaMaiorCelular &&(

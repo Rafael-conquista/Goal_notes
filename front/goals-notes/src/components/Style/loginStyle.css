@@ -94,7 +94,10 @@ input {
     width: 100%;
 }
 
-.botaoLogar {
+.botaoLogar, .botaoRegistrar{
+    position: relative;
+    top: 0;
+    left: 0;
     transition: 0.3s;
     margin-top: 50px;
     height: 50px;
@@ -107,17 +110,23 @@ input {
 }
 
 @media screen and (max-width: 1000px) {
-    .botaoLogar {
+    .botaoLogar, .botaoRegistrar{
         font-size: 1.5rem;
         width: 80vw;
     }
 }
 
-.botaoLogar:hover {
-    box-shadow: 0px 0px 5px #28B498;
+.botaoLogar:hover, .botaoRegistrar:hover {
+    top: -2px;
+    left: -2px;
+    box-shadow: 5px 5px  #131f24;
 }
 
-.botaoLogar:active {
+.botaoRegistrar:hover {
+    box-shadow: 5px 5px  white !important;
+}
+
+.botaoLogar:active, .botaoRegistrar:active {
     background: #24a38a;
 }
 
@@ -172,7 +181,6 @@ input {
     font-family: "Varela Round", sans-serif;
     position: fixed;
     bottom: 0px;
-    animation: subir 0.5s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -195,7 +203,6 @@ input {
     font-family: "Varela Round", sans-serif;
     position: fixed;
     bottom: 0px;
-    animation: subir 0.5s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -265,20 +272,32 @@ input {
     }
 }
 
-@keyframes subir {
-    from {
-        bottom: -60px;
-    }
-    to {
-        bottom: 0px;
-    }
+.bot_esqueceu_senha {
+    width: 80%;
+    margin-top: 30px;
 }
 
 .esqueciSenha {
-    color: blue !important;
+    position: relative;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+    color: white !important;
     margin-top: 10px;
     cursor: pointer;
     width: 80%;
+    background-color: #28B498;
+    padding: 10px;
+    border-radius: 100px;
+    text-shadow: none;
+    text-decoration: none;
+    text-shadow: 0px 0px 3px #000;
+}
+
+.esqueciSenha:hover {
+    top: -2px;
+    left: -2px;
+    box-shadow: 5px 5px  #131f24;
 }
 
 @media screen and (max-width: 1000px) {
@@ -370,17 +389,6 @@ input {
 
 .fecha, .fecha .eye::after {
     background-color: #d98851;
-    animation: fechar;
-}
-
-
-@keyframes fechar {
-    from {
-        bottom: -60px;
-    }
-    to {
-        bottom: 0px;
-    }
 }
 
 .fecha .eye {
