@@ -1,0 +1,42 @@
+/* Estilos do footer */
+.Footer {
+    background-color: #131F24;
+    color: #fff;
+    padding: 0.1em;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.social_list {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    position: relative;
+}
+
+.social_list li {
+    margin: 0.5em;
+    position: relative;
+    top: 1em;
+}
+
+.social_list li:hover {
+    color:#D88750;
+}
+
+.social_list svg {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.copy_right {
+    margin-top: 2em;
+}
+
+.copy_right span {
+    font-weight: bold;
+    color:#D88750;
+}
