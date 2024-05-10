@@ -8,6 +8,7 @@ import GoalsContainer from '../../components/GoalsContainers.js';
 import GoalCreator from '../../components/goalCreator.js';
 import Spinner from 'react-bootstrap/Spinner';
 import '../../components/Style/goals_container.css'
+import { getAllTypes } from '../../services/api_requests.js';
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
@@ -15,6 +16,7 @@ function Goals (){
   const [goals, setGoals] = useState([])
   const [id, setId] = useState()
   const [name, setName] = useState('')
+  const [types, setTypes] = useState([]);
 
   async function verify_user(token){
     const token_id = await verify(token)
@@ -42,6 +44,12 @@ function Goals (){
   }, []);
 
   useEffect(() => {
+    getTypes().then((dados) => {
+        setTypes(dados)
+    });
+}, []);
+
+  useEffect(() => {
     if (id) {
       getGoals(id).then((dados) =>{
         setGoals(dados)
@@ -51,6 +59,11 @@ function Goals (){
     }
   }, [id, mayUpdate]);
 
+  async function getTypes(){
+    const data = await getAllTypes()
+    return data
+}
+
   async function getGoals(id){
     const dados = await getAllGoals(id)
     return dados
@@ -58,13 +71,14 @@ function Goals (){
   //criar um componente de criação de novas metas e estilizar o de listagem
   return (
     <div className='goal_creator_buttons'>
-      <Navbar currentPage="metas" />
+      <Navbar/>
         {loaded ? 
           <GoalsContainer
             goals={goals}
             id = {id}
             mayUpdate={mayUpdate}
             setMayUpdate={setMayUpdate}
+            types={types}
           />
         : <div>
           <Spinner animation="grow" size="sm" variant="secondary"/>
