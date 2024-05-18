@@ -102,7 +102,7 @@ class GoalsController:
         goal.importance_degree = dados.get("importance_degree", 1)
         goal.user_id = user_id
         main_queries.save_query(goal)
-        return {"message": "the goal has been created"}, 201
+        return {"id": goal.goals_id, "message": "the goal has been created"}, 201
 
     def goals_by_user(self, user_id):
         try:

@@ -44,9 +44,7 @@ class Item_register(Resource):
             return {"message": "Goal not found"}
 
         item = ItemsModel(dados)
-        import ipdb
 
-        ipdb.set_trace()
         item.dataCadastro = (
             format_datetime(item.dataCadastro)
             if "dataCadastro"

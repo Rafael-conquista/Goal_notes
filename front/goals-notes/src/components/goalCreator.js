@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IoMdClose } from "react-icons/io";
 import Dropdown from 'react-bootstrap/Dropdown';
-import { createGoal } from '../services/goals_request';
+import { createGoal, registerItems } from '../services/goals_request';
 import './Style/goals_container.css'
 
 function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
     const [showModal, setShowModal] = useState(false);
-    const [createSubtasks, setCreateSubtasks] = useState(false);
     const [name, setName] = useState('');
     const [obs, setObs] = useState('');
     const [priority, setPriority] = useState(1);
@@ -77,6 +76,11 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
             const response = await createGoal(goal_json);
             if (response.message === "the goal has been created") {
                 setMessage("Meta criada com sucesso!");
+                Object.entries(descriptions).map(([id, description]) => {
+                    //adicionar a requisição para cada subtask
+                    console.log(`goal_id: ${response.id}, Description: ${description}`);
+                    return '';
+                });
                 handleClose();
             }
             setMayUpdate(true);
