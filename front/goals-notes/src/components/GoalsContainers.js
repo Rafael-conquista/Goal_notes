@@ -15,6 +15,8 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [priority, setPriority] = useState(1);
     const [type, setType] = useState(1);
     const [days, setDays] = useState(30);
+    const [subtasks, setSubtasks] = useState(false);
+
 
     useEffect(() => {
         if (Object.keys(goals).length > 0) {
@@ -23,18 +25,6 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     }, [goals, goalClicked]);
 
     const goalsArray = Object.values(goals);
-
-    const handleModal = () => {
-        setShowModal(true);
-    };
-
-    const handleClose = () => {
-        setShowModal(false);
-    };
-
-    const importance_degree_set = (value) => {
-        setPriority(value)
-    }
 
     const renderedTypes = types.types.map((item) => {
         return (
@@ -115,6 +105,12 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             <span>Finalizar tarefa</span>
                                         </div>
                                     }
+                                    <div className='botao' onClick={() => {
+                                        setSubtasks(!subtasks)
+                                    }}>
+                                        Ver subtarefas
+                                    </div>
+                                    {subtasks ? <div>tem tarefas {goal.goals_id}</div> : ''}
 
                                 </div>
                             )

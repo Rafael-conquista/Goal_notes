@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IoMdClose } from "react-icons/io";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -14,26 +14,45 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
     const [type, setType] = useState(1);
     const [days, setDays] = useState(30);
     const [message, setMessage] = useState('');
+    const [items, setItems] = useState([]);
+    const [descriptions, setDescriptions] = useState({});
+
+    const addItem = () => {
+        const newItem = { id: items.length + 1, description: '' };
+        setItems([...items, newItem]);
+    };
+
+    const handleInputChange = (id, value) => {
+        setDescriptions({ ...descriptions, [id]: value });
+        console.log(descriptions)
+    };
+
+    const removeItem = (id) => {
+        setItems(items.filter(item => item.id !== id));
+        const newDescriptions = { ...descriptions };
+        delete newDescriptions[id];
+        setDescriptions(newDescriptions);
+    };
 
     const nameChange = (e) => {
-        setName(e.target.value)
-    }
+        setName(e.target.value);
+    };
 
     const obsChange = (e) => {
-        setObs(e.target.value)
-    }
+        setObs(e.target.value);
+    };
 
     const dateChange = (e) => {
-        setDays(e.target.value)
-    }
+        setDays(e.target.value);
+    };
 
     const handlePriority = (degree) => {
-        setPriority(degree)
-    }
+        setPriority(degree);
+    };
 
     const handleType = (type) => {
-        setType(type)
-    }
+        setType(type);
+    };
 
     const handleModal = () => {
         setShowModal(true);
@@ -43,10 +62,10 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
         setShowModal(false);
     };
 
-    async function verify_and_save_goal(){
-        if(!name || !obs || !days){
-            setMessage("Valores não podem estar vazios")
-        }else{
+    async function verify_and_save_goal() {
+        if (!name || !obs || !days) {
+            setMessage("Valores não podem estar vazios");
+        } else {
             const goal_json = {
                 "name": name,
                 "obs": obs,
@@ -55,20 +74,18 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                 "type_id": Number(type),
                 "expected_data": days
             };
-            const response = await createGoal(goal_json)
-            if(response.message === "the goal has been created"){
-                setMessage("meta criada com sucesso!")
-                handleClose()
+            const response = await createGoal(goal_json);
+            if (response.message === "the goal has been created") {
+                setMessage("Meta criada com sucesso!");
+                handleClose();
             }
-            setMayUpdate(true)
-        }  
+            setMayUpdate(true);
+        }
     }
 
-    const renderedTypes = types.types.map((item) => {
-        return (
-            <Dropdown.Item onClick={() => handleType(item.id)}><p>{item.name}</p></Dropdown.Item>
-        );
-      });
+    const renderedTypes = types.types.map((item) => (
+        <Dropdown.Item key={item.id} onClick={() => handleType(item.id)}><p>{item.name}</p></Dropdown.Item>
+    ));
 
     return (
         <div>
@@ -98,7 +115,7 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                                 <Dropdown.Item onClick={() => handlePriority(5)}>5</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                        <input type='text' placeholder='observações' maxLength={200} onChange={obsChange} />
+                        <input type='text' placeholder='Observações' maxLength={200} onChange={obsChange} />
                         <input type='number' placeholder='Tempo para concluir em dias' onChange={dateChange} />
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -108,19 +125,26 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                                 {renderedTypes}
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Deseja criar sub-tarefas?
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => setCreateSubtasks(true)}>Sim</Dropdown.Item>
-                                <Dropdown.Item>Não</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
                     </div>
-                    {message ? 
-                        <div>{message}</div> : <div></div>
-                    }
+                    <ul>
+                        {items.map((item) => (
+                            <div key={item.id} className="item">
+                                <label>
+                                    Sub-tarefa {item.id}:
+                                    <input
+                                        type="text"
+                                        value={descriptions[item.id] || ''}
+                                        onChange={(e) => handleInputChange(item.id, e.target.value)}
+                                    />
+                                </label>
+                                <button onClick={() => removeItem(item.id)}>Excluir</button>
+                            </div>
+                        ))}
+                    </ul>
+                    <div className='new_goal_button' onClick={addItem}>
+                        Criar sub-tarefa +
+                    </div>
+                    {message && <div>{message}</div>}
                 </Modal.Body>
                 <Modal.Footer className='modal_footer'>
                     <div className='buttons'>
@@ -131,11 +155,10 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                             <span>Salvar</span>
                         </div>
                     </div>
-
                 </Modal.Footer>
             </Modal>
         </div>
-    )
+    );
 }
 
 export default GoalCreator;
