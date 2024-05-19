@@ -23,7 +23,6 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
 
     const handleInputChange = (id, value) => {
         setDescriptions({ ...descriptions, [id]: value });
-        console.log(descriptions)
     };
 
     const removeItem = (id) => {
@@ -76,12 +75,14 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
             const response = await createGoal(goal_json);
             if (response.message === "the goal has been created") {
                 setMessage("Meta criada com sucesso!");
-                Object.entries(descriptions).map(([id, description]) => {
-                    //adicionar a requisição para cada subtask
-                    console.log(`goal_id: ${response.id}, Description: ${description}`);
-                    return '';
-                });
+                for (const id in descriptions) {
+                    if (descriptions[id] !== '') {
+                        await registerItems(descriptions[id], response.id)
+                    }
+                }
                 handleClose();
+                setDescriptions({})
+                setItems([])
             }
             setMayUpdate(true);
         }

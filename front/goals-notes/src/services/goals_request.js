@@ -77,7 +77,7 @@ export async function registerItems(data, id){
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify({
-      "desc": data.desc,
+      "desc": data,
       "goals_id": id
     });
   
