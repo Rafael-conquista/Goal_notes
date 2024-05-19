@@ -1,5 +1,7 @@
-from utils import main_queries
+from utils import main_queries, format_date
+from sql_alchemy import banco
 from models.items_model import ItemsModel
+from controllers.Goals_controller import GoalsController
 
 
 class ItemsController:
@@ -44,3 +46,27 @@ class ItemsController:
 
         except Exception as error:
             return {"message": error}, 400
+    
+    def find_items_by_goal(goal_id):
+        try:
+            goal = GoalsController.find_goal(goal_id)
+            if goal[0]['id']:
+                items = (
+                    banco.session.query(ItemsModel)
+                    .filter(ItemsModel.goals_id == goal_id)
+                    .all()
+                )
+            
+            organized_items = {}
+            cont = 0
+            for item in items:
+                if not item.excluido:
+                    item_object = {
+                        "desc": item.desc,
+                        "ativo": item.ativo
+                    }
+                    organized_items.update({cont: item_object})
+                    cont = cont + 1
+            return organized_items
+        except:
+            return {"message": "Items not found"}
