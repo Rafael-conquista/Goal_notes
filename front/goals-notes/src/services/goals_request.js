@@ -63,7 +63,6 @@ export async function UpdateGoal(data, id){
       body: raw,
       redirect: 'follow'
     };
-    console.log(raw)
     let response = await fetch(`http://127.0.0.1:5000/goal/${id}`, requestOptions)
     return response.json()
   } catch(e){
@@ -93,5 +92,15 @@ export async function registerItems(data, id){
   } catch(e){
       console.log(e)
     return false
+  }
+}
+
+export async function getItemsByGoal(id){
+  try{
+    let response = await fetch(`http://127.0.0.1:5000/items_by_goal/${id}`)
+    let goalsData = await response.json()
+    return goalsData
+  } catch(e){
+    console.log(e)
   }
 }
