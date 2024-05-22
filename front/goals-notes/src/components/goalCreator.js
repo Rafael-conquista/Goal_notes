@@ -7,6 +7,7 @@ import './Style/goals_container.css'
 
 function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
     const [showModal, setShowModal] = useState(false);
+    const [createSubtasks, setCreateSubtasks] = useState(false);
     const [name, setName] = useState('');
     const [obs, setObs] = useState('');
     const [priority, setPriority] = useState(1);
@@ -14,19 +15,26 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
     const [days, setDays] = useState(30);
     const [message, setMessage] = useState('');
     const [items, setItems] = useState([]);
+    const [lastItems, setLastItems] = useState(0);
     const [descriptions, setDescriptions] = useState({});
 
     const addItem = () => {
-        const newItem = { id: items.length + 1, description: '' };
+        const newItem = { id: lastItems + 1, description: '' };
+        setLastItems(lastItems + 1);
         setItems([...items, newItem]);
     };
 
     const handleInputChange = (id, value) => {
         setDescriptions({ ...descriptions, [id]: value });
+        console.log(descriptions)
     };
 
     const removeItem = (id) => {
-        setItems(items.filter(item => item.id !== id));
+        // Filtra a lista para excluir o item com o id especificado
+        const novaLista = items.filter(item => item.id !== id);
+        setItems(novaLista);
+
+        // Remove a descrição correspondente
         const newDescriptions = { ...descriptions };
         delete newDescriptions[id];
         setDescriptions(newDescriptions);
@@ -74,15 +82,13 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
             };
             const response = await createGoal(goal_json);
             if (response.message === "the goal has been created") {
-                setMessage("Meta criada com sucesso!");
                 for (const id in descriptions) {
                     if (descriptions[id] !== '') {
                         await registerItems(descriptions[id], response.id)
                     }
                 }
+                setMessage("Meta criada com sucesso!");
                 handleClose();
-                setDescriptions({})
-                setItems([])
             }
             setMayUpdate(true);
         }
@@ -94,9 +100,7 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
 
     return (
         <div>
-            <h1>
-                Minhas Metas
-            </h1>
+            <h1>Minhas Metas</h1>
             <div className='new_goal_button' onClick={handleModal}>
                 Criar nova Meta +
             </div>
@@ -132,8 +136,8 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                         </Dropdown>
                     </div>
                     <ul>
-                        {items.map((item) => (
-                            <div key={item.id} className="item">
+                        {items.map((item, index) => (
+                            <div key={index} className="item">
                                 <label>
                                     Sub-tarefa {item.id}:
                                     <input

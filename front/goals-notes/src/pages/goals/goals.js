@@ -51,7 +51,7 @@ function Goals (){
 
   useEffect(() => {
     if (id) {
-      getGoals(id).then((dados) =>{
+      getGoals(id).then((dados) => {
         setGoals(dados)
         setLoaded(true)
         setMayUpdate(false)

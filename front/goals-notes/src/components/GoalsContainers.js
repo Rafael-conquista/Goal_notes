@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import GoalCreator from './goalCreator';
 import './Style/goals_container.css';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { UpdateGoal, getItemsByGoal } from '../services/goals_request';
+import { UpdateGoal, getItemsByGoal, registerItems } from '../services/goals_request';
 
 function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [empty, setEmpty] = useState(true);
@@ -13,9 +13,9 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [type, setType] = useState(1);
     const [days, setDays] = useState(30);
     const [visibleSubtasks, setVisibleSubtasks] = useState(null);
-    const [items, setItems] = useState([]);
     const [lastItems, setLastItems] = useState();
-    
+    const [items, setItems] = useState([]);
+    const [descriptions, setDescriptions] = useState({});
 
     useEffect(() => {
         if (Object.keys(goals).length > 0) {
@@ -40,20 +40,19 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
             type_id: Number(type),
             expected_data: days,
         };
-        await UpdateGoal(goal_json, goalClicked.goals_id);
-        setGoalClicked(null);
+
+        setGoalClicked();
         setName('');
         setDays(30);
         setObs('');
         setPriority(1);
         setType(1);
+        setDescriptions({});
         setMayUpdate(true);
     }
 
     async function deactivate_task(end_date = false, goals_id) {
-        const goal_json = {
-            end_date: end_date
-        };
+        const goal_json = { end_date };
         await UpdateGoal(goal_json, goals_id);
         setMayUpdate(true);
     }
@@ -66,7 +65,6 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                 setVisibleSubtasks(visibleSubtasks === id ? null : id);
             }else{
                 const itemsResponse = await getItemsByGoal(id);
-
                 const itemsArray = Object.values(itemsResponse);
                 setItems(itemsArray);
                 setVisibleSubtasks(visibleSubtasks === id ? null : id);
@@ -94,6 +92,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                     <div onClick={() => {
                                         if (!goal.end_date) {
                                             setGoalClicked(goal);
+                                            getItemsGoal(goal.goals_id);
                                         }
                                     }}>
                                         <div className='goal_title'>
@@ -162,11 +161,10 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                             </Dropdown>
                         </div>
                         <div>
-                            <p>observação</p>
+                            <p>Observação</p>
                             <input type='text' placeholder={goalClicked.obs} maxLength={200} onChange={(e) => setObs(e.target.value)} />
                         </div>
-                        <p></p>
-                        <p>expectativa de finalização: <input type='number' placeholder='Tempo para concluir em dias' onChange={(e) => setDays(e.target.value)} /></p>
+                        <p>Expectativa de finalização: <input type='number' placeholder='Tempo para concluir em dias' onChange={(e) => setDays(e.target.value)} /></p>
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 Qual é a categoria?
