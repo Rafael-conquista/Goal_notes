@@ -68,6 +68,12 @@ input {
     display: flex;
 }
 
+@media screen and (max-width: 1500px) {
+    .sectionLoginForm {
+        width: 200vw;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     .sectionLoginForm {
         height: auto;
@@ -77,7 +83,7 @@ input {
 
 .logoCapivara {
     height: 100px;
-    position: fixed;
+    position: absolute;
 }
 
 .LoginForm {
@@ -139,7 +145,7 @@ input {
     align-items: center;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1500px) {
     .cardLogin {
         height: 100vh;
         width: 100vw;
@@ -156,7 +162,7 @@ input {
     align-items: center;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1500px) {
     .cardRegister {
         height: 100vh;
         width: 100vw;
