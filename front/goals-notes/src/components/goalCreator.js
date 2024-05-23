@@ -7,7 +7,6 @@ import './Style/goals_container.css'
 
 function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
     const [showModal, setShowModal] = useState(false);
-    const [createSubtasks, setCreateSubtasks] = useState(false);
     const [name, setName] = useState('');
     const [obs, setObs] = useState('');
     const [priority, setPriority] = useState(1);
@@ -26,7 +25,6 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
 
     const handleInputChange = (id, value) => {
         setDescriptions({ ...descriptions, [id]: value });
-        console.log(descriptions)
     };
 
     const removeItem = (id) => {

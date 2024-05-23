@@ -13,9 +13,9 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [type, setType] = useState(1);
     const [days, setDays] = useState(30);
     const [visibleSubtasks, setVisibleSubtasks] = useState(null);
-    const [lastItems, setLastItems] = useState();
-    const [items, setItems] = useState([]);
     const [descriptions, setDescriptions] = useState({});
+    const [items, setItems] = useState([]);
+    const [lastItems, setLastItems] = useState(0);
 
     useEffect(() => {
         if (Object.keys(goals).length > 0) {
@@ -40,15 +40,15 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
             type_id: Number(type),
             expected_data: days,
         };
-
+        await UpdateGoal(goal_json, goalClicked.goals_id);
         setGoalClicked();
         setName('');
         setDays(30);
         setObs('');
         setPriority(1);
         setType(1);
-        setDescriptions({});
         setMayUpdate(true);
+        setItems([]);
     }
 
     async function deactivate_task(end_date = false, goals_id) {
@@ -57,23 +57,33 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         setMayUpdate(true);
     }
 
-    async function getItemsGoal(id) {
+    async function request_items(id) {
+        const itemsResponse = await getItemsByGoal(id);
+        const itemsArray = Object.values(itemsResponse);
+        setItems(itemsArray);
+        setVisibleSubtasks(visibleSubtasks === id ? null : id);
+        setLastItems(id);
+    }
+
+    function getItemsGoal(id) {
         try {
-            console.log(lastItems, id)
-            if(lastItems === id){
-                setLastItems()
+            if (lastItems === id) {
+                setLastItems();
                 setVisibleSubtasks(visibleSubtasks === id ? null : id);
-            }else{
-                const itemsResponse = await getItemsByGoal(id);
-                const itemsArray = Object.values(itemsResponse);
-                setItems(itemsArray);
-                setVisibleSubtasks(visibleSubtasks === id ? null : id);
-                setLastItems(id)
+            } else {
+                request_items(id);
             }
         } catch (error) {
             console.error('Failed to load items:', error);
             setItems([]);
         }
+    }
+
+    function handleInputChange(id, value) {
+        const updatedItems = items.map(item =>
+            item.id === id ? { ...item, desc: value } : item
+        );
+        setItems(updatedItems);
     }
 
     return (
@@ -92,7 +102,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                     <div onClick={() => {
                                         if (!goal.end_date) {
                                             setGoalClicked(goal);
-                                            getItemsGoal(goal.goals_id);
+                                            request_items(goal.goals_id);
                                         }
                                     }}>
                                         <div className='goal_title'>
@@ -173,6 +183,25 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                 {renderedTypes}
                             </Dropdown.Menu>
                         </Dropdown>
+                        <div>
+                            Sub-tarefas já criadas:
+                        </div>
+                        <ul>
+                            {items.map((item, index) => (
+                                <div key={index} className="item">
+                                    <label>
+                                        <input
+                                            type="text"
+                                            value={item.desc}
+                                            onChange={(e) => handleInputChange(item.id, e.target.value)}
+                                        />
+                                    </label>
+                                </div>
+                            ))}
+                        </ul>
+                        <div className='new_goal_button'>
+                            Criar sub-tarefa +
+                        </div>
                         <div className='buttons'>
                             <div className='botao close' onClick={() => setGoalClicked(null)}>
                                 <span>Fechar</span>
