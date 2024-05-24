@@ -6,7 +6,7 @@ import '../../components/Style/loginStyle.css';
 import { remove_token } from '../../utils/token_verify.js';
 
 const Initial = () => {
-  const [telaMaiorCelular, setTelaMaiorCelular] = useState(window.innerWidth > 1000);
+  const [telaMaiorCelular, setTelaMaiorCelular] = useState(window.innerWidth > 1500);
 
   async function verify(token) {
     try {
@@ -14,30 +14,27 @@ const Initial = () => {
       const id = response.id
       if (sessionStorage.getItem("first_acess")){
         window.location.href = `/CapCreate`;
-      }else if (id) {
-        //quando tivermos a página inicial, passar o id para a url
+      } else if (id) {
         window.location.href = `${id}/goals`;
       } else {
-        console.log('é necessário realizar o login')
-        remove_token()
+        console.log('é necessário realizar o login');
+        remove_token();
       }
     } catch {
-      console.log('validation error')
+      console.log('validation error');
     }
   }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      verify(token)
+      verify(token);
     }
   }, []);
 
-
   useEffect(() => {
-
     const verificarTamanhoDaTela = () => {
-      setTelaMaiorCelular(window.innerWidth > 1000);
+      setTelaMaiorCelular(window.innerWidth > 1500);
     };
 
     window.addEventListener('resize', verificarTamanhoDaTela);
@@ -47,21 +44,29 @@ const Initial = () => {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
     <section className='sectionLoginForm'>
-      { telaMaiorCelular &&(
+      {telaMaiorCelular && (
         <>
-          <img className='logoCapivara capivaraOlha' src='/content/capivaraSemOlhos.png' alt="capivaraSemOlhos"></img>
+          <img className='logoCapivara capivaraOlha' src='/content/capivaraSemOlhos.png' alt="capivaraSemOlhos" />
           <div id='cap' className="eyes">
             <div className="eye" id="leftEye"></div>
           </div>
         </>
       )}
       <div id='login' className='cardLogin grid'>
-          <LoginComponent />
+        <LoginComponent />
       </div>
       <div id='registro' className='cardRegister grid'>
-          <RegisterComponent />
+        <RegisterComponent />
       </div>
     </section>
   );
