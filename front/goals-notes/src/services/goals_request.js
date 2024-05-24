@@ -95,6 +95,27 @@ export async function registerItems(data, id){
   }
 }
 
+export async function updateItems(data){
+  try{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify(data);
+  
+    var requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+  
+    let response = await fetch(`http://127.0.0.1:5000/item/${data.id}`, requestOptions)
+    return response.json()
+  } catch(e){
+      console.log(e)
+    return false
+  }
+}
+
 export async function getItemsByGoal(id){
   try{
     let response = await fetch(`http://127.0.0.1:5000/items_by_goal/${id}`)

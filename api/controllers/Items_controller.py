@@ -62,6 +62,7 @@ class ItemsController:
             for item in items:
                 if not item.excluido:
                     item_object = {
+                        "id": item.id,
                         "desc": item.desc,
                         "ativo": item.ativo
                     }

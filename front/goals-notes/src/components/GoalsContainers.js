@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import GoalCreator from './goalCreator';
 import './Style/goals_container.css';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { UpdateGoal, getItemsByGoal, registerItems } from '../services/goals_request';
+import { UpdateGoal, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
 
 function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [empty, setEmpty] = useState(true);
     const [goalClicked, setGoalClicked] = useState();
-    const [name, setName] = useState('');
-    const [obs, setObs] = useState('');
-    const [priority, setPriority] = useState(1);
-    const [type, setType] = useState(1);
-    const [days, setDays] = useState(30);
+    const [name, setName] = useState();
+    const [obs, setObs] = useState();
+    const [priority, setPriority] = useState();
+    const [type, setType] = useState();
+    const [days, setDays] = useState();
     const [visibleSubtasks, setVisibleSubtasks] = useState(null);
     const [descriptions, setDescriptions] = useState({});
     const [items, setItems] = useState([]);
@@ -41,12 +41,15 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
             expected_data: days,
         };
         await UpdateGoal(goal_json, goalClicked.goals_id);
+        items.forEach(item => {
+            updateItems(item)
+        });
         setGoalClicked();
-        setName('');
-        setDays(30);
-        setObs('');
-        setPriority(1);
-        setType(1);
+        setName();
+        setDays();
+        setObs();
+        setPriority();
+        setType();
         setMayUpdate(true);
         setItems([]);
     }
