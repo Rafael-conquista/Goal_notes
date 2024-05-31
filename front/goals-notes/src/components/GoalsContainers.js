@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import GoalCreator from './goalCreator';
+import ItemCreator from './subItemsCreator';
 import './Style/goals_container.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { UpdateGoal, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
@@ -13,9 +14,9 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [type, setType] = useState();
     const [days, setDays] = useState();
     const [visibleSubtasks, setVisibleSubtasks] = useState(null);
-    const [descriptions, setDescriptions] = useState({});
     const [items, setItems] = useState([]);
     const [lastItems, setLastItems] = useState(0);
+    const [descriptions, setDescriptions] = useState({});
 
     useEffect(() => {
         if (Object.keys(goals).length > 0) {
@@ -44,6 +45,11 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         items.forEach(item => {
             updateItems(item)
         });
+        for (const id in descriptions) {
+            if (descriptions[id] !== '') {
+                await registerItems(descriptions[id], goalClicked.goals_id)
+            }
+        }
         setGoalClicked();
         setName();
         setDays();
@@ -52,6 +58,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         setType();
         setMayUpdate(true);
         setItems([]);
+        setDescriptions({})
     }
 
     async function deactivate_task(end_date = false, goals_id) {
@@ -202,9 +209,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                 </div>
                             ))}
                         </ul>
-                        <div className='new_goal_button'>
-                            Criar sub-tarefa +
-                        </div>
+                        <ItemCreator descriptions={descriptions} setDescriptions={setDescriptions}/>
                         <div className='buttons'>
                             <div className='botao close' onClick={() => setGoalClicked(null)}>
                                 <span>Fechar</span>

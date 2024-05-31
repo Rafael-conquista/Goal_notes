@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { createGoal, registerItems } from '../services/goals_request';
 import './Style/goals_container.css'
+import ItemCreator from './subItemsCreator';
 
 function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
     const [showModal, setShowModal] = useState(false);
@@ -21,21 +22,6 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
         const newItem = { id: lastItems + 1, description: '' };
         setLastItems(lastItems + 1);
         setItems([...items, newItem]);
-    };
-
-    const handleInputChange = (id, value) => {
-        setDescriptions({ ...descriptions, [id]: value });
-    };
-
-    const removeItem = (id) => {
-        // Filtra a lista para excluir o item com o id especificado
-        const novaLista = items.filter(item => item.id !== id);
-        setItems(novaLista);
-
-        // Remove a descrição correspondente
-        const newDescriptions = { ...descriptions };
-        delete newDescriptions[id];
-        setDescriptions(newDescriptions);
     };
 
     const nameChange = (e) => {
@@ -133,21 +119,7 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                    <ul>
-                        {items.map((item, index) => (
-                            <div key={index} className="item">
-                                <label>
-                                    Sub-tarefa {item.id}:
-                                    <input
-                                        type="text"
-                                        value={descriptions[item.id] || ''}
-                                        onChange={(e) => handleInputChange(item.id, e.target.value)}
-                                    />
-                                </label>
-                                <button onClick={() => removeItem(item.id)}>Excluir</button>
-                            </div>
-                        ))}
-                    </ul>
+                    <ItemCreator descriptions={descriptions} setDescriptions={setDescriptions}/>
                     <div className='new_goal_button' onClick={addItem}>
                         Criar sub-tarefa +
                     </div>
