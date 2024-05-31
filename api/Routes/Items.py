@@ -8,6 +8,11 @@ from utils import main_queries
 from utils.format_date import format_datetime
 
 
+class ItemsByGoals(Resource):
+    def get(sef, id):
+        return ItemsController.find_items_by_goal(id)
+        
+
 # Retorna todos os itens do banco de dados
 class Items(Resource):
     def get(self):
@@ -44,9 +49,7 @@ class Item_register(Resource):
             return {"message": "Goal not found"}
 
         item = ItemsModel(dados)
-        import ipdb
 
-        ipdb.set_trace()
         item.dataCadastro = (
             format_datetime(item.dataCadastro)
             if "dataCadastro"

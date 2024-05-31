@@ -8,7 +8,6 @@ export async function getAllGoals(id){
   }
 }
 
-
 export async function createGoal(data){
   try{
     var myHeaders = new Headers();
@@ -64,11 +63,65 @@ export async function UpdateGoal(data, id){
       body: raw,
       redirect: 'follow'
     };
-    console.log(raw)
     let response = await fetch(`http://127.0.0.1:5000/goal/${id}`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
     return false
+  }
+}
+
+export async function registerItems(data, id){
+  try{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({
+      "desc": data,
+      "goals_id": id
+    });
+  
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+  
+    let response = await fetch("http://127.0.0.1:5000/item_register", requestOptions)
+    return response.json()
+  } catch(e){
+      console.log(e)
+    return false
+  }
+}
+
+export async function updateItems(data){
+  try{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify(data);
+  
+    var requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+  
+    let response = await fetch(`http://127.0.0.1:5000/item/${data.id}`, requestOptions)
+    return response.json()
+  } catch(e){
+      console.log(e)
+    return false
+  }
+}
+
+export async function getItemsByGoal(id){
+  try{
+    let response = await fetch(`http://127.0.0.1:5000/items_by_goal/${id}`)
+    let goalsData = await response.json()
+    return goalsData
+  } catch(e){
+    console.log(e)
   }
 }

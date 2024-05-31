@@ -1,7 +1,7 @@
 from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
-from Routes.Items import Item, Items, Item_register
+from Routes.Items import Item, Items, Item_register, ItemsByGoals
 from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer
 from Routes.Posts import Post, Posts, PostCreator
 from Routes.PostComments import PostComment, Comment, Comments
@@ -43,6 +43,7 @@ api.add_resource(Type_register, "/type_register")
 api.add_resource(Items, "/items")
 api.add_resource(Item, "/item/<int:id>")
 api.add_resource(Item_register, "/item_register")
+api.add_resource(ItemsByGoals, "/items_by_goal/<int:id>")
 # Amigos related Routes
 api.add_resource(Amigos_registro, "/Amigos_registro")
 api.add_resource(Amigos, "/Amigos")
