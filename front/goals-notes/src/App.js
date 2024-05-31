@@ -7,8 +7,19 @@ import Perfil from "./pages/perfil/perfil";
 import UserUpdate from "./pages/userUpdate/userUpdate"
 import { Route,Routes, BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { verify } from "./utils/token_verify";
+import React, { useState, useEffect } from 'react';
 
-function App() {
+  function App() {
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        const token = localStorage.getItem('token');
+        verify(token);
+        console.log('estou verificando o token');
+      }, 600000);
+  
+      return () => clearInterval(intervalId);
+    }, []);
   return (
     <BrowserRouter>
         <Routes>
