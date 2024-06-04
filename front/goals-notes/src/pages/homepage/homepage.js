@@ -1,18 +1,68 @@
 import React from 'react';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
-import cap_default from '../../images/cap_default.jpg';
 import '../../components/Style/homeStyle.css';
 
 const Homepage = () => {
   return (
     <div>
-      <Navbar currentPage="home" /> 
-      <div className='capScreen homeScreen'>
-        <div className="cap_component">
-          <div className='chat'>
-            <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-            <p className='mensagemChat'>Nos meandros serenos desta floresta verdejante, entre os murmúrios dos riachos e o sussurro das folhas ao vento, eu, a capivara, encontro meu refúgio, onde a harmonia e a serenidade se entrelaçam em um chat muito particular, preenchido com as mais puras essências da natureza.</p>
+      <Navbar currentPage="home"/> 
+      <div className='capScreen homeScreen'>  
+        <div className="div_meio">
+          <div className='fundo_escuro'>
+            <p className='description'>Atualizações de amigos</p>
+            <div className='divisoria'></div>
+          </div>
+          <div className='conteudo'>
+          <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+          </div>
+        </div>
+        <div className='div_dir'>
+          <div className='fundo_escuro'>
+            <p className='description'>Metas Alcançadas</p>
+            <div className='divisoria'></div>
+          </div>
+          <div className='conteudo'>
+          <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+          </div>
+        </div>
+        <div className='div_esq'>
+          <div className='fundo_escuro'>  
+            <p className='description'>Metas Pendentes</p>
+            <div className='divisoria'></div>
+          </div>
+          <div className='conteudo'>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
+            <p>Seu amigo conseguiu completar a missão de ajudar uma capivarinha mais de idade a atravessar a rua. PARABÉNS!!!</p>
           </div>
         </div>
       </div>
