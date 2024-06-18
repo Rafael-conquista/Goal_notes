@@ -1,0 +1,64 @@
+.pomodoroTimer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #343a40;
+  }
+  
+  .timer {
+    font-size: 4em;
+    margin: 20px 0;
+    color: #495057;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:active {
+    background-color: #004085;
+  }
+  
+  .resetButton {
+    background-color: #6c757d;
+  }
+  
+  .resetButton:hover {
+    background-color: #5a6268;
+  }
+  
+  .resetButton:active {
+    background-color: #4e555b;
+  }
+  
