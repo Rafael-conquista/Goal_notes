@@ -2,60 +2,52 @@ import './Style/userStyle.css'
 import React, { useState, useEffect } from 'react';
 import { FaAngleLeft } from "react-icons/fa6";
 import cap_default from '../images/cap_default.jpg';
+import { get_user } from '../services/user_requests';
 import { update_user } from '../services/user_requests';
 import { verify } from '../utils/token_verify';
 import { Modal } from 'react-bootstrap';
+import Loading from './loading.js';
 
 function UserUpdateComponent() {
     const [showModal, setShowModal] = useState(false);
-    const [nickname, setNickname] = useState()
+    const [editar, setEditar] = useState(false);
+    const [nickname, setNickname] = useState('')
+    const [nicknameAntigo, setNicknameAntigo] = useState('')
     const [id, setId] = useState()
-    const [password, setPassword] = useState()
-    const [message, setMessage] = useState('Para alterar seu usuário, basta alterar os respectivos campos e nos informar sua senha!')
-    const [confirmPassword, setConfirmPassword] = useState()
-
+    const [message, setMessage] = useState('')
+    const [loading, setloading] = useState(false);
+    
     const nicknameChange = (e) => {
         setNickname(e.target.value)
     }
-
-    const passwordChange = (e) => {
-        setPassword(e.target.value)
-    }
-
-    const confirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value)
-    }
-
-    const handleModal = () => {
-        setShowModal(true);
-    };
 
     const handleClose = () => {
         setShowModal(false);
     };
 
     const submitChanges = (e) => {
-        EraseForm()
-        if ((password === confirmPassword) && (nickname)){
+        if (nickname){
             user_update()
+            setEditar(false)
         }else{
-            setMessage('A sua senha e a confirmação da senha estão diferentes')
+            setMessage('Favor inserir um apelido')
         }
     }
 
-    function EraseForm() {
-        setNickname('')
-        setPassword('')
-        setConfirmPassword('')
+    const alterPerfil = (e) => {
+        setEditar(true)
+        setMessage('')
     }
 
     async function user_update() {
         const user_json = {
-            "surname": nickname,
-            "password": password,
+            "surname": nickname
         };
         const response = await update_user(user_json, id);
         setMessage(response.message)
+        if(response.message == 'user updated successfully') {
+            setNicknameAntigo(nickname);
+        }
     }
 
     async function del_update(excluir=false) {
@@ -84,36 +76,60 @@ function UserUpdateComponent() {
             setId(id)
         });
     }, [])
+    
+    async function get_surname(id){
+        const user = await get_user(id);
+        return user
+    }
 
+    useEffect(() => {
+            get_surname(id).then((user) => {
+                if (user) {
+                    setNicknameAntigo(user.surname);
+                    setNickname(nicknameAntigo);
+                    setloading(false);
+                }
+                else {
+                    setloading(true);
+                    get_surname(id);
+                }
+            });
+    }, [nicknameAntigo, id])
+    
     return (
-        <div className="user_container">
-            <div className='return_button' onClick={()=>{
-                window.history.back();
-            }}>
-                <FaAngleLeft />
-            </div>
-            <div className='info_input'>
+        <div className={`component_cap ${editar ? 'border' : 'border_esquerda'}`}>
+            {loading && <Loading/>}
+            <div className='card text'>
+                <h1>Edite seu perfil</h1>
                 <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-                <input type='text' placeholder='seu apelido' className='nickname_input' onChange={nicknameChange} value={nickname}/>
-                <input type="password" placeholder='password' required="required" className='password_input' onChange={passwordChange} value={password}/>
-                <input type="password" placeholder='confirm password' required="required" className='password_input' onChange={confirmPasswordChange} value={confirmPassword}/>
-            </div>
-            <div className='submit_buttons'>
-                <div className='delete_button' onClick={handleModal}>
-                    Excluir Perfil
-                </div>
-                <div className='submit_comment_button' onClick={submitChanges}>
-                    Alterar
-                </div>
-            </div>
-            <p>{message}</p>
-            
-            <Modal show={showModal} onHide={handleClose} centered size="xl">
-                <Modal.Header>
-                    <div className='form_grid'>
-                        Você tem certeza de que deseja excluir seu perfil?
+                {!editar &&
+                    <input type='text' placeholder='Digite um apelido' readOnly className='nickname_input' value={nicknameAntigo}/>
+                }
+                {editar &&
+                    <input type='text' placeholder='Digite um apelido' className='nickname_input_editando' onChange={nicknameChange} value={nickname}/>
+                }
+                <div className='submit_buttons'>
+                {!editar && (
+                    <div className='submit_comment_button' onClick={alterPerfil}>
+                        Editar o perfil
                     </div>
-                </Modal.Header>
+                )}
+                {editar && (
+                    <div className='submit_comment_button' onClick={submitChanges}>
+                        Alterar apelido
+                    </div>
+                )}
+                </div>
+                {(message != '' && message != 'user updated successfully') && (
+                    <p className='texto_alerta'>{message}</p>
+                )}
+                {(message != '' && message == 'user updated successfully') && (
+                    <p className='texto_sucesso'>Apelido atualizado</p>
+                )}
+
+            </div>
+          
+            <Modal show={showModal} onHide={handleClose} centered size="xl">
                 <Modal.Footer className='modal_footer'>
                     <div className='buttons'>
                         <div className='botao' onClick={handleClose}>
