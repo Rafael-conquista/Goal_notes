@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Style/navbar.css';
+import LogoffButton from './logoffButton';
 
 function Navbar({ currentPage }) {
   const [atual, setAtual] = useState(currentPage);
@@ -118,6 +119,7 @@ function Navbar({ currentPage }) {
             <a className="option" href="Perfil" onClick={() => setAtual(3)}>
               <p className="text_menu">Perfil</p>
             </a>
+            <LogoffButton/>
           </div>
         </header>
       )}
