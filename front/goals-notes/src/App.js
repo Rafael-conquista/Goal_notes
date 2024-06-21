@@ -8,7 +8,8 @@ import UserUpdate from "./pages/userUpdate/userUpdate"
 import { Route,Routes, BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { verify } from "./utils/token_verify";
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import PomodoroTimer from "./pages/pomodoro/pomodoro";
 
   function App() {
     useEffect(() => {
@@ -30,6 +31,7 @@ import React, { useState, useEffect } from 'react';
           <Route path="/:id/UserUpdate" element={<UserUpdate />}></Route>
           <Route path="/:id/Amigos" element={<Amigos />}></Route>
           <Route path="/:id/Perfil" element={<Perfil />}></Route>
+          <Route path="/:id/Pomodoro" element={<PomodoroTimer/>}></Route>
         </Routes>
     </BrowserRouter>
   );

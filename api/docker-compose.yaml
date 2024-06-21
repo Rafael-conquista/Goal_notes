@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - USE_SQLITE=False
+      - SQL_DATABASE=my_database
+      - SQL_USER=postgres
+      - SQL_PASSWORD=TCCGoals_Note
+      - SQL_SERVER=db
+      - SQL_PORT=5432
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:14.2-alpine
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+    driver: local

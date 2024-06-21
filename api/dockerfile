@@ -1,16 +1,21 @@
-FROM python:3
+# Usar a imagem base do Python
+FROM python:3.10
 
-RUN apt-get update -y && \
-  apt-get install -y python3-pip
-
+# Definir o diretório de trabalho
 WORKDIR /app
 
-COPY requirements.txt .
+# Instalar dependências do sistema e o curl
+RUN apt-get update -y && \
+    apt-get install -y postgresql-client
 
-RUN pip install -r requirements.txt
+# Copiar todos os arquivos do diretório atual para /app no contêiner
+COPY . /app
 
-COPY . .
+# Instalar as dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Expor a porta onde o app vai rodar
 EXPOSE 5000
 
-CMD ["python", "./app.py"]
+# Comando para rodar a aplicação
+CMD ["python", "app.py"]
