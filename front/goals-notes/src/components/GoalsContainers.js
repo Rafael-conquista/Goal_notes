@@ -32,6 +32,13 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         </Dropdown.Item>
     ));
 
+    function handleCheckboxChange(item) {
+        item.ativo = !item.ativo; // Inverte o valor atual do checkbox
+        console.log(item)
+        updateItems(item)
+        setMayUpdate(true)
+    }
+
     async function verify_and_save_goal() {
         const goal_json = {
             name: name,
@@ -43,11 +50,11 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         };
         await UpdateGoal(goal_json, goalClicked.goals_id);
         items.forEach(item => {
-            updateItems(item)
+            updateItems(item);
         });
         for (const id in descriptions) {
             if (descriptions[id] !== '') {
-                await registerItems(descriptions[id], goalClicked.goals_id)
+                await registerItems(descriptions[id], goalClicked.goals_id);
             }
         }
         setGoalClicked();
@@ -58,7 +65,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         setType();
         setMayUpdate(true);
         setItems([]);
-        setDescriptions({})
+        setDescriptions({});
     }
 
     async function deactivate_task(end_date = false, goals_id) {
@@ -143,8 +150,16 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             {items.length > 0 ? (
                                                 items.map((item, index) => (
                                                     <div key={index} className='subtask_item'>
-                                                        <p>{item.desc}</p>
-                                                        <p>{item.ativo ? 'Ativo' : 'Inativo'}</p>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={item.ativo}
+                                                                onChange={() => {
+                                                                    handleCheckboxChange(item);
+                                                                }}
+                                                            />
+                                                            {item.desc}
+                                                        </label>
                                                     </div>
                                                 ))
                                             ) : (
@@ -209,7 +224,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                 </div>
                             ))}
                         </ul>
-                        <ItemCreator descriptions={descriptions} setDescriptions={setDescriptions}/>
+                        <ItemCreator descriptions={descriptions} setDescriptions={setDescriptions} />
                         <div className='buttons'>
                             <div className='botao close' onClick={() => setGoalClicked(null)}>
                                 <span>Fechar</span>
