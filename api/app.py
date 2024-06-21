@@ -1,3 +1,34 @@
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+from flask_restful import Api
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+app = Flask(__name__)
+CORS(app)
+app.config["CORS_HEADERS"] = "*"
+
+if os.getenv('USE_SQLITE') == 'True':
+    print('Utilizando banco de dados local com SQLite')
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///banco.db"
+else:
+    print('Utilizando banco de dados local com Docker e PostgreSQL, certifique de estar rodando o container corretamente')
+    server = os.getenv('SQL_SERVER', 'db')
+    database = os.getenv('SQL_DATABASE', 'my_database')
+    username = os.getenv('SQL_USER', 'postgres')
+    password = os.getenv('SQL_PASSWORD', '')
+    port = os.getenv('SQL_PORT', '5432')
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://postgres:example@db:5432/postgres"
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+banco = SQLAlchemy(app)
+api = Api(app)
+
+# Import your routes here
 from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
@@ -8,22 +39,6 @@ from Routes.PostComments import PostComment, Comment, Comments
 from Routes.Caps import Cap_register, Cap, Users_cap
 from Routes.Store import Store_skins, Store, Store_register
 from Routes.VerifyJWT import VerifyJWT
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS, cross_origin
-from flask import Flask
-from flask_restful import Api
-
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///banco.db"
-cors = CORS(app)
-app.config["CORS_HEADERS"] = "*"
-api = Api(app)
-
-
-@app.before_first_request
-def cria_banco():
-    banco.create_all()
-
 
 # Users related Routes
 api.add_resource(Users, "/users")
@@ -67,6 +82,10 @@ api.add_resource(Users_cap, "/users_cap/<int:id>")
 api.add_resource(Store_skins,"/skins")
 api.add_resource(Store, "/store/<int:id>")
 api.add_resource(Store_register, "/skin_register")
+
+@app.before_first_request
+def cria_banco():
+    banco.create_all()
 
 if __name__ == "__main__":
     from sql_alchemy import banco
