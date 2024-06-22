@@ -17,7 +17,7 @@ class ItemsController:
             goals_id = item.goals_id
             desc = item.desc
 
-            item_list.append({"item_id": id, "goals_id": goals_id, "desc": desc})
+            item_list.append({"item_id": id, "goals_id": goals_id, "desc": desc, "ativo": item.ativo})
 
         main_queries.close_conection()
 
@@ -28,7 +28,7 @@ class ItemsController:
         try:
 
             item = main_queries.find_query(ItemsModel, id)
-            return {"id": item.id, "goals_id": item.goals_id, "desc": item.desc}, 200
+            return {"id": item.id, "goals_id": item.goals_id, "desc": item.desc, "ativo": item.ativo}, 200
 
         except Exception as ex:
             return {"message": ex}
@@ -38,6 +38,7 @@ class ItemsController:
 
             item = main_queries.find_query(ItemsModel, id)
             item.desc = dados.get("desc", item.desc)
+            item.ativo = dados.get("ativo", item.ativo)
             main_queries.save_query(item)
 
             main_queries.close_conection()
