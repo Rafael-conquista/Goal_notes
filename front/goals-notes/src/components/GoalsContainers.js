@@ -3,7 +3,7 @@ import GoalCreator from './goalCreator';
 import ItemCreator from './subItemsCreator';
 import './Style/goals_container.css';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { UpdateGoal, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
+import { UpdateGoal, deleteGoals, deleteItems, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
 
 function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [empty, setEmpty] = useState(true);
@@ -97,7 +97,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     }
 
     function handleInputChange(id, value) {
-        const updatedItems = items.map(item =>
+        const updatedItems = items.map(item =>  
             item.id === id ? { ...item, desc: value } : item
         );
         setItems(updatedItems);
@@ -145,6 +145,12 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                     <div className='botao' onClick={() => getItemsGoal(goal.goals_id)}>
                                         Ver subtarefas
                                     </div>
+                                    <div className='botao' onClick={async () => {
+                                        deleteGoals(goal.goals_id)
+                                        setMayUpdate(true)
+                                    }}>
+                                        Excluir meta
+                                    </div>
                                     {visibleSubtasks === goal.goals_id && (
                                         <div className='subtasks'>
                                             {items.length > 0 ? (
@@ -160,6 +166,10 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                                             />
                                                             {item.desc}
                                                         </label>
+                                                        <button onClick={async () =>{
+                                                            await deleteItems(item.id)
+                                                            request_items(goal.goals_id);
+                                                        }}>Excluir</button>
                                                     </div>
                                                 ))
                                             ) : (

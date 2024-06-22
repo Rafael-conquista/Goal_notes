@@ -71,6 +71,25 @@ export async function UpdateGoal(data, id){
   }
 }
 
+export async function deleteGoals(id){
+  try{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    var requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+  
+    let response = await fetch(`http://127.0.0.1:5000/goal/${id}`, requestOptions)
+    return response.json()
+  } catch(e){
+      console.log(e)
+    return false
+  }
+}
+
 export async function registerItems(data, id){
   try{
     var myHeaders = new Headers();
@@ -99,7 +118,7 @@ export async function updateItems(data){
   try{
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify(data);
+    var raw = JSON.stringify(data);  
   
     var requestOptions = {
       method: 'PUT',
@@ -109,6 +128,25 @@ export async function updateItems(data){
     };
   
     let response = await fetch(`http://127.0.0.1:5000/item/${data.id}`, requestOptions)
+    return response.json()
+  } catch(e){
+      console.log(e)
+    return false
+  }
+}
+
+export async function deleteItems(id){
+  try{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+  
+    var requestOptions = {
+      method: 'DELETE',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+  
+    let response = await fetch(`http://127.0.0.1:5000/item/${id}`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)

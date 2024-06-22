@@ -28,9 +28,8 @@ class Item(Resource):
         return Item
 
     def delete(self, id):
-        main_queries.delete_query(self, id)
-        main_queries.close_conection()
-        return {"message:" "the item has been deleted"}, 202
+        main_queries.delete_query(ItemsModel, id)
+        return {"message": "the item has been deleted"}, 202
 
     def put(self, id):
         dados = request.get_json()

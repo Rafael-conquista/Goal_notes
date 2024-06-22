@@ -30,6 +30,10 @@ class Goal(Resource):
         dados = request.get_json()
         message = GoalsController.update_goal(goals_id, dados)
         return message
+    
+    def delete(self, goals_id):
+        main_queries.delete_query(GoalsModel, goals_id)
+        return {"message": "the goal has been deleted"}, 202
 
     def post(self, goals_id):
         dados = request.get_json()
