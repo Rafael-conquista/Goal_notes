@@ -84,7 +84,7 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
 
     return (
         <div>
-            <h1>Minhas Metas</h1>
+            <h1>Metas</h1>
             <div className='new_goal_button' onClick={handleModal}>
                 Criar nova Meta +
             </div>
@@ -120,9 +120,7 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                         </Dropdown>
                     </div>
                     <ItemCreator descriptions={descriptions} setDescriptions={setDescriptions}/>
-                    <div className='new_goal_button' onClick={addItem}>
-                        Criar sub-tarefa +
-                    </div>
+
                     {message && <div>{message}</div>}
                 </Modal.Body>
                 <Modal.Footer className='modal_footer'>

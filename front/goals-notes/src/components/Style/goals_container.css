@@ -1,114 +1,362 @@
-.goals_view{
-    width: 95vw;
-    padding-left: 20px;
-    margin-top: 150px;
+/* goals_container.css */
+
+/* Estilos gerais */
+.goals_view {
+  width: 95vw;
+  padding-left: 20px;
+  margin-top: 150px;
 }
 
-.goal_creator_buttons{
-    margin-top: 100px;
+.goals_view h1 {
+  color: #1D3557;
 }
 
-.buttons{
-    display: flex;
-    padding-right: 2vw;
-  }
+.goal_creator_buttons {
+  margin-top: -40px;
+  background-color: #a8dadc79;
+  height: 100vh;
+}
 
-.new_goal_button{
-    background: #86b3aa;
-    text-align: center;
-    padding: 20px;
-    cursor: pointer;
+.buttons {
+  display: flex;
+  padding-right: 2vw;
+}
+
+.new_goal_button {
+  background: #83C5BE;
+  text-align: center;
+  padding: 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.new_goal_button:hover {
+  transform: translateY(-5px);
 }
 
 .modal-content {
-    background-color: #e8ffec !important;
+  background-color: #e8ffec !important;
+}
+
+.modal-header {
+  border-bottom: var(--bs-modal-header-border-width) solid #48ff00 !important;
+  justify-content: space-around;
+}
+
+.modal-footer {
+  border-top: var(--bs-modal-header-border-width) solid #48ff00 !important;
+}
+
+.modal_title {
+  color: rgb(45, 59, 50);
+}
+
+.close_button {
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-size: 3em;
+  transition: 0.5s;
+}
+
+.close_button:hover {
+  color: #ff0000;
+}
+
+.botao {
+  width: 180px;
+  height: 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgb(81, 252, 65);
+  border-radius: 20px;
+  outline: none;
+  transition: 0.5s ease-in-out;
+  text-align: center;
+  margin-right: 2vw;
+}
+
+.botao span {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.botao a {
+  text-decoration: none;
+}
+
+.fixed_botao {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #FF6B6B;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s, transform 0.3s;
+  text-align: center;
+  font-size: 1em;
+}
+
+.fixed_botao:hover {
+  background-color: #ff4c4c;
+  transform: translateY(-3px);
+}
+
+.fixed_botao span {
+  display: block;
+  text-align: center;
+}
+
+.botao:hover {
+  transition: 0.5s ease-in-out;
+  background: rgb(6, 199, 54);
+  transform: scale(1.05);
+}
+
+.close:hover {
+  background: rgb(255, 0, 0);
+}
+
+.modal_position {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form_grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+@media screen and (min-width: 1000px) {
+  .form_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
-  
-  .modal-header{
-    border-bottom: var(--bs-modal-header-border-width) solid #48ff00 !important;
-    justify-content: space-around;
+  .form_grid input {
+    margin-top: 0px !important;
   }
-  
-  .modal-footer{
-    border-top: var(--bs-modal-header-border-width) solid #48ff00 !important;
+}
+
+.form_grid input {
+  margin-top: 10px !important;
+  color: black;
+}
+
+.form_grid input::placeholder {
+  color: rgb(187, 186, 186);
+}
+
+.goal_card {
+  background-color: #F1FAEE;
+  position: relative;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.goal_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.goal_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #28B498;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.goal_title h3 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.5em;
+  color: #FF6B6B;
+}
+
+.goal_title h4 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #FF6B6B;
+  white-space: nowrap;
+}
+
+.goal_card p {
+  margin: 10px 0;
+  color: #555;
+  font-size: 1em;
+}
+
+.goal_card p span {
+  font-weight: bold;
+}
+
+.goal_card h5 {
+  text-align: center;
+  font-size: 20px;
+}
+
+.goal_card .goal_data {
+  margin-top: 20px;
+}
+
+.goal_card .goal_data p {
+  display: flex;
+  justify-content: baseline;
+  margin: 5px 0;
+}
+
+.goal_card .goal_data p span {
+  font-weight: bold;
+  color: #1D3557;
+}
+
+.goal_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  padding-bottom: 20px;
+}
+
+.goal_title p {
+  margin: 0;
+}
+
+.goal_title .name {
+  flex: 1;
+  text-align: center;
+}
+
+.goal_title .importance {
+  margin-left: auto;
+}
+
+.goal_title input {
+  margin: 0;
+  cursor: pointer !important;
+}
+
+.goals_grid {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Media query para telas menores que 750px */
+@media screen and (max-width: 750px) {
+  .goals_grid {
+    grid-template-columns: 1fr;
   }
-  
-  .modal_title{
-    color: rgb(45, 59, 50)  ;
+}
+
+.top_left_botao {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 5px 10px; /* Reduz o padding para mobile */
+  cursor: pointer;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s, transform 0.3s;
+  text-align: center;
+  font-size: 0.8em; /* Reduz o tamanho da fonte para mobile */
+}
+
+.top_left_botao:hover {
+  background-color: #45a049;
+  transform: translateY(-3px);
+}
+
+.top_left_botao span {
+  display: block;
+  text-align: center;
+}
+
+/* Estilos responsivos para os botões em telas pequenas */
+@media screen and (max-width: 850px) {
+  .fixed_botao {
+    bottom: 10px; /* Ajusta a posição para mobile */
+    right: 10px; /* Ajusta a posição para mobile */
+    padding: 5px 10px; /* Reduz o padding para mobile */
+    font-size: 0.8em; /* Reduz o tamanho da fonte para mobile */
   }
 
-  .close_button{
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    font-size: 3em;
-    transition: 0.5s;
+  .goal_title{
+    margin-top: 20px;
   }
-  
-  .close_button:hover{
-    color: #ff0000;
+
+  .top_left_botao {
+    top: 10px; /* Ajusta a posição para mobile */
+    left: 10px; /* Ajusta a posição para mobile */
+    padding: 5px 10px; /* Reduz o padding para mobile */
+    font-size: 0.8em; /* Reduz o tamanho da fonte para mobile */
   }
 
   .botao {
-    width: 180px;
-    height: 30px;
-    cursor: pointer;
-    background: transparent;
-    border: 1px solid rgb(81, 252, 65);
-    border-radius: 20px;
-    outline: none;
-    transition: 0.5s ease-in-out;
-    text-align: center;
-    margin-right: 2vw;
+    width: 100px; /* Reduz a largura para mobile */
+    height: 25px; /* Reduz a altura para mobile */
+    font-size: 0.8em; /* Reduz o tamanho da fonte para mobile */
   }
+}
 
-  .botao span {
-    color: rgb(0, 0, 0);
-    font-size: 18px;
-    font-weight: 100;
-  }
-  
-  .botao a{
-    text-decoration: none;
-  }
-  
-  .botao:hover {
-    transition: 0.5s ease-in-out;
-    background: rgb(6, 199, 54);
-    transform: scale(1.05);
-  }
+.subtasks {
+  margin-top: 20px;
+}
 
-  .close:hover{
-    background: rgb(255, 0, 0);
-  }
+.subtask_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
 
-  .modal_position{
-    display: flex;
-    justify-content: space-between;
-  }
+.subtask_item label {
+  flex-grow: 1;
+}
 
-  .form_grid{
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(1, 2fr);
-    justify-items: center;
-  }
-  
-  @media screen and (min-width:1000px) {
-    .form_grid {
-      flex-direction: column;
-      grid-template-columns: repeat(2, 2fr);
-      gap: 5px;
-    }
-    .form_grid input{
-        margin-top: 0px !important;
-    }
-  }
+.subtask_item input[type="checkbox"] {
+  margin-right: 10px;
+}
 
-  .form_grid input{
-    margin-top: 10px !important;
-    color: black;
-  }
+.subtask_item button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
-  .form_grid input::placeholder{
-    color: rgb(187, 186, 186);
-  }
+.subtask_item button:hover {
+  background-color: #ff1a1a;
+}
+
+/* Estilos específicos para o botão de editar */
+.edit_button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.edit_button:hover {
+  background-color: #0056b3;
+}
