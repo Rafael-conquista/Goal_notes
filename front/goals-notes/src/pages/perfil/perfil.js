@@ -4,6 +4,9 @@ import cap_default from '../../images/cap_default.jpg';
 import user_default from '../../images/user.webp';
 import '../../components/Style/homeStyle.css';
 import '../../components/Style/perfil.css';
+import UserUpdateComponent from '../../components/userUpdate';
+import CapUpdateComponent from '../../components/capUpdate';
+import AmigosConsultComponent from '../../components/amigosConsult';
 
 const Homepage = () => {
   return (
@@ -12,54 +15,10 @@ const Homepage = () => {
       <div className='capScreen homeScreen'>
         <div className="cap_component_perfil">
           <section className='component_cap_main'>
-            <div className='component_cap border_direita'>
-	            <div class="card_esq">
-	            	<div class="text">
-                  <h1>Modifique sua Capivarinha</h1>
-                  <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-                  <div className='user_info'>
-                    <label for='cap_name'>Nome Capivara</label>
-                    <input readOnly id='cap_name'></input>
-                  </div>
-                </div>
-	            	</div>
-	            </div>
-            <div className='component_cap border_esquerda'>
-	            <div class="card">
-	            	<div class="text">
-                  <h1>Modifique seu perfil</h1>
-                  <img src={user_default} alt='vazio' className="cap_welcome_page" />
-                  <div className='user_info_main'>
-                    <div className='user_info'>
-                      <label for='email'>E-mail</label>
-                      <input readOnly id='email'></input>
-                    </div>
-                    <div className='user_info'>
-                      <label for='nome'>Nome</label>
-                      <input readOnly id='nome'></input>
-                    </div>
-                  </div>
-	            	</div>
-	            </div>
-            </div>
+            <CapUpdateComponent/>
+            <UserUpdateComponent/>
           </section>
-          <section className='component_amigos_main'>
-            <h1>Amizades feitas Recentemente</h1>
-            <div className='amigo_main'>
-              <div className='amigo'>
-                <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-                <p>Fulaninho</p>
-              </div>
-              <div className='amigo'>
-                <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-                <p>Beltraninho</p>
-              </div>
-              <div className='amigo'>
-                <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-                <p>Racunamatata</p>
-              </div>
-            </div>
-          </section>
+          <AmigosConsultComponent/>
         </div>
       </div>
     </div>

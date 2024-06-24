@@ -31,7 +31,25 @@
 }
 
 .border_esquerda {
+    transition: 1s;
     border-left: 1px solid #131f24ec;
+}
+
+.border {
+    transition: 1s;
+    width: 100vw;
+}
+
+.nickname_input {
+    cursor: default !important;
+}
+
+.nickname_input_editando {
+    cursor: text;
+}
+
+.infosUser {
+    display: flex;
 }
 
 .component_cap_main {
@@ -92,6 +110,8 @@
     flex-direction: column;
     position: relative;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
 }
   
 .card::before, .card_esq::before {
@@ -149,4 +169,19 @@
 .card_esq:hover::before {
     top: -30%;
     right: 85%;
+}
+
+.texto_alerta, .texto_sucesso {
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0 0 0;
+}
+
+.texto_alerta {
+    background: rgb(215, 215, 0);
+}
+
+.texto_sucesso {
+    background: green;
 }

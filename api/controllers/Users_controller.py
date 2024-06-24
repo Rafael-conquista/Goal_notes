@@ -26,21 +26,55 @@ class UsersController:
         return {"users": user_list}, 200
 
     def update_user(user_id, dados):
-        try:
-            user = main_queries.find_query(UsersModel, user_id)
-            user.name = dados.get("name", user.name)
-            user.surname = dados.get("surname", user.surname)
-            user.password = dados.get("password", user.password)
-            user.age = dados.get("age", user.age)
-            # adaptar user.age para pegar a data de nascimento
-            user.capCoins = dados.get("capCoins", user.capCoins)
-            user.excluido = dados.get("excluido", user.excluido)
-            user.dataAlteracao = banco.func.now()
-            main_queries.save_query(user)
-            return {"message": "user updated successfully"}, 200
-        except Exception as error:
-            return {"message": error}, 400
-
+        users = main_queries.find_query(UsersModel, user_id)
+        if (dados.get("sencivel") == True and dados.get("password") == users.password and dados.get("email") != users.email and dados.get("newPassword") == ""):
+            try:
+                user = main_queries.find_query(UsersModel, user_id)
+                user.surname = dados.get("surname", user.surname)
+                user.email = dados.get("email", user.email)
+                # adaptar user.age para pegar a data de nascimento
+                user.dataAlteracao = banco.func.now()
+                main_queries.save_query(user)
+                return {"message": "user updated successfully"}, 200            
+            except Exception as error:
+                return {"message": error}, 400
+        elif (dados.get("sencivel") == True and dados.get("password") == users.password and dados.get("newPassword") != ""):
+            try:
+                user = main_queries.find_query(UsersModel, user_id)
+                user.surname = dados.get("surname", user.surname)
+                user.email = dados.get("email", user.email)
+                user.password = dados.get("newPassword", user.password)
+                user.dataAlteracao = banco.func.now()
+                main_queries.save_query(user)
+                return {"message": "user updated successfully"}, 200            
+            except Exception as error:
+                return {"message": error}, 400
+        elif (dados.get("sencivel") == False):
+            try:
+                user = main_queries.find_query(UsersModel, user_id)
+                user.surname = dados.get("surname", user.surname)
+                user.dataAlteracao = banco.func.now()
+                main_queries.save_query(user)
+                return {"message": "user updated successfully"}, 200            
+            except Exception as error:
+                return {"message": error}, 400
+        elif (dados.get("sencivel") == True and dados.get("password") != users.password):
+            return {"message": "senha inválida"}, 200
+        else:
+            try:
+                user = main_queries.find_query(UsersModel, user_id)
+                user.name = dados.get("name", user.name)
+                user.surname = dados.get("surname", user.surname)
+                user.email = dados.get("email", user.email)
+                user.age = dados.get("age", user.age)
+                user.admin = dados.get("admin", user.admin)
+                user.capCoins = dados.get("capCoins", user.capCoins)
+                user.password = dados.get("password", user.password)
+                user.dataAlteracao = banco.func.now()
+                main_queries.save_query(user)
+                return {"message": "user updated successfully"}, 200            
+            except Exception as error:
+                return {"message": error}, 400
     def find_user(id):
         try:
             user = main_queries.find_query(UsersModel, id)

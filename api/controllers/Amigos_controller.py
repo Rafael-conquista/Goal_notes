@@ -109,6 +109,7 @@ class AmigosController:
         main_queries.close_conection()
         return {"amigos": amigos_list}, 200
 
+
     def find_friend(id_usuario_enviado, id_usuario_recebido):
         amigos = main_queries.find_all_query(AmigosModel)
         amigos_list = []
@@ -163,6 +164,43 @@ class AmigosController:
                         }
                     )
 
+        if amigos_list:
+            return {"amigos": amigos_list}, 200
+        else:
+            return {"message": "Amigo não encontrado"}, 404
+
+    def find_friend_by_user(id_usuario):
+        amigos = main_queries.find_all_query(AmigosModel)
+        amigos_list = []
+
+        for amigo in amigos:
+            amigo_data_cadastro = (
+                amigo.data_cadastro.strftime("%Y-%m-%d %H:%M:%S")
+                if amigo.data_cadastro is not None
+                else None
+            )
+            amigo_data_alteracao = (
+                amigo.data_alteracao.strftime("%Y-%m-%d %H:%M:%S")
+                if amigo.data_alteracao is not None
+                else None
+            )
+            if id_usuario != "":
+                if (amigo.id_usuario_enviado == int(id_usuario) or (amigo.id_usuario_recebido == int(id_usuario))):
+                    if(amigo.id_usuario_enviado != id_usuario):
+                        user = main_queries.find_query(UsersModel, amigo.id_usuario_enviado)
+                    elif(amigo.id_usuario_recebido != id_usuario):
+                        user = main_queries.find_query(UsersModel, amigo.id_usuario_recebido)
+                    amigos_list.append(
+                        {
+                            "id": amigo.id,
+                            "id_usuario_enviado": amigo.id_usuario_enviado,
+                            "id_usuario_recebido": amigo.id_usuario_recebido,
+                            "data_cadastro": amigo_data_cadastro,
+                            "data_alteracao": amigo_data_alteracao,
+                            "excluido": amigo.excluido,
+                            "name": user.surname,
+                        }
+                    )
         if amigos_list:
             return {"amigos": amigos_list}, 200
         else:

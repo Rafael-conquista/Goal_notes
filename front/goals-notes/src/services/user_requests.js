@@ -17,7 +17,9 @@ export async function get_user(id){
         "email": data.email,
         "surname": data.surname,
         "password": data.password,
-        "excluido": data.excluir
+        "newPassword": data.newPassword,
+        "excluido": data.excluir,
+        "sencivel": data.sencivel
       });
       var requestOptions = {
         method: 'PUT',
@@ -26,7 +28,7 @@ export async function get_user(id){
         redirect: 'follow'
       };
     
-      let response = await fetch(`http://127.0.0.1:5000/user/${id}`, requestOptions)//tirar do id 1 como fixo
+      let response = await fetch(`http://127.0.0.1:5000/user/${id}`, requestOptions)
       return response.json()
     } catch(e){
         console.log(e)
