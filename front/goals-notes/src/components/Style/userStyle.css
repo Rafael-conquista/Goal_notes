@@ -33,11 +33,10 @@ input{
     color: white;
 }
 
-.submit_comment_button{
+.submit_comment_button, .alter_password{
     margin-right: 30px;
     padding: 12px 24px;
     border-radius: 8px;
-    background-color: #71bb00;
     font-family: Roboto;
     font-size: 14px;
     font-weight: normal;
@@ -48,6 +47,14 @@ input{
     text-align: center;
     color: #ffffff;
     cursor: pointer;
+}
+
+.submit_comment_button {
+    background-color: #71bb00;
+}
+
+.alter_password {
+    background-color: #00a5bb;
 }
 
 .info_input {

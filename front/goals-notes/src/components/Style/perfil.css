@@ -48,6 +48,10 @@
     cursor: text;
 }
 
+.infosUser {
+    display: flex;
+}
+
 .component_cap_main {
     width: 100vw;
     display: flex;
