@@ -39,6 +39,17 @@ function UserUpdateComponent() {
         }
     }
 
+    const validaEmail = (e) => {
+        const emailRegex = /^[a-z0-9+_.-]+@[a-z0-9.-]+$/;
+        if (emailRegex && emailRegex.test(email)) {
+            user_update()
+        } 
+        else {
+            setloading(false)
+            setMessage('Por favor, insira um e-mail válido.');
+        }
+    }
+
     const passwordChange = (e) => {
         setPassword(e.target.value)
         setAlteraSencivel(true)
@@ -75,8 +86,8 @@ function UserUpdateComponent() {
         }
         else if (alteraSencivel && email != emailAntigo && password != '' && password == confirmPassword) {
             if (nickname && email){
-                user_update()
                 setloading(true)
+                validaEmail()
             }
             else if (!nickname){
                 setMessage('Favor inserir um apelido')
@@ -275,8 +286,8 @@ function UserUpdateComponent() {
                 {editar && !alteraSenha &&
                     <>
                         <div className='infosUser'>
-                            <input type='text' placeholder='Digite um apelido' className='nickname_input_editando' onChange={nicknameChange} value={nickname}/>
-                            <input type='text' placeholder='Digite o seu e-mail' className='nickname_input_editando' onChange={emailChange} value={email}/>
+                            <input type='text' required placeholder='Digite um apelido' className='nickname_input_editando' onChange={nicknameChange} value={nickname}/>
+                            <input type='email' required placeholder='Digite o seu e-mail' className='nickname_input_editando' onChange={emailChange} value={email}/>
                         </div>
                         {alteraSencivel &&
                             <div className='infosUser'>
@@ -312,7 +323,7 @@ function UserUpdateComponent() {
                 {editar && !alteraSenha && (
                     <>
                         <div className='submit_comment_button' onClick={submitChanges}>
-                            Alterar apelido
+                            Alterar perfil
                         </div>
                         <div className='alter_password' onClick={voltar}>
                             Voltar
