@@ -24,7 +24,7 @@ function UserUpdateComponent() {
     const [id, setId] = useState()
     const [message, setMessage] = useState('')
     const [loading, setloading] = useState(false);
-    
+
     const nicknameChange = (e) => {
         setNickname(e.target.value)
     }
@@ -148,6 +148,13 @@ function UserUpdateComponent() {
     const voltar = (e) => {
         setEditar(false)
         setAlteraSenha(false)
+        setAlteraSencivel(false)
+        setNickname(nicknameAntigo)
+        setEmail(emailAntigo)
+        setPassword('')
+        setConfirmPassword('')
+        setNewPassword('')
+        setConfirmNewPassword('')
         setMessage('')
     }
 
