@@ -51,7 +51,6 @@ export async function UpdateGoal(data, id){
         "obs": data.obs,
         "importance_degree": data.importance_degree,
         "user_id": data.user_id,
-        "type_id": data.type_id,
         "expected_data": Number(data.expected_data)
       });
 

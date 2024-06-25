@@ -4,6 +4,7 @@ from flask import request
 
 from models.Goals_model import GoalsModel
 from controllers.Goals_controller import GoalsController
+from controllers.Items_controller import ItemsController
 from models.Users_model import UsersModel
 from utils.format_date import format_datetime
 from utils import main_queries
@@ -32,6 +33,7 @@ class Goal(Resource):
         return message
     
     def delete(self, goals_id):
+        ItemsController.delete_all_goals_items(goals_id)
         main_queries.delete_query(GoalsModel, goals_id)
         return {"message": "the goal has been deleted"}, 202
 

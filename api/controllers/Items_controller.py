@@ -72,3 +72,6 @@ class ItemsController:
             return organized_items
         except:
             return {"message": "Items not found"}
+
+    def delete_all_goals_items(goals_id):
+        banco.session.query(ItemsModel).filter(ItemsModel.goals_id == goals_id).delete()

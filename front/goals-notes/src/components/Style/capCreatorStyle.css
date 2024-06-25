@@ -166,29 +166,9 @@
     }
 }
 
-.goal_card{
-    background-color: rgba(177, 235, 235, 0.801);
-    margin-top: 20px;
-    border-radius: 20px;
-    padding: 20px;
-    position: relative;
-}
-
 .edit_button{
     background-color: #28B498;
     border-radius: 20px;
     font-size: 15px;
     padding: 10px;
-}
-
-.goal_title{
-    border-bottom: solid #28B498;
-    display: grid;
-    grid-template-columns: repeat(3, 2fr);
-    justify-items: center;
-}
-
-.goal_title input{
-    margin: 0;
-    cursor: pointer !important;
 }

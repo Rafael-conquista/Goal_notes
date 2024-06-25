@@ -30,12 +30,12 @@ function ItemCreator({descriptions, setDescriptions}){
             <div className='new_goal_button' onClick={addItem}>
                 Criar sub-tarefa +
             </div>
-            <ul>
                 {items.map((item, index) => (
-                    <div key={index} className="item">
+                    <div key={index} className="">
                         <label>
                             Sub-tarefa {item.id}:
                             <input
+                                className='styled-input'
                                 type="text"
                                 value={descriptions[item.id] || ''}
                                 onChange={(e) => handleInputChange(item.id, e.target.value)}
@@ -44,7 +44,6 @@ function ItemCreator({descriptions, setDescriptions}){
                         <button onClick={() => removeItem(item.id)}>Excluir</button>
                     </div>
                 ))}
-            </ul>
         </div>
     )
 
