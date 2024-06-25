@@ -88,6 +88,7 @@
 
 .fixed_botao {
   position: absolute;
+  color: white;
   bottom: 20px;
   right: 20px;
   padding: 10px 20px;
@@ -268,6 +269,7 @@
   left: 20px;
   padding: 5px 10px; /* Reduz o padding para mobile */
   cursor: pointer;
+  color: white;
   background-color: #4CAF50;
   border: none;
   border-radius: 5px;
@@ -293,6 +295,7 @@
     right: 10px; /* Ajusta a posição para mobile */
     padding: 5px 10px; /* Reduz o padding para mobile */
     font-size: 0.8em; /* Reduz o tamanho da fonte para mobile */
+    color: white;
   }
 
   .goal_title{

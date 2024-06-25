@@ -119,7 +119,6 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
 
     return (
         <div className='goals_view' style={{ overflowX: 'hidden' }}>
-            <GoalCreator id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate} types={types} />
             {goalClickedUpdate ? ( /* Renderização do formulário de edição */
                 <div className='goal_update'>
                     <div className='goal_update_body'>
@@ -183,6 +182,8 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                     </div>
                 </div>
             ) : (
+                <div>
+                <GoalCreator id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate} types={types} />
                 <div className='goals_grid'>
                     {empty ? (
                         <div>
@@ -233,6 +234,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                             </div>
                         ))
                     )}
+                </div>
                 </div>
             )}
 
