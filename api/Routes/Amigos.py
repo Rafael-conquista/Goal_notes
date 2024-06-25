@@ -12,7 +12,11 @@ class Amigo(Resource):
         id_usuario_enviado = dados["id_usuario_enviado"]
         id_usuario_recebido = dados["id_usuario_recebido"]
         return AmigosController.find_friend(id_usuario_enviado, id_usuario_recebido)
-
+    
+class Amigos_user(Resource):
+    def get(self, user_id):
+        user = AmigosController.find_friend_by_user(user_id)
+        return user
 
 class Amigos(Resource):
     def get(self):

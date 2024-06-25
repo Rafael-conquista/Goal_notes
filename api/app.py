@@ -33,7 +33,7 @@ from Routes.Users import User, Users, User_register, User_login
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
 from Routes.Items import Item, Items, Item_register, ItemsByGoals
-from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer
+from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer, Amigos_user
 from Routes.Posts import Post, Posts, PostCreator
 from Routes.PostComments import PostComment, Comment, Comments
 from Routes.Caps import Cap_register, Cap, Users_cap
@@ -63,6 +63,7 @@ api.add_resource(ItemsByGoals, "/items_by_goal/<int:id>")
 api.add_resource(Amigos_registro, "/Amigos_registro")
 api.add_resource(Amigos, "/Amigos")
 api.add_resource(Amigo, "/Amigo")
+api.add_resource(Amigos_user, "/AmigosUser/<int:user_id>")
 api.add_resource(Amigo_desfazer, "/Amigo_desfazer")
 # verify JWT token
 api.add_resource(VerifyJWT, "/verify_token")
