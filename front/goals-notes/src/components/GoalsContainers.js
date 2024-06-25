@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import GoalCreator from './goalCreator';
 import ItemCreator from './subItemsCreator';
 import './Style/goals_container.css';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { UpdateGoal, deleteGoals, deleteItems, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
@@ -45,6 +44,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const deactivateTask = async (end_date = false, goals_id) => {
         const goal_json = { end_date };
         await UpdateGoal(goal_json, goals_id);
+        setShowModal(false);
         setMayUpdate(true);
     };
 
@@ -226,6 +226,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
 
                                     <div className='fixed_botao' onClick={async () => {
                                         await deleteGoals(goal.goals_id);
+                                        setShowModal(false);
                                         setMayUpdate(true);
                                     }}>
                                         <span>Excluir meta</span>
