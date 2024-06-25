@@ -116,7 +116,7 @@ function RegisterComponent(){
           </div>
           <div className='formRegistroUsuario'>
               <input
-                type="text"
+                type="email"
                 required="required"
                 onChange={emailChange}
                 id="email"

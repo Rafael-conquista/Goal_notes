@@ -174,6 +174,7 @@
   border-bottom: 2px solid #28B498;
   padding-bottom: 10px;
   margin-bottom: 15px;
+  margin-top: 5vh;
 }
 
 .goal_title h3 {
@@ -317,11 +318,11 @@
 }
 
 .subtask_item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
   border-bottom: 1px solid #ddd;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .subtask_item label {
@@ -336,7 +337,6 @@
   background-color: #ff4d4d;
   color: white;
   border: none;
-  padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -359,4 +359,93 @@
 
 .edit_button:hover {
   background-color: #0056b3;
+}
+
+.rating {
+  display: inline-block;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  float: right;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.rating label:before {
+  content: '\2605';
+  font-size: 30px;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #fbff25;
+  transition: color 0.3s;
+}
+
+.priority_div {
+  display: flex;
+  align-items: center; /* Alinha os itens verticalmente no centro */
+}
+
+.priority_label {
+  margin-right: 10px; /* Espaço entre o texto e os elementos de avaliação */
+}
+
+.rating {
+  align-items: center; /* Alinha os itens verticalmente no centro */
+}
+
+.styled-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  margin: 5px 0;
+  color: #555;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.styled-input:focus {
+  border-color: #007BFF;
+}
+
+.styled-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.goal_update{
+  background-color: #F1FAEE;
+  width: 70%;
+  margin: 0 auto;
+  position: relative;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.goal_update_body {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 900px) {
+  .goal_update{
+    width: 100%;
+  }
 }

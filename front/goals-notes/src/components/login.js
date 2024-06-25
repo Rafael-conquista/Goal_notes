@@ -126,7 +126,7 @@ function LoginComponent() {
                     <div className='registroLogin'>
                         <input
                             className='textos'
-                            type="text"
+                            type="email"
                             required="required"
                             onChange={emailChange}
                             id="email"
@@ -182,7 +182,7 @@ function LoginComponent() {
                     <div className='registroLogin'>
                         <input
                             className='textos'
-                            type="text"
+                            type="email"
                             required="required"
                             onChange={emailChange}
                             id="email"

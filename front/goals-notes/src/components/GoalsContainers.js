@@ -13,7 +13,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [goalClickedUpdate, setGoalClickedUpdate] = useState(null);
     const [name, setName] = useState('');
     const [obs, setObs] = useState('');
-    const [priority, setPriority] = useState('');
+    const [priority, setPriority] = useState(1);
     const [type, setType] = useState('');
     const [days, setDays] = useState('');
     const [items, setItems] = useState([]);
@@ -63,24 +63,48 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     };
 
     const verify_and_save_goal = async () => {
-        const goal_json = {
-            name: name,
-            obs: obs,
-            importance_degree: Number(priority),
-            user_id: Number(id),
-            type_id: Number(type),
-            expected_data: days,
-        };
-        await UpdateGoal(goal_json, goalClicked.goals_id);
-        items.forEach(async item => {
+        // Inicializa um objeto vazio para o goal_json
+        const goal_json = {};
+
+        // Adiciona apenas os campos que estão preenchidos
+        if (name) {
+            goal_json.name = name;
+        }
+        if (obs) {
+            goal_json.obs = obs;
+        }
+        if (priority) {
+            goal_json.importance_degree = Number(priority);
+        }
+        if (id) {
+            goal_json.user_id = Number(id);
+        }
+        if (days) {
+            goal_json.expected_data = days;
+        }
+
+        // Se importance_degree for zero, substitui pelo valor existente de goalClickedUpdate.importance_degree
+        if (goal_json.importance_degree === 0 && goalClickedUpdate && goalClickedUpdate.importance_degree) {
+            goal_json.importance_degree = goalClickedUpdate.importance_degree;
+        }
+
+        // Chama a função de atualização do objetivo (goal)
+        await UpdateGoal(goal_json, goalClickedUpdate.goals_id);
+
+        // Atualiza cada item
+        await Promise.all(items.map(async item => {
             await updateItems(item);
-        });
+        }));
+
+        // Registra novos items se houver descrições preenchidas
         for (const id in descriptions) {
-            if (descriptions[id] !== '') {
-                await registerItems(descriptions[id], goalClicked.goals_id);
+            if (descriptions[id]) { // Verifica se a descrição não é vazia
+                await registerItems(descriptions[id], goalClickedUpdate.goals_id);
             }
         }
-        setGoalClicked(null);
+
+        // Limpa os estados e reinicia a interface
+        setGoalClickedUpdate(null);
         setName('');
         setDays('');
         setObs('');
@@ -92,53 +116,54 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         setShowModal(false);
     };
 
+
     return (
         <div className='goals_view' style={{ overflowX: 'hidden' }}>
             <GoalCreator id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate} types={types} />
             {goalClickedUpdate ? ( /* Renderização do formulário de edição */
-                <div className='goal_card'>
-                    <div>
+                <div className='goal_update'>
+                    <div className='goal_update_body'>
                         <div className='goal_title'>
-                            {goalClickedUpdate.name}
+                            <h3>{goalClickedUpdate.name}</h3>
                         </div>
-                        <p>Nome da meta:</p>
-                        <input type='text' placeholder={goalClickedUpdate.name} maxLength={100} onChange={(e) => setName(e.target.value)} />
+                        <div className="priority_div">
+                            <p className="priority_label"><span>Prioridade: </span></p>
+                            <div className="rating">
+                                <input value="5" name="rate" id="star5" type="radio" onClick={() => setPriority(5)} />
+                                <label title="text" htmlFor="star5"></label>
+                                <input value="4" name="rate" id="star4" type="radio" onClick={() => setPriority(4)} />
+                                <label title="text" htmlFor="star4"></label>
+                                <input value="3" name="rate" id="star3" type="radio" onClick={() => setPriority(3)} />
+                                <label title="text" htmlFor="star3"></label>
+                                <input value="2" name="rate" id="star2" type="radio" onClick={() => setPriority(2)} />
+                                <label title="text" htmlFor="star2"></label>
+                                <input value="1" name="rate" id="star1" type="radio" onClick={() => setPriority(1)} />
+                                <label title="text" htmlFor="star1"></label>
+                            </div>
+                        </div>
+
                         <div>
-                            <p>{goalClickedUpdate.importance_degree}★</p>
-                            <Dropdown>
-                                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                    Grau de prioridade
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setPriority('1')}>1</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setPriority('2')}>2</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setPriority('3')}>3</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setPriority('4')}>4</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setPriority('5')}>5</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <p>Nome</p>
+                            <input className='styled-input' type='text' placeholder="Alterar Nome" maxLength={100} onChange={(e) => setName(e.target.value)} />
                         </div>
+
+                        
                         <div>
                             <p>Observação</p>
-                            <input type='text' placeholder={goalClickedUpdate.obs} maxLength={200} onChange={(e) => setObs(e.target.value)} />
+                            <input type='text' className='styled-input' placeholder={goalClickedUpdate.obs} maxLength={200} onChange={(e) => setObs(e.target.value)} />
                         </div>
-                        <p>Expectativa de finalização: <input type='number' placeholder='Tempo para concluir em dias' onChange={(e) => setDays(e.target.value)} /></p>
-                        <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Qual é a categoria?
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                {/* Aqui você renderiza as opções de categoria */}
-                            </Dropdown.Menu>
-                        </Dropdown>
                         <div>
-                            Sub-tarefas já criadas:
+                            <p>Expectativa de finalização: </p>
+                            <input type='number' className='styled-input' placeholder='Tempo para concluir em dias' onChange={(e) => setDays(e.target.value)} />
                         </div>
-                        <ul>
+                        <div>
+                            <h3>Sub-tarefas já criadas:</h3>
+                        </div>
                             {items.map((item, index) => (
                                 <div key={index} className="item">
                                     <label>
                                         <input
+                                            className='styled-input'
                                             type="text"
                                             value={item.desc}
                                             onChange={(e) => handleInputChange(item.id, e.target.value)}
@@ -146,16 +171,14 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                     </label>
                                 </div>
                             ))}
-                        </ul>
-                        {/* Componente ItemCreator para criar novas subtarefas */}
                         <ItemCreator descriptions={descriptions} setDescriptions={setDescriptions} />
-                        <div className='buttons'>
-                            <div className='botao close' onClick={() => setGoalClickedUpdate(null)}>
-                                <span>Fechar</span>
-                            </div>
-                            <div className='botao' onClick={verify_and_save_goal}>
-                                <span>Salvar</span>
-                            </div>
+                    </div>
+                    <div className='buttons'>
+                        <div className='botao close' onClick={() => setGoalClickedUpdate(null)}>
+                            <span>Fechar</span>
+                        </div>
+                        <div className='botao' onClick={verify_and_save_goal}>
+                            <span>Salvar</span>
                         </div>
                     </div>
                 </div>
@@ -168,7 +191,13 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                     ) : (
                         Object.values(goals).map((goal, key) => (
                             <div key={key} className='goal_card'>
-                                <div className='edit_button' onClick={() => setGoalClickedUpdate(goal)}>
+                                <div className='edit_button' onClick={async () => {
+                                    const itemsResponse = await getItemsByGoal(goal.goals_id);
+                                    const itemsArray = Object.values(itemsResponse);
+                                    setItems(itemsArray);
+                                    setGoalClickedUpdate(goal)
+                                }
+                                }>
                                     Editar
                                 </div>
                                 <div onClick={() => handleOpenModal(goal)}>
@@ -207,7 +236,6 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                 </div>
             )}
 
-            {/* Modal para exibir as subtarefas */}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>{goalClicked && goalClicked.name}</Modal.Title>
@@ -223,9 +251,9 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             checked={item.ativo}
                                             onChange={() => handleCheckboxChange(item)}
                                         />
-                                        {item.desc}
                                     </label>
-                                    <button onClick={async () =>{
+                                    {item.desc}
+                                    <button onClick={async () => {
                                         await deleteItems(item.id);
                                         const updatedItems = items.filter(i => i.id !== item.id);
                                         setItems(updatedItems);
@@ -240,9 +268,6 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>
                         Fechar
-                    </Button>
-                    <Button variant="primary" onClick={verify_and_save_goal}>
-                        Salvar
                     </Button>
                 </Modal.Footer>
             </Modal>
