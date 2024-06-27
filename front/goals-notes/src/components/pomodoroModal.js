@@ -3,10 +3,16 @@ import { Modal } from 'react-bootstrap';
 import { IoMdClose } from "react-icons/io";
 import './Style/goals_container.css'
 import styles from './Style/pomodoro.module.css';
+import { UpdateGoal } from '../services/goals_request';
 
 function PomodoroModel({ id, key, goal_name }) {
     const [showModal, setShowModal] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState(null);
+
+    async function pomodoro_cycle_register(){
+        const goal_json = {pomodoro_cycles: cycles}
+        await UpdateGoal(goal_json, id)
+    }
 
     const handleModal = () => {
         setShowModal(true);
@@ -15,9 +21,13 @@ function PomodoroModel({ id, key, goal_name }) {
     const handleClose = () => {
         handleReset()
         setShowModal(false);
+        console.log(`fechou com' + ${cycles} + 'ciclos`)
+        //adicionar a requisição de registro de ciclos aqui
+        pomodoro_cycle_register()
+        setCycles(0)
     };
 
-    const [secondsLeft, setSecondsLeft] = useState(25 * 60); // 25 minutes
+    const [secondsLeft, setSecondsLeft] = useState(0.1 * 60); // 25 minutes
     const [isRunning, setIsRunning] = useState(false);
     const [mode, setMode] = useState('work'); // 'work', 'shortBreak', 'longBreak'
     const [cycles, setCycles] = useState(0);
@@ -32,15 +42,15 @@ function PomodoroModel({ id, key, goal_name }) {
             if (mode === 'work') {
                 if ((cycles + 1) % 4 === 0) {
                     setMode('longBreak');
-                    setSecondsLeft(15 * 60); // 15 minutes
+                    setSecondsLeft(0.1 * 60); // 15 minutes
                 } else {
                     setMode('shortBreak');
-                    setSecondsLeft(5 * 60); // 5 minutes
+                    setSecondsLeft(0.1 * 60); // 5 minutes
                 }
                 setCycles(cycles + 1);
             } else {
                 setMode('work');
-                setSecondsLeft(25 * 60); // 25 minutes
+                setSecondsLeft(0.1 * 60); // 25 minutes
             }
             setIsRunning(false);
         }
@@ -59,7 +69,8 @@ function PomodoroModel({ id, key, goal_name }) {
 
     const handleReset = () => {
         setIsRunning(false);
-        setSecondsLeft(mode === 'work' ? 25 * 60 : mode === 'shortBreak' ? 5 * 60 : 15 * 60);
+        setSecondsLeft(0.1 * 60);
+        setMode('work')
     };
 
     return (
@@ -98,13 +109,6 @@ function PomodoroModel({ id, key, goal_name }) {
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer className='modal_footer'>
-                    <div className='buttons'>
-                        <div className='botao close' onClick={handleClose}>
-                            <span>Fechar</span>
-                        </div>
-                    </div>
-                </Modal.Footer>
             </Modal>
         </div>
     );

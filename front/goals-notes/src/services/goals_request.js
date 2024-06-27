@@ -49,6 +49,7 @@ export async function UpdateGoal(data, id){
       raw = JSON.stringify({
         "name": data.name,
         "obs": data.obs,
+        "pomodoro_cycles": data.pomodoro_cycles,
         "importance_degree": data.importance_degree,
         "user_id": data.user_id,
         "expected_data": Number(data.expected_data)
