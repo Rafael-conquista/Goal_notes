@@ -24,6 +24,7 @@ class GoalsController:
                     "initial_data": format_to_string(goal.initial_data),
                     "expected_data": format_to_string(goal.expected_data),
                     "current_progress": goal.current_progress,
+                    "pomodoro_cycles": goal.pomodoro_cycles,
                     "obs": goal.obs,
                     "end_date": format_to_string(goal.end_date),
                     "user_id": goal.user_id,
@@ -48,6 +49,7 @@ class GoalsController:
             "initial_data": format_to_string(goal.initial_data),
             "expected_data": format_to_string(goal.expected_data),
             "current_progress": goal.current_progress,
+            "pomodoro_cycles": goal.pomodoro_cycles,
             "obs": goal.obs,
             "end_date": format_to_string(goal.end_date),
             "user_id": goal.user_id,
@@ -75,6 +77,8 @@ class GoalsController:
                 data_atual = datetime.now()
                 data_final = data_atual + timedelta(days=dados["expected_data"])
                 goal.expected_data = data_final
+            if dados.get('pomodoro_cycles'):
+                goal.pomodoro_cycles = goal.pomodoro_cycles + int(dados.get('pomodoro_cycles'))
             main_queries.save_query(goal)
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:
@@ -133,6 +137,7 @@ class GoalsController:
                 "name": goal.name,
                 "current_progress": goal.current_progress,
                 "importance_degree": goal.importance_degree,
+                "pomodoro_cycles": goal.pomodoro_cycles,
                 "end_date": format_to_string(goal.end_date),
                 "initial_data": format_to_string(goal.initial_data),
                 "expected_data": format_to_string(goal.expected_data),

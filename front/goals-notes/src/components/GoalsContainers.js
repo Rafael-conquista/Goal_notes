@@ -5,6 +5,7 @@ import './Style/goals_container.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { UpdateGoal, deleteGoals, deleteItems, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
+import PomodoroModel from './pomodoroModal';
 
 function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [empty, setEmpty] = useState(true);
@@ -146,7 +147,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                             <input className='styled-input' type='text' placeholder="Alterar Nome" maxLength={100} onChange={(e) => setName(e.target.value)} />
                         </div>
 
-                        
+
                         <div>
                             <p>Observação</p>
                             <input type='text' className='styled-input' placeholder={goalClickedUpdate.obs} maxLength={200} onChange={(e) => setObs(e.target.value)} />
@@ -158,18 +159,18 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                         <div>
                             <h3>Sub-tarefas já criadas:</h3>
                         </div>
-                            {items.map((item, index) => (
-                                <div key={index} className="item">
-                                    <label>
-                                        <input
-                                            className='styled-input'
-                                            type="text"
-                                            value={item.desc}
-                                            onChange={(e) => handleInputChange(item.id, e.target.value)}
-                                        />
-                                    </label>
-                                </div>
-                            ))}
+                        {items.map((item, index) => (
+                            <div key={index} className="item">
+                                <label>
+                                    <input
+                                        className='styled-input'
+                                        type="text"
+                                        value={item.desc}
+                                        onChange={(e) => handleInputChange(item.id, e.target.value)}
+                                    />
+                                </label>
+                            </div>
+                        ))}
                         <ItemCreator descriptions={descriptions} setDescriptions={setDescriptions} />
                     </div>
                     <div className='buttons'>
@@ -183,59 +184,61 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                 </div>
             ) : (
                 <div>
-                <GoalCreator id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate} types={types} />
-                <div className='goals_grid'>
-                    {empty ? (
-                        <div>
-                            Você ainda não possui nenhuma meta cadastrada! Mas não seja por isso, crie uma agora mesmo!
-                        </div>
-                    ) : (
-                        Object.values(goals).map((goal, key) => (
-                            <div key={key} className='goal_card'>
-                                <div className='edit_button' onClick={async () => {
-                                    const itemsResponse = await getItemsByGoal(goal.goals_id);
-                                    const itemsArray = Object.values(itemsResponse);
-                                    setItems(itemsArray);
-                                    setGoalClickedUpdate(goal)
-                                }
-                                }>
-                                    Editar
-                                </div>
-                                <div onClick={() => handleOpenModal(goal)}>
-                                    <div className='goal_title'>
-                                        <h3 className='name'>{goal.name}</h3>
-                                        <h4 className='importance'>{goal.importance_degree}★</h4>
-                                    </div>
-                                    <div className='goal_data'>
-                                        <h5 className='goal_obs'>{goal.obs}</h5>
-                                        <p><span>Início:</span> {goal.initial_data}</p>
-                                        <p><span>Expectativa:</span> {goal.expected_data}</p>
-                                        <p><span>Tipo:</span> {goal.type_name}</p>
-                                        {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
-                                    </div>
-
-                                    {goal.end_date ? (
-                                        <div className='top_left_botao' onClick={() => deactivateTask(false, goal.goals_id)}>
-                                            <span>Reativar tarefa</span>
-                                        </div>
-                                    ) : (
-                                        <div className='top_left_botao' onClick={() => deactivateTask(true, goal.goals_id)}>
-                                            <span>Finalizar tarefa</span>
-                                        </div>
-                                    )}
-
-                                    <div className='fixed_botao' onClick={async () => {
-                                        await deleteGoals(goal.goals_id);
-                                        setShowModal(false);
-                                        setMayUpdate(true);
-                                    }}>
-                                        <span>Excluir meta</span>
-                                    </div>
-                                </div>
+                    <GoalCreator id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate} types={types} />
+                    <div className='goals_grid'>
+                        {empty ? (
+                            <div>
+                                Você ainda não possui nenhuma meta cadastrada! Mas não seja por isso, crie uma agora mesmo!
                             </div>
-                        ))
-                    )}
-                </div>
+                        ) : (
+                            Object.values(goals).map((goal, key) => (
+                                <div key={key} className='goal_card'>
+                                    <div className='edit_button' onClick={async () => {
+                                        const itemsResponse = await getItemsByGoal(goal.goals_id);
+                                        const itemsArray = Object.values(itemsResponse);
+                                        setItems(itemsArray);
+                                        setGoalClickedUpdate(goal)
+                                    }
+                                    }>
+                                        Editar
+                                    </div>
+                                    <div onClick={() => handleOpenModal(goal)}>
+                                        <div className='goal_title'>
+                                            <h3 className='name'>{goal.name}</h3>
+                                            <h4 className='importance'>{goal.importance_degree}★</h4>
+                                        </div>
+                                        <div className='goal_data'>
+                                            <h5 className='goal_obs'>{goal.obs}</h5>
+                                            <p><span>Início:</span> {goal.initial_data}</p>
+                                            <p><span>Expectativa:</span> {goal.expected_data}</p>
+                                            <p><span>Tipo:</span> {goal.type_name}</p>
+                                            <p><span>Ciclos de Pomodoro: </span> {goal.pomodoro_cycles}</p>
+                                            {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
+                                        </div>
+
+                                        {goal.end_date ? (
+                                            <div className='top_left_botao' onClick={() => deactivateTask(false, goal.goals_id)}>
+                                                <span>Reativar tarefa</span>
+                                            </div>
+                                        ) : (
+                                            <div className='top_left_botao' onClick={() => deactivateTask(true, goal.goals_id)}>
+                                                <span>Finalizar tarefa</span>
+                                            </div>
+                                        )}
+
+                                        <div className='fixed_botao' onClick={async () => {
+                                            await deleteGoals(goal.goals_id);
+                                            setShowModal(false);
+                                            setMayUpdate(true);
+                                        }}>
+                                            <span>Excluir meta</span>
+                                        </div>
+                                    </div>
+                                    <PomodoroModel id={goal.goals_id} key={key} goal_name={goal.name}/>
+                                </div>
+                            ))
+                        )}
+                    </div>
                 </div>
             )}
 
