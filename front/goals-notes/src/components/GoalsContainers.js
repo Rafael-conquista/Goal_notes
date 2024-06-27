@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GoalCreator from './goalCreator';
 import ItemCreator from './subItemsCreator';
+import FinishedGoals from './finishedGoals';
 import './Style/goals_container.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -277,6 +278,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <FinishedGoals id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate}/>
         </div>
     );
 }
