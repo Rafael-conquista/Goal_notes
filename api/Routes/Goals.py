@@ -13,7 +13,8 @@ from sql_alchemy import banco
 
 class Goals_by_user(Resource):
     def get(self, user_id):
-        return GoalsController.goals_by_user(self, user_id)
+        status_search = request.args.get('ativas')
+        return GoalsController.goals_by_user(self, user_id, status_search)
 
 
 class Goals(Resource):

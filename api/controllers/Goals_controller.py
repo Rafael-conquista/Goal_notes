@@ -108,7 +108,7 @@ class GoalsController:
         main_queries.save_query(goal)
         return {"id": goal.goals_id, "message": "the goal has been created"}, 201
 
-    def goals_by_user(self, user_id):
+    def goals_by_user(self, user_id, status=True):
         try:
             user = UsersController.find_user(user_id)
             id = user[0].get("id")
@@ -118,7 +118,7 @@ class GoalsController:
                     .filter(GoalsModel.user_id == id)
                     .all()
                 )
-                goals_formatted = GoalsController.parser_goals_infos(goals)
+                goals_formatted = GoalsController.parser_goals_infos(goals, status)
                 return goals_formatted
             else:
                 return {"message": "the user doesn't exist in database"}, 400
@@ -126,27 +126,46 @@ class GoalsController:
         except:
             return {"message": "something went wrong during request"}, 400
 
-    def parser_goals_infos(goals):
+    def parser_goals_infos(goals, status):
         organized_goals = {}
         cont = 0
         for goal in goals:
             type_name = GoalsController.find_type_name(goal)
+            if status == True:
+                if not goal.end_date:
+                    goal_object = {
+                        "goals_id": goal.goals_id,
+                        "name": goal.name,
+                        "current_progress": goal.current_progress,
+                        "importance_degree": goal.importance_degree,
+                        "pomodoro_cycles": goal.pomodoro_cycles,
+                        "end_date": format_to_string(goal.end_date),
+                        "initial_data": format_to_string(goal.initial_data),
+                        "expected_data": format_to_string(goal.expected_data),
+                        "user_id": goal.user_id,
+                        "obs": goal.obs,
+                        "type_name": type_name,
+                    }
+                    organized_goals.update({cont: goal_object})
+                cont = cont + 1
+            else:
+                if goal.end_date:
+                    goal_object = {
+                        "goals_id": goal.goals_id,
+                        "name": goal.name,
+                        "current_progress": goal.current_progress,
+                        "importance_degree": goal.importance_degree,
+                        "pomodoro_cycles": goal.pomodoro_cycles,
+                        "end_date": format_to_string(goal.end_date),
+                        "initial_data": format_to_string(goal.initial_data),
+                        "expected_data": format_to_string(goal.expected_data),
+                        "user_id": goal.user_id,
+                        "obs": goal.obs,
+                        "type_name": type_name,
+                    }
+                    organized_goals.update({cont: goal_object})
+                cont = cont + 1
 
-            goal_object = {
-                "goals_id": goal.goals_id,
-                "name": goal.name,
-                "current_progress": goal.current_progress,
-                "importance_degree": goal.importance_degree,
-                "pomodoro_cycles": goal.pomodoro_cycles,
-                "end_date": format_to_string(goal.end_date),
-                "initial_data": format_to_string(goal.initial_data),
-                "expected_data": format_to_string(goal.expected_data),
-                "user_id": goal.user_id,
-                "obs": goal.obs,
-                "type_name": type_name,
-            }
-            organized_goals.update({cont: goal_object})
-            cont = cont + 1
 
         return organized_goals, 200
 
