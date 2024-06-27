@@ -75,3 +75,10 @@ class ItemsController:
 
     def delete_all_goals_items(goals_id):
         banco.session.query(ItemsModel).filter(ItemsModel.goals_id == goals_id).delete()
+
+    def update_all_goals_items(goals_id):
+        items = ItemsController.find_items_by_goal(goals_id)
+        for item in items:
+            item = main_queries.find_query(ItemsModel, items[item].get('id'))
+            item.ativo = True
+            main_queries.save_query(item)

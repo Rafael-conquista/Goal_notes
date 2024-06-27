@@ -29,6 +29,8 @@ class Goal(Resource):
 
     def put(self, goals_id):
         dados = request.get_json()
+        if dados.get('end_date') == True:
+            ItemsController.update_all_goals_items(goals_id)
         message = GoalsController.update_goal(goals_id, dados)
         return message
     
