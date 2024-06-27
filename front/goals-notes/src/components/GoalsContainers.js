@@ -212,6 +212,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             <p><span>Início:</span> {goal.initial_data}</p>
                                             <p><span>Expectativa:</span> {goal.expected_data}</p>
                                             <p><span>Tipo:</span> {goal.type_name}</p>
+                                            <p><span>Ciclos de Pomodoro: </span> {goal.pomodoro_cycles}</p>
                                             {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
                                         </div>
 
