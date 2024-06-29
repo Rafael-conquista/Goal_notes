@@ -17,6 +17,25 @@ class Amigos_user(Resource):
     def get(self, user_id):
         user = AmigosController.find_friend_by_user(user_id)
         return user
+    
+class Amigos_user_Pendente(Resource):
+    def get(self, user_id):
+        user = AmigosController.find_friend_by_user_pendente(user_id)
+        return user
+
+class Amigo_aceitar_solicitacao(Resource):
+    def put(self):
+        dados = request.get_json()
+        id_amizade = dados["id_amizade"]
+        user = AmigosController.friend_accept_request(id_amizade)
+        return user
+    
+class Amigo_negar_solicitacao(Resource):
+    def put(self):
+        dados = request.get_json()
+        id_amizade = dados["id_amizade"]
+        user = AmigosController.friend_deny_request(id_amizade)
+        return user
 
 class Amigos(Resource):
     def get(self):

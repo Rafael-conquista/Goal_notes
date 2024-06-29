@@ -114,7 +114,7 @@ function Navbar({ currentPage }) {
               <p className="text_menu">Metas</p>
             </a>
             <a className="option" href="Amigos" onClick={() => setAtual(2)}>
-              <p className="text_menu">Amigos</p>
+              <p className="text_menu">Loja</p>
             </a>
             <a className="option" href="Perfil" onClick={() => setAtual(3)}>
               <p className="text_menu">Perfil</p>

@@ -14,7 +14,7 @@ class AmigosController:
         user_friend = main_queries.find_query(UsersModel, user_friend_id)
 
         if not user or not user_friend:
-            return {"message": "Usuários incorretos"}, 400
+            return {"message": "Usuário não encontrado"}, 400
 
         existing_amigo = (
             banco.session.query(AmigosModel)
@@ -61,25 +61,28 @@ class AmigosController:
             amigo2 = existing_amigo_2_deletado
             if amigo:
                 amigo.excluido = 0
-                amigo.dataAlteracao = banco.func.now()
+                amigo.data_solicitacao_aceita = None
+                amigo.data_solicitacao = banco.func.now()
                 main_queries.save_query(amigo)
                 main_queries.close_conection()
-                return {"message": "A amizade foi criada com sucesso 3"}, 200
+                return {"message": "Solicitação enviada"}, 200
             elif amigo2:
                 amigo2.id_usuario_enviado = user_id
                 amigo2.id_usuario_recebido = user_friend_id
+                amigo2.data_solicitacao_aceita = None
+                amigo2.data_solicitacao = banco.func.now()
                 amigo2.excluido = 0
-                amigo.dataAlteracao = banco.func.now()
                 main_queries.save_query(amigo2)
                 main_queries.close_conection()
-                return {"message": "A amizade foi criada com sucesso 2"}, 200
+                return {"message": "Solicitação enviada"}, 200
 
         new_amigo = AmigosModel()
         new_amigo.id_usuario_enviado = user_id
         new_amigo.id_usuario_recebido = user_friend_id
+        new_amigo.data_solicitacao = banco.func.now()
         main_queries.save_query(new_amigo)
 
-        return {"message": "A amizade foi criada com sucesso"}, 201
+        return {"message": "Solicitação enviada"}, 201
 
     def find_all_friend(self):
         amigos = main_queries.find_all_query(AmigosModel)
@@ -171,9 +174,11 @@ class AmigosController:
 
     def find_friend_by_user(id_usuario):
         amigos = main_queries.find_all_query(AmigosModel)
+        amigos_sorted = sorted(amigos, key=lambda amigo: amigo.data_solicitacao or datetime.min, reverse=True)
+
         amigos_list = []
 
-        for amigo in amigos:
+        for amigo in amigos_sorted:
             amigo_data_cadastro = (
                 amigo.data_cadastro.strftime("%Y-%m-%d %H:%M:%S")
                 if amigo.data_cadastro is not None
@@ -185,7 +190,7 @@ class AmigosController:
                 else None
             )
             if id_usuario != "":
-                if (amigo.id_usuario_enviado == int(id_usuario) or (amigo.id_usuario_recebido == int(id_usuario))):
+                if ((amigo.id_usuario_enviado == int(id_usuario) or (amigo.id_usuario_recebido == int(id_usuario))) and amigo.excluido != 1 and amigo.data_solicitacao_aceita is not None):
                     if(amigo.id_usuario_enviado != id_usuario):
                         user = main_queries.find_query(UsersModel, amigo.id_usuario_enviado)
                     elif(amigo.id_usuario_recebido != id_usuario):
@@ -199,6 +204,47 @@ class AmigosController:
                             "data_alteracao": amigo_data_alteracao,
                             "excluido": amigo.excluido,
                             "name": user.surname,
+                            "userId": user.id,
+                        }
+                    )
+        if amigos_list:
+            return {"amigos": amigos_list}, 200
+        else:
+            return {"message": "Amigo não encontrado"}, 404
+
+    def find_friend_by_user_pendente(id_usuario):
+        amigos = main_queries.find_all_query(AmigosModel)
+        amigos_sorted = sorted(amigos, key=lambda amigo: amigo.data_solicitacao or datetime.min, reverse=True)
+
+        amigos_list = []
+
+        for amigo in amigos_sorted:
+            amigo_data_cadastro = (
+                amigo.data_cadastro.strftime("%Y-%m-%d %H:%M:%S")
+                if amigo.data_cadastro is not None
+                else None
+            )
+            amigo_data_alteracao = (
+                amigo.data_alteracao.strftime("%Y-%m-%d %H:%M:%S")
+                if amigo.data_alteracao is not None
+                else None
+            )
+            if id_usuario != "":
+                if ((amigo.id_usuario_enviado == int(id_usuario) or (amigo.id_usuario_recebido == int(id_usuario))) and amigo.excluido != 1 and amigo.data_solicitacao_aceita is None):
+                    if(amigo.id_usuario_enviado != id_usuario):
+                        user = main_queries.find_query(UsersModel, amigo.id_usuario_enviado)
+                    elif(amigo.id_usuario_recebido != id_usuario):
+                        user = main_queries.find_query(UsersModel, amigo.id_usuario_recebido)
+                    amigos_list.append(
+                        {
+                            "id": amigo.id,
+                            "id_usuario_enviado": amigo.id_usuario_enviado,
+                            "id_usuario_recebido": amigo.id_usuario_recebido,
+                            "data_cadastro": amigo_data_cadastro,
+                            "data_alteracao": amigo_data_alteracao,
+                            "excluido": amigo.excluido,
+                            "name": user.surname,
+                            "userId": user.id,
                         }
                     )
         if amigos_list:
@@ -211,7 +257,6 @@ class AmigosController:
             amigo = main_queries.find_query(AmigosModel, id)
             if amigo:
                 amigo.excluido = 1
-                amigo.dataAlteracao = banco.func.now()
                 main_queries.save_query(amigo)
                 main_queries.close_conection()
                 return {"message": "Amigo atualizado com sucesso"}, 200
@@ -219,3 +264,29 @@ class AmigosController:
                 return {"message": "Amigo não encontrado"}, 404
         except Exception as error:
             return {"message": str(error)}, 400
+
+    def friend_accept_request(id_amizade):
+        try:
+            amigo = main_queries.find_query(AmigosModel, id_amizade)
+            if amigo:
+                amigo.data_solicitacao_aceita = banco.func.now()
+                main_queries.save_query(amigo)
+                main_queries.close_conection()
+                return {"message": "Solicitação Aceita"}, 200
+            else:
+                return {"message": "Amigo não encontrado"}, 404
+        except Exception as error:
+            return {"message": str(error)}, 400
+
+    def friend_deny_request(id_amizade):
+            try:
+                amigo = main_queries.find_query(AmigosModel, id_amizade)
+                if amigo:
+                    amigo.excluido = 1
+                    main_queries.save_query(amigo)
+                    main_queries.close_conection()
+                    return {"message": "Solicitação Aceita"}, 200
+                else:
+                    return {"message": "Amigo não encontrado"}, 404
+            except Exception as error:
+                return {"message": str(error)}, 400
