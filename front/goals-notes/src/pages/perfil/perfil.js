@@ -31,7 +31,7 @@ const Homepage = () => {
               <UserUpdateComponent/>
             </section>
             <section className='component_amigos'>
-              <button onClick={consultarAmigos} className='botao_amigos'>Todos os amigos</button>
+              <button onClick={consultarAmigos} className='botao_amigos'>Consultar amigos</button>
               <AmigosConsultUltimosComponent/>
             </section>
           </>
@@ -39,8 +39,8 @@ const Homepage = () => {
           {amigosGeral &&
           <>
             <section className='component_amigos'>
+              <button onClick={desconsultarAmigos} className='botao_amigos'>Perfil</button>
               <AmigosConsultComponent/>
-              <button onClick={desconsultarAmigos} className='botao_amigos'>Todos os amigos</button>
               </section>
           </>
           }

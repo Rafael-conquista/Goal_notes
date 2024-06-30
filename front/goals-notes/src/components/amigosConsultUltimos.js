@@ -52,12 +52,12 @@ function AmigosConsultComponent() {
     return (
         <section className='component_amigos_main'>
             <h1>Amizades feitas Recentemente</h1>
-            <div className='amigo_main'>
+            <div className='amigo_main_ultimos'>
                 {friends.length > 0 ? friends.map((friend) => (
                     <div key={friend.id} className='amigo'>
-                        <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-                        <p>{friend.name}</p>
-                    </div>
+                    <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                    <p>{friend.name} #{friend.userId}</p>
+                </div>
                 )) : <p>Você ainda não fez nenhuma amizade.</p>}
             </div>
         </section>
