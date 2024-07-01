@@ -37,7 +37,7 @@
 
 .border {
     transition: 1s;
-    width: 100vw;
+    width: 70vw;
 }
 
 .nickname_input {
@@ -591,7 +591,7 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: #f44336;
   }
   
-  .Btn, .Btn_senha, .Btn_voltar {
+  .Btn, .Btn_senha, .Btn_voltar, .Btn_cap {
     position: relative;
     display: flex;
     align-items: center;
@@ -607,12 +607,16 @@ input[type="number"]::-webkit-outer-spin-button {
     border-radius: 10px;
     transition-duration: 0.3s;
   }
+  
+  .Btn_cap {
+    width: 170px;
+  }
 
   .Btn_voltar {
     width: 130px;
   }
   
-  .Btn {
+  .Btn, .Btn_cap {
     background-color: #71bb00;
   }
 
@@ -629,7 +633,7 @@ input[type="number"]::-webkit-outer-spin-button {
     transition-duration: 0.3s;
   }
   
-  .Btn:hover {
+  .Btn:hover, .Btn_cap:hover {
     color: transparent;
     background-color: #71bb00;
   }
@@ -644,7 +648,7 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: #009fbb;
   }
   
-  .Btn:hover svg, .Btn_senha:hover svg, .Btn_voltar:hover svg {
+  .Btn:hover svg, .Btn_senha:hover svg, .Btn_voltar:hover svg, .Btn_cap:hover svg {
     right: 43%;
     margin: 0;
     padding: 0;
@@ -652,7 +656,7 @@ input[type="number"]::-webkit-outer-spin-button {
     transition-duration: 0.3s;
   }
   
-  .Btn:active, .Btn_senha:active, .Btn_voltar:active {
+  .Btn:active, .Btn_senha:active, .Btn_voltar:active, .Btn_cap:active {
     transform: translate(3px, 3px);
     transition-duration: 0.3s;
   }
