@@ -41,12 +41,27 @@
 }
 
 .nickname_input {
-    cursor: default !important;
+  margin: 0;
+  cursor: default !important;
+}
+
+.cap_coins {
+  position: absolute;
+  top: 10px;
+  left: 60px;
+}
+
+.cap_coins_img {
+  position: absolute;
+  height: 50px;
+  top: 0px;
+  left: 10px;
 }
 
 .nickname_input_editando {
     cursor: text;
-}
+    margin: 0;
+  }
 
 .infosUser {
     display: flex;
@@ -467,6 +482,12 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 300px;
 }
 
+.label_input_user {
+  text-align: center;
+  margin: 0px 10px;
+  width: 500px;
+}
+
   .button-cover {
     height: 100px;
     margin: 20px;
@@ -497,7 +518,7 @@ input[type="number"]::-webkit-outer-spin-button {
     left: 0;
   }
   
-  .button {
+  .button_amigos {
     position: relative;
     top: 50%;
     width: 74px;
@@ -529,8 +550,8 @@ input[type="number"]::-webkit-outer-spin-button {
     z-index: 1;
   }
   
-  .button.r,
-  .button.r .layer {
+  .button_amigos.r,
+  .button_amigos.r .layer {
     border-radius: 100px;
     top: 40px;
   }
@@ -569,4 +590,72 @@ input[type="number"]::-webkit-outer-spin-button {
     left: 42px;
     background-color: #f44336;
   }
+  
+  .Btn, .Btn_senha, .Btn_voltar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 210px;
+    height: 40px;
+    border: none;
+    padding: 0px 20px;
+    background-color: #71bb00;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 10px;
+    transition-duration: 0.3s;
+  }
+
+  .Btn_voltar {
+    width: 130px;
+  }
+  
+  .Btn {
+    background-color: #71bb00;
+  }
+
+  .Btn_senha, .Btn_voltar {
+    background-color: #009fbb;
+  }
+
+  .svg_button {
+    width: 13px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: white;
+    transition-duration: 0.3s;
+  }
+  
+  .Btn:hover {
+    color: transparent;
+    background-color: #71bb00;
+  }
+
+  .Btn_senha:hover{
+    color: transparent;
+    background-color: #009fbb;
+  }
+
+  .Btn_voltar:hover{
+    color: transparent;
+    background-color: #009fbb;
+  }
+  
+  .Btn:hover svg, .Btn_senha:hover svg, .Btn_voltar:hover svg {
+    right: 43%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition-duration: 0.3s;
+  }
+  
+  .Btn:active, .Btn_senha:active, .Btn_voltar:active {
+    transform: translate(3px, 3px);
+    transition-duration: 0.3s;
+  }
+
+  
   
