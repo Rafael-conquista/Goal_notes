@@ -140,6 +140,7 @@
     width: 150px;
     justify-content: center;
     z-index: 100;
+    font-size: 1.2em;
 }
 
 .option p {
@@ -455,3 +456,19 @@
     transition-duration: .5s;
     transform: rotate(180deg);
   }
+
+.cap_coin_nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 1.2em;
+}
+
+.cap_coins {
+  margin: 0px;
+}
+
+.cap_coins_img {
+  height: 70%;
+}

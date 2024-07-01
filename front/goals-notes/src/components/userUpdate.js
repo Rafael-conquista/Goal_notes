@@ -1,8 +1,5 @@
 import './Style/userStyle.css'
 import React, { useState, useEffect } from 'react';
-import { FaAngleLeft } from "react-icons/fa6";
-import cap_default from '../images/cap_default.jpg';
-import cap_coins from '../images/capCoin.png';
 import { get_user } from '../services/user_requests';
 import { update_user } from '../services/user_requests';
 import { verify } from '../utils/token_verify';
@@ -16,7 +13,6 @@ function UserUpdateComponent() {
     const [alteraSencivel, setAlteraSencivel] = useState(false);
     const [nickname, setNickname] = useState('')
     const [email, setEmail] = useState('')
-    const [capCoins, setCapCoins] = useState('')
     const [password, setPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmNewPassword, setConfirmNewPassword] = useState('')
@@ -63,10 +59,6 @@ function UserUpdateComponent() {
     const confirmNewPasswordChange = (e) => {
         setConfirmNewPassword(e.target.value)
     }
-
-    const handleClose = () => {
-        setShowModal(false);
-    };
 
     const submitChanges = (e) => {
         if (alteraSencivel && email == emailAntigo && password == '') {
@@ -224,18 +216,6 @@ function UserUpdateComponent() {
         }
     }
 
-    async function del_update(excluir=false) {
-            const user_json = {
-                "excluir":true
-            };
-            const response = await update_user(user_json, id);
-            setMessage(response.message)
-    }
-
-    async function delete_user() {
-        del_update()
-    }
-
     async function verify_token(){
         const token_id = await verify(localStorage.getItem('token'))
         return token_id
@@ -261,7 +241,6 @@ function UserUpdateComponent() {
                 if (user) {
                     setNicknameAntigo(user.surname);
                     setEmailAntigo(user.email);
-                    setCapCoins(user.capCoins);
                     setNickname(nicknameAntigo);
                     setEmail(emailAntigo);
                     setloading(false);
@@ -288,7 +267,6 @@ function UserUpdateComponent() {
                             <label>e-mail do Usuário</label>
                             <input type='text' placeholder='Digite um e-mail' readOnly className='nickname_input' value={emailAntigo}/>
                         </div>
-                        <img src={cap_coins} alt='vazio' className="cap_coins_img" /><p className='cap_coins'>CapCoins {capCoins}</p>
                     </div>
                 }
                 {editar && !alteraSenha &&
@@ -391,26 +369,6 @@ function UserUpdateComponent() {
                 )}
 
             </div>
-          
-            <Modal show={showModal} onHide={handleClose} centered size="xl">
-                <Modal.Footer className='modal_footer'>
-                    <div className='buttons'>
-                        <div className='botao' onClick={handleClose}>
-                            <span>Não</span>
-                        </div>
-                        <div className='botao close' onClick={() => {
-                            delete_user().then(() =>{
-                                localStorage.removeItem('token')
-                                window.location.href = `/`;
-                            })
-                        }}>
-                            <span>Sim, por favor...</span>
-                        </div>
-                    </div>
-
-                </Modal.Footer>
-            </Modal>
-            
         </div>
     )
 }

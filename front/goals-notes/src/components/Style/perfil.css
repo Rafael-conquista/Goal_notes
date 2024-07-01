@@ -45,19 +45,6 @@
   cursor: default !important;
 }
 
-.cap_coins {
-  position: absolute;
-  top: 10px;
-  left: 60px;
-}
-
-.cap_coins_img {
-  position: absolute;
-  height: 50px;
-  top: 0px;
-  left: 10px;
-}
-
 .nickname_input_editando {
     cursor: text;
     margin: 0;
