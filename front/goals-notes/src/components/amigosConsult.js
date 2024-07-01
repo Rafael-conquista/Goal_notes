@@ -247,7 +247,6 @@ function AmigosConsultComponent() {
                             <div id="button-3" class="button button_amigos r">
                                 <input onClick={() => consultaEnviadas()} class="checkbox" type="checkbox"></input>
                                 <div class="knobs"></div>
-                                <div class="layer"></div>
                             </div>
                         </div>
                         <div className='label_input'>
@@ -255,7 +254,6 @@ function AmigosConsultComponent() {
                             <div id="button-3" class="button button_amigos r">
                                 <input onClick={() => consultaRecebidas()} class="checkbox" type="checkbox"></input>
                                 <div class="knobs"></div>
-                                <div class="layer"></div>
                             </div>
                         </div>
                     </div>

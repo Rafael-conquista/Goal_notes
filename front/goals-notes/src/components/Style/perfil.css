@@ -553,7 +553,7 @@ input[type="number"]::-webkit-outer-spin-button {
   .button_amigos.r,
   .button_amigos.r .layer {
     border-radius: 100px;
-    top: 40px;
+    top: 25px;
   }
   
   #button-3 .knobs:before {
