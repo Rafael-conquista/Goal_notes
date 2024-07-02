@@ -4,6 +4,7 @@ import Goals from "./pages/goals/goals"
 import CapCreate from "./pages/CapCreate/CapCreate";
 import Amigos from "./pages/amigos/amigos";
 import Perfil from "./pages/perfil/perfil";
+import Store from "./pages/store/store";
 import UserUpdate from "./pages/userUpdate/userUpdate"
 import { Route,Routes, BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -30,6 +31,7 @@ import React, { useEffect } from 'react';
           <Route path="/:id/UserUpdate" element={<UserUpdate />}></Route>
           <Route path="/:id/Amigos" element={<Amigos />}></Route>
           <Route path="/:id/Perfil" element={<Perfil />}></Route>
+          <Route path="/:id/store" element={<Store />}></Route>
         </Routes>
     </BrowserRouter>
   );

@@ -15,6 +15,14 @@ class User(Resource):
         dados = request.get_json()
         message = UsersController.update_user(user_id, dados)
         return message
+    
+class User_consult(Resource):
+    def post(self):
+        dados = request.get_json()
+        apelido = dados["apelido"]
+        id = dados["id"]
+        idUsuario = dados["idUsuario"]
+        return UsersController.find_user_apelido(apelido, id, idUsuario)
 
 
 class Users(Resource):

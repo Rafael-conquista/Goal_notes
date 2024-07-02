@@ -2,7 +2,8 @@ from sql_alchemy import banco
 from utils import main_queries, jwt_methods
 from models.Users_model import UsersModel
 from utils.format_date import format_to_string
-
+from models.Amigos_model import AmigosModel
+import re
 
 class UsersController:
 
@@ -22,6 +23,76 @@ class UsersController:
                     "excluido": user.excluido,
                 }
             )
+
+        return {"users": user_list}, 200
+
+    def find_user_apelido(apelido, id, idUsuario):
+        users = main_queries.find_all_query(UsersModel)
+        user_list = []
+
+        for user in users:
+            if user.id == idUsuario:
+                continue
+            def check_existing_friendship(user_id, friend_id):
+                    existing_amigo = (
+                        banco.session.query(AmigosModel)
+                        .filter(
+                            ((AmigosModel.id_usuario_enviado == user_id) & 
+                            (AmigosModel.id_usuario_recebido == friend_id)) |
+                            ((AmigosModel.id_usuario_enviado == friend_id) & 
+                            (AmigosModel.id_usuario_recebido == user_id))
+                        )
+                        .filter(AmigosModel.excluido == False)
+                        .first()
+                    )
+                    return existing_amigo is not None
+            if check_existing_friendship(idUsuario, user.id):
+                continue
+
+            if id == "" and re.search(apelido, user.surname, re.IGNORECASE):
+                user_list.append(
+                    {
+                        "name": user.name,
+                        "id": user.id,
+                        "email": user.email,
+                        "surname": user.surname,
+                        "capCoins": user.capCoins,
+                        "dataCadastro": format_to_string(user.dataCadastro),
+                        "age": format_to_string(user.age),
+                        "excluido": user.excluido,
+                    }
+                )
+            elif apelido == "" and str(id) == str(user.id):
+                user_list.append(
+                    {
+                        "name": user.name,
+                        "id": user.id,
+                        "email": user.email,
+                        "surname": user.surname,
+                        "capCoins": user.capCoins,
+                        "dataCadastro": format_to_string(user.dataCadastro),
+                        "age": format_to_string(user.age),
+                        "excluido": user.excluido,
+                    }
+                )
+            elif apelido and id and re.search(apelido, user.surname, re.IGNORECASE) and str(id) == str(user.id):
+                user_list.append(
+                    {
+                        "name": user.name,
+                        "id": user.id,
+                        "email": user.email,
+                        "surname": user.surname,
+                        "capCoins": user.capCoins,
+                        "dataCadastro": format_to_string(user.dataCadastro),
+                        "age": format_to_string(user.age),
+                        "excluido": user.excluido,
+                    }
+                )
+
+        user_list = user_list[:6]
+
+        if not user_list:
+            return {"message": "Nenhum usuário encontrado"}, 200
 
         return {"users": user_list}, 200
 

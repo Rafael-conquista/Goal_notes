@@ -18,3 +18,6 @@ class AmigosModel(banco.Model):
     data_cadastro = banco.Column(banco.DateTime, default=banco.func.now())
     data_alteracao = banco.Column(banco.DateTime, onupdate=banco.func.now())
     excluido = banco.Column(banco.Boolean, default=False)
+    data_solicitacao = banco.Column(banco.DateTime)
+    data_solicitacao_aceita = banco.Column(banco.DateTime)
+    

@@ -29,11 +29,11 @@ banco = SQLAlchemy(app)
 api = Api(app)
 
 # Import your routes here
-from Routes.Users import User, Users, User_register, User_login
+from Routes.Users import User, Users, User_register, User_login, User_consult
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
 from Routes.Items import Item, Items, Item_register, ItemsByGoals
-from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer, Amigos_user
+from Routes.Amigos import Amigo, Amigos, Amigos_registro, Amigo_desfazer, Amigos_user, Amigos_user_Pendente, Amigo_aceitar_solicitacao, Amigo_negar_solicitacao
 from Routes.Posts import Post, Posts, PostCreator
 from Routes.PostComments import PostComment, Comment, Comments
 from Routes.Caps import Cap_register, Cap, Users_cap
@@ -43,6 +43,7 @@ from Routes.VerifyJWT import VerifyJWT
 # Users related Routes
 api.add_resource(Users, "/users")
 api.add_resource(User, "/user/<int:user_id>")
+api.add_resource(User_consult, "/userConsult")
 api.add_resource(User_register, "/register")
 api.add_resource(User_login, "/login")
 # users and Goals related Routes
@@ -64,6 +65,9 @@ api.add_resource(Amigos_registro, "/Amigos_registro")
 api.add_resource(Amigos, "/Amigos")
 api.add_resource(Amigo, "/Amigo")
 api.add_resource(Amigos_user, "/AmigosUser/<int:user_id>")
+api.add_resource(Amigos_user_Pendente, "/AmigosUserPendente/<int:user_id>")
+api.add_resource(Amigo_aceitar_solicitacao, "/AmigoAceitarSolicitacao")
+api.add_resource(Amigo_negar_solicitacao, "/AmigoNegarSolicitacao")
 api.add_resource(Amigo_desfazer, "/Amigo_desfazer")
 # verify JWT token
 api.add_resource(VerifyJWT, "/verify_token")

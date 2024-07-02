@@ -1,14 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import './Style/navbar.css';
 import LogoffButton from './logoffButton';
+import cap_coins from '../images/capCoin.png';
+import { verify } from '../utils/token_verify';
+import { get_user } from '../services/user_requests';
+import { useParams } from 'react-router-dom';
 
 function Navbar({ currentPage }) {
+  const { id } = useParams();
   const [atual, setAtual] = useState(currentPage);
   const [telaMaiorCelular, setTelaMaiorCelular] = useState(window.innerWidth > 1000);
   const [dropdown, setDropdown] = useState(false);
+  const [capCoins, setCapCoins] = useState();
+  const [loading, setloading] = useState(false);
 
-  // Este useEffect maneja a atualização do estado 'atual' baseado na prop 'currentPage'
+  async function get_coins(id){
+    const user = await get_user(id);
+    return user
+  }
+
   useEffect(() => {
+    get_coins(id).then((user) => {
+      if (user) {
+          setCapCoins(user.capCoins);
+          setloading(false);
+      }
+      else {
+          setloading(true);
+      }
+    });
+  }, [id, capCoins])
+
+useEffect(() => {
     switch (currentPage) {
       case 'home':
         setAtual(0);
@@ -16,7 +39,7 @@ function Navbar({ currentPage }) {
       case 'metas':
         setAtual(1);
         break;
-      case 'amigos':
+      case 'Store':
         setAtual(2);
         break;
       case 'perfil':
@@ -113,13 +136,16 @@ function Navbar({ currentPage }) {
             <a className="option" href="Goals" onClick={() => setAtual(1)}>
               <p className="text_menu">Metas</p>
             </a>
-            <a className="option" href="Amigos" onClick={() => setAtual(2)}>
-              <p className="text_menu">Amigos</p>
+            <a className="option" href="Store" onClick={() => setAtual(2)}>
+              <p className="text_menu">Loja</p>
             </a>
             <a className="option" href="Perfil" onClick={() => setAtual(3)}>
               <p className="text_menu">Perfil</p>
             </a>
             <LogoffButton/>
+            <div className='cap_coin_nav'>
+              <img src={cap_coins} alt='vazio' className="cap_coins_img" /><p className='cap_coins'>CapCoins {capCoins}</p>
+            </div>
           </div>
         </header>
       )}
@@ -154,13 +180,13 @@ function Navbar({ currentPage }) {
                 </a>
               )}
               {atual == 2 &&(
-                <a className="option" style={{ color:'#8B4513',  height: 'auto' }} href="Amigos" onClick={() => setAtual(2)}>
-                  <p className="text_menu">Amigos</p>
+                <a className="option" style={{ color:'#8B4513',  height: 'auto' }} href="Store" onClick={() => setAtual(2)}>
+                  <p className="text_menu">Store</p>
                 </a>
               )}
               {atual != 2 &&(
-                <a className="option" style={{ height: 'auto' }} href="Amigos" onClick={() => setAtual(2)}>
-                  <p className="text_menu">Amigos</p>
+                <a className="option" style={{ height: 'auto' }} href="Store" onClick={() => setAtual(2)}>
+                  <p className="text_menu">Store</p>
                 </a>
               )}
               {atual == 3 &&(
@@ -198,13 +224,13 @@ function Navbar({ currentPage }) {
                 </a>
               )}
               {atual == 2 &&(
-                <a className="option" style={{ color:'#8B4513',  height: 'auto' }} href="Amigos" onClick={() => setAtual(2)}>
-                  <p className="text_menu">Amigos</p>
+                <a className="option" style={{ color:'#8B4513',  height: 'auto' }} href="Store" onClick={() => setAtual(2)}>
+                  <p className="text_menu">Store</p>
                 </a>
               )}
               {atual != 2 &&(
-                <a className="option" style={{ height: 'auto' }} href="Amigos" onClick={() => setAtual(2)}>
-                  <p className="text_menu">Amigos</p>
+                <a className="option" style={{ height: 'auto' }} href="Store" onClick={() => setAtual(2)}>
+                  <p className="text_menu">Store</p>
                 </a>
               )}
               {atual == 3 &&(
