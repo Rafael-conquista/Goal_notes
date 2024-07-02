@@ -5,8 +5,10 @@ import { update_user } from '../services/user_requests';
 import { verify } from '../utils/token_verify';
 import { Modal } from 'react-bootstrap';
 import Loading from './loading.js';
+import { useParams } from 'react-router-dom';
 
 function UserUpdateComponent() {
+    const { id } = useParams();
     const [showModal, setShowModal] = useState(false);
     const [editar, setEditar] = useState(false);
     const [alteraSenha, setAlteraSenha] = useState(false);
@@ -18,7 +20,6 @@ function UserUpdateComponent() {
     const [confirmNewPassword, setConfirmNewPassword] = useState('')
     const [nicknameAntigo, setNicknameAntigo] = useState('')
     const [emailAntigo, setEmailAntigo] = useState('')
-    const [id, setId] = useState()
     const [message, setMessage] = useState('')
     const [loading, setloading] = useState(false);
     
@@ -216,21 +217,6 @@ function UserUpdateComponent() {
         }
     }
 
-    async function verify_token(){
-        const token_id = await verify(localStorage.getItem('token'))
-        return token_id
-    }
-
-    useEffect(() => {
-        const first_acess = sessionStorage.getItem('first_acess')
-        if (first_acess) {
-            window.location.href = '/CapCreate';
-        }
-        verify_token().then((id) => {
-            setId(id)
-        });
-    }, [])
-    
     async function get_surname(id){
         const user = await get_user(id);
         return user

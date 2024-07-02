@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { FaAngleLeft } from "react-icons/fa6";
 import cap_default from '../images/cap_default.jpg';
 import { get_cap, update_cap } from '../services/cap_requests.js';
-import { verify } from '../utils/token_verify.js';
 import { Modal } from 'react-bootstrap';
 import Loading from './loading.js';
 import { getAmigosUser } from '../services/amigos_requests.js';
@@ -13,12 +12,12 @@ import { aceitar_amizade } from '../services/amigos_requests.js';
 import { negar_amizade } from '../services/amigos_requests.js';
 import { desfazer_amizade } from '../services/amigos_requests.js';
 import { searchFriend } from '../services/user_requests.js';
-
+import { useParams } from 'react-router-dom';
 
 function AmigosConsultComponent() {
     const [showModal, setShowModal] = useState(false);
     const [ultimos, setUltimos] = useState(true);
-    const [id, setId] = useState();
+    const { id } = useParams();
     const [message, setMessage] = useState('');
     const [friendSearch, setfriendSearch] = useState('');
     const [friendSearchApelido, setfriendSearchApelido] = useState('');
@@ -38,10 +37,6 @@ function AmigosConsultComponent() {
         setfriendSearchId(e.target.value)
     }
 
-    async function verify_token() {
-        const token_id = await verify(localStorage.getItem('token'));
-        return token_id;
-    }
 
     async function aceitarAmizade(idAmizade) {
         console.log(idAmizade)
@@ -131,16 +126,6 @@ function AmigosConsultComponent() {
             setLoading(false);
         });
     }
-
-    useEffect(() => {
-        const first_acess = sessionStorage.getItem('first_acess');
-        if (first_acess) {
-            window.location.href = '/CapCreate';
-        }
-        verify_token().then((id) => {
-            setId(id);
-        });
-    }, []);
 
     useEffect(() => {
         getAmigosUser(id, false).then((amigos) => {

@@ -51,6 +51,7 @@ function CapCreatorComponent(){
             setId(id)
         });
     }, [])
+    
     useEffect(() => {
         const timeoutId = setTimeout(() => {
           setShowInput(true);

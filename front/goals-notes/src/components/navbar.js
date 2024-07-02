@@ -4,29 +4,15 @@ import LogoffButton from './logoffButton';
 import cap_coins from '../images/capCoin.png';
 import { verify } from '../utils/token_verify';
 import { get_user } from '../services/user_requests';
+import { useParams } from 'react-router-dom';
 
 function Navbar({ currentPage }) {
+  const { id } = useParams();
   const [atual, setAtual] = useState(currentPage);
   const [telaMaiorCelular, setTelaMaiorCelular] = useState(window.innerWidth > 1000);
   const [dropdown, setDropdown] = useState(false);
   const [capCoins, setCapCoins] = useState();
-  const [id, setId] = useState()
   const [loading, setloading] = useState(false);
-
-  async function verify_token(){
-    const token_id = await verify(localStorage.getItem('token'))
-    return token_id
-  }
-
-  useEffect(() => {
-      const first_acess = sessionStorage.getItem('first_acess')
-      if (first_acess) {
-          window.location.href = '/CapCreate';
-      }
-      verify_token().then((id) => {
-          setId(id)
-      });
-  }, [])
 
   async function get_coins(id){
     const user = await get_user(id);

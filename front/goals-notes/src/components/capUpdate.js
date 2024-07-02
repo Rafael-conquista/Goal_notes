@@ -7,12 +7,13 @@ import { update_cap } from '../services/cap_requests.js';
 import { verify } from '../utils/token_verify.js';
 import { Modal } from 'react-bootstrap';
 import Loading from './loading.js';
+import { useParams } from 'react-router-dom';
 
 function CapUpdateComponent() {
-    const [editar, setEditar] = useState(false);
+    const [editar, setEditar] = useState(false);  
+    const { id } = useParams();
     const [name, setName] = useState('')
     const [nameAntigo, setNameAntigo] = useState('')
-    const [id, setId] = useState()
     const [message, setMessage] = useState('')
     const [loading, setloading] = useState(false);
     
@@ -51,21 +52,6 @@ function CapUpdateComponent() {
         }
     }
 
-    async function verify_token(){
-        const token_id = await verify(localStorage.getItem('token'))
-        return token_id
-    }
-
-    useEffect(() => {
-        const first_acess = sessionStorage.getItem('first_acess')
-        if (first_acess) {
-            window.location.href = '/CapCreate';
-        }
-        verify_token().then((id) => {
-            setId(id)
-        });
-    }, [])
-    
     async function get_cap_name(id){
         const user = await get_cap(id);
         return user
