@@ -6,23 +6,17 @@ import '../../components/Style/homeStyle.css';
 import '../../components/Style/perfil.css';
 
 const Store = () => {
-  const [amigosGeral, setAmigosGeral] = useState(false);
-
-  const consultarAmigos = (e) => {
-    setAmigosGeral(true);
-  }
-  const desconsultarAmigos = (e) => {
-    setAmigosGeral(false);
-  }
 
   return (
-    <div>
+    <>
       <Navbar currentPage="Store" />
-      <div className='capScreen homeScreen'>
+      <section className='capScreen homeScreen'>
         <div className="cap_component_perfil">
         </div>
-      </div>
-    </div>
+        <div className="cap_component_perfil">
+        </div>
+      </section>
+    </>
   );
 }
 

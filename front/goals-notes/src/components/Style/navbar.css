@@ -463,6 +463,10 @@
   justify-content: center;
   color: #FFF;
   font-size: 1.2em;
+  right: 20px;
+  position: absolute;
+  height: 110px;
+  top: 0;
 }
 
 .cap_coins {
@@ -470,5 +474,5 @@
 }
 
 .cap_coins_img {
-  height: 70%;
+  height: 80px;
 }
