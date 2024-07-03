@@ -65,10 +65,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     };
 
     const verify_and_save_goal = async () => {
-        // Inicializa um objeto vazio para o goal_json
         const goal_json = {};
-
-        // Adiciona apenas os campos que estão preenchidos
         if (name) {
             goal_json.name = name;
         }
@@ -84,28 +81,18 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         if (days) {
             goal_json.expected_data = days;
         }
-
-        // Se importance_degree for zero, substitui pelo valor existente de goalClickedUpdate.importance_degree
         if (goal_json.importance_degree === 0 && goalClickedUpdate && goalClickedUpdate.importance_degree) {
             goal_json.importance_degree = goalClickedUpdate.importance_degree;
         }
-
-        // Chama a função de atualização do objetivo (goal)
         await UpdateGoal(goal_json, goalClickedUpdate.goals_id);
-
-        // Atualiza cada item
         await Promise.all(items.map(async item => {
             await updateItems(item);
         }));
-
-        // Registra novos items se houver descrições preenchidas
         for (const id in descriptions) {
-            if (descriptions[id]) { // Verifica se a descrição não é vazia
+            if (descriptions[id]) {
                 await registerItems(descriptions[id], goalClickedUpdate.goals_id);
             }
         }
-
-        // Limpa os estados e reinicia a interface
         setGoalClickedUpdate(null);
         setName('');
         setDays('');
@@ -118,10 +105,9 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         setShowModal(false);
     };
 
-
     return (
         <div className='goals_view' style={{ overflowX: 'hidden' }}>
-            {goalClickedUpdate ? ( /* Renderização do formulário de edição */
+            {goalClickedUpdate ? (
                 <div className='goal_update'>
                     <div className='goal_update_body'>
                         <div className='goal_title'>
@@ -142,13 +128,10 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                 <label title="text" htmlFor="star1"></label>
                             </div>
                         </div>
-
                         <div>
                             <p>Nome</p>
                             <input className='styled-input' type='text' placeholder="Alterar Nome" maxLength={100} onChange={(e) => setName(e.target.value)} />
                         </div>
-
-
                         <div>
                             <p>Observação</p>
                             <input type='text' className='styled-input' placeholder={goalClickedUpdate.obs} maxLength={200} onChange={(e) => setObs(e.target.value)} />
@@ -199,8 +182,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                         const itemsArray = Object.values(itemsResponse);
                                         setItems(itemsArray);
                                         setGoalClickedUpdate(goal)
-                                    }
-                                    }>
+                                    }}>
                                         Editar
                                     </div>
                                     <div onClick={() => handleOpenModal(goal)}>
@@ -216,17 +198,15 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             <p><span>Ciclos de Pomodoro: </span> {goal.pomodoro_cycles}</p>
                                             {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
                                         </div>
-
                                         {goal.end_date ? (
                                             <div className='top_left_botao' onClick={() => deactivateTask(false, goal.goals_id)}>
                                                 <span>Reativar tarefa</span>
                                             </div>
                                         ) : (
-                                            <div className='top_left_botao' onClick={() => deactivateTask(true, goal.goals_id)}>
+                                            <div className='top_left_botao' onClick={() => deactivateTask(new Date().toISOString().split('T')[0], goal.goals_id)}>
                                                 <span>Finalizar tarefa</span>
                                             </div>
                                         )}
-
                                         <div className='fixed_botao' onClick={async () => {
                                             await deleteGoals(goal.goals_id);
                                             setShowModal(false);
@@ -242,7 +222,6 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                     </div>
                 </div>
             )}
-
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>{goalClicked && goalClicked.name}</Modal.Title>

@@ -176,3 +176,8 @@ class UsersController:
             token = jwt_methods.jwt_create_token(user.id)
             return {"message": "user logged in successfully", "token": token}, 200
         return {"message": "login not found: wrong password or surname"}, 404
+    
+    def update_user_capcoin(id, new_capcoins):
+        user = main_queries.find_query(UsersModel, id)
+        user.capCoins += new_capcoins
+        main_queries.save_query(user)
