@@ -18,6 +18,7 @@ class GoalsModel(banco.Model):
     update_data = banco.Column(banco.DateTime, onupdate=banco.func.now())
     end_date = banco.Column(banco.Date, default=None)
     expected_data = banco.Column(banco.DateTime, default=None)
+    goal_value = banco.Column(banco.Integer, default=1)
     dataExcluido = banco.Column(banco.Date, default=None)
     user_id = banco.Column(banco.Integer, ForeignKey("Users.id"), nullable=False)
     type_id = banco.Column(banco.Integer, ForeignKey("Types.id"))

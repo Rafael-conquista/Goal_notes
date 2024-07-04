@@ -25,6 +25,7 @@ class GoalsController:
                     "expected_data": format_to_string(goal.expected_data),
                     "current_progress": goal.current_progress,
                     "pomodoro_cycles": goal.pomodoro_cycles,
+                    "goal_value": goal.goal_value,
                     "obs": goal.obs,
                     "end_date": format_to_string(goal.end_date),
                     "user_id": goal.user_id,
@@ -50,6 +51,7 @@ class GoalsController:
             "expected_data": format_to_string(goal.expected_data),
             "current_progress": goal.current_progress,
             "pomodoro_cycles": goal.pomodoro_cycles,
+            "goal_value": goal.goal_value,
             "obs": goal.obs,
             "end_date": format_to_string(goal.end_date),
             "user_id": goal.user_id,
@@ -69,16 +71,24 @@ class GoalsController:
             goal.current_progress = dados.get("current_progress", goal.current_progress)
             goal.obs = dados.get("obs", goal.obs)
             if dados.get("end_date") != None:
-                if dados["end_date"] == True:
-                    goal.end_date = datetime.now()
-                else:
+                if dados.get("end_date") == False:
                     goal.end_date = None
+                else:
+                    goal.end_date = datetime.now()
+                    if goal.end_date < goal.expected_data:
+                        goal.goal_value = goal.goal_value + 5
+                if goal.goal_value != -1:
+                    UsersController.update_user_capcoin(goal.user_id, goal.goal_value)
+                #adicionar a moeda para o usuário antes de desativar as moedas
+                goal.goal_value = -1
             if dados.get('expected_data'):
                 data_atual = datetime.now()
                 data_final = data_atual + timedelta(days=dados["expected_data"])
                 goal.expected_data = data_final
             if dados.get('pomodoro_cycles'):
                 goal.pomodoro_cycles = goal.pomodoro_cycles + int(dados.get('pomodoro_cycles'))
+                if goal.goal_value != -1 and goal.goal_value < 15:
+                    goal.goal_value = goal.goal_value + int(dados.get('pomodoro_cycles'))
             main_queries.save_query(goal)
             return {"message": "Goal updated successfully"}, 200
         except Exception as error:
@@ -131,7 +141,7 @@ class GoalsController:
         cont = 0
         for goal in goals:
             type_name = GoalsController.find_type_name(goal)
-            if status == True:
+            if status == 'true':
                 if not goal.end_date:
                     goal_object = {
                         "goals_id": goal.goals_id,
@@ -139,6 +149,7 @@ class GoalsController:
                         "current_progress": goal.current_progress,
                         "importance_degree": goal.importance_degree,
                         "pomodoro_cycles": goal.pomodoro_cycles,
+                        "goal_value": goal.goal_value,
                         "end_date": format_to_string(goal.end_date),
                         "initial_data": format_to_string(goal.initial_data),
                         "expected_data": format_to_string(goal.expected_data),
@@ -156,6 +167,7 @@ class GoalsController:
                         "current_progress": goal.current_progress,
                         "importance_degree": goal.importance_degree,
                         "pomodoro_cycles": goal.pomodoro_cycles,
+                        "goal_value": goal.goal_value,
                         "end_date": format_to_string(goal.end_date),
                         "initial_data": format_to_string(goal.initial_data),
                         "expected_data": format_to_string(goal.expected_data),
