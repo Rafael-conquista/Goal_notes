@@ -48,6 +48,8 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         await UpdateGoal(goal_json, goals_id);
         setShowModal(false);
         setMayUpdate(true);
+        const myObject = { update_coin: true };
+        sessionStorage.setItem('update_coin', JSON.stringify(myObject));
     };
 
     const handleCheckboxChange = async (item) => {
@@ -196,6 +198,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             <p><span>Expectativa:</span> {goal.expected_data}</p>
                                             <p><span>Tipo:</span> {goal.type_name}</p>
                                             <p><span>Ciclos de Pomodoro: </span> {goal.pomodoro_cycles}</p>
+                                            <p><span>Esta meta está valendo: </span> {goal.goal_value} 🪙</p>
                                             {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
                                         </div>
                                         {goal.end_date ? (
