@@ -10,14 +10,15 @@ class PostsController:
         user = main_queries.find_query(UsersModel, user_id)
         goal = main_queries.find_query(GoalsModel, dados.get("id_goal", None))
         if not user or not goal:
-            return {"message": "incorret user or goal id"}
-
-        post = PostsModel(dados)
-        post.user_id = user_id
-        post.goal_id = dados.get("goal_id", None)
-        main_queries.save_query(post)
-
-        return {"message": "the post has been created"}, 201
+            return False
+        if goal.user_id == user_id:
+            post = PostsModel(dados)
+            post.user_id = user_id
+            post.goal_id = dados.get("goal_id", None)
+            post.image_id = dados.get("image_id", None)
+            main_queries.save_query(post)
+            return True
+        return False
 
     def find_post(id):
         try:
@@ -45,6 +46,7 @@ class PostsController:
                     "id_goal": post.id_goal,
                     "id": post.id,
                     "id_user": post.id_user,
+                    "id_image": post.image_id,
                     "numLikes": post.numLikes,
                 }
             )
