@@ -20,6 +20,27 @@ function Navbar({ currentPage }) {
   }
 
   useEffect(() => {
+    const intervalId = setInterval(() => {
+      const update_coin = JSON.parse(sessionStorage.getItem('update_coin'));
+
+      if(update_coin){
+        get_coins(id).then((user) => {
+          if (user) {
+              setCapCoins(user.capCoins);
+              setloading(false);
+          }
+          else {
+              setloading(true);
+          }
+        });
+        sessionStorage.removeItem('update_coin');
+      }
+    }, 1600);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
     get_coins(id).then((user) => {
       if (user) {
           setCapCoins(user.capCoins);
