@@ -7,6 +7,7 @@ class PostsModel(banco.Model):
 
     id = banco.Column(banco.Integer, primary_key=True, autoincrement=True)
     numLikes = banco.Column(banco.Integer, default=0)
+    image_id = banco.Column(banco.Integer, default=1)
     desc = banco.Column(banco.String(200), nullable=False)
     id_user = banco.Column(banco.Integer, ForeignKey("Users.id"), nullable=False)
     id_goal = banco.Column(banco.Integer, ForeignKey("Goals.goals_id"), nullable=False)
@@ -18,3 +19,4 @@ class PostsModel(banco.Model):
         self.desc = dados.get("desc", None)
         self.id_user = dados.get("id_user", None)
         self.id_goal = dados.get("id_goal", None)
+        self.image_id = dados.get("image_id", None)

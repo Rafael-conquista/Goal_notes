@@ -72,9 +72,8 @@ api.add_resource(Amigo_desfazer, "/Amigo_desfazer")
 # verify JWT token
 api.add_resource(VerifyJWT, "/verify_token")
 # posts related Routes
-api.add_resource(Posts, "/posts")
+api.add_resource(Posts, "/posts/<int:id>")
 api.add_resource(Post, "/post/<int:id>")
-api.add_resource(PostCreator, "/create_post")
 # comments related Routes
 api.add_resource(Comments, "/comments")
 api.add_resource(Comment, "/comment/<int:id>")
