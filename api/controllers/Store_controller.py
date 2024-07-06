@@ -47,7 +47,6 @@ class StoreController:
             store.end_date = (
                 format_datetime(store.end_date) if "end_date" in dados.keys() else None
             )
-            import ipdb; ipdb.set_trace()
             main_queries.save_query(store)
             return {"message": "the skin has been created"}, 201
         except:

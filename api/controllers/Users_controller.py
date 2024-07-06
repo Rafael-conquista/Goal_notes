@@ -98,7 +98,7 @@ class UsersController:
 
     def update_user(user_id, dados):
         users = main_queries.find_query(UsersModel, user_id)
-        if (dados.get("sencivel") == True and dados.get("password") == users.password and dados.get("email") != users.email and dados.get("newPassword") == ""):
+        if (dados.get("sensivel") == True and dados.get("password") == users.password and dados.get("email") != users.email and dados.get("newPassword") == ""):
             try:
                 user = main_queries.find_query(UsersModel, user_id)
                 user.surname = dados.get("surname", user.surname)
@@ -109,7 +109,7 @@ class UsersController:
                 return {"message": "user updated successfully"}, 200            
             except Exception as error:
                 return {"message": error}, 400
-        elif (dados.get("sencivel") == True and dados.get("password") == users.password and dados.get("newPassword") != ""):
+        elif (dados.get("sensivel") == True and dados.get("password") == users.password and dados.get("newPassword") != ""):
             try:
                 user = main_queries.find_query(UsersModel, user_id)
                 user.surname = dados.get("surname", user.surname)
@@ -120,7 +120,7 @@ class UsersController:
                 return {"message": "user updated successfully"}, 200            
             except Exception as error:
                 return {"message": error}, 400
-        elif (dados.get("sencivel") == False):
+        elif (dados.get("sensivel") == False):
             try:
                 user = main_queries.find_query(UsersModel, user_id)
                 user.surname = dados.get("surname", user.surname)
@@ -129,7 +129,7 @@ class UsersController:
                 return {"message": "user updated successfully"}, 200            
             except Exception as error:
                 return {"message": error}, 400
-        elif (dados.get("sencivel") == True and dados.get("password") != users.password):
+        elif (dados.get("sensivel") == True and dados.get("password") != users.password):
             return {"message": "senha inválida"}, 200
         else:
             try:

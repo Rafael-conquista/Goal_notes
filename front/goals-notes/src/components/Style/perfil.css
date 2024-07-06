@@ -242,6 +242,13 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 33.5vw;
 }
 
+.amizades_consult {
+  height: calc(100vh - 110px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100vw;
+}
+
 .amizades_geral, .amizades_pendente {
     border-right: solid #e5a24c55 2px;
 }

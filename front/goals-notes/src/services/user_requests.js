@@ -19,7 +19,7 @@ export async function get_user(id){
         "password": data.password,
         "newPassword": data.newPassword,
         "excluido": data.excluir,
-        "sencivel": data.sencivel
+        "sensivel": data.sensivel
       });
       var requestOptions = {
         method: 'PUT',
