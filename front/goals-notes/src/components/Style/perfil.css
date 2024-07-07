@@ -68,6 +68,19 @@
     width: auto;
 }
 
+.consultar_amigo {
+  border-radius: 100px;
+}
+
+.cap_welcome_page {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.cap_welcome_page:hover {
+  box-shadow: 0 0 10px white;
+}
+
 .user_info_main {
     display: flex;
 }

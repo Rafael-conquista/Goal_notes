@@ -204,7 +204,9 @@ function AmigosConsultComponent({ idToken, id }) {
                         <div className='amizades_amigos'>
                             {friends.length > 0 ? friends.map((friend) => (
                                 <div key={friend.id} className='amigo'>
-                                    <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                    <a className='consultar_amigo' href={`/${friend.userId}/Perfil`}>
+                                        <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                    </a>
                                     <p>{friend.name} #{friend.userId}</p>
                                         <button type="button" onClick={() => desfazerAmizade(friend.id)} class="button_perfil_negar">
                                             <span class="button__text">Remover</span>
@@ -224,7 +226,9 @@ function AmigosConsultComponent({ idToken, id }) {
                         <div className='amizades_amigos'>
                             {friends.length > 0 ? friends.map((friend) => (
                                 <div key={friend.id} className='amigo'>
-                                    <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                    <a className='consultar_amigo' href={`/${friend.userId}/Perfil`}>
+                                        <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                    </a>
                                     <p>{friend.name} #{friend.userId}</p>
                                 </div>
                             )) : <p>Você ainda não fez nenhuma amizade.</p>}
@@ -256,7 +260,9 @@ function AmigosConsultComponent({ idToken, id }) {
                                     <>
                                         {((!consultarRecebidoPendente && !consultarEnviadoPendente)) &&
                                             <div key={friendPendente.id} className='amigo'>
-                                                <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                                <a className='consultar_amigo' href={`/${friendPendente.userId}/Perfil`}>
+                                                    <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                                </a>
                                                 <p>{friendPendente.name} #{friendPendente.userId}</p>
                                                 {friendPendente.id_usuario_enviado != id &&
                                                     <div className='botoes_amigos'>
@@ -288,7 +294,9 @@ function AmigosConsultComponent({ idToken, id }) {
                                         }
                                         {consultarRecebidoPendente && !consultarEnviadoPendente && friendPendente.id_usuario_enviado == id &&
                                             <div key={friendPendente.id} className='amigo'>
-                                                <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                                <a className='consultar_amigo' href={`/${friendPendente.userId}/Perfil`}>
+                                                    <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                                </a>
                                                 <p>{friendPendente.name} #{friendPendente.userId}</p>
                                                 <div className='botoes_amigos'>
                                                     <button type="button" onClick={() => negarAmizade(friendPendente.id)} class="button_perfil_negar">
@@ -303,7 +311,9 @@ function AmigosConsultComponent({ idToken, id }) {
                                         }
                                         {!consultarRecebidoPendente && consultarEnviadoPendente && friendPendente.id_usuario_enviado != id &&
                                             <div key={friendPendente.id} className='amigo'>
-                                                <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                                <a className='consultar_amigo' href={`/${friendPendente.userId}/Perfil`}>
+                                                    <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                                </a>
                                                 <p>{friendPendente.name} #{friendPendente.userId}</p>
                                                 <div className='botoes_amigos'>
                                                     <button type="button" onClick={() => aceitarAmizade(friendPendente.id)} class="button_perfil">
@@ -336,7 +346,9 @@ function AmigosConsultComponent({ idToken, id }) {
                                         <>
                                             {amigosConsult.id != id &&
                                                 <div key={amigosConsult.id} className='amigo'>
-                                                    <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                                    <a className='consultar_amigo' href={`/${amigosConsult.id}/Perfil`}>
+                                                        <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                                                    </a>
                                                     <p>{amigosConsult.surname} #{amigosConsult.id}</p>
                                                     <button type="button" onClick={() => requestFriend(amigosConsult.id)} class="button_perfil">
                                                       <span class="button__text">Solicitar</span>

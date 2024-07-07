@@ -32,7 +32,9 @@ function AmigosConsultComponent({ idToken, id }) {
             <div className='amigo_main_ultimos'>
                 {friends.length > 0 ? friends.map((friend) => (
                     <div key={friend.id} className='amigo'>
-                    <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                    <a className='consultar_amigo' href={`/${friend.userId}/Perfil`}>
+                        <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                    </a>
                     <p>{friend.name} #{friend.userId}</p>
                 </div>
                 )) : <p>Você ainda não fez nenhuma amizade.</p>}
