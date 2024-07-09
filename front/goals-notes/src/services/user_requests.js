@@ -19,7 +19,8 @@ export async function get_user(id){
         "password": data.password,
         "newPassword": data.newPassword,
         "excluido": data.excluir,
-        "sensivel": data.sensivel
+        "sencivel": data.sencivel,
+        "capCoins": data.capCoins
       });
       var requestOptions = {
         method: 'PUT',

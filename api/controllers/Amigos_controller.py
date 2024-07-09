@@ -171,8 +171,8 @@ class AmigosController:
             return {"amigos": amigos_list}, 200
         else:
             return {"message": "Amigo não encontrado"}, 404
-
-    def find_friend_by_user(id_usuario):
+        
+    def make_friend_by_user_list(id_usuario):
         amigos = main_queries.find_all_query(AmigosModel)
         amigos_sorted = sorted(amigos, key=lambda amigo: amigo.data_solicitacao or datetime.min, reverse=True)
 
@@ -207,6 +207,10 @@ class AmigosController:
                             "userId": user.id,
                         }
                     )
+        return amigos_list
+
+    def find_friend_by_user(id_usuario):
+        amigos_list = AmigosController.make_friend_by_user_list(id_usuario)
         if amigos_list:
             return {"amigos": amigos_list}, 200
         else:

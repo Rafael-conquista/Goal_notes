@@ -5,8 +5,8 @@ from controllers.Posts_controller import PostsController
 
 
 class Posts(Resource):
-    def get(self):
-        return PostsController.find_all_posts()
+    def get(self, id):
+        return PostsController.show_friend_posts(id)
 
 
 class Post(Resource):
