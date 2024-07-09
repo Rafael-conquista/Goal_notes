@@ -41,25 +41,52 @@ export async function postCompra(preco, capCoins, idUsuario, idStore){
     return false
   }
 }
-export async function escolherSkin(idSkin){
-  try{
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+export async function escolherSkin(idSkin, validacao){
+    if(validacao == true){
+      try{
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
+        var raw = JSON.stringify({
+          "idSkin": idSkin,
+          "validacao": validacao
+        });
+        var requestOptions = {
+          method: 'PUT',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+      
+        let response = await fetch(`http://127.0.0.1:5000/active_iten_user`, requestOptions)
+        return response.json()
+      } catch(e){
+          console.log(e)
+        return false
+      }
+    }
+    else if(validacao == false){
+      try{
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
+        var raw = JSON.stringify({
+          "idSkin": idSkin,
+          "validacao": validacao
+        });
+        var requestOptions = {
+          method: 'PUT',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+      
+        let response = await fetch(`http://127.0.0.1:5000/active_iten_user`, requestOptions)
+        return response.json()
+      } catch(e){
+          console.log(e)
+        return false
+      }
+    }
     
-    var raw = JSON.stringify({
-      "idSkin": idSkin
-    });
-    var requestOptions = {
-      method: 'PUT',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-  
-    let response = await fetch(`http://127.0.0.1:5000/active_iten_user`, requestOptions)
-    return response.json()
-  } catch(e){
-      console.log(e)
-    return false
-  }
 }

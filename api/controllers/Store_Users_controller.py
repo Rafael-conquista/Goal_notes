@@ -71,30 +71,52 @@ class StoreUsersController:
         except Exception as error:
             return {"message": error}, 501
 
-    def active_iten_user(idSkin):
-        valida = False
-        skin_user = main_queries.find_query(StoreUsersModel, idSkin)
-        idUser = skin_user.id_usuario
+    def active_iten_user(idSkin, validacao):
+        if (validacao == False):
+            valida = False
+            skin_user = main_queries.find_query(StoreUsersModel, idSkin)
+            idUser = skin_user.id_usuario
 
-        skins = main_queries.find_all_query(StoreUsersModel)
-        if not isinstance(skins, list):
-            skins = [skins]
-            
-        if skins is None:
-            skins = []
+            skins = main_queries.find_all_query(StoreUsersModel)
+            if not isinstance(skins, list):
+                skins = [skins]
 
-        for skin in skins:
-            if (skin.id_usuario == idUser and skin.id != idSkin):
-                skin.using = 0
-                main_queries.save_query(skin)
-            elif (skin.id_usuario == idUser and skin.id == idSkin):
-                skin.using = 1
-                main_queries.save_query(skin)
-                valida = True
+            if skins is None:
+                skins = []
 
-        if(valida):
-            return 'Alterado'
-        else:
-            return 'Algo deu erro'
-        
+            for skin in skins:
+                if (skin.id_usuario == idUser and skin.id != idSkin):
+                    skin.using = 0
+                    main_queries.save_query(skin)
+                elif (skin.id_usuario == idUser and skin.id == idSkin):
+                    skin.using = 1
+                    main_queries.save_query(skin)
+                    valida = True
+
+            if(valida):
+                return 'Alterado'
+            else:
+                return 'Algo deu erro'
+        elif (validacao == True):
+            valida = False
+            idUser = idSkin
+
+            skins = main_queries.find_all_query(StoreUsersModel)
+            if not isinstance(skins, list):
+                skins = [skins]
+
+            if skins is None:
+                skins = []
+
+            for skin in skins:
+                if (skin.id_usuario == idUser):
+                    skin.using = 0
+                    main_queries.save_query(skin)
+                    valida = True
+
+            if(valida):
+                return 'Alterado'
+            else:
+                return 'Algo deu erro'
+
         

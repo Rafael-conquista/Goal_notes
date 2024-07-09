@@ -24,12 +24,14 @@ const UsuarioFoto = ({ idToken }) => {
 	  <div className='loading'>
 		<div className='clicar' onClick={() => alerta()}></div>
 		<div className='consulta_skins'>
-			<h1>Aqui estão todas as suas skins</h1>
-			<div className='consulta_skins_images'>
+			<h1>Aqui estão as skins compradas</h1>
+			<div className='amizades_amigos consulta_skins_images'>
 				{skin.length > 0 ? skin.map((skinsUsuario) => (
 				  <AmigoFotoComponent id={skinsUsuario.id_store} perfil={true} alterando={true} idCap={skinsUsuario.id} />
-				)) : <p>Você ainda não tem skins, tente comprar algumas na loja.</p>}
+				)) : <p>Você ainda não tem skins compradas, tente comprar algumas na loja.</p>}
 			</div>
+			<h1>Aqui estão as skins padrões</h1>
+			<AmigoFotoComponent id={0} perfil={true} alterando={true} idCap={idToken} />
 		</div>
 	  </div>
 	);

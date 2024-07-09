@@ -31,6 +31,7 @@ class Active_iten_user(Resource):
     def put(self):
         dados = request.get_json()
         idSkin = dados["idSkin"]
-        return StoreUsersController.active_iten_user(idSkin)
+        validacao = dados["validacao"]
+        return StoreUsersController.active_iten_user(idSkin, validacao)
 
 

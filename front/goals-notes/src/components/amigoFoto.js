@@ -29,6 +29,8 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap }) {
 
     const getImageSrc = (idImage) => {
         switch (idImage) {
+          case 0:
+            return cap_default;
           case 1:
             return cap_doom;
           case 2:
@@ -45,9 +47,17 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap }) {
       };
 
     async function escolherCap() {
-      const response = await escolherSkin(idCap)
-      if (response === 'Alterado'){
-        window.location.reload()
+      if (id != 0) {
+        const response = await escolherSkin(idCap, false)
+        if (response === 'Alterado'){
+          window.location.reload()
+        }
+      }
+      else if (id == 0) {
+        const response = await escolherSkin(idStore, true)
+        if (response === 'Alterado'){
+          window.location.reload()
+        }
       }
     }
     
@@ -61,8 +71,11 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap }) {
         {consultaPerfil && !editar &&
           <img src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page'/>
         }
-        {consultaPerfil && editar &&
-          <img onClick={() => escolherCap()} src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page cap_welcome_page_amigo'/>
+        {consultaPerfil && editar && !idStore &&
+          <img src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page cap_welcome_page_amigo'/>
+        }
+        {consultaPerfil && editar && idStore &&
+          <img onClick={() => escolherCap()} src={getImageSrc(idImage)} alt='vazio' className='espacamento cap_welcome_page cap_welcome_page_amigo'/>
         }
       </>
     );

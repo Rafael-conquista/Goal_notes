@@ -84,9 +84,12 @@ const Store = () => {
   async function comprarSkin(preco, idStore) {
     if (preco <= capCoins) {
       const response = await postCompra(preco, capCoins, idToken, idStore);
+      setCapCoins(capCoins - preco)
       getSkins().then((skins) => {
         const result = skins.skins
         setSkin(result);
+        const myObject = { update_coin: true };
+        sessionStorage.setItem('update_coin', JSON.stringify(myObject));
       })
       getImage(id).then((image) => {
         const result = image.skins
