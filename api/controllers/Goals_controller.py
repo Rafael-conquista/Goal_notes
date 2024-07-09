@@ -4,7 +4,9 @@ from utils import main_queries
 from models.Types_model import TypesModel
 from models.Goals_model import GoalsModel
 from models.Users_model import UsersModel
+from models.Cap_model import CapModel
 from controllers.Users_controller import UsersController
+from controllers.Posts_controller import PostsController
 from datetime import datetime, timedelta
 
 
@@ -80,6 +82,16 @@ class GoalsController:
                 if goal.goal_value != -1:
                     UsersController.update_user_capcoin(goal.user_id, goal.goal_value)
                 #adicionar a moeda para o usuário antes de desativar as moedas
+                #create posts
+                cap = banco.session.query(CapModel).filter(CapModel.id_user == goal.user_id).first()
+                data = {
+                    "desc": goal.name,
+                    "id_user": goal.user_id,
+                    "id_goal": goal.goals_id,
+                    "image_id": cap.selected_skin
+                }
+                PostsController.make_post(data, goal.user_id)
+
                 goal.goal_value = -1
             if dados.get('expected_data'):
                 data_atual = datetime.now()

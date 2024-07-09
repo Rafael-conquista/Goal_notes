@@ -10,6 +10,7 @@ import { Route,Routes, BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { verify } from "./utils/token_verify";
 import React, { useEffect } from 'react';
+import Posts from "./pages/GoalPosts/posts";
 
   function App() {
     useEffect(() => {
@@ -32,6 +33,7 @@ import React, { useEffect } from 'react';
           <Route path="/:id/Amigos" element={<Amigos />}></Route>
           <Route path="/:id/Perfil" element={<Perfil />}></Route>
           <Route path="/:id/store" element={<Store />}></Route>
+          <Route path="/:id/posts" element={<Posts />}></Route>
         </Routes>
     </BrowserRouter>
   );
