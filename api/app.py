@@ -38,6 +38,7 @@ from Routes.Posts import Post, Posts, PostCreator
 from Routes.PostComments import PostComment, Comment, Comments
 from Routes.Caps import Cap_register, Cap, Users_cap
 from Routes.Store import Store_skins, Store, Store_register
+from Routes.Store_Users import Itens_by_user, Itens_active_by_user, Itens_register_by_user, Active_iten_user
 from Routes.VerifyJWT import VerifyJWT
 
 # Users related Routes
@@ -86,6 +87,12 @@ api.add_resource(Users_cap, "/users_cap/<int:id>")
 api.add_resource(Store_skins,"/skins")
 api.add_resource(Store, "/store/<int:id>")
 api.add_resource(Store_register, "/skin_register")
+#Store_User related Routes
+api.add_resource(Itens_by_user,"/Itens_by_user/<int:user_id>")
+api.add_resource(Itens_active_by_user,"/Itens_by_user_active/<int:user_id>")
+api.add_resource(Itens_register_by_user, "/itens_register_by_user")
+api.add_resource(Active_iten_user, "/active_iten_user")
+
 
 @app.before_first_request
 def cria_banco():

@@ -1,8 +1,5 @@
-import random
 from sql_alchemy import banco
 from sqlalchemy import ForeignKey
-from utils import main_queries
-import datetime
 
 
 class AmigosModel(banco.Model):
