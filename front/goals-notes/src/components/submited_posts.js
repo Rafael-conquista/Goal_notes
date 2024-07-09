@@ -24,6 +24,9 @@ function SubmitedPosts({ posts }) {
                                 Completou a tarefa: {comment.desc}
                             </p>
                         </div>
+                        <div className='fixed_like'>
+                                <span>❤️</span>
+                        </div>
                     </div>
                 ))
             ) : (

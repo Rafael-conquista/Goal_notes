@@ -82,14 +82,35 @@
 
 .posts {
     width: 35vw;
-    height: 29vh;
-    border-radius: 3px;
-    background-color: #b5ffe05b;
-    border: solid 1px #3b3b3b;
+    height: 19vh;
+    border-radius: 20px;
+    background-color: #F1FAEE;
+    border: solid 1px #bdbdbd;
     display: grid;
     grid-template-columns: min-content 1fr;
     gap: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.fixed_like{
+    position: absolute;
+    color: white;
+    bottom: 10px;
+    right: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #ffc8c8;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s, transform 0.3s;
+    text-align: center;
+    font-size: 1em;
+}
+
+.fixed_like:hover {
+    background-color: #ffebeb;
+    transform: translateY(-3px);
+  }
 
 .text_style {
     padding-left: 30px;
@@ -97,14 +118,14 @@
     text-align: justify;
     margin-top: 28px;
     font-family: Roboto;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.25;
     letter-spacing: normal;
     text-align: left;
-    color: #9f9f9f;
+    color: #000000;
 }
 
 .comments_image {
@@ -120,27 +141,27 @@
 
 .sender {
     font-family: Roboto;
-    font-size: 12px;
+    font-size: 20px;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.33;
     letter-spacing: 0.29px;
     text-align: left;
-    color: #5f5f5f;
+    color: #FF6B6B;
 }
 
 .sender_name {
     margin-top: -5px;
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 25px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.29;
     letter-spacing: normal;
     text-align: left;
-    color: #7a7a7a;
+    color: #FF6B6B;
 }
 
 @media screen and (max-width: 1340px) {
@@ -164,7 +185,7 @@
 @media screen and (max-width: 1200px) {
     .posts {
         width: 55vw;
-        height: 29vh;
+        height: 19vh;
     }
 
     .feed_container span {
@@ -175,7 +196,7 @@
 @media screen and (max-width: 800px) {
     .posts {
         width: 75vw;
-        height: 29vh;
+        height: 19vh;
     }
 
     .feed_container span {
@@ -186,7 +207,7 @@
 @media screen and (max-width: 540px) {
     .posts {
         width: 75vw;
-        height: 32vh;
+        height: 22vh;
     }
 
     .feed_container span {
