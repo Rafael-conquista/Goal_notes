@@ -13,7 +13,7 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap }) {
   const [idImage, setIdImage] = useState();
   const [idStore, setIdStore] = useState(idCap);
   const [consultaPerfil, setConsultaPerfil] = useState(perfil);
-  const [editar, setEditar] = useState(alterando);
+  const [editar, setEditar] = useState();
 
     useEffect(() => {
       getImageActive(id).then((image) => {

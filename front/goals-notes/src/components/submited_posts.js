@@ -1,6 +1,7 @@
 import { update_user } from '../services/user_requests';
 import './Style/posts.css';
 import { useEffect, useState } from 'react';
+import AmigoFotoComponent from './amigoFoto';
 
 function SubmitedPosts({ posts }) {
     const [comments, setComments] = useState([]);
@@ -15,11 +16,14 @@ function SubmitedPosts({ posts }) {
             {comments && comments.length > 0 ? (
                 comments.map((comment, index) => (
                     <div key={index} className='posts'>
-                        <img src={`img${comment.imageId}.jpg`} className='avatar' alt='imagem de perfil' />
+                        <AmigoFotoComponent id = {comment.id_user}/>
                         <div className='text_style'>
+                        <a className='sender_name' href={`/${comment.id_user}/Perfil`}>
                             <p className='sender_name'>
                                Seu amigo {comment.user_name} tem novidades!
                             </p>
+                        </a>
+
                             <p>
                                 Completou a tarefa: {comment.desc}
                             </p>
