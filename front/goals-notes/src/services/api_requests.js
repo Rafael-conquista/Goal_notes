@@ -107,3 +107,13 @@ export async function getAllTypes(){
     console.log(e)
   }
 }
+
+export async function getPosts(id){
+  try{
+    let response = await fetch(`http://127.0.0.1:5000/posts/${id}`)
+    let posts = await response.json()
+    return posts
+  } catch(e){
+    console.log(e)
+  }
+}
