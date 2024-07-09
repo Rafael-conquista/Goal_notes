@@ -1,8 +1,8 @@
+import { update_user } from '../services/user_requests';
 import './Style/posts.css';
 import { useEffect, useState } from 'react';
 
 function SubmitedPosts({ posts }) {
-    console.log(posts);
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
@@ -24,7 +24,9 @@ function SubmitedPosts({ posts }) {
                                 Completou a tarefa: {comment.desc}
                             </p>
                         </div>
-                        <div className='fixed_like'>
+                        <div className='fixed_like' onClick={async () => {
+                            await update_user({"capCoins": 2}, comment.id_user);
+                        }}>
                                 <span>❤️</span>
                         </div>
                     </div>
