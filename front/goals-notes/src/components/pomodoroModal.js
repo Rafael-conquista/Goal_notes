@@ -42,10 +42,10 @@ function PomodoroModel({ id, key, goal_name }) {
             if (mode === 'work') {
                 if ((cycles + 1) % 4 === 0) {
                     setMode('longBreak');
-                    setSecondsLeft(25 * 60); // 15 minutes
+                    setSecondsLeft(15 * 60); // 15 minutes
                 } else {
                     setMode('shortBreak');
-                    setSecondsLeft(25 * 60); // 5 minutes
+                    setSecondsLeft(5 * 60); // 5 minutes
                 }
                 setCycles(cycles + 1);
             } else {
