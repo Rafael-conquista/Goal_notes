@@ -9,7 +9,6 @@ class StoreController:
         skins = main_queries.find_all_query(StoreModel)
         skin_list = []
         for skin in skins:
-            obs = skin.initial_data
             skin_list.append({
                 "id": skin.id,
                 "rarity": skin.id,

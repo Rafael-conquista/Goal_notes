@@ -1,10 +1,12 @@
 import './Style/userStyle.css'
 import React, { useState, useEffect } from 'react';
-import cap_default from '../images/cap_default.jpg';
 import { update_cap } from '../services/cap_requests.js';
+import AmigoFotoComponent from '../components/amigoFoto.js';
+import UsuarioFotoComponent from '../components/usuarioFoto.js';
 
 function CapUpdateComponent({ idToken, id, nameAntigo }) {
     const [editar, setEditar] = useState(false);
+    const [alterarFotoPerfil, setAlterarFotoPerfil] = useState(false);
     const [name, setName] = useState('')
     const [message, setMessage] = useState('')
     
@@ -39,12 +41,26 @@ function CapUpdateComponent({ idToken, id, nameAntigo }) {
         const response = await update_cap(user_json, id);
         setMessage(response.message)
     }
+
+    const alterFoto = (e) => {
+        setAlterarFotoPerfil(true)
+    }
     
     return (
         <div className={`component_cap ${editar ? 'border' : 'border_esquerda'}`}>
             <div className='card_esq text'>
                 <h1>Edite sua capivara</h1>
-                <img src={cap_default} alt='vazio' className="cap_welcome_page" />
+                {!editar &&
+                    <AmigoFotoComponent id = {id} perfil={true}/>
+                }
+                {editar &&
+                    <a className='consultar_amigo' onClick={alterFoto}>
+                        <AmigoFotoComponent id = {id} perfil={true} alterando={true}/>
+                    </a>
+                }
+                {alterarFotoPerfil &&
+                    <UsuarioFotoComponent idToken = {idToken}/>
+                }
                 { id == idToken &&
                     <>
                         {!editar &&

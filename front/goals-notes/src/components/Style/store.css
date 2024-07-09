@@ -71,3 +71,36 @@
     margin: 10px;
     margin-bottom: 20px;
   }
+
+  .button_perfil_store_comprada {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
+
+  .campoCompra_store_comprada {
+    cursor: default;
+    width: 100%;
+  }
+
+  .button_perfil_store_comprada {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .button_perfil_store_comprada:hover {
+    background-color: #007bff;
+  }
+
+  .button_text {
+    left: -10px !important;
+  }

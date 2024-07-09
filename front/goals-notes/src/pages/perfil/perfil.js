@@ -10,10 +10,10 @@ import { get_user } from '../../services/user_requests';
 import { get_cap } from '../../services/cap_requests.js';
 import { verify } from '../../utils/token_verify';
 import { useParams } from 'react-router-dom';
-import Loading from '../../components/loading.js';
 
 const Homepage = () => {
   const [amigosGeral, setAmigosGeral] = useState(false);
+  const [vez, setVez] = useState(false);
   const { id } = useParams();
   const [idToken, setIdToken] = useState();
   const [nicknameAntigo, setNicknameAntigo] = useState()
@@ -55,9 +55,10 @@ const Homepage = () => {
   }
 
   useEffect(() => {
-    if (capName == null || nicknameAntigo == null|| emailAntigo == null ) {
+    if (!vez) {
       get_cap_name(id)
       get_surname(id)
+      setVez(true)
     }
   })
 

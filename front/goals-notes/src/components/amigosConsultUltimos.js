@@ -1,8 +1,8 @@
 import './Style/userStyle.css';
 import React, { useState, useEffect } from 'react';
-import cap_default from '../images/cap_default.jpg';
 import Loading from './loading.js';
 import { getAmigosUser } from '../services/amigos_requests.js';
+import AmigoFotoComponent from '../components/amigoFoto.js';
 
 function AmigosConsultComponent({ idToken, id }) {
     const [loading, setLoading] = useState(true);
@@ -32,9 +32,7 @@ function AmigosConsultComponent({ idToken, id }) {
             <div className='amigo_main_ultimos'>
                 {friends.length > 0 ? friends.map((friend) => (
                     <div key={friend.id} className='amigo'>
-                    <a className='consultar_amigo' href={`/${friend.userId}/Perfil`}>
-                        <img src={cap_default} alt='vazio' className="cap_welcome_page" />
-                    </a>
+                      <AmigoFotoComponent id = {friend.userId}/>
                     <p>{friend.name} #{friend.userId}</p>
                 </div>
                 )) : <p>Você ainda não fez nenhuma amizade.</p>}

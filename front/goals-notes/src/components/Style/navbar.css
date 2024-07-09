@@ -113,7 +113,8 @@
 }
 
 .best_buton {
-    text-align: left;
+  z-index: 0;
+  text-align: left;
 }
 
 .indicator {
