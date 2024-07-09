@@ -82,10 +82,13 @@ class PostsController:
         post_json = []
         data_atual = datetime.now()
         limite_data = data_atual - timedelta(days=5)
+        max_posts = 20
+        post_count = 0
+        
         if not amigos:
             return []
         
-        for amigo in amigos: 
+        for amigo in amigos:
             if amigo.get("id_usuario_enviado") == user_id:
                 result = banco.session.query(PostsModel).filter(PostsModel.id_user == amigo["id_usuario_recebido"]).all()
                 id_friend = amigo["id_usuario_recebido"]
@@ -94,12 +97,16 @@ class PostsController:
                 id_friend = amigo["id_usuario_enviado"]
             
             for post in result:
+                if post_count >= max_posts:
+                    return post_json
+                
                 if post.dataCadastro > limite_data:
                     post_dict = PostsController.object_to_dict(post)
                     user = main_queries.find_query(UsersModel, id_friend)
                     post_dict.update({"user_name": user.surname})
                     post_json.append(post_dict)
-        
+                    post_count += 1
+            
         return post_json
 
     def show_friend_posts(user_id):
