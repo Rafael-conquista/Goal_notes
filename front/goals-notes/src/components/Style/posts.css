@@ -233,5 +233,6 @@
 @media screen and (max-width: 400px) {
     .posts {
         width: 75vw;
+        height: 28vh;
     }
 }

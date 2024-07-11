@@ -1,15 +1,23 @@
 import { update_user } from '../services/user_requests';
+import React, { useRef } from 'react';
 import './Style/posts.css';
 import { useEffect, useState } from 'react';
 import AmigoFotoComponent from './amigoFoto';
+import CapMessage from './CapMessages';
 
-function SubmitedPosts({ posts }) {
+function SubmitedPosts({ posts, id }) {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
         // Caso você precise fazer algo com os comments quando posts mudarem
         setComments(posts.posts);
     }, [posts]);
+
+    const capMessageRef = useRef();
+
+    const handleClick = () => {
+      capMessageRef.current.triggerToast();
+    };
 
     return (
         <div>
@@ -30,6 +38,7 @@ function SubmitedPosts({ posts }) {
                         </div>
                         <div className='fixed_like' onClick={async () => {
                             await update_user({"capCoins": 2}, comment.id_user);
+                            handleClick()
                         }}>
                                 <span>❤️</span>
                         </div>
@@ -38,6 +47,7 @@ function SubmitedPosts({ posts }) {
             ) : (
                 <p>Nenhum post encontrado</p>
             )}
+            <CapMessage ref={capMessageRef} message="Ótimo! Seu amigo ficará muito feliz com o seu apoio!" id_user={id} />
         </div>
     );
 }

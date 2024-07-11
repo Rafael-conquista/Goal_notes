@@ -9,7 +9,7 @@ import cap_witcher from '../images/capWitcher.png';
 import { getImageActive } from '../services/store_user_requests.js';
 import { escolherSkin } from '../services/store_user_requests.js';
 
-function AmigoFotoComponent({ id, perfil, alterando, idCap }) {
+function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
   const [idImage, setIdImage] = useState();
   const [idStore, setIdStore] = useState(idCap);
   const [consultaPerfil, setConsultaPerfil] = useState(perfil);
@@ -63,13 +63,16 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap }) {
     
     return (
       <>
-        {!consultaPerfil && !editar &&
+        {!consultaPerfil && !editar && !toast &&
           <a className='consultar_amigo' href={`/${id}/Perfil`}>
             <img src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page cap_welcome_page_amigo'/>
           </a>
         } 
         {consultaPerfil && !editar &&
           <img src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page'/>
+        }
+        {toast && !editar &&
+          <img src={getImageSrc(idImage)} alt='vazio' style={{ width: '60px', height: '60px', marginRight: '10px' }}/>
         }
         {consultaPerfil && editar && !idStore &&
           <img src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page cap_welcome_page_amigo'/>
