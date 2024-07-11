@@ -233,6 +233,7 @@
 .botao_amigos {
     position: absolute;
     margin: 10px;
+    z-index: 100;
 }
 
 .input_amigos {
@@ -680,6 +681,15 @@ input[type="number"]::-webkit-outer-spin-button {
     overflow-x: hidden;
     overflow-y: auto;
   }
+  
+  .consulta_skins::-webkit-scrollbar {
+    width: 10px;
+  }
+    
+  .consulta_skins::-webkit-scrollbar-thumb {
+    background: #555; 
+    border-radius: 10px;
+  }
 
   .clicar {
     position: absolute;
@@ -695,4 +705,67 @@ input[type="number"]::-webkit-outer-spin-button {
   
   .espacamento {
     margin: 30px 0px 20px;
+  }
+
+.img_perfil {
+  transition: 0.8s;
+  cursor: pointer;
+}
+
+.img_perfil:hover {
+  background-color: #FFF5;
+}
+
+  .background_img_undefined {
+    border-radius: 100px;
+  }
+
+  .background_img_hover_1:hover {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 10px #A020F0);
+  }
+
+  .background_img_1 {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 5px #A020F0);
+  }
+
+  .background_img_hover_2:hover {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 10px #FF0000);
+  }
+
+  .background_img_2 {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 5px #FF0000);
+  }
+
+  .background_img_hover_3:hover {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 10px #228B22);
+  }
+
+  .background_img_3 {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 5px #228B22);
+  }
+
+  .background_img_hover_4:hover {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 10px #0000ff);
+  }
+
+  .background_img_4 {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 5px #0000ff);
+  }
+
+  .background_img_hover_5:hover {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 10px #EEAD2D);
+  }
+
+  .background_img_5 {
+    border-radius: 100px;
+    filter: drop-shadow(0px 0px 5px #EEAD2D);
   }

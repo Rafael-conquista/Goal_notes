@@ -13,6 +13,8 @@ class StoreModel(banco.Model):
     dataCadastro = banco.Column(banco.DateTime, default=banco.func.now())
     dataAlteracao = banco.Column(banco.DateTime, onupdate=banco.func.now())
     active = banco.Column(banco.Boolean, default=False) 
+    enum = banco.Column(banco.Integer, default=None)
+    type = banco.Column(banco.Integer, default=None)
 
     def __init__(self, dados):
         self.price = dados.get("price", None)
