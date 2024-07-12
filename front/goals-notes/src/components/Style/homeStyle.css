@@ -1,176 +1,92 @@
-.homeScreen {    
-    flex-direction: row;
-    flex: 1 ;
-    margin-top: 110px;
-    margin-bottom: 110px;
-    height: calc(100vh - 110px);
-    padding-bottom: 110px;
-    background-image: url('../../images/fundoCasa.jpeg') !important;
+.homeScreen {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 220px);
+  margin: 110px 0 110px 0;
+  background-image: url("../../images/fundoCasa.jpeg");
 }
 
-.conteudo p {
-    padding: 10px 13px 10px 10px; /* cima, direita, baixo, esquerda. */
-    margin-bottom: 0;
+.asside {
+  height: 50%;
+  font-style: italic;
+  background-color: #131f24ec;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-top: 0.5px solid #ffffff;
+  color: #ffff;
 }
 
-.conteudo p:first-of-type {
-    padding-top: 30px; /* Aplica um padding-top de 20 pixels somente na primeira tag <p> dentro da classe "minhaClasse" */
+.asside_title {
+  background-color: #00000050;
+  border-bottom: 1px solid #b6b3b3;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: var(--base-text-weight-semibold, 600);
+  text-align: center; /* Centralizar o texto */
+  font-size: 1rem; /* Tamanho de fonte padrão */
+  padding: 1rem 0 1rem 0;
 }
 
-.conteudo p:last-of-type {
-    padding-bottom: 30px; /* Aplica um padding-top de 20 pixels somente na primeira tag <p> dentro da classe "minhaClasse" */
+.asside_content {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
-.conteudo {
-    overflow-y: auto;
-    flex: 1; /* Ocupa todo o espaço restante da div_meio */
-    color: #ffff;
+.asside_content > p {
+  padding: 0 0.5rem 0 0.5rem;
 }
 
-.div_meio, .div_dir, .div_esq {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #131f24ec;
-    white-space: normal; /* Permitir quebra de linha */
-    word-wrap: break-word; /* Permitir quebra de palavra */
-    padding-top: 15px; /* Espaço interno para as divs */
-    box-sizing: border-box; /* Garantir que padding e border não aumentem o tamanho do elemento */
-    border-top: 1px solid #b6b3b3; /* Adicionada borda superior */
-    border-right: 1px solid #b6b3b3; /* Adicionada borda superior */
-    border-bottom: 1px solid #b6b3b3; /* Adicionada borda superior */
-    font-style: italic;
-    max-height: calc(100vh - 220px);
-}
-
-.div_meio {
-    order: 2; /* Posição do meio */
-}
-
-.div_dir {
-    order: 3; /* Posição da direita */
-    border-right: 0px;
-}
-
-.div_esq {
-    order: 1; /* Posição da esquerda */
-}
-
-.description {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    color: #ffff;
-    font-weight: var(--base-text-weight-semibold, 600);
-    text-align: center; /* Centralizar o texto */
-    font-size: 1rem; /* Tamanho de fonte padrão */
-    word-wrap: break-word; /* Permitir quebra de palavra */
-}
-
-.divisoria{
-    border-bottom: 1px solid #b6b3b3; /* Adiciona uma linha vermelha de 2 pixels de largura */
-    width: 100%; /* Garante que a linha ocupe toda a largura disponível */
-}
-
-.fundo_escuro{
-    background-color: rgba(0, 0, 0, 0.27); /* Fundo mais escuro com opacidade */
-    width: 100%;
-    margin-top: -15px; /* Ajustar margem negativa para cobrir o padding-top */
-    padding-top: 15px; /* Adicionar padding-top para manter espaçamento interno */
-    position: sticky;
-    top: -15px;
+.metasAlcancadas {
+  display: none;
 }
 
 ::-webkit-scrollbar {
-    width: 4px; /* largura da barra de rolagem */
-    background-color: transparent; /* background da barra de rolagem transparente */
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #888; /* cor do botão da barra de rolagem */
-    border-radius: 2px;
-  }
-  
-  /* Esconder a barra de rolagem quando não estiver sendo utilizada */
-  ::-webkit-scrollbar-thumb:vertical {
-    transition: background 0.3s;
-  }
-  
-  ::-webkit-scrollbar-thumb:vertical:active {
-    background: #555; /* cor do botão da barra de rolagem quando ativa */
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* cor do botão da barra de rolagem quando hover */
-  }
-  
-  ::-webkit-scrollbar-thumb:vertical:hover {
-    background: #555; /* cor do botão da barra de rolagem vertical quando hover */
-  }
-  
-
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .homeScreen {
-        flex-direction: column; /* Colocar as divs em uma coluna vertical */
-        align-items: center; /* Centralizar o conteúdo */
-    }
-
-    .div_meio, .div_dir, .div_esq {
-        width: 100%; /* Ajustar a largura para caber na tela */
-        border-bottom: 1px solid #b6b3b3; /* Adicionada borda superior */
-        border-right: 0px; /* Adiciona borda na direita */
-    }
-
-    .div_meio {
-        order: 2; /* Primeira div na tela pequena */
-    }
-
-    .div_dir {
-        display: none;
-    }
-
-    .div_esq {
-        order: 1; /* Terceira div na tela pequena */
-        border-bottom: 0;
-    }
-
-    .description {
-        font-size: 1rem; /* Ajustar tamanho da fonte */
-    }
-
-.conteudo {
-    max-height: calc(80vh - 438px);
-    overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
+  width: 4px; /* largura da barra de rolagem */
+  background-color: transparent; /* background da barra de rolagem transparente */
 }
 
-.fundo_escuro{
-    padding-top: 18px; /* Adicionar padding-top para manter espaçamento interno */
+::-webkit-scrollbar-thumb {
+  background: #888; /* cor do botão da barra de rolagem */
+  border-radius: 2px;
 }
 
+/* Esconder a barra de rolagem quando não estiver sendo utilizada */
+::-webkit-scrollbar-thumb:vertical {
+  transition: background 0.3s;
 }
 
+::-webkit-scrollbar-thumb:vertical:active {
+  background: #555; /* cor do botão da barra de rolagem quando ativa */
+}
 
-@media (max-width: 480px) {
-    .homeScreen {
-        display: flex;
-        flex-direction: column;
-        flex: 1 ;
-        margin-top: 110px;
-        height: calc(100vh - 110px);
-        padding-bottom: 110px;
-        background-image: url('../../images/fundoCasa.jpeg') !important;
-    }
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* cor do botão da barra de rolagem quando hover */
+}
 
-    .description {
-        font-size: 0.9rem; /* Ajustar tamanho da fonte para telas muito pequenas */
-        white-space: normal; /* Permitir quebra de linha */
-        word-wrap: break-word; /* Permitir quebra de palavra */
-    }
-    .conteudo {
-        max-height: calc(104vh - 626px);
-        overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
-    }
-    .fundo_escuro{
-        padding-top: 16px; /* Adicionar padding-top para manter espaçamento interno */
-    }
+::-webkit-scrollbar-thumb:vertical:hover {
+  background: #555; /* cor do botão da barra de rolagem vertical quando hover */
+}
+
+@media (min-width: 768px) {
+  .homeScreen {
+    max-height: calc(100vh - 220px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .metasAlcancadas {
+    display: flex;
+    border-left: 0.5px solid #ffffff;
+    border-right: 0.5px solid #ffffff;
+  }
+
+  .asside {
+    height: calc(100vh - 220px);
+    border-bottom: 1px solid #b6b3b3;
+  }
+}
+@media (min-width: 1024px) {
 }
