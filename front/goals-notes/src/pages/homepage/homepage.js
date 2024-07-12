@@ -7,7 +7,7 @@ const Homepage = () => {
   return (
     <div>
       <Navbar currentPage="home"/> 
-      <div className='capScreen homeScreen'>  
+      <div className='homeScreen'>  
         <div className="div_meio">
           <div className='fundo_escuro'>
             <p className='description'>Atualizações de amigos</p>

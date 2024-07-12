@@ -1,11 +1,9 @@
-.homeScreen {
-    display: flex;
+.homeScreen {    
     flex-direction: row;
-    justify-content: space-between;
     flex: 1 ;
     margin-top: 110px;
     margin-bottom: 110px;
-    height: calc(100vh - 110px) !important;
+    height: calc(100vh - 110px);
     padding-bottom: 110px;
     background-image: url('../../images/fundoCasa.jpeg') !important;
 }
@@ -153,22 +151,16 @@
 
 
 @media (max-width: 480px) {
-    .description {
-        font-size: 0.9rem; /* Ajustar tamanho da fonte para telas muito pequenas */
-        white-space: normal; /* Permitir quebra de linha */
-        word-wrap: break-word; /* Permitir quebra de palavra */
+    .homeScreen {
+        display: flex;
+        flex-direction: column;
+        flex: 1 ;
+        margin-top: 110px;
+        height: calc(100vh - 110px);
+        padding-bottom: 110px;
+        background-image: url('../../images/fundoCasa.jpeg') !important;
     }
-    .conteudo {
-        max-height: calc(104vh - 626px);
-        overflow-y: auto; /* Adiciona rolagem vertical quando necessário */
-    }
-    .fundo_escuro{
-        padding-top: 16px; /* Adicionar padding-top para manter espaçamento interno */
-    }
-}
 
-
-@media (max-width: 480px){
     .description {
         font-size: 0.9rem; /* Ajustar tamanho da fonte para telas muito pequenas */
         white-space: normal; /* Permitir quebra de linha */
