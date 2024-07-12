@@ -1,3 +1,7 @@
+P {
+    margin: 0;
+}
+
 .cap_component {
     position: absolute;
     display: flex;
@@ -47,6 +51,7 @@
     text-align: left;
     margin-top: 2vh;
     width: 55vw;
+    min-height: 3.75rem;
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -63,11 +68,12 @@
     border-color: #28B498;
     margin: 0 auto;
     text-align: center;
+    width: 22rem;
+    
 }
 
 .button{
     width: 180px;
-    height: 60px;
     cursor: pointer;
     background: transparent;
     border: 1px solid #28B498;
