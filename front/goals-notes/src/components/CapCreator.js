@@ -118,8 +118,8 @@ function CapCreatorComponent(){
         const cap_json = {
             "name": capName
         }
-        const user_response = await update_user(user_json, id);
-        const cap_response = await register_cap(cap_json, id);
+        const user_response = await update_user(user_json, id);  // Corrigir , pois nao esta sendo usado 
+        const cap_response = await register_cap(cap_json, id);   // Corrigir , pois nao esta sendo usado
         sessionStorage.removeItem('first_acess');
         window.location.href = `/${id}/Goals`
     }
