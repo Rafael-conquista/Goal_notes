@@ -247,7 +247,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                         const updatedItems = items.filter(i => i.id !== item.id);
                                         setItems(updatedItems);
                                     }}>Excluir</button>
-                                </div> 
+                                </div>
                             ))
                         ) : (
                             <p>Nenhuma subtarefa encontrada.</p>
