@@ -1,36 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Modal } from 'react-bootstrap';
 import { IoMdClose } from "react-icons/io";
-import './Style/goals_container.css'
+import './Style/goals_container.css';
 import styles from './Style/pomodoro.module.css';
 import { UpdateGoal } from '../services/goals_request';
+import CapMessage from './CapMessages';
 
 function PomodoroModel({ id, key, goal_name }) {
     const [showModal, setShowModal] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [secondsLeft, setSecondsLeft] = useState(25 * 60); // 25 minutes
+    const [isRunning, setIsRunning] = useState(false);
+    const [mode, setMode] = useState('work'); // 'work', 'shortBreak', 'longBreak'
+    const [cycles, setCycles] = useState(0);
+    const capMessageRef = useRef();
 
-    async function pomodoro_cycle_register(){
-        const goal_json = {pomodoro_cycles: cycles}
-        await UpdateGoal(goal_json, id)
+    async function pomodoro_cycle_register() {
+        const goal_json = { pomodoro_cycles: cycles };
+        await UpdateGoal(goal_json, id);
+        handleClick();
     }
+
+    const handleClick = () => {
+        if (capMessageRef.current) {
+            capMessageRef.current.triggerToast();
+        }
+    };
 
     const handleModal = () => {
         setShowModal(true);
     };
 
     const handleClose = () => {
-        handleReset()
+        handleReset();
         setShowModal(false);
-        console.log(`fechou com' + ${cycles} + 'ciclos`)
-        //adicionar a requisição de registro de ciclos aqui
-        pomodoro_cycle_register()
-        setCycles(0)
+        console.log(`fechou com ${cycles} ciclos`);
+        pomodoro_cycle_register();
+        setCycles(0);
     };
-
-    const [secondsLeft, setSecondsLeft] = useState(25 * 60); // 25 minutes
-    const [isRunning, setIsRunning] = useState(false);
-    const [mode, setMode] = useState('work'); // 'work', 'shortBreak', 'longBreak'
-    const [cycles, setCycles] = useState(0);
 
     useEffect(() => {
         let timer = null;
@@ -70,7 +77,7 @@ function PomodoroModel({ id, key, goal_name }) {
     const handleReset = () => {
         setIsRunning(false);
         setSecondsLeft(25 * 60);
-        setMode('work')
+        setMode('work');
     };
 
     return (
@@ -86,7 +93,9 @@ function PomodoroModel({ id, key, goal_name }) {
                     <div style={{ marginTop: '10px' }}>
                         <button>Iniciar agora!</button>
                     </div>
-                ) : (<div><button>Pomodoro</button></div>)}
+                ) : (
+                    <div><button>Pomodoro</button></div>
+                )}
             </div>
             <Modal show={showModal} onHide={handleClose} centered size="xl" dialogClassName="custom-modal">
                 <Modal.Header>
@@ -110,6 +119,7 @@ function PomodoroModel({ id, key, goal_name }) {
                     </div>
                 </Modal.Body>
             </Modal>
+            <CapMessage ref={capMessageRef} message={`Você realizou ${cycles} ciclo(s) completamente!`} id_user={id} />
         </div>
     );
 }
