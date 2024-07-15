@@ -72,6 +72,15 @@ P {
   width: 60%;
 }
 
+.cap_component input{
+    color: white;
+    border-color: #28B498;
+    margin: 0 auto;
+    text-align: center;
+    width: 22rem;
+    
+}
+
 .button {
   width: 50%; /* Mantém a largura automática */
   min-height: 50px; /* Define uma altura mínima para garantir espaço para o texto */
@@ -87,7 +96,6 @@ P {
   justify-content: center;
   align-items: center;
   white-space: normal; /* Permite quebra de linha dentro do botão */
-
 }
 
 .button:hover {
@@ -180,4 +188,26 @@ P {
   border-radius: 20px;
   font-size: 15px;
   padding: 10px;
+}
+
+.cap_component input::placeholder{
+    color: white;
+    font-size: 12px;
+}
+.button span {
+    color: white;
+    font-size: 16px; /* Ajuste conforme necessário */
+    font-weight: 500; /* Ajuste conforme necessário */
+}
+.button{
+    width: 30vw;
+}
+.button {
+    width: 40vw; /* Ajuste conforme necessário */
+    height: 50px; /* Ajuste conforme necessário */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import GoalCreator from './goalCreator';
 import ItemCreator from './subItemsCreator';
 import FinishedGoals from './finishedGoals';
@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { UpdateGoal, deleteGoals, deleteItems, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
 import PomodoroModel from './pomodoroModal';
+import CapMessage from './CapMessages';
 
 function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [empty, setEmpty] = useState(true);
@@ -20,10 +21,25 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [items, setItems] = useState([]);
     const [descriptions, setDescriptions] = useState({});
     const [showModal, setShowModal] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
 
     useEffect(() => {
         setEmpty(Object.keys(goals).length === 0);
     }, [goals, goalClicked]);
+
+    useEffect(() => {
+        if (notificationMessage) {
+            handleClick();
+        }
+    }, [notificationMessage]);
+
+    const capMessageRef = useRef();
+
+    const handleClick = () => {
+        if (capMessageRef.current) {
+            capMessageRef.current.triggerToast();
+        }
+    };
 
     const handleCloseModal = () => {
         setShowModal(false);
@@ -162,8 +178,11 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                     <div className='buttons'>
                         <div className='botao close' onClick={() => setGoalClickedUpdate(null)}>
                             <span>Fechar</span>
-                        </div>
-                        <div className='botao' onClick={verify_and_save_goal}>
+                        </div>  
+                        <div className='botao' onClick={() =>{
+                            verify_and_save_goal()
+                            setNotificationMessage("conseguimos alterar sua meta!")
+                        }}>
                             <span>Salvar</span>
                         </div>
                     </div>
@@ -202,11 +221,19 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
                                         </div>
                                         {goal.end_date ? (
-                                            <div className='top_left_botao' onClick={() => deactivateTask(false, goal.goals_id)}>
+                                            <div className='top_left_botao' onClick={() => {
+                                                deactivateTask(false, goal.goals_id)
+                                                setNotificationMessage("Sua meta foi reativada com sucesso!")
+                                            }
+                                            }>
                                                 <span>Reativar tarefa</span>
                                             </div>
                                         ) : (
-                                            <div className='top_left_botao' onClick={() => deactivateTask(new Date().toISOString().split('T')[0], goal.goals_id)}>
+                                            <div className='top_left_botao' onClick={() => {
+                                                deactivateTask(new Date().toISOString().split('T')[0], goal.goals_id)
+                                                setNotificationMessage("Sua meta foi finalizada com sucesso!")
+                                            }
+                                            }>
                                                 <span>Finalizar tarefa</span>
                                             </div>
                                         )}
@@ -214,6 +241,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             await deleteGoals(goal.goals_id);
                                             setShowModal(false);
                                             setMayUpdate(true);
+                                            setNotificationMessage("conseguimos deletar sua meta!")
                                         }}>
                                             <span>Excluir meta</span>
                                         </div>
@@ -261,6 +289,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                 </Modal.Footer>
             </Modal>
             <FinishedGoals id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate}/>
+            <CapMessage ref={capMessageRef} message={notificationMessage} id_user={id} />
         </div>
     );
 }
