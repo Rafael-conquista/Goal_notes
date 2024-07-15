@@ -1,3 +1,7 @@
+P {
+    margin: 0;
+}
+
 .cap_component {
   position: absolute;
   display: flex;
@@ -83,6 +87,7 @@
   justify-content: center;
   align-items: center;
   white-space: normal; /* Permite quebra de linha dentro do botão */
+
 }
 
 .button:hover {

@@ -52,7 +52,7 @@ function PostsFeeds({ update }) {
                 Feed
             </span>
             <div>
-                <SubmitedPosts posts={posts} update={update} />
+                <SubmitedPosts posts={posts} update={update} id={id} />
             </div>
         </div>
     );
