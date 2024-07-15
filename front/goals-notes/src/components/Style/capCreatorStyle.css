@@ -81,6 +81,7 @@ P {
     outline: none;
     transition: 0.3s ease-in-out;
     margin: 0 auto;
+    height: 60px;
 }
 
 .button:hover{
@@ -169,6 +170,22 @@ P {
     .cap_component input::placeholder{
         color: white;
         font-size: 12px;
+    }
+    .button span {
+        color: white;
+        font-size: 16px; /* Ajuste conforme necessário */
+        font-weight: 500; /* Ajuste conforme necessário */
+    }
+    .button{
+        width: 30vw;
+    }
+    .button {
+        width: 40vw; /* Ajuste conforme necessário */
+        height: 50px; /* Ajuste conforme necessário */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
     }
 }
 

@@ -4,7 +4,7 @@
     background-color: #131F24;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 9999;
     width: 100%;
     position: fixed !important;
     justify-content: center;
@@ -113,7 +113,7 @@
 }
 
 .best_buton {
-  z-index: 0;
+  z-index: 999;
   text-align: left;
 }
 
