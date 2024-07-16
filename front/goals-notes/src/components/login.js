@@ -134,56 +134,34 @@ function LoginComponent() {
           <button className="textos botaoLogar" type="submit" value="entar">
             Entrar
           </button>
-
-          {/* <div className='coletaneaBotoesLogar'>
-                            <button className='textos botaoLogar' type="submit" value="entar">Entrar</button>
-                            <a className='textos botaoLogar botaoCriarUsuario' onClick={() => primeiraVezAtualizar(true)} href="#registro">Criar Usuário</a>
-                        </div> */}
         </form>
       )}
       {!primeiraVez && (
         <form className="LoginForm" onSubmit={login_user}>
-          <h1 className="textos">Faça o Login em sua Conta</h1>
-          <div className="registroLogin">
-            <input
-              className="textos"
-              type="email"
-              required="required"
-              onChange={emailChange}
-              id="email"
-              placeholder="Informe o E-mail ou nome de usuário"
-            />
-          </div>
+          <h1 className="textos">Acesse sua conta</h1>
+          <input
+            className="textos"
+            type="email"
+            required="required"
+            onChange={emailChange}
+            id="email"
+            placeholder="Informe o E-mail"
+          />
 
-          <div className="registroSenha">
-            <input
-              className="textos"
-              type="password"
-              required="required"
-              onChange={passwordChange}
-              id="password"
-              placeholder="informe a sua senha"
-            />
-            <button className="textos esqueciSenha">Esqueceu a senha?</button>
-          </div>
+          <input
+            className="textos"
+            type="password"
+            required="required"
+            onChange={passwordChange}
+            id="password"
+            placeholder="informe a sua senha"
+          />
+
+          <button className="textos esqueciSenha">Esqueceu a senha?</button>
 
           <button className="textos botaoLogar" type="submit" value="entar">
             Entrar
           </button>
-
-          <div className="coletaneaBotoesLogar">
-            <button className="textos botaoLogar" type="submit" value="entar">
-              Entrar
-            </button>
-            <a
-              className="textos botaoLogar botaoCriarUsuario"
-              onClick={() => primeiraVezAtualizar(true)}
-              href="#registro"
-            >
-              Criar Usuário
-            </a>
-          </div>
-
           {message ? <div className="textos alertaLogin">{message}</div> : ""}
         </form>
       )}
