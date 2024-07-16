@@ -22,6 +22,9 @@ const Homepage = () => {
               <PostsFeeds/>
           </div>
         </div>
+        <div>
+          {/* asdasd */}
+        </div>
         <div className="asside metasPendentes">
           <t3 className="asside_title">Metas Pendentes</t3>
           <div className="asside_content">
