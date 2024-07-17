@@ -8,9 +8,29 @@ from models.Cap_model import CapModel
 from controllers.Users_controller import UsersController
 from controllers.Posts_controller import PostsController
 from datetime import datetime, timedelta
+from sqlalchemy import func
 
 
 class GoalsController:
+
+    def find_4_last_finished_goals(user_id):
+        import ipdb; ipdb.set_trace()  
+        today = datetime.now().date()
+        goals = banco.session.query(GoalsModel)\
+            .filter(GoalsModel.end_date <= today, GoalsModel.user_id == user_id)\
+            .order_by(func.abs(func.julianday(GoalsModel.end_date) - func.julianday(today)))\
+            .limit(4).all()
+    
+    def find_4_next_goals_to_finish(user_id): 
+        today = datetime.now()
+        goals = banco.session.query(GoalsModel)\
+            .filter(GoalsModel.expected_data > today, GoalsModel.user_id == user_id, GoalsModel.end_date == None)\
+            .order_by(GoalsModel.expected_data)\
+            .limit(4)\
+            .all()
+        
+        #adicionar um for para adicionar em um json de retorno
+        #Criar rota 
 
     def find_all_goals():
         goals = main_queries.find_all_query(GoalsModel)
