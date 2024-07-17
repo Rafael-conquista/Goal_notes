@@ -13,13 +13,29 @@ from sqlalchemy import func
 
 class GoalsController:
 
+    def format_goals_json(goals):
+        goal_list = []
+        for goal in goals:
+            goal_list.append(
+                {
+                    "name": goal.name,
+                    "expected_data": format_to_string(goal.expected_data),
+                    "obs": goal.obs,
+                    "end_date": format_to_string(goal.end_date),
+
+                }
+            )
+        return goal_list
+
+
     def find_4_last_finished_goals(user_id):
-        import ipdb; ipdb.set_trace()  
         today = datetime.now().date()
         goals = banco.session.query(GoalsModel)\
             .filter(GoalsModel.end_date <= today, GoalsModel.user_id == user_id)\
             .order_by(func.abs(func.julianday(GoalsModel.end_date) - func.julianday(today)))\
             .limit(4).all()
+        goals_list = GoalsController.format_goals_json(goals)
+        return {"goals": goals_list}, 200
     
     def find_4_next_goals_to_finish(user_id): 
         today = datetime.now()
@@ -28,9 +44,8 @@ class GoalsController:
             .order_by(GoalsModel.expected_data)\
             .limit(4)\
             .all()
-        
-        #adicionar um for para adicionar em um json de retorno
-        #Criar rota 
+        goals_list = GoalsController.format_goals_json(goals)
+        return {"goals": goals_list}, 200 
 
     def find_all_goals():
         goals = main_queries.find_all_query(GoalsModel)
