@@ -1,446 +1,399 @@
-/* body {    
-    height: 100vh;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
-/* @media screen and (max-width: 1000px) {
-    body {    
-        height: auto;
-        overflow-y: auto;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-    }
-} */
-
 h1 {
-    font-size: 4.5rem;
-    text-align: center;
-    font-weight: bold !important;
+  font-size: max(3vw, 1.5rem);
+  text-align: center;
+  font-weight: bold !important;
 }
 
 h2 {
-    padding: 0 100px;
-    text-align: center;
-    margin: 50px 0px;
-    font-size: 1.5rem;
-}
-
-@media screen and (max-width: 1000px) {
-    h1{
-        font-size: 3rem;
-    }
-    
-    h2 {
-        padding: 0 10px;
-    }
+  text-align: center;
+  margin: 50px 0px;
+  font-size: max(1vw, 1rem);
 }
 
 input {
-    cursor: text !important;
-    margin-top: 50px;
-    background-color: #28B49810;
-    color: #000;
-    border-radius: 80px;
-    border-style: ridge;
-    padding: 1rem;
-    width: 80%;
+  background-color: #28b49810;
+  color: #000;
+  border-radius: 80px;
+  border-style: ridge;
+  padding: 1em;
 }
 
 ::placeholder {
-    color: #000;
+  color: #000;
 }
 
-::-ms-input-placeholder { /* Edge 12 -18 */
-    color: #000;
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: #000;
 }
 
 .no-scroll {
-    overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 .sectionLoginForm {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-}
-
-@media screen and (max-width: 1500px) {
-    .sectionLoginForm {
-        width: 200vw;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .sectionLoginForm {
-        height: auto;
-        flex-direction: column;
-    }
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 
 .logoCapivara {
-    height: 100px;
-    position: absolute;
+  width: 300px;
+  height: 100px;
+  position: absolute;
+}
+
+@media screen and (max-width: 720px) {
+  .logoCapivara {
+    position: relative;
+    margin: auto;
+    width: 150px;
+    height: 50px;
+  }
+}
+
+.login-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100vh;
 }
 
 .LoginForm {
-    display: grid;
-    justify-content: center;
-    justify-items: center;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  flex-direction: column;
+  max-width: 40rem;
 }
 
-/*#1f1324*/
-.registroLogin, .registroSenha {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+.LoginForm input::placeholder,
+.LoginForm input {
+  color: black;
 }
 
-.botaoLogar, .botaoRegistrar{
-    position: relative;
-    top: 0;
-    left: 0;
-    transition: 0.3s;
-    margin-top: 50px;
-    height: 50px;
-    width: 40%;
-    border-radius: 100px;
-    color: white;
-    text-shadow: 0px 0px 3px #000;
-    border: none;
-    background: #28B498;
+.botaoLogar {
+  position: relative;
+  transition: 0.3s;
+  height: 50px;
+  width: 40%;
+  border-radius: 100px;
+  color: white;
+  text-shadow: 0px 0px 3px #000;
+  border: none;
+  background: #28b498;
+  margin: auto;
 }
 
-@media screen and (max-width: 1000px) {
-    .botaoLogar, .botaoRegistrar{
-        font-size: 1.5rem;
-        width: 80vw;
-    }
+.botaoRegistrar {
+  position: relative;
+  transition: 0.3s;
+  height: 50px;
+  width: 40%;
+  border-radius: 100px;
+  color: white;
+  text-shadow: 0px 0px 3px #000;
+  border: none;
+  background: #28b498;
 }
 
-.botaoLogar:hover, .botaoRegistrar:hover {
-    top: -2px;
-    left: -2px;
-    box-shadow: 5px 5px  #131f24;
+.botaoLogar:hover {
+  top: -2px;
+  left: -2px;
+  box-shadow: 5px 5px #131f24;
 }
 
 .botaoRegistrar:hover {
-    box-shadow: 5px 5px  white !important;
+  top: -2px;
+  left: -2px;
+  box-shadow: 5px 5px #131f24;
 }
 
-.botaoLogar:active, .botaoRegistrar:active {
-    background: #24a38a;
+.botaoRegistrar:hover {
+  box-shadow: 5px 5px white !important;
+}
+
+.botaoLogar:active,
+.botaoRegistrar:active {
+  background: #24a38a;
 }
 
 .cardLogin {
-    width: 65vw;
-    display: flex;
-    color: black;
-    text-shadow: 0 0 5px white;
-    justify-content: center;
-    align-items: center;
-}
-
-@media screen and (max-width: 1500px) {
-    .cardLogin {
-        height: 100vh;
-        width: 100vw;
-    }
+  display: flex;
+  flex: 2;
+  min-width: min(100%, 22.5rem);
+  color: black;
+  text-shadow: 0 0 5px white;
+  flex-direction: column;
+  background: white;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .cardRegister {
-    width: 35vw;
-    display: flex;
-    color: white;
-    text-shadow: 0 0 5px black;
-    background: #131F24;
-    justify-content: center;
-    align-items: center;
-}
-
-@media screen and (max-width: 1500px) {
-    .cardRegister {
-        height: 100vh;
-        width: 100vw;
-    }
+  display: flex;
+  flex: 1;
+  min-width: min(100%, 22.5rem);
+  color: white;
+  text-shadow: 0 0 5px black;
+  flex-direction: column;
+  background: #131f24;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .textos {
-    cursor: default;
-    font-family: "Varela Round", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  cursor: default;
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .alertaLogin {
-    height: 60px;
-    width: 65vw;
-    font-size: 1.5rem;
-    background-color: darkred;
-    color: white;
-    text-shadow: none;
-    text-align: center;
-    font-family: "Varela Round", sans-serif;
-    position: fixed;
-    bottom: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 60px;
+  width: 65vw;
+  font-size: 1.5rem;
+  background-color: darkred;
+  color: white;
+  text-shadow: none;
+  text-align: center;
+  font-family: "Varela Round", sans-serif;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media screen and (max-width: 1000px) {
-    .alertaLogin {
-        height: 100px;
-    }
-}
-
-.alertaRegistro, .alertaRegistroSucesso {
-    height: 60px;
-    width: 35vw;
-    padding: 0px 10px;
-    font-size: 1.5rem;
-    color: white;
-    text-shadow: none;
-    text-align: center;
-    font-family: "Varela Round", sans-serif;
-    position: fixed;
-    bottom: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.alertaRegistro,
+.alertaRegistroSucesso {
+  height: 60px;
+  width: 35vw;
+  padding: 0px 10px;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: none;
+  text-align: center;
+  font-family: "Varela Round", sans-serif;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .alertaRegistro {
-    background-color: darkred;
+  background-color: darkred;
 }
 
 .alertaRegistroSucesso {
-    background-color: green;
-}
-
-@media screen and (max-width: 1000px) {
-    .alertaRegistro, .alertaRegistroSucesso {
-        height: 100px;
-    }
+  background-color: green;
 }
 
 .coletaneaBotoesLogar {
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
 }
 
 .botaoCriarUsuario {
-    background-color: #131F24;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #131f24;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .botaoUsuarUsuario {
-    background-color: #000;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #000;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 1000px) {
-    .alertaLogin {
-        width: 100vw;
-    }
-    
-    .alertaRegistro, .alertaRegistroSucesso {
-        width: 100vw;
-    }
-    
-    .botaoCriarUsuario:hover {
-        box-shadow: 0px 0px 5px #131F24;
-    }
+  .alertaLogin {
+    width: 100vw;
+  }
 
-    .botaoCriarUsuario:active {
-        background: #000000;
-    }
-    
-    .botaoUsuarUsuario:hover {
-        box-shadow: 0px 0px 5px #000;
-    }
-    
-    .botaoUsuarUsuario:active {
-        background: #000;
-    }
-}
+  .alertaRegistro,
+  .alertaRegistroSucesso {
+    width: 100vw;
+  }
 
-.bot_esqueceu_senha {
-    width: 80%;
-    margin-top: 30px;
+  .botaoCriarUsuario:hover {
+    box-shadow: 0px 0px 5px #131f24;
+  }
+
+  .botaoCriarUsuario:active {
+    background: #000000;
+  }
+
+  .botaoUsuarUsuario:hover {
+    box-shadow: 0px 0px 5px #000;
+  }
+
+  .botaoUsuarUsuario:active {
+    background: #000;
+  }
 }
 
 .esqueciSenha {
-    position: relative;
-    top: 0;
-    left: 0;
-    transition: 0.3s;
-    color: white !important;
-    margin-top: 10px;
-    cursor: pointer;
-    width: 80%;
-    background-color: #28B498;
-    padding: 10px;
-    border-radius: 100px;
-    text-shadow: none;
-    text-decoration: none;
-    text-shadow: 0px 0px 3px #000;
+  position: relative;
+  transition: 0.3s;
+  color: #28b498;
+  cursor: pointer;
+  background-color: transparent;
+  text-decoration: underline;
+  opacity: 0.6;
+  width: fit-content;
 }
 
 .esqueciSenha:hover {
-    top: -2px;
-    left: -2px;
-    box-shadow: 5px 5px  #131f24;
-}
-
-@media screen and (max-width: 1000px) {
-    .esqueciSenha {
-        text-align: center;
-    }
-}
-
-.registroUsuario {
-    align-items: center;
-    display: grid;
-    justify-items: center;
+  color: #28b498;
+  opacity: 1;
+  background-color: transparent;
 }
 
 .formRegistroUsuario {
-    display: flex;
-    width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
-@media screen and (max-width: 1000px) {
-    .formRegistroUsuario {
-        width: 100%;
-    }
+.formRegistroUsuario input {
+  color: white;
+  width: 30%;
 }
-
-.registroUsuario input {
+@media screen and (max-width: 720px) {
+  .formRegistroUsuario input {
     color: white;
-    margin: 0px 10px 50px;
+    width: 100%;
+  }
 }
 
-.registroUsuario ::placeholder {
-    color: #FFF;
+.formRegistroUsuario ::placeholder {
+  color: #fff;
 }
 
-.registroUsuario ::-ms-input-placeholder { /* Edge 12 -18 */
-    color: #FFF;
+.formRegistroUsuario ::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: #fff;
 }
-
 
 .capivaraOlha {
-    height: 300px;
+  height: 300px;
 }
-  
+
 .eyes {
-    left: 130px;
-    top: 140px;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    background: #ffffff;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(0, 0, 0, 0.05); 
-    border: 2px solid #000;
+  left: 130px;
+  top: 140px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 2px solid #000;
 }
-  
+
 .eye {
-    width: 25px;
-    height: 25px;
-    background-color: #333;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: none; 
+  width: 25px;
+  height: 25px;
+  background-color: #333;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: none;
 }
-  
+
 .eye::after {
-    content: '';
-    position: absolute;
-    top: 20%;
-    left: 25%;
-    width: 8px;
-    height: 8px;
-    background-color: #fff;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0.7;
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.7;
 }
 
-.registroLogin .textos, .registroSenha .textos {
-    color: #000;
+@media screen and (max-width: 720px) {
+  .eyes {
+    display: none;
+  }
 }
 
-.registroLogin .textos::placeholder, .registroSenha .textos::placeholder {
-    color: #000;
+.registroLogin .textos,
+.registroSenha .textos {
+  color: #000;
 }
 
-.fecha, .fecha .eye::after {
-    background-color: #d98851;
+.registroLogin .textos::placeholder,
+.registroSenha .textos::placeholder {
+  color: #000;
+}
+
+.fecha,
+.fecha .eye::after {
+  background-color: #d98851;
 }
 
 .fecha .eye {
-    width: 25px;
-    height: 25px;
-    background-color: #0000;
-    border-radius: 50%;
-    border: 3px solid #0000;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  width: 25px;
+  height: 25px;
+  background-color: #0000;
+  border-radius: 50%;
+  border: 3px solid #0000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 @keyframes rodar {
-    to {
-        rotate: 360deg;
-    }
+  to {
+    rotate: 360deg;
+  }
 }
 
 .loading {
-    transition: 1s;
-    position: fixed;
-    display: flex;
-    left: 0px;
-    top: 0px;
-    width: 100vw;
-    height: 100vh;
-    background: #0006;
-    z-index: 1;
-    align-items: center;
-    justify-content: center;
+  transition: 1s;
+  position: fixed;
+  display: flex;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: #0006;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
 }
 
 .loadingRodar {
-    width: 250px;
-    height: 250px;
-    border-style: outset;
-    border-color: white;
-    border-radius: 100%;
-    border-width: thick;
-    animation: rodar 2s ease-out infinite;
+  width: 250px;
+  height: 250px;
+  border-style: outset;
+  border-color: white;
+  border-radius: 100%;
+  border-width: thick;
+  animation: rodar 2s ease-out infinite;
 }
 
 @media screen and (max-width: 1000px) {
-    .loadingRodar {
-        width: 50px;
-        height: 50px;
-    }
+  .loadingRodar {
+    width: 50px;
+    height: 50px;
+  }
 }
