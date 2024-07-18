@@ -14,7 +14,6 @@ function IncomingGoalsList() {
                 setGoals(dados.goals);
                 setLoaded(true);
             });
-            console.log(goals)
         }
     }, [id]);
 
@@ -41,16 +40,17 @@ function IncomingGoalsList() {
                 <div>
                     {goals && goals.length > 0 ? (
                         goals.map((goals, index) => (
-                            <div key={index} className='posts'>
-                                <div className='text_style'>
-                                    
-                                </div>
-                                <div className='text_style'>
+                            <div key={index} className=''>
+                                <div style={{
+                                    color: '#9f9f9f',
+                                    fontSize: '20px',
+                                    fontWeight: 'bold',
+                                }}>
                                     A tarefa {goals.name} está quase chegando em sua data final!
                                     <p>
                                         no dia {goals.expected_data}
                                     </p>
-                                </div> 
+                                </div>
                             </div>
                         ))
                     ) : (

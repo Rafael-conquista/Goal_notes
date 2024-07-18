@@ -41,16 +41,17 @@ function LastGoalsList() {
                 <div>
                     {goals && goals.length > 0 ? (
                         goals.map((goals, index) => (
-                            <div key={index} className='posts'>
-                                <div className='text_style'>
-                                    
-                                </div>
-                                <div className='text_style'>
+                            <div key={index} className=''>
+                                <div style={{
+                                    color: '#9f9f9f',
+                                    fontSize: '20px',
+                                    fontWeight: 'bold',
+                                }}>
                                     Você finalizou a tarefa {goals.name}!
                                     <p>
                                         no dia {goals.end_date}
                                     </p>
-                                </div> 
+                                </div>
                             </div>
                         ))
                     ) : (
