@@ -14,7 +14,13 @@ from sql_alchemy import banco
 class Goals_by_user(Resource):
     def get(self, user_id):
         status_search = request.args.get('ativas')
-        return GoalsController.goals_by_user(self, user_id, status_search)
+        reference_goals = request.args.get('tipo_busca')
+        if status_search:
+            return GoalsController.goals_by_user(self, user_id, status_search)
+        if reference_goals == 'ended':
+            return GoalsController.find_4_last_finished_goals(user_id)
+        if reference_goals == 'nexts':
+            return GoalsController.find_4_next_goals_to_finish(user_id)
 
 
 class Goals(Resource):

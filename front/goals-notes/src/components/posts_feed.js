@@ -48,9 +48,6 @@ function PostsFeeds({ update }) {
 
     return (
         <div className="feed_container">
-            <span>
-                Feed
-            </span>
             <div>
                 <SubmitedPosts posts={posts} update={update} id={id} />
             </div>
