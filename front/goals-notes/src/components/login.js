@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { token_storage } from "../utils/token_verify";
 import { token_verify } from "../services/api_requests.js";
 import { remove_token } from "../utils/token_verify.js";
@@ -52,6 +52,7 @@ function LoginComponent() {
   const primeiraVezAtualizar = (event) => {
     setPrimeiraVez(true);
   };
+
   async function active_user() {
     const user_json = {
       excluir: false,
@@ -105,6 +106,10 @@ function LoginComponent() {
     setShowModal(false);
   };
 
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  };
+
   return (
     <>
       {loading && <Loading />}
@@ -134,6 +139,14 @@ function LoginComponent() {
           <button className="textos botaoLogar" type="submit" value="entar">
             Entrar
           </button>
+
+          <p
+            className="textos esqueciSenha redirect"
+            onClick={scrollToBottom}
+          >
+            Realizar cadastro
+          </p>
+          
         </form>
       )}
       {!primeiraVez && (
@@ -158,6 +171,13 @@ function LoginComponent() {
           />
 
           <button className="textos esqueciSenha">Esqueceu a senha?</button>
+
+          <p
+            className="textos esqueciSenha redirect"
+            onClick={scrollToBottom}
+          >
+            Realizar cadastro
+          </p>
 
           <button className="textos botaoLogar" type="submit" value="entar">
             Entrar
