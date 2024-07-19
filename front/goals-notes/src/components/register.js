@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { token_storage } from "../utils/token_verify";
 import { register } from "../services/api_requests";
 import Loading from "./loading.js";
@@ -14,21 +14,14 @@ function RegisterComponent() {
   const [primeiraVez, setPrimeiraVez] = useState(true);
   const [sucesso, setSucesso] = useState(false);
 
-  const emailChange = (e) => {
-    setEmail(e.target.value);
-    console.log(e.target.value);
-  };
-  const surnameChange = (e) => {
-    setSurname(e.target.value);
-  };
-  const passwordChange = (e) => {
-    setPassword(e.target.value);
-  };
-  const confirmChange = (e) => {
-    setConfirm(e.target.value);
-  };
-  const ageChange = (e) => {
-    setAge(e.target.value);
+  const emailChange = (e) => setEmail(e.target.value);
+  const surnameChange = (e) => setSurname(e.target.value);
+  const passwordChange = (e) => setPassword(e.target.value);
+  const confirmChange = (e) => setConfirm(e.target.value);
+  const ageChange = (e) => setAge(e.target.value);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   async function register_user(event) {
@@ -50,12 +43,11 @@ function RegisterComponent() {
     const response = await register(user_json);
     console.log(response);
     if (response.message === "the user has been created") {
-      setMessage("usuário criado com sucesso");
+      setMessage("Usuário criado com sucesso");
       setSucesso(true);
       setPrimeiraVez(false);
       setloading(false);
       token_storage(response.token);
-
       sessionStorage.setItem("first_acess", true);
       window.location.href = "/capCreate";
     } else {
@@ -64,31 +56,6 @@ function RegisterComponent() {
       setloading(false);
     }
   }
-
-  const capivaraOlhos = (focus) => {
-    const olhos = document.getElementById("cap");
-    if (focus) {
-      olhos.classList.add("fecha");
-    } else {
-      olhos.classList.remove("fecha");
-    }
-  };
-  document.addEventListener("mousemove", function (e) {
-    const eyes = document.querySelectorAll(".eye");
-    eyes.forEach((eye) => {
-      const bounds = eye.getBoundingClientRect();
-      const x = bounds.left + bounds.width / 2;
-      const y = bounds.top + bounds.height / 2;
-      const radianAngle = Math.atan2(e.clientY - y, e.clientX - x);
-      const angle = radianAngle * (180 / Math.PI);
-      const distance = Math.min(Math.hypot(e.clientX - x, e.clientY - y), 12);
-      eye.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translate(${distance}px)`;
-    });
-  });
-
-  const primeiraVezAtualizar = (event) => {
-    setPrimeiraVez(true);
-  };
 
   return (
     <>
@@ -108,7 +75,6 @@ function RegisterComponent() {
           id="email"
           placeholder="E-mail"
         />
-
         <input
           className="textos"
           type="text"
@@ -117,7 +83,6 @@ function RegisterComponent() {
           id="surname"
           placeholder="Informe o usuário"
         />
-
         <input
           className="textos"
           type="date"
@@ -126,7 +91,6 @@ function RegisterComponent() {
           id="age"
           placeholder="Data de nascimento"
         />
-
         <input
           className="textos"
           type="password"
@@ -143,53 +107,21 @@ function RegisterComponent() {
           onChange={confirmChange}
           placeholder="Confirme a Senha"
         />
-
-        {/* <input
-          className="textos"
-          type="password"
-          required="required"
-          onChange={passwordChange}
-          onFocus={() => capivaraOlhos(true)}
-          onBlur={() => capivaraOlhos(false)}
-          id="password"
-          placeholder="Insira sua Senha"
-        />
-        <input
-          className="textos"
-          type="password"
-          id="confirm_password"
-          required="required"
-          onChange={confirmChange}
-          onFocus={() => capivaraOlhos(true)}
-          onBlur={() => capivaraOlhos(false)}
-          placeholder="confirme a Senha"
-        /> */}
-
-        <button className="textos botaoRegistrar" type="submit" value="entar">
+        <button className="textos botaoRegistrar" type="submit">
           Registrar
         </button>
-        {/* <div className="coletaneaBotoesLogar">
-          <button className="textos botaoRegistrar" type="submit" value="entar">
-            Registrar-se
-          </button>
-          <a
-            className="textos botaoRegistrar botaoUsuarUsuario"
-            onClick={() => primeiraVezAtualizar(true)}
-            href="#login"
-          >
-            Logar Usuário
-          </a>
-        </div> */}
-        {!primeiraVez &&
-          !sucesso &&
-          (message ? <div className="alertaRegistro">{message}</div> : "")}
-        {!primeiraVez &&
-          sucesso &&
-          (message ? (
-            <div className="alertaRegistroSucesso">{message}</div>
-          ) : (
-            ""
-          ))}
+        <p
+          className="textos esqueciSenha redirect"
+          onClick={scrollToTop} 
+        >
+          Já possui uma conta? Realize agora seu login!
+        </p>
+        {!primeiraVez && !sucesso && (
+          <div className="alertaRegistro">{message}</div>
+        )}
+        {!primeiraVez && sucesso && (
+          <div className="alertaRegistroSucesso">{message}</div>
+        )}
       </form>
     </>
   );
