@@ -66,6 +66,9 @@ const Homepage = () => {
     <div>
       <Navbar currentPage="perfil" />
       <div className='capScreen homeScreen'>
+        {idToken != id &&
+          <a href={`/${idToken}/perfil`}><button className='botao_amigos'>Voltar para seu perfil</button></a>
+        }
         <div className="cap_component_perfil">
           {!amigosGeral &&
           <>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../../components/navbar';
 import cap_default from '../../images/cap_default.jpg';
 import cap_doom from '../../images/capDoom.png';
@@ -15,6 +15,7 @@ import { get_user } from '../../services/user_requests.js'
 import { useParams } from 'react-router-dom';
 import { getImage } from '../../services/store_user_requests.js';
 import { postCompra } from '../../services/store_user_requests.js';
+import CapMessage from '../../components/CapMessages';
 
 const Store = () => {
 
@@ -43,6 +44,12 @@ const Store = () => {
     return { id: token_id };
   }
 
+  const capMessageRef = useRef();
+
+  const handleClick = () => {
+    capMessageRef.current.triggerToast();
+  };
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     verify_user(token).then(({ id }) => {
@@ -63,6 +70,16 @@ const Store = () => {
       setVez(true)
     }
   }, [skin, skinPossue]);
+
+  const verifyIten = (id, type) => {
+    if (type == 1) {
+      return getImageSrc(id)
+    }
+    else if (type == 2) {
+      return getImageSrc(id)
+      // getBackground(id)
+    }
+  };
 
   const getImageSrc = (idImage) => {
     switch (idImage) {
@@ -98,6 +115,7 @@ const Store = () => {
       setVez(true)
     }
     else {
+      handleClick()
     }
   };
   
@@ -108,35 +126,87 @@ const Store = () => {
   return (
     <>
       <Navbar currentPage="Store" />
-      <section className='capScreen homeScreen'>
-        <div className="amigo_main_ultimos store_component_cima">
-          {skin.length > 0 ? skin.map((store) => (
-            !possuiSkin(store.id) ? (
-                  <div class="card_store">
-                    <div class="image_store">
-                      <span class="text_store"><img className='img_store' src={getImageSrc(store.id)}></img></span>
+      <section className='capScreen homeScreen store'>
+        <div className="store_component_cima">
+          <h1 className='tituloStore'>Compre algumas skins da Cap</h1>
+          <div className="amigo_main_ultimos">
+            {skin.length > 0 ? skin.map((store) => (
+              !possuiSkin(store.id) ? (
+                <>
+                  { store.type == 1 &&
+                      <div className="card_store">
+                        <div className="image_store">
+                          <span className="text_store"><img className='img_store' src={verifyIten(store.enum, store.type)}></img></span>
+                        </div>
+                        <span className="price">¢{store.price}</span>
+                        <div className='campoCompra_store'>
+                          <button onClick={() => comprarSkin(store.price, store.id)} type="button" className="button_perfil_store button_perfil">
+                            <span className="button__text">Comprar</span>
+                            <span className="button__icon"><svg viewBox="0 0 16 16" className="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path></svg></span>
+                          </button>
+                        </div>
+                      </div>
+                  }
+                </>
+              ) : (
+                <>
+                  { store.type == 1 &&
+                    <div className="card_store">
+                      <div className="image_store">
+                        <span className="text_store"><img className='img_store' src={verifyIten(store.enum, store.type)}></img></span>
+                      </div>
+                      <div className='campoCompra_store_comprada campoCompra_store'>
+                        <button type="button" className="button_perfil_store_comprada">
+                          <span className="button__text button_text">Comprada</span>
+                        </button>
+                      </div>
                     </div>
-                    <span class="price">¢{store.price}</span>
-                    <div className='campoCompra_store'>
-                      <button onClick={() => comprarSkin(store.price, store.id)} type="button" class="button_perfil_store button_perfil">
-                        <span class="button__text">Comprar</span>
-                        <span class="button__icon"><svg viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path></svg></span>
-                      </button>
+                  }
+                </>
+              )
+            )) : <p>Ainda não skins sendo vendidas.</p>}
+          </div>
+        </div>
+        <div className="store_component_baixo">
+          <h1 className='tituloStore'>Compre algumas cores de fundo para sua Cap</h1>
+          <div className="amigo_main_ultimos">
+            {skin.length > 0 ? skin.map((store) => (
+              !possuiSkin(store.id) ? (
+                <>
+                  { store.type == 2 &&
+                      <div className="card_store">
+                        <div className="image_store">
+                          <span className="text_store"><div className={`img_store background_${store.enum}`}></div></span>
+                        </div>
+                        <span className="price">¢{store.price}</span>
+                        <div className='campoCompra_store'>
+                          <button onClick={() => comprarSkin(store.price, store.id)} type="button" className="button_perfil_store button_perfil">
+                            <span className="button__text">Comprar</span>
+                            <span className="button__icon"><svg viewBox="0 0 16 16" className="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path></svg></span>
+                          </button>
+                        </div>
+                      </div>
+                  }
+                </>
+              ) : (
+                <>
+                  { store.type == 2 &&
+                    <div className="card_store">
+                      <div className="image_store">
+                        <span className="text_store"><div className={`img_store background_${store.enum}`}></div></span>
+                      </div>
+                      <div className='campoCompra_store_comprada campoCompra_store'>
+                        <button type="button" className="button_perfil_store_comprada">
+                          <span className="button__text button_text">Comprada</span>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-            ) : (
-                  <div class="card_store">
-                    <div class="image_store">
-                      <span class="text_store"><img className='img_store' src={getImageSrc(store.id)}></img></span>
-                    </div>
-                    <div className='campoCompra_store_comprada campoCompra_store'>
-                      <button type="button" class="button_perfil_store_comprada">
-                        <span class="button__text button_text">Comprada</span>
-                      </button>
-                    </div>
-                  </div>
-            )
-          )) : <p>Ainda não está sendo vendido nada.</p>}
+                  }
+                </>
+              )
+            )) : <p>Ainda não skins sendo vendidas.</p>}
+          </div>
+          <CapMessage ref={capMessageRef} message={"Ah não, parece que você não tem CapCoins o suficiente."} id_user={id} />
         </div>
       </section>
     </>

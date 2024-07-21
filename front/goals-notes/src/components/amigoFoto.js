@@ -6,20 +6,32 @@ import cap_link from '../images/capLink.png';
 import cap_wizard from '../images/capWizard.png';
 import cap_percy from '../images/capPercy.png';
 import cap_witcher from '../images/capWitcher.png';
-import { getImageActive } from '../services/store_user_requests.js';
+import { getItensActive } from '../services/store_user_requests.js';
 import { escolherSkin } from '../services/store_user_requests.js';
+import Loading from './loading.js';
 
 function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
   const [idImage, setIdImage] = useState();
+  const [enumBackGround, setEnumBackGround] = useState();
   const [idStore, setIdStore] = useState(idCap);
   const [consultaPerfil, setConsultaPerfil] = useState(perfil);
-  const [editar, setEditar] = useState();
+  const [editar, setEditar] = useState(alterando);
+	const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-      getImageActive(id).then((image) => {
+      getItensActive(id, 1).then((image) => {
         if (image.skins.length > 0 && !idCap) {
           const result = image.skins[0]
-          setIdImage(result.id_store)
+          setIdImage(result.enum)
+        }
+        if (idCap) {
+          setIdImage(id)
+        }
+      })
+      getItensActive(id, 2).then((image) => {
+        if (image.skins.length > 0 && !idCap) {
+          const result = image.skins[0]
+          setEnumBackGround(result.enum)
         }
         if (idCap) {
           setIdImage(id)
@@ -47,35 +59,39 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
       };
 
     async function escolherCap() {
+		  setLoading(true)
       if (id != 0) {
-        const response = await escolherSkin(idCap, false)
+        const response = await escolherSkin(idCap, false, 1)
         if (response === 'Alterado'){
           window.location.reload()
+		      setLoading(false)
         }
       }
       else if (id == 0) {
-        const response = await escolherSkin(idStore, true)
+        const response = await escolherSkin(idStore, true, 1)
         if (response === 'Alterado'){
           window.location.reload()
+		      setLoading(false)
         }
       }
     }
     
     return (
       <>
+		    {loading && <Loading/>}
         {!consultaPerfil && !editar && !toast &&
           <a className='consultar_amigo' href={`/${id}/Perfil`}>
-            <img src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page cap_welcome_page_amigo'/>
+            <img src={getImageSrc(idImage)} alt='vazio' className={`cap_welcome_page cap_welcome_page_amigo background_img_hover_${enumBackGround}`}/>
           </a>
         } 
         {consultaPerfil && !editar &&
           <img src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page'/>
         }
         {toast && !editar &&
-          <img src={getImageSrc(idImage)} alt='vazio' style={{ width: '60px', height: '60px', marginRight: '10px' }}/>
+          <img src={getImageSrc(idImage)} alt='vazio' className={`background_img_${enumBackGround}`} style={{ width: '60px', height: '60px', marginRight: '10px' }}/>
         }
         {consultaPerfil && editar && !idStore &&
-          <img src={getImageSrc(idImage)} alt='vazio' className='cap_welcome_page cap_welcome_page_amigo'/>
+          <img src={getImageSrc(idImage)} alt='vazio' className={`cap_welcome_page cap_welcome_page_amigo background_img_hover_${enumBackGround}`}/>
         }
         {consultaPerfil && editar && idStore &&
           <img onClick={() => escolherCap()} src={getImageSrc(idImage)} alt='vazio' className='espacamento cap_welcome_page cap_welcome_page_amigo'/>

@@ -15,7 +15,9 @@ class StoreController:
                 "initial_date": format_to_string(skin.initial_data),
                 "end_date": format_to_string(skin.end_date),
                 "price": skin.price,
-                "active": skin.active
+                "active": skin.active,
+                "enum": skin.enum,
+                "type": skin.type
             })
         main_queries.close_conection()
         return {"skins": skin_list}, 200
@@ -29,7 +31,9 @@ class StoreController:
                 "initial_date": format_to_string(skin.initial_data),
                 "end_date": format_to_string(skin.end_date),
                 "price": skin.price,
-                "active": skin.active
+                "active": skin.active,
+                "enum": skin.enum,
+                "type": skin.type
             }, 200
         except Exception as ex:
             return {"message": ex}
