@@ -84,8 +84,10 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
     return (
         <div>
             <h1>Metas</h1>
-            <div className='new_goal_button' onClick={handleModal}>
-                Criar nova Meta +
+            <div className='new_goal_container'>
+                <div className='new_goal_button' onClick={handleModal}>
+                    Criar nova Meta +
+                </div>
             </div>
             <Modal show={showModal} onHide={handleClose} centered size="xl" dialogClassName="custom-modal">
                 <Modal.Header>
@@ -94,7 +96,6 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                 </Modal.Header>
                 <Modal.Body>
                     <div className='form_grid'>
-                        <input type='text' placeholder='Nome de sua meta' maxLength={100} onChange={nameChange} className='styled-input'/>
                         <div className="priority_div">
                             <p className="priority_label"><span>Prioridade: </span></p>
                             <div className="rating">
@@ -110,16 +111,17 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
                                 <label title="text" htmlFor="star1"></label>
                             </div>
                         </div>
-                        <input type='text' placeholder='Observações' maxLength={200} onChange={obsChange} className='styled-input'/>
-                        <input type='number' placeholder='Tempo para concluir em dias' onChange={dateChange} className='styled-input'/>
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                Qual é a categoria?
+                                Categoria
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {renderedTypes}
                             </Dropdown.Menu>
                         </Dropdown>
+                        <input type='text' placeholder='Nome de sua meta' maxLength={100} onChange={nameChange} className='styled-input'/>
+                        <input type='text' placeholder='Observações' maxLength={200} onChange={obsChange} className='styled-input'/>
+                        <input type='number' placeholder='Tempo para concluir em dias' onChange={dateChange} className='styled-input'/>
                     </div>
                     <ItemCreator descriptions={descriptions} setDescriptions={setDescriptions}/>
 
