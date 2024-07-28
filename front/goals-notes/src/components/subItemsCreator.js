@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { FaRegTrashCan } from "react-icons/fa6";
 
 function ItemCreator({descriptions, setDescriptions}){
     const [items, setItems] = useState([]);
@@ -41,7 +42,7 @@ function ItemCreator({descriptions, setDescriptions}){
                                 onChange={(e) => handleInputChange(item.id, e.target.value)}
                             />
                         </label>
-                        <button onClick={() => removeItem(item.id)}>Excluir</button>
+                        <button className="fixed_button" onClick={() => removeItem(item.id)}><FaRegTrashCan/></button>
                     </div>
                 ))}
         </div>
