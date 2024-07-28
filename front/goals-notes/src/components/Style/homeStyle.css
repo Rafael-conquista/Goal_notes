@@ -73,7 +73,7 @@
   background: #555; /* cor do botão da barra de rolagem vertical quando hover */
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .homeScreen {
     max-height: calc(100vh - 220px);
     display: grid;
@@ -94,7 +94,7 @@
   }
 
   .asside {
-    height: calc(100vh - 220px);
+    height: calc(100vh - 120px);
     border-bottom: 1px solid #b6b3b3;
   }
 }

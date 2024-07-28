@@ -31,8 +31,11 @@ function IncomingGoalsList({id}) {
                                     color: '#9f9f9f',
                                     fontSize: '20px',
                                     fontWeight: 'bold',
+                                    paddingBottom: '45px',
+                                    paddingRight: '25px',
+                                    paddingLeft: '25px'
                                 }}>
-                                    A tarefa {goals.name} está quase chegando em sua data final!
+                                    A tarefa {goals.name} está quase chegando em sua data final❗
                                     <p>
                                         no dia {goals.expected_data}
                                     </p>
@@ -40,7 +43,7 @@ function IncomingGoalsList({id}) {
                             </div>
                         ))
                     ) : (
-                        <p>Nenhum meta finalizada recentemente</p>
+                        <p>Nenhum meta a ser finalizada</p>
                     )}
                 </div>
             </div>
