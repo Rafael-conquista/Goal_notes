@@ -12,11 +12,6 @@ const Homepage = () => {
       <Navbar currentPage="home" />
       <div className="homeScreen">
 
-        <div className="asside">
-          <t3 className="asside_title">Atualizações de amigos</t3>
-          <div className="asside_content"></div>
-        </div>
-
         <div className="asside metasAlcancadas">
           <t3 className="asside_title">Metas Alcançadas</t3>
           <div className="asside_content">
