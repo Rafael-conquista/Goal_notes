@@ -3,10 +3,9 @@ import { verify } from '../utils/token_verify.js';
 import { get_user } from '../services/user_requests.js';
 import { getNextGoalsList } from '../services/goals_request.js';
 
-function IncomingGoalsList() {
+function IncomingGoalsList({id}) {
     const [loaded, setLoaded] = useState(false);
     const [goals, setGoals] = useState([]);
-    const [id, setId] = useState(null);
 
     useEffect(() => {
         if (id) {
@@ -16,19 +15,6 @@ function IncomingGoalsList() {
             });
         }
     }, [id]);
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        verify_user(token).then(({ id, name }) => {
-            setId(id);
-        });
-    }, []);
-
-    async function verify_user(token) {
-        const token_id = await verify(token);
-        const user = await get_user(token_id);
-        return { id: token_id, name: user['name'] };
-    }
 
     if (!loaded) {
         return <p>Carregando...</p>;
