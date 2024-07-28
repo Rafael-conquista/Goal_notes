@@ -90,7 +90,7 @@ function PomodoroModel({ id, key, goal_name }) {
                 onClick={handleModal}
             >
                 {hoveredIndex === key ? (
-                    <div style={{ marginTop: '10px' }}>
+                    <div>
                         <button>Iniciar agora!</button>
                     </div>
                 ) : (
