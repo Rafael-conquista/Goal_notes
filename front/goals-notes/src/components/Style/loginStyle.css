@@ -3,7 +3,7 @@
 h1 {
   font-size: max(3vw, 1.5rem);
   text-align: center;
-  font-weight: bold !important;
+  font-weight: bold;
 }
 
 h2 {
@@ -108,7 +108,7 @@ input {
 }
 
 .botaoRegistrar:hover {
-  box-shadow: 5px 5px white !important;
+  box-shadow: 5px 5px white ;
 }
 
 .botaoLogar:active,
@@ -396,3 +396,11 @@ input {
     height: 50px;
   }
 }
+
+
+
+
+.Title_login {
+  font-weight: bold;
+}
+

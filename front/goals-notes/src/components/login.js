@@ -115,7 +115,7 @@ function LoginComponent() {
       {loading && <Loading />}
       {primeiraVez && (
         <form className="LoginForm" onSubmit={login_user}>
-          <h1 className="textos">Acesse sua conta</h1>
+          <h1 className="textos Title_login">Acesse sua conta</h1>
           <input
             className="textos"
             type="email"
