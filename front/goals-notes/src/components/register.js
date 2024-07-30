@@ -69,6 +69,7 @@ function RegisterComponent() {
       </div>
       <form className="formRegistroUsuario" onSubmit={register_user}>
         <input
+        className="textos formRegistroUsuario_input"
           type="email"
           required="required"
           onChange={emailChange}
@@ -76,7 +77,7 @@ function RegisterComponent() {
           placeholder="E-mail"
         />
         <input
-          className="textos"
+          className="textos formRegistroUsuario_input"
           type="text"
           required="required"
           onChange={surnameChange}
@@ -84,7 +85,7 @@ function RegisterComponent() {
           placeholder="Informe o usuário"
         />
         <input
-          className="textos"
+          className="textos formRegistroUsuario_input"
           type="date"
           required="required"
           onChange={ageChange}
@@ -92,7 +93,7 @@ function RegisterComponent() {
           placeholder="Data de nascimento"
         />
         <input
-          className="textos"
+          className="textos formRegistroUsuario_input"
           type="password"
           required="required"
           onChange={passwordChange}
@@ -100,7 +101,7 @@ function RegisterComponent() {
           placeholder="Insira sua Senha"
         />
         <input
-          className="textos"
+          className="textos formRegistroUsuario_input"
           type="password"
           id="confirm_password"
           required="required"
