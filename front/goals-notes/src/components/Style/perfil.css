@@ -233,7 +233,7 @@
 .botao_amigos {
     position: absolute;
     margin: 10px;
-    z-index: 100;
+    z-index: 1;
 }
 
 .input_amigos {
@@ -696,7 +696,7 @@ input[type="number"]::-webkit-outer-spin-button {
     height: 100vh;
     width: 100vw;
     cursor: pointer;
-    z-index: 0;
+    z-index: 10;
   }
 
   .consulta_skins_images {
