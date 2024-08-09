@@ -14,6 +14,7 @@ P {
   height: 80vh;
   border-radius: 30px;
   background-color: #131f24ec;
+  align-items: center; /* corrigindo alinhamento e botoes quebrando no final em celular */
 }
 
 .capScreen {
@@ -42,7 +43,8 @@ P {
   margin: 0 auto;
   height: fit-content;
   width: max-content;
-  margin-top: 15vh;
+  /* margin-top: 15vh;  corrigindo um problema de quebra de tela e de botoes */
+  justify-items: center;
 }
 
 .cap_txt_box {
@@ -50,6 +52,7 @@ P {
   border-radius: 20px;
   text-align: left;
   margin-top: 2vh;
+  min-height: 57px;
   width: 55vw;
   display: flex;
   justify-content: center;
@@ -118,7 +121,7 @@ P {
   .cap_txt_box_grid {
     grid-template-columns: repeat(1, 2fr);
     margin: 0 auto;
-    margin-top: 15vh;
+    /* margin-top: 15vh; corrigindo alinhamento  */
   }
   .cap_welcome_page {
     border-radius: 100px;
@@ -141,7 +144,7 @@ P {
   .cap_txt_box_grid {
     grid-template-columns: repeat(1, 2fr);
     margin: 0 auto;
-    margin-top: 20vh;
+    /* margin-top: 20vh; corrigindo alinhamento */
   }
   .cap_welcome_page {
     border-radius: 100px;
@@ -163,7 +166,7 @@ P {
     grid-template-columns: repeat(1, 2fr);
     height: fit-content;
     margin: 0 auto;
-    margin-top: 20vh;
+    /* margin-top: 20vh; corrigindo alinhamento */
   }
   .cap_welcome_page {
     border-radius: 100px;
@@ -179,4 +182,18 @@ P {
   border-radius: 20px;
   font-size: 15px;
   padding: 10px;
+}
+
+.button_capCreator {
+  min-width: 150px;
+  max-width: 200px;
+}
+
+.confirm_button_capCreator{
+  min-width: 200px;
+}
+
+.text_capCreator {
+  min-width: 250px;
+  max-width: 350px;
 }
