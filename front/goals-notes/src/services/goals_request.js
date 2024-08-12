@@ -173,3 +173,23 @@ export async function getItemsByGoal(id){
     console.log(e)
   }
 }
+
+export async function getFinishedGoalsList(id){
+  try{
+    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?tipo_busca=ended`)
+    let goalsData = await response.json()
+    return goalsData
+  } catch(e){
+    console.log(e)
+  }
+}
+
+export async function getNextGoalsList(id){
+  try{
+    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?tipo_busca=nexts`)
+    let goalsData = await response.json()
+    return goalsData
+  } catch(e){
+    console.log(e)
+  }
+}

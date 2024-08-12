@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import GoalCreator from './goalCreator';
 import ItemCreator from './subItemsCreator';
 import FinishedGoals from './finishedGoals';
@@ -7,6 +7,11 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { UpdateGoal, deleteGoals, deleteItems, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
 import PomodoroModel from './pomodoroModal';
+import CapMessage from './CapMessages';
+import { FaRegTrashCan } from "react-icons/fa6";
+import { FaRegEdit } from "react-icons/fa";
+import { GrCompliance } from "react-icons/gr";
+
 
 function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [empty, setEmpty] = useState(true);
@@ -20,10 +25,25 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [items, setItems] = useState([]);
     const [descriptions, setDescriptions] = useState({});
     const [showModal, setShowModal] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
 
     useEffect(() => {
         setEmpty(Object.keys(goals).length === 0);
     }, [goals, goalClicked]);
+
+    useEffect(() => {
+        if (notificationMessage) {
+            handleClick();
+        }
+    }, [notificationMessage]);
+
+    const capMessageRef = useRef();
+
+    const handleClick = () => {
+        if (capMessageRef.current) {
+            capMessageRef.current.triggerToast();
+        }
+    };
 
     const handleCloseModal = () => {
         setShowModal(false);
@@ -131,22 +151,22 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                             </div>
                         </div>
                         <div>
-                            <p>Nome</p>
+                            <span>Nome</span>
                             <input className='styled-input' type='text' placeholder="Alterar Nome" maxLength={100} onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div>
-                            <p>Observação</p>
+                            <span>Observação</span>
                             <input type='text' className='styled-input' placeholder={goalClickedUpdate.obs} maxLength={200} onChange={(e) => setObs(e.target.value)} />
                         </div>
                         <div>
-                            <p>Expectativa de finalização: </p>
+                            <span>Expectativa de finalização: </span>
                             <input type='number' className='styled-input' placeholder='Tempo para concluir em dias' onChange={(e) => setDays(e.target.value)} />
                         </div>
                         <div>
                             <h3>Sub-tarefas já criadas:</h3>
                         </div>
                         {items.map((item, index) => (
-                            <div key={index} className="item">
+                            <div key={index} className="teste">
                                 <label>
                                     <input
                                         className='styled-input'
@@ -162,8 +182,11 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                     <div className='buttons'>
                         <div className='botao close' onClick={() => setGoalClickedUpdate(null)}>
                             <span>Fechar</span>
-                        </div>
-                        <div className='botao' onClick={verify_and_save_goal}>
+                        </div>  
+                        <div className='botao' onClick={() =>{
+                            verify_and_save_goal()
+                            setNotificationMessage("conseguimos alterar sua meta!")
+                        }}>
                             <span>Salvar</span>
                         </div>
                     </div>
@@ -179,43 +202,55 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                         ) : (
                             Object.values(goals).map((goal, key) => (
                                 <div key={key} className='goal_card'>
-                                    <div className='edit_button' onClick={async () => {
+                                    <div className='edit_button_goals' onClick={async () => {
                                         const itemsResponse = await getItemsByGoal(goal.goals_id);
                                         const itemsArray = Object.values(itemsResponse);
                                         setItems(itemsArray);
                                         setGoalClickedUpdate(goal)
                                     }}>
-                                        Editar
+                                        <FaRegEdit />
                                     </div>
                                     <div onClick={() => handleOpenModal(goal)}>
                                         <div className='goal_title'>
                                             <h3 className='name'>{goal.name}</h3>
                                             <h4 className='importance'>{goal.importance_degree}★</h4>
                                         </div>
+                                        <h5 className='goal_obs'>{goal.obs}</h5>
                                         <div className='goal_data'>
-                                            <h5 className='goal_obs'>{goal.obs}</h5>
                                             <p><span>Início:</span> {goal.initial_data}</p>
                                             <p><span>Expectativa:</span> {goal.expected_data}</p>
                                             <p><span>Tipo:</span> {goal.type_name}</p>
                                             <p><span>Ciclos de Pomodoro: </span> {goal.pomodoro_cycles}</p>
-                                            <p><span>Esta meta está valendo: </span> {goal.goal_value} 🪙</p>
+                                            <p>
+                                                <span>Recompensa: </span>
+                                                {goal.goal_value === -1 ? 0 : goal.goal_value} 🪙
+                                            </p>
                                             {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
                                         </div>
                                         {goal.end_date ? (
-                                            <div className='top_left_botao' onClick={() => deactivateTask(false, goal.goals_id)}>
+                                            <div className='top_left_botao' onClick={() => {
+                                                deactivateTask(false, goal.goals_id) 
+                                                setNotificationMessage("Sua meta foi reativada com sucesso!")
+                                            }
+                                            }>
                                                 <span>Reativar tarefa</span>
                                             </div>
                                         ) : (
-                                            <div className='top_left_botao' onClick={() => deactivateTask(new Date().toISOString().split('T')[0], goal.goals_id)}>
-                                                <span>Finalizar tarefa</span>
+                                            <div className='top_left_botao' onClick={() => {
+                                                deactivateTask(new Date().toISOString().split('T')[0], goal.goals_id)
+                                                setNotificationMessage("Sua meta foi finalizada com sucesso!")
+                                            }
+                                            }>
+                                                <GrCompliance />
                                             </div>
                                         )}
                                         <div className='fixed_botao' onClick={async () => {
                                             await deleteGoals(goal.goals_id);
                                             setShowModal(false);
                                             setMayUpdate(true);
+                                            setNotificationMessage("conseguimos deletar sua meta!")
                                         }}>
-                                            <span>Excluir meta</span>
+                                            <span><FaRegTrashCan/></span>
                                         </div>
                                     </div>
                                     <PomodoroModel id={goal.goals_id} key={key} goal_name={goal.name}/>
@@ -234,7 +269,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                         {items.length > 0 ? (
                             items.map((item, index) => (
                                 <div key={index} className='subtask_item'>
-                                    <label>
+                                    <label className="custom-checkbox">
                                         <input
                                             type="checkbox"
                                             checked={item.ativo}
@@ -246,7 +281,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                         await deleteItems(item.id);
                                         const updatedItems = items.filter(i => i.id !== item.id);
                                         setItems(updatedItems);
-                                    }}>Excluir</button>
+                                    }}><FaRegTrashCan/></button>
                                 </div>
                             ))
                         ) : (
@@ -261,6 +296,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                 </Modal.Footer>
             </Modal>
             <FinishedGoals id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate}/>
+            <CapMessage ref={capMessageRef} message={notificationMessage} id_user={id} />
         </div>
     );
 }

@@ -14,12 +14,14 @@
 .goal_creator_buttons {
   margin-top: -40px;
   background-color: #a8dadc79;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .buttons {
   display: flex;
   padding-right: 2vw;
+  justify-content: end;
+  padding-top: 10px;
 }
 
 .new_goal_button {
@@ -36,16 +38,16 @@
 }
 
 .modal-content {
-  background-color: #e8ffec !important;
+  background-color: #F1FAEE !important;
 }
 
 .modal-header {
-  border-bottom: var(--bs-modal-header-border-width) solid #48ff00 !important;
+  border-bottom: var(--bs-modal-header-border-width) solid #F1FAEE !important;
   justify-content: space-around;
 }
 
 .modal-footer {
-  border-top: var(--bs-modal-header-border-width) solid #48ff00 !important;
+  border-top: var(--bs-modal-header-border-width) solid #F1FAEE !important;
 }
 
 .modal_title {
@@ -161,6 +163,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
+  z-index: 0;
 }
 
 .goal_card:hover {
@@ -212,8 +215,18 @@
   margin-top: 20px;
 }
 
+.goal_data{
+  display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  gap: 10px;
+  justify-content: center; /* Centraliza o grid horizontalmente */
+}
+
+.goal_data span{
+  color: #FF6B6B !important; 
+}
+
 .goal_card .goal_data p {
-  display: flex;
   justify-content: baseline;
   margin: 5px 0;
 }
@@ -257,7 +270,7 @@
 }
 
 /* Media query para telas menores que 750px */
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 900px) {
   .goals_grid {
     grid-template-columns: 1fr;
   }
@@ -275,7 +288,7 @@
   border-radius: 5px;
   transition: 0.3s, transform 0.3s;
   text-align: center;
-  font-size: 0.8em; /* Reduz o tamanho da fonte para mobile */
+  font-size: 15px; /* Reduz o tamanho da fonte para mobile */
 }
 
 .top_left_botao:hover {
@@ -299,7 +312,7 @@
   }
 
   .goal_title{
-    margin-top: 20px;
+    margin-top: 30px;
   }
 
   .top_left_botao {
@@ -348,20 +361,21 @@
   background-color: #ff1a1a;
 }
 
-/* Estilos específicos para o botão de editar */
-.edit_button {
+.edit_button_goals {
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
-  background-color: #007bff;
-  color: white;
+  color: #054e47; 
   padding: 5px 10px;
-  border-radius: 4px;
+  text-align: center;
+  border-radius: 5px; 
+  font-size: 25px;
+  transition: 0.3s, transform 0.3s;
 }
 
-.edit_button:hover {
-  background-color: #0056b3;
+.edit_button_goals:hover {
+  transform: translateY(-5px);
 }
 
 .rating {
@@ -408,7 +422,7 @@
   width: 100%;
   max-width: 400px;
   padding: 10px 15px;
-  margin: 5px 0;
+  margin: 10px 0;
   color: #555;
   box-sizing: border-box;
   font-size: 16px;
@@ -439,6 +453,11 @@
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.priority_div span, .goal_update_body span{
+  color: #FF6B6B !important;
+  font-weight: bold;
+}
+
 .goal_update_body {
   display: grid;
   align-items: center;
@@ -451,4 +470,16 @@
   .goal_update{
     width: 100%;
   }
+}
+
+@media screen and (max-width: 500px) {
+  .goal_data{
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: left;
+  }
+}
+
+input[type="checkbox"]{
+  background-color: black !important;
 }

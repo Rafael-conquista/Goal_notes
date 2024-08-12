@@ -1,40 +1,102 @@
 .homeScreen {
-    margin-top: 110px;
-    height: calc(100vh - 110px) !important;
-    background-image: url('../../images/fundoCasa.jpeg') !important;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 220px);
+  margin: 110px 0 110px 0;
+  background-image: url("../../images/fundoCasa.jpeg");
 }
 
-.cap_component {
-    position: absolute;
+.asside {
+  font-style: italic;
+  background-color: #131f24ec;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-top: 0.5px solid #ffffff;
+  color: #ffff;
+  padding-bottom: 100px;
+}
+
+.asside_title {
+  background-color: #00000050;
+  border-bottom: 1px solid #b6b3b3;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: var(--base-text-weight-semibold, 600);
+  text-align: center; /* Centralizar o texto */
+  font-size: 1rem; /* Tamanho de fonte padrão */
+  padding: 1rem 0 1rem 0;
+}
+
+.asside_content {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.asside_content > p {
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.metasAlcancadas {
+  display: none;
+}
+
+.metasPendentes{
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 4px; /* largura da barra de rolagem */
+  background-color: transparent; /* background da barra de rolagem transparente */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* cor do botão da barra de rolagem */
+  border-radius: 2px;
+}
+
+/* Esconder a barra de rolagem quando não estiver sendo utilizada */
+::-webkit-scrollbar-thumb:vertical {
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:vertical:active {
+  background: #555; /* cor do botão da barra de rolagem quando ativa */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* cor do botão da barra de rolagem quando hover */
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+  background: #555; /* cor do botão da barra de rolagem vertical quando hover */
+}
+
+@media (min-width: 1200px) {
+  .homeScreen {
+    max-height: calc(100vh - 220px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .metasAlcancadas {
     display: flex;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 70vw;
-    height: calc(100vh - 110px) !important;
-    border-radius: 30px;
-    background-color: #131f24ec;
-}
+    border-left: 0.5px solid #ffffff;
+    border-right: 0.5px solid #ffffff;
+  }
 
-.chat {
+  .metasPendentes{
     display: flex;
-    margin: 10px 10px !important;
-    height: min-content;
-    align-items: center;
-    justify-content: space-between;
-}
+    border-left: 0.5px solid #ffffff;
+    border-right: 0.5px solid #ffffff;
+  }
 
-.cap_welcome_page {
-    border-radius: 100px;
-    width: 110px;
-    height: 110px;
+  .asside {
+    height: calc(100vh - 120px);
+    border-bottom: 1px solid #b6b3b3;
+  }
 }
-
-.mensagemChat {
-    font-size: 1.5rem;
-    margin: 0px 15px;
-    color: white;
-    text-shadow: 1px 1px black;
+@media (min-width: 1024px) {
 }
