@@ -32,8 +32,9 @@ function LastGoalsList({id}) {
                                     color: '#9f9f9f',
                                     fontSize: '20px',
                                     fontWeight: 'bold',
+                                    paddingBottom: '45px'
                                 }}>
-                                    Você finalizou a tarefa {goals.name}!
+                                    ✅ Você finalizou a tarefa {goals.name}!
                                     <p>
                                         no dia {goals.end_date}
                                     </p>
