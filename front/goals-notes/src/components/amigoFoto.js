@@ -18,20 +18,6 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
   const [editar, setEditar] = useState(alterando);
 	const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    getItensActive(id, 1).then((image) => {
-      if (image.skins.length > 0 && !idCap) {
-        const result = image.skins[0]
-        setIdImage(result.enum)
-      }
-      if (idCap) {
-        setIdImage(id)
-      }
-    })
-    getItensActive(id, 2).then((image) => {
-      if (image.skins.length > 0 && !idCap) {
-        const result = image.skins[0]
-        setEnumBackGround(result.enum)
   function update_fetched_skins() {
     if (!sessionStorage.getItem('fetched_skins')) {
       sessionStorage.setItem('fetched_skins', JSON.stringify({ id: idImage }));
@@ -43,27 +29,45 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
   }
 
   useEffect(() => {
+    getItensActive(id, 2).then((image) => {
+      if (image.skins.length > 0 && !idCap) {
+        const result = image.skins[0]
+        setEnumBackGround(result.enum)
+      }
+    });
+  })
+
+  useEffect(() => {
+    getItensActive(id, 2).then((image) => {
+      if (image.skins.length > 0 && !idCap) {
+        const result = image.skins[0]
+        setEnumBackGround(result.enum)
+      }
+    });
+  })
+
+  useEffect(() => {
     if (!sessionStorage.getItem('fetched_skins')) {
-      getImageActive(id).then((image) => {
-        if (image.skins.length > 0 && !idCap) {
-          const result = image.skins[0]
-          setIdImage(result.id_store)
-          update_fetched_skins()
-        }
-        if (idCap) {
-          setIdImage(id)
-          update_fetched_skins()
-        }
-      })
-    } else {
+      getItensActive(id, 1).then((image) => {
+      if (image.skins.length > 0 && !idCap) {
+        const result = image.skins[0]
+        setIdImage(result.enum)
+        update_fetched_skins()
+      }
+      if (idCap) {
+        setIdImage(id)
+        update_fetched_skins()
+      }
+    })
+  } else {
       const teste = JSON.parse(sessionStorage.getItem('fetched_skins'));
       if (teste[`${id}`]) {
         setIdImage(teste[`${id}`])
       } else {
-        getImageActive(id).then((image) => {
+        getItensActive(id, 1).then((image) => {
           if (image.skins.length > 0 && !idCap) {
             const result = image.skins[0]
-            setIdImage(result.id_store)
+            setIdImage(result.enum)
             update_fetched_skins()
           }
           if (idCap) {
@@ -73,7 +77,6 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
         })
       }
     }
-
   }, [idImage]);
 
     const getImageSrc = (idImage) => {
@@ -131,10 +134,11 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
           <img src={getImageSrc(idImage)} alt='vazio' className={`cap_welcome_page cap_welcome_page_amigo background_img_hover_${enumBackGround}`}/>
         }
         {consultaPerfil && editar && idStore &&
-          <img onClick={() => escolherCap()} src={getImageSrc(idImage)} alt='vazio' className='espacamento cap_welcome_page cap_welcome_page_amigo'/>
+          <img onClick={() => escolherCap()} src={getImageSrc(id)} alt='vazio' className='espacamento cap_welcome_page cap_welcome_page_amigo'/>
         }
       </>
     );
 }
+
 
 export default AmigoFotoComponent;
