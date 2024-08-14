@@ -31,6 +31,7 @@ const UsuarioFoto = ({ idToken }) => {
 		const response = await escolherSkin(id, false, type)
 		if (response === 'Alterado'){
 			window.location.reload()
+			sessionStorage.removeItem('fetched_background');
 		}
 	}
 
@@ -39,6 +40,7 @@ const UsuarioFoto = ({ idToken }) => {
 		const response = await escolherSkin(idToken, true, type)
 		if (response === 'Alterado'){
 			window.location.reload()
+			sessionStorage.removeItem('fetched_background');
 		}
 	}
 

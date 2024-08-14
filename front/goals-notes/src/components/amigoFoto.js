@@ -129,6 +129,7 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
       if (id != 0) {
         const response = await escolherSkin(idCap, false, 1)
         if (response === 'Alterado'){
+    			sessionStorage.removeItem('fetched_skins');
           window.location.reload()
 		      setLoading(false)
         }
@@ -136,6 +137,7 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
       else if (id == 0) {
         const response = await escolherSkin(idStore, true, 1)
         if (response === 'Alterado'){
+    			sessionStorage.removeItem('fetched_skins');
           window.location.reload()
 		      setLoading(false)
         }
