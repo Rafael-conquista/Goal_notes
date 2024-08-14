@@ -28,23 +28,49 @@ function AmigoFotoComponent({ id, perfil, alterando, idCap, toast }) {
     }
   }
 
-  useEffect(() => {
-    getItensActive(id, 2).then((image) => {
-      if (image.skins.length > 0 && !idCap) {
-        const result = image.skins[0]
-        setEnumBackGround(result.enum)
-      }
-    });
-  })
+  function update_fetched_background() {
+    if (!sessionStorage.getItem('fetched_background')) {
+      sessionStorage.setItem('fetched_background', JSON.stringify({ id: enumBackGround }));
+    } else {
+      const fetchedSkins = JSON.parse(sessionStorage.getItem('fetched_background'));
+      fetchedSkins[id] = enumBackGround;
+      sessionStorage.setItem('fetched_background', JSON.stringify(fetchedSkins));
+    }
+  }
+
+  // useEffect(() => {
+  //   getItensActive(id, 2).then((image) => {
+  //     if (image.skins.length > 0 && !idCap) {
+  //       const result = image.skins[0]
+  //       setEnumBackGround(result.enum)
+  //     }
+  //   });
+  // })
 
   useEffect(() => {
-    getItensActive(id, 2).then((image) => {
-      if (image.skins.length > 0 && !idCap) {
-        const result = image.skins[0]
-        setEnumBackGround(result.enum)
+    if (!sessionStorage.getItem('fetched_background')) {
+      getItensActive(id, 2).then((image) => {
+        if (image.skins.length > 0 && !idCap) {
+          const result = image.skins[0]
+          setEnumBackGround(result.enum)
+          update_fetched_background()
+        }
+      });
+  } else {
+      const teste = JSON.parse(sessionStorage.getItem('fetched_background'));
+      if (teste[`${id}`]) {
+        setEnumBackGround(teste[`${id}`])
+      } else {
+        getItensActive(id, 2).then((image) => {
+          if (image.skins.length > 0 && !idCap) {
+            const result = image.skins[0]
+            setEnumBackGround(result.enum)
+            update_fetched_background()
+          }
+        });
       }
-    });
-  })
+    }
+  }, [enumBackGround]);
 
   useEffect(() => {
     if (!sessionStorage.getItem('fetched_skins')) {
