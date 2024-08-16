@@ -1,6 +1,10 @@
+import get_api_url from "../config";
+
+const apiUrl = get_api_url()
+
 export async function getAllGoals(id){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?ativas=true`)
+    let response = await fetch(apiUrl+`usergoals/${id}?ativas=true`)
     let goalsData = await response.json()
     return goalsData
   } catch(e){
@@ -10,7 +14,7 @@ export async function getAllGoals(id){
 
 export async function getAllFinishedGoals(id){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?ativas=false`)
+    let response = await fetch(apiUrl+`usergoals/${id}?ativas=false`)
     let goalsData = await response.json()
     return goalsData
   } catch(e){
@@ -38,7 +42,7 @@ export async function createGoal(data){
       redirect: 'follow'
     };
   
-    let response = await fetch("http://127.0.0.1:5000/goal/2", requestOptions)
+    let response = await fetch(apiUrl+"goal/2", requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -73,7 +77,7 @@ export async function UpdateGoal(data, id){
       body: raw,
       redirect: 'follow'
     };
-    let response = await fetch(`http://127.0.0.1:5000/goal/${id}`, requestOptions)
+    let response = await fetch(apiUrl+`goal/${id}`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -92,7 +96,7 @@ export async function deleteGoals(id){
       redirect: 'follow'
     };
   
-    let response = await fetch(`http://127.0.0.1:5000/goal/${id}`, requestOptions)
+    let response = await fetch(apiUrl+`goal/${id}`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -116,7 +120,7 @@ export async function registerItems(data, id){
       redirect: 'follow'
     };
   
-    let response = await fetch("http://127.0.0.1:5000/item_register", requestOptions)
+    let response = await fetch(apiUrl+"item_register", requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -137,7 +141,7 @@ export async function updateItems(data){
       redirect: 'follow'
     };
   
-    let response = await fetch(`http://127.0.0.1:5000/item/${data.id}`, requestOptions)
+    let response = await fetch(apiUrl+`item/${data.id}`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -156,7 +160,7 @@ export async function deleteItems(id){
       redirect: 'follow'
     };
   
-    let response = await fetch(`http://127.0.0.1:5000/item/${id}`, requestOptions)
+    let response = await fetch(apiUrl+`item/${id}`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -166,7 +170,7 @@ export async function deleteItems(id){
 
 export async function getItemsByGoal(id){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/items_by_goal/${id}`)
+    let response = await fetch(apiUrl+`items_by_goal/${id}`)
     let goalsData = await response.json()
     return goalsData
   } catch(e){
@@ -176,7 +180,7 @@ export async function getItemsByGoal(id){
 
 export async function getFinishedGoalsList(id){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?tipo_busca=ended`)
+    let response = await fetch(apiUrl+`usergoals/${id}?tipo_busca=ended`)
     let goalsData = await response.json()
     return goalsData
   } catch(e){
@@ -186,7 +190,7 @@ export async function getFinishedGoalsList(id){
 
 export async function getNextGoalsList(id){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?tipo_busca=nexts`)
+    let response = await fetch(apiUrl+`usergoals/${id}?tipo_busca=nexts`)
     let goalsData = await response.json()
     return goalsData
   } catch(e){

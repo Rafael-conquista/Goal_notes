@@ -1,6 +1,10 @@
+import get_api_url from "../config";
+
+const apiUrl = get_api_url()
+
 export async function getImageActive(id){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/Itens_by_user_active/${id}`)
+    let response = await fetch(apiUrl+`Itens_by_user_active/${id}`)
     let user = await response.json()
     return user
   } catch(e){
@@ -9,7 +13,7 @@ export async function getImageActive(id){
 
 export async function getImage(id){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/Itens_by_user/${id}`)
+    let response = await fetch(apiUrl+`Itens_by_user/${id}`)
     let user = await response.json()
     return user
   } catch(e){
@@ -34,7 +38,7 @@ export async function postCompra(preco, capCoins, idUsuario, idStore){
       redirect: 'follow'
     };
   
-    let response = await fetch(`http://127.0.0.1:5000/itens_register_by_user`, requestOptions)
+    let response = await fetch(apiUrl+`itens_register_by_user`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -58,7 +62,7 @@ export async function escolherSkin(idSkin, validacao){
           redirect: 'follow'
         };
       
-        let response = await fetch(`http://127.0.0.1:5000/active_iten_user`, requestOptions)
+        let response = await fetch(apiUrl+`active_iten_user`, requestOptions)
         return response.json()
       } catch(e){
           console.log(e)
@@ -81,7 +85,7 @@ export async function escolherSkin(idSkin, validacao){
           redirect: 'follow'
         };
       
-        let response = await fetch(`http://127.0.0.1:5000/active_iten_user`, requestOptions)
+        let response = await fetch(apiUrl+`active_iten_user`, requestOptions)
         return response.json()
       } catch(e){
           console.log(e)

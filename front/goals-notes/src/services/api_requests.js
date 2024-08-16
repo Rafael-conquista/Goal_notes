@@ -1,4 +1,9 @@
+import get_api_url from "../config";
+
+const apiUrl = get_api_url()
+
 export async function register(data){
+  console.log(apiUrl)
   try{
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -17,7 +22,7 @@ export async function register(data){
       redirect: 'follow'
     };
   
-    let response = await fetch("http://127.0.0.1:5000/register", requestOptions)
+    let response = await fetch(apiUrl+"register", requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -42,7 +47,7 @@ export async function login(data){
       redirect: 'follow'
     };
   
-    let response = await fetch("http://127.0.0.1:5000/login", requestOptions)
+    let response = await fetch(apiUrl+"login", requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -66,7 +71,7 @@ export async function token_verify(token) {
       redirect: 'follow'
     };
 
-    let response = await fetch(`http://127.0.0.1:5000/verify_token`, requestOptions)
+    let response = await fetch(apiUrl+`verify_token`, requestOptions)
     return response.json()
   } catch (e) {
     console.log(e)
@@ -90,7 +95,7 @@ export async function register_cap(data, id){
       redirect: 'follow'
     };
   
-    let response = await fetch("http://127.0.0.1:5000/cap_register", requestOptions)
+    let response = await fetch(apiUrl + "cap_register", requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -100,7 +105,7 @@ export async function register_cap(data, id){
 
 export async function getAllTypes(){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/types`)
+    let response = await fetch(apiUrl+`types`)
     let types= await response.json()
     return types
   } catch(e){
@@ -110,7 +115,7 @@ export async function getAllTypes(){
 
 export async function getPosts(id){
   try{
-    let response = await fetch(`http://127.0.0.1:5000/posts/${id}`)
+    let response = await fetch(apiUrl+`posts/${id}`)
     let posts = await response.json()
     return posts
   } catch(e){
