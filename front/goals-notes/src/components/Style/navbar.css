@@ -1,10 +1,16 @@
 .navbar_view {
-  background-color: black;
+  background-color: #131F24;
   top: 0;
   z-index: 100;
   width: 100%;
-  position: fixed !important;
+  max-height: 110px;
+  position: fixed;
   justify-content: center;
+}
+
+.offcanvas-header {
+  width: 100%;
+  flex-direction: column;
 }
 
 .fine_line {
@@ -23,9 +29,16 @@
   cursor: pointer;
 }
 
-.menu_title:hover {
-  -webkit-animation: swing 1s ease;
-  animation: swing 1s ease infinite;
+.offcanvas {
+  padding-left: 0 !important;
+}
+
+.menu_title_hide {
+  cursor: default !important;
+  color: white;
+  cursor: pointer;
+  -webkit-animation: swing 0.8s ease;
+  animation: swing 0.8s ease infinite;
   -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
 }
@@ -63,8 +76,8 @@
 }
 
 .offcanvas {
-  background-color: black !important;
-  align-items: baseline !important;
+  background-color: #131F24 ;
+  align-items: baseline ;
   padding-left: 1vw;
 }
 
@@ -74,12 +87,166 @@
   display: flex;
   transition: 0.5s;
   margin: 15px 0px;
+  text-align: center;
+  display: flex;
+}
+
+.item_home {
+  width: 100%;
+  left: 0;
+}
+
+.cor {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.menu_link {
+  color: #fff;
   text-decoration: none;
-  padding-top: 20px;
-  padding-left: 2vw;
+  font-size: 1.8rem;
 }
 
 .button {
   max-width: 20vw;
   max-height: 30vh;
+}
+
+.navbar_items {
+  padding-left: 0 !important;
+  width: 100%;
+}
+
+.center {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn_navbar_home {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.btn_navbar_home:hover {
+  color: white;
+}
+
+.item_home::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1%;
+  background-color: darkgoldenrod;
+  z-index: -1;
+  transition: all 0.8s;
+  left: 0;
+  height: 4%;
+}
+
+.item_home:hover::before {
+  width: 100%;
+}
+
+.btn_navbar_metas {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.btn_navbar_metas:hover {
+  color: white;
+}
+
+.item_metas::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1%;
+  background-color: green;
+  z-index: -1;
+  transition: all 0.8s;
+  left: 0;
+  height: 4%;
+}
+
+.item_metas:hover::before {
+  width: 100%;
+}
+
+.btn_navbar_loja {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.btn_navbar_loja:hover {
+  color: white;
+}
+
+.item_loja::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1%;
+  background-color: brown;
+  z-index: -1;
+  transition: all 0.8s;
+  left: 0;
+  height: 4%;
+}
+
+.item_loja:hover::before {
+  width: 100%;
+}
+
+.btn_navbar_deslogar {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.btn_navbar_deslogar:hover {
+  color: white;
+}
+
+.item_deslogar::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1%;
+  background-color: darkslateblue;
+  z-index: -1;
+  transition: all 0.8s;
+  left: 0;
+  height: 4%;
+}
+
+.item_deslogar:hover::before {
+  width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  .offcanvas {
+    --bs-offcanvas-width: 300px
+  }
 }
