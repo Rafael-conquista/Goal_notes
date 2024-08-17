@@ -5,7 +5,11 @@ const apiUrl = get_api_url()
 export async function getAmigosUser(id, ultimos) {
   if(ultimos == true) {
     try {
-      let response = await fetch(apiUrl+`AmigosUser/${id}`);
+      let response = await fetch(apiUrl+`AmigosUser/${id}`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+        }
+      });
       let result = await response.json();
       return result.amigos.slice(0, 3);
     } catch (e) {
@@ -15,7 +19,11 @@ export async function getAmigosUser(id, ultimos) {
   }
   else {
     try {
-      let response = await fetch(apiUrl+`AmigosUser/${id}`);
+      let response = await fetch(apiUrl+`AmigosUser/${id}`,{
+        headers: {
+          'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+        }
+      });
       let result = await response.json();
       return result.amigos;
     } catch (e) {
@@ -36,7 +44,9 @@ export async function makeFriend(idUsuario, idAmigo) {
     });
     var requestOptions = {
       method: 'POST',
-      headers: myHeaders,
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
       body: raw,
       redirect: 'follow'
     };
@@ -51,7 +61,11 @@ export async function makeFriend(idUsuario, idAmigo) {
 
 export async function getAmigosUserPendente(id) {
   try {
-    let response = await fetch(apiUrl+`AmigosUserPendente/${id}`);
+    let response = await fetch(apiUrl+`AmigosUserPendente/${id}`,{
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      }
+    });
     let result = await response.json();
     return result.amigos;
   } catch (e) {
@@ -71,7 +85,9 @@ export async function aceitar_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: myHeaders,
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
       body: raw,
       redirect: 'follow'
     };
@@ -94,7 +110,9 @@ export async function negar_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: myHeaders,
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
       body: raw,
       redirect: 'follow'
     };
@@ -117,7 +135,9 @@ export async function desfazer_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: myHeaders,
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
       body: raw,
       redirect: 'follow'
     };

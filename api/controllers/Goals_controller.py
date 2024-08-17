@@ -30,10 +30,16 @@ class GoalsController:
 
     def find_4_last_finished_goals(user_id):
         today = datetime.now().date()
-        goals = banco.session.query(GoalsModel)\
-            .filter(GoalsModel.end_date <= today, GoalsModel.user_id == user_id)\
-            .order_by(func.abs(func.julianday(GoalsModel.end_date) - func.julianday(today)))\
-            .limit(4).all()
+        if banco.engine.dialect.name == 'postgresql':
+            goals = banco.session.query(GoalsModel)\
+                .filter(GoalsModel.end_date <= today, GoalsModel.user_id == user_id)\
+                .order_by(func.abs(func.date_part('epoch', GoalsModel.end_date) - func.date_part('epoch', today)))\
+                .limit(4).all()
+        else:
+            goals = banco.session.query(GoalsModel)\
+                .filter(GoalsModel.end_date <= today, GoalsModel.user_id == user_id)\
+                .order_by(func.abs(func.julianday(GoalsModel.end_date) - func.julianday(today)))\
+                .limit(4).all()
         goals_list = GoalsController.format_goals_json(goals)
         return {"goals": goals_list}, 200
     
