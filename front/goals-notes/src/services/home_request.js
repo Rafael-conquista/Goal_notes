@@ -1,6 +1,10 @@
+import get_api_url from "../config";
+
+const apiUrl = get_api_url()
+
 export async function getAllGoals(id){
     try{
-      let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}`)
+      let response = await fetch(apiUrl+`usergoals/${id}`)
       let goalsData = await response.json()
       return goalsData
     } catch(e){
@@ -30,7 +34,7 @@ export async function getAllGoals(id){
         redirect: 'follow'
       };
     
-      let response = await fetch("http://127.0.0.1:5000/goal/2", requestOptions)
+      let response = await fetch(apiUrl+"goal/2", requestOptions)
       return response.json()
     } catch(e){
         console.log(e)

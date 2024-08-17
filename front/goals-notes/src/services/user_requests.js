@@ -1,6 +1,10 @@
+import get_api_url from "../config";
+
+const apiUrl = get_api_url()
+
 export async function get_user(id){
     try{
-      let response = await fetch(`http://127.0.0.1:5000/user/${id}`)
+      let response = await fetch(apiUrl+`user/${id}`)
       let user = await response.json()
       return user
     } catch(e){
@@ -29,7 +33,7 @@ export async function get_user(id){
         redirect: 'follow'
       };
     
-      let response = await fetch(`http://127.0.0.1:5000/user/${id}`, requestOptions)
+      let response = await fetch(apiUrl+`user/${id}`, requestOptions)
       return response.json()
     } catch(e){
         console.log(e)
@@ -54,7 +58,7 @@ export async function get_user(id){
         redirect: 'follow'
       };
     
-      let response = await fetch(`http://127.0.0.1:5000/userConsult`, requestOptions)
+      let response = await fetch(apiUrl+`userConsult`, requestOptions)
       return response.json()
     } catch(e){
         console.log(e)

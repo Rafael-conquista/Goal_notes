@@ -1,6 +1,10 @@
+import get_api_url from "../config";
+
+const apiUrl = get_api_url()
+
 export async function get_cap(id){
     try{
-      let response = await fetch(`http://127.0.0.1:5000/users_cap/${id}`)
+      let response = await fetch(apiUrl+`users_cap/${id}`)
       let user = await response.json()
       return user
     } catch(e){
@@ -10,7 +14,7 @@ export async function get_cap(id){
 
   export async function update_cap(data, id){
     try{
-      let response = await fetch(`http://127.0.0.1:5000/users_cap/${id}`)
+      let response = await fetch(apiUrl+`users_cap/${id}`)
       let user = await response.json()
       try{
         var myHeaders = new Headers();
@@ -26,7 +30,7 @@ export async function get_cap(id){
           redirect: 'follow'
         };
             
-        let response = await fetch(`http://127.0.0.1:5000/cap/${user.id}`, requestOptions)
+        let response = await fetch(apiUrl+`cap/${user.id}`, requestOptions)
         return response.json()
       } catch(e){
           console.log(e)
