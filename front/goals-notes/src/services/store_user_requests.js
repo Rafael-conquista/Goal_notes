@@ -2,9 +2,9 @@ import get_api_url from "../config";
 
 const apiUrl = get_api_url()
 
-export async function getImageActive(id){
+export async function getItensActive(id, type){
   try{
-    let response = await fetch(apiUrl+`Itens_by_user_active/${id}`)
+    let response = await fetch(apiURL+`Itens_by_user_active/${id}/${type}`)
     let user = await response.json()
     return user
   } catch(e){
@@ -45,7 +45,7 @@ export async function postCompra(preco, capCoins, idUsuario, idStore){
     return false
   }
 }
-export async function escolherSkin(idSkin, validacao){
+export async function escolherSkin(idSkin, validacao, type){
     if(validacao == true){
       try{
         var myHeaders = new Headers();
@@ -53,7 +53,8 @@ export async function escolherSkin(idSkin, validacao){
         
         var raw = JSON.stringify({
           "idSkin": idSkin,
-          "validacao": validacao
+          "validacao": validacao,
+          "type": type
         });
         var requestOptions = {
           method: 'PUT',
@@ -76,7 +77,8 @@ export async function escolherSkin(idSkin, validacao){
         
         var raw = JSON.stringify({
           "idSkin": idSkin,
-          "validacao": validacao
+          "validacao": validacao,
+          "type": type
         });
         var requestOptions = {
           method: 'PUT',
