@@ -4,8 +4,14 @@ const apiUrl = get_api_url()
 
 export async function get_user(id){
     try{
-      let response = await fetch(apiUrl+`user/${id}`)
+      console.log(apiUrl+`user/${id}`)
+      let response = await fetch(apiUrl + `user/${id}`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+        }
+      })
       let user = await response.json()
+      
       return user
     } catch(e){
       console.log(e)
@@ -16,6 +22,7 @@ export async function get_user(id){
     try{
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
+      myHeaders.append('ngrok-skip-browser-warning', 'true')
   
       var raw = JSON.stringify({
         "email": data.email,
@@ -45,6 +52,7 @@ export async function get_user(id){
     try{
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
+      myHeaders.append('ngrok-skip-browser-warning', 'true')
   
       var raw = JSON.stringify({
         "apelido": apelido,
