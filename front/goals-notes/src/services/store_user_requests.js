@@ -4,7 +4,7 @@ const apiUrl = get_api_url()
 
 export async function getItensActive(id, type){
   try{
-    let response = await fetch(apiURL+`Itens_by_user_active/${id}/${type}`)
+    let response = await fetch(apiUrl+`Itens_by_user_active/${id}/${type}`)
     let user = await response.json()
     return user
   } catch(e){
