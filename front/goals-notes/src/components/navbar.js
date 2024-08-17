@@ -1,18 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { useState } from "react";
+import cap_coins from "../images/capCoin.png";
 import { TiThMenu } from "react-icons/ti";
 import { useParams } from 'react-router-dom';
 import AmigoFotoComponent from '../components/amigoFoto.js';
 import LogoffButton from '../components/logoffButton.js'
+import { get_user } from "../services/user_requests";
 import "./Style/navbar.css";
 
 function Navbar() {
   const [show, setShow] = useState(false);
   const { id } = useParams();
+  const [capCoins, setCapCoins] = useState();
+  const [loading, setloading] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  async function get_coins(id) {
+    const user = await get_user(id);
+    return user;
+  }
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const update_coin = JSON.parse(sessionStorage.getItem("update_coin"));
+
+      if (update_coin) {
+        get_coins(id).then((user) => {
+          if (user) {
+            setCapCoins(user.capCoins);
+            setloading(false);
+          } else {
+            setloading(true);
+          }
+        });
+        sessionStorage.removeItem("update_coin");
+      }
+    }, 1600);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    get_coins(id).then((user) => {
+      if (user) {
+        setCapCoins(user.capCoins);
+        setloading(false);
+      } else {
+        setloading(true);
+      }
+    });
+  }, [id, capCoins]);
 
   return (
     <div>
@@ -22,6 +61,10 @@ function Navbar() {
               Goal notes
           </h1>
           <TiThMenu className="burguer_menu" onClick={handleShow} />
+        </div>
+        <div className="cap_coin_nav">
+          <img src={cap_coins} alt="vazio" className="cap_coins_img" />
+          <p className="cap_coins">CapCoins {capCoins}</p>
         </div>
         <Offcanvas
           show={show}
