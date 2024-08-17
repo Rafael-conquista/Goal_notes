@@ -4,6 +4,7 @@ import { useState } from "react";
 import { TiThMenu } from "react-icons/ti";
 import { useParams } from 'react-router-dom';
 import AmigoFotoComponent from '../components/amigoFoto.js';
+import LogoffButton from '../components/logoffButton.js'
 import "./Style/navbar.css";
 
 function Navbar() {
@@ -60,15 +61,7 @@ function Navbar() {
                 </div>
               </a>
             </li>
-            <li className="menu_item_nav" onClick={handleClose}>
-              <a className="menu_link center" href="store" >
-                <div className="item_deslogar">
-                  <a className="menu_link btn_navbar_deslogar">
-                  deslogar
-                  </a>
-                </div>
-              </a>
-            </li>
+            <LogoffButton />
           </ul>
         </Offcanvas>
       </nav>
