@@ -14,7 +14,6 @@
   
 
 .store_component_cima, .store_component_baixo {
-    min-height: 50vh;
     background-color: #131F2455;
 }
 
@@ -24,6 +23,22 @@
 
 .store_component_baixo {
   border-top: 1px black solid;
+}
+
+.homeScreenStore {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 110px);
+  margin: 110px 0 0 0;
+  background-image: url("../../images/fundoCasa.jpeg");
+}
+
+.store_item {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  justify-items: center;
+  align-items: center;
+  min-height: calc(50vh - (121.4px ));
 }
 
 .card_store {
@@ -36,7 +51,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: #131F24;
     padding: 0.5em;
     flex-direction: column;
     margin: 20px 0px;
@@ -62,7 +77,7 @@
     font-size: 0.9em;
     position: absolute;
     bottom: 5px;
-    color: #000;
+    color: #fff;
   }
   
   .card_store:hover::after {
@@ -79,7 +94,7 @@
   }
   
   .image_store {
-    background: rgb(241, 241, 241);
+    background: #222E33;
     width: 100%;
     height: 100%;
     display: grid;
@@ -143,25 +158,51 @@
   }
 
   .background_0 {
-    box-shadow: 0px 0px 10px #FFF;
+    box-shadow: 0px 0px 20px #FFF;
   }
 
   .background_1 {
-    box-shadow: 0px 0px 10px #A020F0;
+    box-shadow: 0px 0px 20px #A020F0;
   }
 
   .background_2 {
-    box-shadow: 0px 0px 10px #FF0000;
+    box-shadow: 0px 0px 20px #FF0000;
   }
 
   .background_3 {
-    box-shadow: 0px 0px 10px #228B22;
+    box-shadow: 0px 0px 20px #228B22;
   }
 
   .background_4 {
-    box-shadow: 0px 0px 10px #0000ff;
+    box-shadow: 0px 0px 20px #0000ff;
   }
 
   .background_5 {
-    box-shadow: 0px 0px 10px #EEAD2D;
+    box-shadow: 0px 0px 20px #EEAD2D;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .card_store {
+      width: 10em;
+      height: 15em;
+    }
+    .img_store {
+      width: 130px;
+    }
+    .store_item {
+      grid-template-columns: repeat(auto-fit, minmax(200px, auto))
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .card_store {
+      width: 10em;
+      height: 15em;
+    }
+    .img_store {
+      width: 130px;
+    }
+    .store_item {
+      grid-template-columns: repeat(auto-fit, minmax(150px, auto))
+    }
   }

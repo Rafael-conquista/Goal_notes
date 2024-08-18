@@ -126,10 +126,10 @@ const Store = () => {
   return (
     <>
       <Navbar currentPage="Store" />
-      <section className='capScreen homeScreen store'>
+      <section className='capScreen homeScreenStore store'>
         <div className="store_component_cima">
           <h1 className='tituloStore'>Compre algumas skins da Cap</h1>
-          <div className="amigo_main_ultimos">
+          <div className="store_item">
             {skin.length > 0 ? skin.map((store) => (
               !possuiSkin(store.id) ? (
                 <>
@@ -169,7 +169,7 @@ const Store = () => {
         </div>
         <div className="store_component_baixo">
           <h1 className='tituloStore'>Compre algumas cores de fundo para sua Cap</h1>
-          <div className="amigo_main_ultimos">
+          <div className="store_item">
             {skin.length > 0 ? skin.map((store) => (
               !possuiSkin(store.id) ? (
                 <>
