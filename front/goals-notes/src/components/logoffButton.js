@@ -2,13 +2,15 @@ import { remove_token } from "../utils/token_verify";
 
 function LogoffButton() {
   return (
-    <button
-      onClick={remove_token}
-      className="option"
-      style={{ backgroundColor: "transparent" }}
-    >
-      Deslogar
-    </button>
+    <li className="menu_item_nav">
+    <a className="menu_link center" onClick={remove_token} style={{ backgroundColor: "transparent" }}>
+      <div className="item_deslogar">
+        <a className="menu_link btn_navbar_deslogar">
+        deslogar
+        </a>
+      </div>
+    </a>
+    </li>
   );
 }
 
