@@ -1,6 +1,31 @@
-.store_component_cima, .store_component_baixo {
-    height: 50vh;
+.store {
+  overflow-y: auto;
 }
+
+.store::-webkit-scrollbar {
+  width: 10px;
+  background-color: #131F2455;
+}
+  
+.store::-webkit-scrollbar-thumb {
+  background: #555; 
+  border-radius: 10px;
+}
+  
+
+.store_component_cima, .store_component_baixo {
+    min-height: 50vh;
+    background-color: #131F2455;
+}
+
+.store_component_cima {
+  border-bottom: 1px black solid;
+}
+
+.store_component_baixo {
+  border-top: 1px black solid;
+}
+
 .card_store {
     position: relative;
     width: 11.875em;
@@ -14,6 +39,13 @@
     background: #fff;
     padding: 0.5em;
     flex-direction: column;
+    margin: 20px 0px;
+  }
+
+  .tituloStore {
+    color: #fff;
+    text-shadow: 0px 0px 5px black;
+    font-size: 3rem;
   }
   
   .card_store .title {
@@ -63,13 +95,10 @@
     bottom: 0;
   }
 
-  .store_component_cima {
-    background-color: #131F2455;
-  }
-
   .button_perfil_store {
     margin: 10px;
     margin-bottom: 20px;
+    cursor: pointer;
   }
 
   .button_perfil_store_comprada {
@@ -103,4 +132,36 @@
 
   .button_text {
     left: -10px !important;
+  }
+
+  .background_0, .background_1, .background_2, .background_3, .background_4, .background_5 {
+    position: relative;
+    height: 130px;
+    width: 130px;
+    z-index: 100;
+    border-radius: 100px;
+  }
+
+  .background_0 {
+    box-shadow: 0px 0px 10px #FFF;
+  }
+
+  .background_1 {
+    box-shadow: 0px 0px 10px #A020F0;
+  }
+
+  .background_2 {
+    box-shadow: 0px 0px 10px #FF0000;
+  }
+
+  .background_3 {
+    box-shadow: 0px 0px 10px #228B22;
+  }
+
+  .background_4 {
+    box-shadow: 0px 0px 10px #0000ff;
+  }
+
+  .background_5 {
+    box-shadow: 0px 0px 10px #EEAD2D;
   }

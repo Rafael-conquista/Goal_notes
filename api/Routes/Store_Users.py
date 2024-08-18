@@ -13,9 +13,9 @@ class Itens_by_user(Resource):
         return StoreUsersController.find_itens(user_id)
 
 class Itens_active_by_user(Resource):
-    def get(self, user_id):
+    def get(self, user_id, type):
         main_queries.close_conection()
-        return StoreUsersController.find_itens_active(user_id)
+        return StoreUsersController.find_itens_active(user_id, type)
 
 class Itens_register_by_user(Resource):
     def post(self):
@@ -32,6 +32,7 @@ class Active_iten_user(Resource):
         dados = request.get_json()
         idSkin = dados["idSkin"]
         validacao = dados["validacao"]
-        return StoreUsersController.active_iten_user(idSkin, validacao)
+        type = dados["type"]
+        return StoreUsersController.active_iten_user(idSkin, validacao, type)
 
 

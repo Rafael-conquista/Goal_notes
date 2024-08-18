@@ -1,27 +1,40 @@
-export async function getAllGoals(id){
-  try{
-    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?ativas=true`)
+import get_api_url from "../config";
+
+const apiUrl = get_api_url()
+
+export async function getAllGoals(id) {
+  try {
+    let response = await fetch(apiUrl + `usergoals/${id}?ativas=true`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      }
+    })
     let goalsData = await response.json()
     return goalsData
-  } catch(e){
+  } catch (e) {
     console.log(e)
   }
 }
 
-export async function getAllFinishedGoals(id){
-  try{
-    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?ativas=false`)
+export async function getAllFinishedGoals(id) {
+  try {
+    let response = await fetch(apiUrl + `usergoals/${id}?ativas=false`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      }
+    })
     let goalsData = await response.json()
     return goalsData
-  } catch(e){
+  } catch (e) {
     console.log(e)
   }
 }
 
-export async function createGoal(data){
-  try{
+export async function createGoal(data) {
+  try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('ngrok-skip-browser-warning', 'true')
     var raw = JSON.stringify({
       "name": data.name,
       "obs": data.obs,
@@ -30,32 +43,33 @@ export async function createGoal(data){
       "type_id": data.type_id,
       "expected_data": Number(data.expected_data)
     });
-  
+
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
-  
-    let response = await fetch("http://127.0.0.1:5000/goal/2", requestOptions)
+
+    let response = await fetch(apiUrl + "goal/2", requestOptions)
     return response.json()
-  } catch(e){
-      console.log(e)
+  } catch (e) {
+    console.log(e)
     return false
   }
 }
 
-export async function UpdateGoal(data, id){
-  try{
+export async function UpdateGoal(data, id) {
+  try {
     var raw
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    if("end_date" in data){
+    myHeaders.append('ngrok-skip-browser-warning', 'true')
+    if ("end_date" in data) {
       raw = JSON.stringify({
         "end_date": data.end_date
       });
-    }else{
+    } else {
       raw = JSON.stringify({
         "name": data.name,
         "obs": data.obs,
@@ -66,130 +80,146 @@ export async function UpdateGoal(data, id){
       });
 
     }
-  
+
     var requestOptions = {
       method: 'PUT',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
-    let response = await fetch(`http://127.0.0.1:5000/goal/${id}`, requestOptions)
+    let response = await fetch(apiUrl + `goal/${id}`, requestOptions)
     return response.json()
-  } catch(e){
-      console.log(e)
+  } catch (e) {
+    console.log(e)
     return false
   }
 }
 
-export async function deleteGoals(id){
-  try{
+export async function deleteGoals(id) {
+  try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-  
+    myHeaders.append('ngrok-skip-browser-warning', 'true')
+
     var requestOptions = {
       method: 'DELETE',
       headers: myHeaders,
       redirect: 'follow'
     };
-  
-    let response = await fetch(`http://127.0.0.1:5000/goal/${id}`, requestOptions)
+
+    let response = await fetch(apiUrl + `goal/${id}`, requestOptions)
     return response.json()
-  } catch(e){
-      console.log(e)
+  } catch (e) {
+    console.log(e)
     return false
   }
 }
 
-export async function registerItems(data, id){
-  try{
+export async function registerItems(data, id) {
+  try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('ngrok-skip-browser-warning', 'true')
     var raw = JSON.stringify({
       "desc": data,
       "goals_id": id
     });
-  
+
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
-  
-    let response = await fetch("http://127.0.0.1:5000/item_register", requestOptions)
+
+    let response = await fetch(apiUrl + "item_register", requestOptions)
     return response.json()
-  } catch(e){
-      console.log(e)
+  } catch (e) {
+    console.log(e)
     return false
   }
 }
 
-export async function updateItems(data){
-  try{
+export async function updateItems(data) {
+  try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify(data);  
-  
+    myHeaders.append('ngrok-skip-browser-warning', 'true')
+    var raw = JSON.stringify(data);
+
     var requestOptions = {
       method: 'PUT',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
-  
-    let response = await fetch(`http://127.0.0.1:5000/item/${data.id}`, requestOptions)
+
+    let response = await fetch(apiUrl + `item/${data.id}`, requestOptions)
     return response.json()
-  } catch(e){
-      console.log(e)
+  } catch (e) {
+    console.log(e)
     return false
   }
 }
 
-export async function deleteItems(id){
-  try{
+export async function deleteItems(id) {
+  try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-  
+    myHeaders.append('ngrok-skip-browser-warning', 'true')
+
     var requestOptions = {
       method: 'DELETE',
       headers: myHeaders,
       redirect: 'follow'
     };
-  
-    let response = await fetch(`http://127.0.0.1:5000/item/${id}`, requestOptions)
+
+    let response = await fetch(apiUrl + `item/${id}`, requestOptions)
     return response.json()
-  } catch(e){
-      console.log(e)
+  } catch (e) {
+    console.log(e)
     return false
   }
 }
 
-export async function getItemsByGoal(id){
-  try{
-    let response = await fetch(`http://127.0.0.1:5000/items_by_goal/${id}`)
+export async function getItemsByGoal(id) {
+  try {
+    let response = await fetch(apiUrl + `items_by_goal/${id}`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      }
+    })
     let goalsData = await response.json()
     return goalsData
-  } catch(e){
+  } catch (e) {
     console.log(e)
   }
 }
 
-export async function getFinishedGoalsList(id){
-  try{
-    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?tipo_busca=ended`)
+export async function getFinishedGoalsList(id) {
+  try {
+    let response = await fetch(apiUrl + `usergoals/${id}?tipo_busca=ended`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
+    })
     let goalsData = await response.json()
     return goalsData
-  } catch(e){
+  } catch (e) {
     console.log(e)
   }
 }
 
-export async function getNextGoalsList(id){
-  try{
-    let response = await fetch(`http://127.0.0.1:5000/usergoals/${id}?tipo_busca=nexts`)
+export async function getNextGoalsList(id) {
+  try {
+    let response = await fetch(apiUrl + `usergoals/${id}?tipo_busca=nexts`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      }
+    })
     let goalsData = await response.json()
     return goalsData
-  } catch(e){
+  } catch (e) {
     console.log(e)
   }
 }

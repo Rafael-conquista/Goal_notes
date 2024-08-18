@@ -1,7 +1,15 @@
+import get_api_url from "../config";
+
+const apiUrl = get_api_url()
+
 export async function getAmigosUser(id, ultimos) {
   if(ultimos == true) {
     try {
-      let response = await fetch(`http://127.0.0.1:5000/AmigosUser/${id}`);
+      let response = await fetch(apiUrl+`AmigosUser/${id}`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+        }
+      });
       let result = await response.json();
       return result.amigos.slice(0, 3);
     } catch (e) {
@@ -11,7 +19,11 @@ export async function getAmigosUser(id, ultimos) {
   }
   else {
     try {
-      let response = await fetch(`http://127.0.0.1:5000/AmigosUser/${id}`);
+      let response = await fetch(apiUrl+`AmigosUser/${id}`,{
+        headers: {
+          'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+        }
+      });
       let result = await response.json();
       return result.amigos;
     } catch (e) {
@@ -32,12 +44,14 @@ export async function makeFriend(idUsuario, idAmigo) {
     });
     var requestOptions = {
       method: 'POST',
-      headers: myHeaders,
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
       body: raw,
       redirect: 'follow'
     };
   
-    let response = await fetch(`http://127.0.0.1:5000/Amigos_registro`, requestOptions)
+    let response = await fetch(apiUrl+`Amigos_registro`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -47,7 +61,11 @@ export async function makeFriend(idUsuario, idAmigo) {
 
 export async function getAmigosUserPendente(id) {
   try {
-    let response = await fetch(`http://127.0.0.1:5000/AmigosUserPendente/${id}`);
+    let response = await fetch(apiUrl+`AmigosUserPendente/${id}`,{
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      }
+    });
     let result = await response.json();
     return result.amigos;
   } catch (e) {
@@ -67,12 +85,14 @@ export async function aceitar_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: myHeaders,
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
       body: raw,
       redirect: 'follow'
     };
   
-    let response = await fetch(`http://127.0.0.1:5000/AmigoAceitarSolicitacao`, requestOptions)
+    let response = await fetch(apiUrl+`AmigoAceitarSolicitacao`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -90,12 +110,14 @@ export async function negar_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: myHeaders,
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
       body: raw,
       redirect: 'follow'
     };
   
-    let response = await fetch(`http://127.0.0.1:5000/AmigoNegarSolicitacao`, requestOptions)
+    let response = await fetch(apiUrl+`AmigoNegarSolicitacao`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -113,12 +135,14 @@ export async function desfazer_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: myHeaders,
+      headers: {
+        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+      },
       body: raw,
       redirect: 'follow'
     };
   
-    let response = await fetch(`http://127.0.0.1:5000/Amigo_desfazer`, requestOptions)
+    let response = await fetch(apiUrl+`Amigo_desfazer`, requestOptions)
     return response.json()
   } catch(e){
       console.log(e)

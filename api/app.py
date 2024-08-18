@@ -89,7 +89,7 @@ api.add_resource(Store, "/store/<int:id>")
 api.add_resource(Store_register, "/skin_register")
 #Store_User related Routes
 api.add_resource(Itens_by_user,"/Itens_by_user/<int:user_id>")
-api.add_resource(Itens_active_by_user,"/Itens_by_user_active/<int:user_id>")
+api.add_resource(Itens_active_by_user,"/Itens_by_user_active/<int:user_id>/<int:type>")
 api.add_resource(Itens_register_by_user, "/itens_register_by_user")
 api.add_resource(Active_iten_user, "/active_iten_user")
 
