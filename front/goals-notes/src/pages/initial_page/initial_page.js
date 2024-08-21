@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LoginComponent from "../../components/login.js";
 import RegisterComponent from "../../components/register.js";
 import "../../components/Style/loginStyle.css";
 import { token_verify } from "../../services/api_requests.js";
 import { remove_token } from "../../utils/token_verify.js";
-
+import Modal from "../../components/modal/index.js"; /* importar a Modal */
+import { Button } from "react-bootstrap";
 const Initial = () => {
+
+  const [openModal,setOpenModal] = useState(false) /* Funcionamento da Modal  */
+
+
+
   async function verify(token) {
     try {
       const response = await token_verify(token);
@@ -49,7 +55,10 @@ const Initial = () => {
           <RegisterComponent />
         </div>
       </div>
+      <button onClick={() => setOpenModal(true)}>Abir Modal</button>{/* Botao da Modal  */}
+      <Modal isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)}/> {/* importar a modal  */}
     </section>
+    
   );
 };
 
