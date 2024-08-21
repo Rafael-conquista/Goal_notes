@@ -6,6 +6,7 @@
   max-height: 110px;
   position: fixed;
   justify-content: center;
+  height: 110px;
 }
 
 .offcanvas-header {
@@ -259,8 +260,33 @@
   height: 80px;
 }
 
+.tituloStore {
+  color: #fff;
+  text-shadow: 0px 0px 5px black;
+  font-size: 3rem;
+  padding: 0;
+  margin: 50px;
+}
+
+.store_item {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  justify-items: center;
+  align-items: center;
+  min-height: calc(50vh -(213.4px));
+}
+
 @media screen and (max-width: 1000px) {
   .offcanvas {
     --bs-offcanvas-width: 300px
+  }
+
+  .tituloStore {
+    font-size: 1.8rem !important;
+    margin: 10px 5px;
+  }
+
+  .navbar_view .container-fluid h1 {
+    color: #131F24;
   }
 }
