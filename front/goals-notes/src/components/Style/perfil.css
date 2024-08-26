@@ -8,7 +8,7 @@
     right: 0;
     margin: auto;
     width: 100vw;
-    height: calc(100vh - 110px) !important;
+    height: calc(100vh - 110px);
     border-radius: 0px;
     color: white;
 }
@@ -52,6 +52,8 @@
 
 .infosUser {
     display: flex;
+    width: 100%;
+    justify-content: center;
 }
 
 .component_cap_main {
@@ -124,7 +126,7 @@
 }
 
 .amigo_main_geral {
-    height: calc(100vh - 110px);
+    height: calc(100vh);
 }
 
 .amigo {   
@@ -250,14 +252,14 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .amizades {
-    height: calc(100vh - 110px);
+    height: calc(100vh);
     overflow-y: auto;
     overflow-x: hidden;
     width: 33.5vw;
 }
 
 .amizades_consult {
-  height: calc(100vh - 110px);
+  height: calc(100vh);
   overflow-y: auto;
   overflow-x: hidden;
   width: 100vw;
@@ -277,7 +279,7 @@ input[type="number"]::-webkit-outer-spin-button {
   
 
 .amizades_pesquisar {
-    height: calc(100vh - 110px);
+    height: calc(100vh);
     overflow: auto;
     width: 33vw;
 }
@@ -525,6 +527,10 @@ input[type="number"]::-webkit-outer-spin-button {
     bottom: 0;
     left: 0;
   }
+
+  #button-3 {
+    padding: 0px;
+  }
   
   .button_amigos {
     position: relative;
@@ -567,16 +573,16 @@ input[type="number"]::-webkit-outer-spin-button {
   #button-3 .knobs:before {
     content: "Sim";
     position: absolute;
-    top: 4px;
+    top: 5px;
     left: 4px;
-    width: 20px;
-    height: 10px;
+    width: 30px;
+    height: 20px;
     color: #fff;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     line-height: 1;
-    padding: 9px 4px;
+    padding: 9px 4px 8px 4px;
     background-color: #34974d;
     border-radius: 50%;
     transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
@@ -595,7 +601,7 @@ input[type="number"]::-webkit-outer-spin-button {
   
   #button-3 .checkbox:checked + .knobs:before {
     content: "Não";
-    left: 42px;
+    left: 30px;
     background-color: #f44336;
   }
   
@@ -775,6 +781,12 @@ input[type="number"]::-webkit-outer-spin-button {
   flex-direction: column;
 }
 
+@media screen and (max-width: 1600px) {
+  .label_input_user {
+    width: auto;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .homeScreenStore {
     overflow-y: auto;
@@ -782,13 +794,18 @@ input[type="number"]::-webkit-outer-spin-button {
   }
   
   .component_cap_main {
-    height: calc(100vh - 110px);
+    height: calc(100vh);
     flex-direction: column;
   }
   .component_cap {
     width: 100vw;
-    height: calc(55vh - 110px);
+    height: calc(100vh);
   }
+
+  .cap_component_perfil {
+    position: relative;
+  }
+
   .infosUser {
     flex-direction: column;
     width: 100%;
@@ -804,7 +821,11 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .border {
-    border: 0px 0px #dee2e600;
+    border: 0px var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important
+  }
+
+  .border_esquerda {
+    border-left: 0px solid #131f24ec;
   }
 
   .homeScreenStore::-webkit-scrollbar {
@@ -835,5 +856,44 @@ input[type="number"]::-webkit-outer-spin-button {
 
   #btn_editar {
     width: 190px !important;
+    font-size: 1.3rem;
   } 
+
+  .homeScreenStore {
+    background-image: none !important;
+    background: #222E33;
+  }
+
+  .card, .card_esq {
+    background: none;
+  }
+
+  .submit_buttons {
+    width: 100%;
+  }
+
+  .infosUser {
+    margin-top: 10px;
+  }
+  
+  .label_input_user label, .label_input_user input{
+    font-size: 1rem;
+  }
+
+  .component_amigos {
+    height: 50%;
+  }
+
+  .component_amigos_main h1 {
+    padding-top: 80px;
+    font-size: 1.5rem;
+  }
+
+  .component_amigos_main {
+    min-height: 35vh;
+  }
+
+  .component_amigos {
+    height: auto;
+  }
 }
