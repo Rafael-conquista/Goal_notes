@@ -40,19 +40,6 @@ function LoginComponent() {
     setPassword(e.target.value);
   };
 
-  const capivaraOlhos = (focus) => {
-    const olhos = document.getElementById("cap");
-    if (focus) {
-      olhos.classList.add("fecha");
-    } else {
-      olhos.classList.remove("fecha");
-    }
-  };
-
-  const primeiraVezAtualizar = (event) => {
-    setPrimeiraVez(true);
-  };
-
   async function active_user() {
     const user_json = {
       excluir: false,
@@ -140,13 +127,9 @@ function LoginComponent() {
             Entrar
           </button>
 
-          <p
-            className="textos esqueciSenha redirect"
-            onClick={scrollToBottom}
-          >
+          <p className="textos esqueciSenha redirect" onClick={scrollToBottom}>
             Realizar cadastro
           </p>
-          
         </form>
       )}
       {!primeiraVez && (
@@ -172,10 +155,7 @@ function LoginComponent() {
 
           <button className="textos esqueciSenha">Esqueceu a senha?</button>
 
-          <p
-            className="textos esqueciSenha redirect"
-            onClick={scrollToBottom}
-          >
+          <p className="textos esqueciSenha redirect" onClick={scrollToBottom}>
             Realizar cadastro
           </p>
 
