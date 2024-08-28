@@ -7,7 +7,7 @@ import { Modal } from "react-bootstrap";
 import { update_user } from "../services/user_requests.js";
 import Loading from "./loading.js";
 
-function LoginComponent() {
+function LoginComponent({ onPasswordClick }) {
   const [id, set_id] = useState();
   const [email, setEmail] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -119,6 +119,7 @@ function LoginComponent() {
             onChange={passwordChange}
             id="password"
             placeholder="informe a sua senha"
+            onClick={onPasswordClick}
           />
 
           <button className="textos esqueciSenha">Esqueceu a senha?</button>
@@ -151,6 +152,7 @@ function LoginComponent() {
             onChange={passwordChange}
             id="password"
             placeholder="informe a sua senha"
+            onClick={onPasswordClick}
           />
 
           <button className="textos esqueciSenha">Esqueceu a senha?</button>
