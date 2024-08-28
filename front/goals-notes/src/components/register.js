@@ -3,7 +3,7 @@ import { register } from "../services/api_requests";
 import { token_storage } from "../utils/token_verify";
 import Loading from "./loading.js";
 
-function RegisterComponent() {
+function RegisterComponent({ onPasswordClick }) {
   const [email, setEmail] = useState();
   const [age, setAge] = useState();
   const [surname, setSurname] = useState();
@@ -78,7 +78,6 @@ function RegisterComponent() {
     });
   });
 
-
   return (
     <>
       {loading && <Loading />}
@@ -123,6 +122,7 @@ function RegisterComponent() {
           onChange={passwordChange}
           id="password"
           placeholder="Insira sua Senha"
+          onClick={onPasswordClick}
         />
         <input
           className="textos"
@@ -131,6 +131,7 @@ function RegisterComponent() {
           required="required"
           onChange={confirmChange}
           placeholder="Confirme a Senha"
+          onClick={onPasswordClick}
         />
 
         <button className="textos botaoRegistrar" type="submit" value="entar">

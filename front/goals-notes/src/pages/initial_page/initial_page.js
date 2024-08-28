@@ -37,7 +37,10 @@ const Initial = () => {
   };
 
   const handleClickOutside = (event) => {
-    if (!event.target.closest("#password")) {
+    if (
+      !event.target.closest("#password") &&
+      !event.target.closest("#confirm_password")
+    ) {
       setEyeClass("");
     }
   };
@@ -65,7 +68,7 @@ const Initial = () => {
           <LoginComponent onPasswordClick={fecha} />
         </div>
         <div id="registro" className="cardRegister grid">
-          <RegisterComponent />
+          <RegisterComponent onPasswordClick={fecha} />
         </div>
       </div>
     </section>
