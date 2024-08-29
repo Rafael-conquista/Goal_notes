@@ -1,5 +1,5 @@
 .navbar_view {
-  background-color: #131F24;
+  background-color: #131f24;
   top: 0;
   z-index: 100;
   width: 100%;
@@ -77,8 +77,8 @@
 }
 
 .offcanvas {
-  background-color: #131F24 ;
-  align-items: baseline ;
+  background-color: #131f24;
+  align-items: baseline;
   padding-left: 1vw;
 }
 
@@ -141,7 +141,7 @@
 }
 
 .item_home::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 1%;
@@ -149,7 +149,7 @@
   z-index: -1;
   transition: all 0.8s;
   left: 0;
-  height: 4%;
+  height: 7%;
 }
 
 .item_home:hover::before {
@@ -171,7 +171,7 @@
 }
 
 .item_metas::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 1%;
@@ -179,7 +179,7 @@
   z-index: -1;
   transition: all 0.8s;
   left: 0;
-  height: 4%;
+  height: 7%;
 }
 
 .item_metas:hover::before {
@@ -201,7 +201,7 @@
 }
 
 .item_loja::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 1%;
@@ -209,7 +209,7 @@
   z-index: -1;
   transition: all 0.8s;
   left: 0;
-  height: 4%;
+  height: 7%;
 }
 
 .item_loja:hover::before {
@@ -231,7 +231,7 @@
 }
 
 .item_deslogar::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 1%;
@@ -239,7 +239,7 @@
   z-index: -1;
   transition: all 0.8s;
   left: 0;
-  height: 4%;
+  height: 7%;
 }
 
 .item_deslogar:hover::before {
@@ -273,12 +273,12 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, auto));
   justify-items: center;
   align-items: center;
-  min-height: calc(50vh -(213.4px));
+  min-height: calc(50vh - (213.4px));
 }
 
 @media screen and (max-width: 1000px) {
   .offcanvas {
-    --bs-offcanvas-width: 300px
+    --bs-offcanvas-width: 300px;
   }
 
   .tituloStore {
@@ -287,6 +287,6 @@
   }
 
   .navbar_view .container-fluid h1 {
-    color: #131F24;
+    color: #131f24;
   }
 }
