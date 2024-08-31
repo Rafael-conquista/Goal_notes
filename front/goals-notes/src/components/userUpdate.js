@@ -7,8 +7,10 @@ function UserUpdateComponent({ idToken, id, nicknameAntigo, emailAntigo }) {
     const [editar, setEditar] = useState(false);
     const [alteraSenha, setAlteraSenha] = useState(false);
     const [alteraSensivel, setalteraSensivel] = useState(false);
-    const [nickname, setNickname] = useState(nicknameAntigo);
-    const [email, setEmail] = useState(emailAntigo);
+    const [nickname, setNickname] = useState('');
+    const [nicknameAlterado, setNicknameAlterado] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailAlterado, setEmailAlterado] = useState('');
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -21,11 +23,21 @@ function UserUpdateComponent({ idToken, id, nicknameAntigo, emailAntigo }) {
     
     const emailChange = (e) => {
         setEmail(e.target.value)
-        if (e.target.value == emailAntigo){
-            setalteraSensivel(false)
+        if (emailAlterado == ''){
+            if (e.target.value == emailAntigo){
+                setalteraSensivel(false)
+            }
+            else {
+                setalteraSensivel(true)
+            }
         }
-        else {
-            setalteraSensivel(true)
+        if (emailAlterado != ''){
+            if (e.target.value == emailAlterado){
+                setalteraSensivel(false)
+            }
+            else {
+                setalteraSensivel(true)
+            }
         }
     }
 
@@ -33,6 +45,8 @@ function UserUpdateComponent({ idToken, id, nicknameAntigo, emailAntigo }) {
         const emailRegex = /^[a-z0-9+_.-]+@[a-z0-9.-]+$/;
         if (emailRegex && emailRegex.test(email)) {
             user_update()
+            setNicknameAlterado(nickname)
+            setEmailAlterado(email) 
         } 
         else {
             setloading(false)
@@ -54,48 +68,99 @@ function UserUpdateComponent({ idToken, id, nicknameAntigo, emailAntigo }) {
     }
 
     const submitChanges = (e) => {
-        if (alteraSensivel && email == emailAntigo && password == '') {
-            if (nickname && email){
-                user_update()
-                setloading(true)
+        if (emailAlterado == '') {
+            if (alteraSensivel && email == emailAntigo && password == '') {
+                if (nickname && email){
+                    user_update()
+                    setNicknameAlterado(nickname)
+                    setEmailAlterado(email) 
+                    setloading(true)
+                }
+                else if (!nickname){
+                    setMessage('Favor inserir um apelido')
+                }
+                else if (!email){
+                    setMessage('Favor inserir um e-mail')
+                }
             }
-            else if (!nickname){
-                setMessage('Favor inserir um apelido')
+            else if (alteraSensivel && email != emailAntigo && password != '') {
+                if (nickname && email){
+                    setloading(true)
+                    validaEmail()
+                }
+                else if (!nickname){
+                    setMessage('Favor inserir um apelido')
+                }
+                else if (!email){
+                    setMessage('Favor inserir um e-mail')
+                }
             }
-            else if (!email){
-                setMessage('Favor inserir um e-mail')
+            else if (!alteraSensivel) {
+                if (nickname && email){
+                    user_update()
+                    setloading(true)
+                }
+                else if (!nickname){
+                    setMessage('Favor inserir um apelido')
+                }
+                else if (!email){
+                    setMessage('Favor inserir um e-mail')
+                }
+            }
+            else if (email == emailAntigo && nickname == nicknameAntigo) {
+                setMessage('user updated successfully')
+                setEditar(false)
+            }
+            else {
+                setMessage('Para alterar informações sensíveis, favor preencher a senha')
             }
         }
-        else if (alteraSensivel && email != emailAntigo && password != '') {
-            if (nickname && email){
-                setloading(true)
-                validaEmail()
+        if (emailAlterado != '') {
+            if (alteraSensivel && email == emailAlterado && password == '') {
+                if (nickname && email){
+                    user_update()
+                    setloading(true)
+                }
+                else if (!nickname){
+                    setMessage('Favor inserir um apelido')
+                }
+                else if (!email){
+                    setMessage('Favor inserir um e-mail')
+                }
             }
-            else if (!nickname){
-                setMessage('Favor inserir um apelido')
+            else if (alteraSensivel && email != emailAlterado && password != '') {
+                if (nickname && email){
+                    setloading(true)
+                    validaEmail()
+                }
+                else if (!nickname){
+                    setMessage('Favor inserir um apelido')
+                }
+                else if (!email){
+                    setMessage('Favor inserir um e-mail')
+                }
             }
-            else if (!email){
-                setMessage('Favor inserir um e-mail')
+            else if (!alteraSensivel) {
+                if (nickname && email){
+                    user_update()
+                    setNicknameAlterado(nickname)
+                    setEmailAlterado(email) 
+                    setloading(true)
+                }
+                else if (!nickname){
+                    setMessage('Favor inserir um apelido')
+                }
+                else if (!email){
+                    setMessage('Favor inserir um e-mail')
+                }
             }
-        }
-        else if (!alteraSensivel) {
-            if (nickname && email){
-                user_update()
-                setloading(true)
+            else if (email == emailAlterado && nickname == nicknameAlterado) {
+                setMessage('user updated successfully')
+                setEditar(false)
             }
-            else if (!nickname){
-                setMessage('Favor inserir um apelido')
+            else {
+                setMessage('Para alterar informações sensíveis, favor preencher a senha')
             }
-            else if (!email){
-                setMessage('Favor inserir um e-mail')
-            }
-        }
-        else if (email == emailAntigo && nickname == nicknameAntigo) {
-            setMessage('user updated successfully')
-            setEditar(false)
-        }
-        else {
-            setMessage('Para alterar informações sensíveis, favor preencher a senha')
         }
     }
 
@@ -119,6 +184,12 @@ function UserUpdateComponent({ idToken, id, nicknameAntigo, emailAntigo }) {
     const alterPerfil = (e) => {
         setEditar(true)
         setMessage('')
+        console.log(nickname)
+        console.log(email)
+        if (nickname == '' && email == '') {
+            setNickname(nicknameAntigo)
+            setEmail(emailAntigo)
+        }
     }
 
     const alterSenha = (e) => {
@@ -131,74 +202,147 @@ function UserUpdateComponent({ idToken, id, nicknameAntigo, emailAntigo }) {
         setEditar(false)
         setAlteraSenha(false)
         setalteraSensivel(false)
-        setNickname(nicknameAntigo)
-        setEmail(emailAntigo)
         setPassword('')
         setNewPassword('')
         setConfirmNewPassword('')
         setMessage('')
+        if (nickname == '' && email == '') {
+            setNickname(nicknameAntigo)
+            setEmail(emailAntigo)
+        }
     }
 
     async function user_update() {
-        if (email == emailAntigo && password == '' && !alteraSenha) {
-            const user_json = {
-                "surname": nickname,
-                "sensivel": false
-            };
-            const response = await update_user(user_json, id);
-            setMessage(response.message)
-            if(response.message == 'user updated successfully') {
-                setEditar(false)
-                setalteraSensivel(false);
-                setPassword("");
-                setloading(false)
-                setNewPassword("")
-                setConfirmNewPassword("")
+        if (emailAlterado == ''){
+            if (email == emailAntigo && password == '' && !alteraSenha) {
+                const user_json = {
+                    "surname": nickname,
+                    "sensivel": false
+                };
+                const response = await update_user(user_json, id);
+                setMessage(response.message)
+                if(response.message == 'user updated successfully') {
+                    setEditar(false)
+                    setalteraSensivel(false);
+                    setPassword("");
+                    setloading(false)
+                    setNewPassword("")
+                    setConfirmNewPassword("")
+                }
+                else {
+                    setloading(false)
+                }
             }
-            else {
-                setloading(false)
+            else if (email != emailAntigo && password != '' && !alteraSenha) {
+                const user_json = {
+                    "email": email,
+                    "surname": nickname,
+                    "password": password,
+                    "sensivel": true
+                };
+                const response = await update_user(user_json, id);
+                setMessage(response.message)
+                if(response.message == 'user updated successfully') {
+                    setEditar(false)
+                    setalteraSensivel(false);
+                    setPassword("");
+                    setloading(false)
+                    setNewPassword("")
+                    setConfirmNewPassword("")
+                }
+                else {
+                    setloading(false)
+                }
+            }
+            else if (password != '' && alteraSenha) {
+                const user_json = {
+                    "password": password,
+                    "newPassword": newPassword,
+                    "sensivel": true
+                };
+                const response = await update_user(user_json, id);
+                setMessage(response.message)
+                if(response.message == 'user updated successfully') {
+                    setEditar(false)
+                    setalteraSensivel(false);
+                    setPassword("");
+                    setloading(false)
+                    setAlteraSenha(false)
+                    setNewPassword("")
+                    setConfirmNewPassword("")
+                }
+                else {
+                    setloading(false)
+                }
             }
         }
-        else if (email != emailAntigo && password != '' && !alteraSenha) {
-            const user_json = {
-                "email": email,
-                "surname": nickname,
-                "password": password,
-                "sensivel": true
-            };
-            const response = await update_user(user_json, id);
-            setMessage(response.message)
-            if(response.message == 'user updated successfully') {
-                setEditar(false)
-                setalteraSensivel(false);
-                setPassword("");
-                setloading(false)
-                setNewPassword("")
-                setConfirmNewPassword("")
+        if (emailAlterado != ''){
+            if (email == emailAlterado && password == '' && !alteraSenha) {
+                const user_json = {
+                    "surname": nickname,
+                    "sensivel": false
+                };
+                const response = await update_user(user_json, id);
+                setMessage(response.message)
+                if(response.message == 'user updated successfully') {
+                    setEditar(false)
+                    setEmailAlterado(email)
+                    setNicknameAlterado(nickname)
+                    setalteraSensivel(false);
+                    setPassword("");
+                    setloading(false)
+                    setNewPassword("")
+                    setConfirmNewPassword("")
+                }
+                else {
+                    setloading(false)
+                }
             }
-            else {
-                setloading(false)
+            else if (email != emailAlterado && password != '' && !alteraSenha) {
+                const user_json = {
+                    "email": email,
+                    "surname": nickname,
+                    "password": password,
+                    "sensivel": true
+                };
+                const response = await update_user(user_json, id);
+                setMessage(response.message)
+                if(response.message == 'user updated successfully') {
+                    setEditar(false)
+                    setalteraSensivel(false);
+                    setPassword("");
+                    setloading(false)
+                    setNewPassword("")
+                    setConfirmNewPassword("")
+                    setEmailAlterado(email)
+                    setNicknameAlterado(nickname)
+                }
+                else {
+                    setloading(false)
+                }
             }
-        }
-        else if (password != '' && alteraSenha) {
-            const user_json = {
-                "password": password,
-                "newPassword": newPassword,
-                "sensivel": true
-            };
-            const response = await update_user(user_json, id);
-            setMessage(response.message)
-            if(response.message == 'user updated successfully') {
-                setEditar(false)
-                setalteraSensivel(false);
-                setPassword("");
-                setloading(false)
-                setAlteraSenha(false)
-                setNewPassword("")
-                setConfirmNewPassword("")
-            }
-            else {
-                setloading(false)
+            else if (password != '' && alteraSenha) {
+                const user_json = {
+                    "password": password,
+                    "newPassword": newPassword,
+                    "sensivel": true
+                };
+                const response = await update_user(user_json, id);
+                setMessage(response.message)
+                if(response.message == 'user updated successfully') {
+                    setEditar(false)
+                    setalteraSensivel(false);
+                    setPassword("");
+                    setloading(false)
+                    setAlteraSenha(false)
+                    setNewPassword("")
+                    setConfirmNewPassword("")
+                    setEmailAlterado(email)
+                    setNicknameAlterado(nickname)
+                }
+                else {
+                    setloading(false)
+                }
             }
         }
     }
@@ -214,11 +358,21 @@ function UserUpdateComponent({ idToken, id, nicknameAntigo, emailAntigo }) {
                             <div className='infosUser'>
                                 <div className='label_input_user'>
                                     <label>Apelido</label>
-                                    <input type='text' placeholder='Digite um apelido' readOnly className='nickname_input' value={nicknameAntigo}/>
+                                    { nickname == '' &&
+                                        <input type='text' placeholder='Digite um apelido' readOnly className='nickname_input' value={nicknameAntigo}/>
+                                    }
+                                    { nickname != '' &&
+                                        <input type='text' placeholder='Digite um apelido' readOnly className='nickname_input' value={nickname}/>
+                                    }
                                 </div>
                                 <div className='label_input_user'>
                                     <label>e-mail</label>
-                                    <input type='text' placeholder='Digite um e-mail' readOnly className='nickname_input' value={emailAntigo}/>
+                                    { email == '' &&
+                                        <input type='text' placeholder='Digite um e-mail' readOnly className='nickname_input' value={emailAntigo}/>
+                                    }
+                                    { email != '' &&
+                                        <input type='text' placeholder='Digite um e-mail' readOnly className='nickname_input' value={email}/>
+                                    }
                                 </div>
                             </div>
                         }

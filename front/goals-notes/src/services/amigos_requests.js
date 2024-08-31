@@ -111,7 +111,7 @@ export async function negar_amizade(idAmizade) {
       redirect: 'follow'
     };
   
-    let response = await fetch('http://127.0.0.1:5000/AmigoNegarSolicitacao', requestOptions)
+    let response = await fetch(apiUrl+'AmigoNegarSolicitacao', requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
