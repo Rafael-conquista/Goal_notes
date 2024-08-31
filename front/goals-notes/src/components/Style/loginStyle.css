@@ -117,21 +117,40 @@ input {
 }
 
 .cardLogin {
+  position: relative;
   display: flex;
   flex: 2;
-  min-width: min(100%, 22.5rem);
+  max-width: 60vw;
   color: black;
   text-shadow: 0 0 5px white;
   flex-direction: column;
   background: white;
-  justify-content: center;
   align-items: center;
   padding: 1rem;
-  height: 120vh;
+  height: calc(100vh);
+  justify-content: center;
+}
+
+@media screen and (max-width: 1250px) {
+  .cardLogin {
+    top: 200px;
+    height: calc(100vh - 300px);
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .cardLogin {
+    top: 250px;
+    height: calc(100vh - 300px);
+  }
+  .alertaLogin {
+    height: 45px
+  }
 }
 
 @media screen and (max-width: 720px) {
   .cardLogin {
+    top: 0px;
     display: flex;
     flex: 2;
     min-width: min(100%, 22.5rem);
@@ -148,7 +167,7 @@ input {
 .cardRegister {
   display: flex;
   flex: 1;
-  min-width: min(100%, 22.5rem);
+  max-width: 40vw;
   color: white;
   text-shadow: 0 0 5px black;
   flex-direction: column;
@@ -167,7 +186,7 @@ input {
 
 .alertaLogin {
   height: 60px;
-  width: 65vw;
+  width: 60vw;
   font-size: 1.5rem;
   background-color: darkred;
   color: white;
@@ -184,7 +203,7 @@ input {
 .alertaRegistro,
 .alertaRegistroSucesso {
   height: 60px;
-  width: 35vw;
+  width: 40vw;
   padding: 0px 10px;
   font-size: 1.5rem;
   color: white;
@@ -196,6 +215,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  right: 0;
 }
 
 .alertaRegistro {
@@ -230,16 +250,40 @@ input {
   align-items: center;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1500px) {
+  .cardRegister,  
+  .cardLogin {
+    max-width: 50vw;
+  }
+
   .alertaLogin {
-    width: 100vw;
+    width: 50vw;
   }
 
   .alertaRegistro,
   .alertaRegistroSucesso {
-    width: 100vw;
+    width: 50vw;
   }
+}
 
+@media screen and (max-width: 720px) {
+  .login-wrapper {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .cardRegister,  
+  .cardLogin {
+    max-width: 100vw;
+  }
+  .cardLogin {
+    min-height: calc(100vh - 225px)
+  }
+  .cardRegister {
+    min-height: 100vh;
+  }
+}
+
+@media screen and (max-width: 1000px) {
   .botaoCriarUsuario:hover {
     box-shadow: 0px 0px 5px #131f24;
   }
@@ -254,6 +298,17 @@ input {
 
   .botaoUsuarUsuario:active {
     background: #000;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .alertaLogin {
+    width: 100vw;
+  }
+
+  .alertaRegistro,
+  .alertaRegistroSucesso {
+    width: 100vw;
   }
 }
 
@@ -318,6 +373,7 @@ input {
 
 .capivaraOlha {
   height: 300px;
+  z-index: 100;
 }
 
 .eyes {
@@ -331,6 +387,7 @@ input {
   border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(0, 0, 0, 0.05);
   border: 2px solid #000;
+  z-index: 1000;
 }
 
 .eye {
@@ -408,5 +465,19 @@ input {
   .loadingRodar {
     width: 50px;
     height: 50px;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .alertaLogin {
+    height: 45px
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .alertaRegistro, .alertaRegistroSucesso {
+    font-size: 1rem;
+    height: 7vh;
   }
 }

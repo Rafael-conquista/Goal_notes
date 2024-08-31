@@ -137,17 +137,17 @@ function RegisterComponent({ onPasswordClick }) {
         <button className="textos botaoRegistrar" type="submit" value="entar">
           Registrar
         </button>
-        {!primeiraVez &&
-          !sucesso &&
-          (message ? <div className="alertaRegistro">{message}</div> : "")}
-        {!primeiraVez &&
-          sucesso &&
-          (message ? (
-            <div className="alertaRegistroSucesso">{message}</div>
-          ) : (
-            ""
-          ))}
       </form>
+      {!primeiraVez &&
+        !sucesso &&
+        (message ? <div className="alertaRegistro">{message}</div> : "")}
+      {!primeiraVez &&
+        sucesso &&
+        (message ? (
+          <div className="alertaRegistroSucesso">{message}</div>
+        ) : (
+          ""
+        ))}
     </>
   );
 }
