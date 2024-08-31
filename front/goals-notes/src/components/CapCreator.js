@@ -137,20 +137,20 @@ function CapCreatorComponent(){
                             />
                         </p>
                     </div>
-                    {showInput && !showTextInput && !showCapInput && !confirmNames && !noInput &&<button className='button' onClick={handleInput}><span>Continuar</span></button>}
-                    {noInput &&<button className='button' onClick={user_update}><span>Continuar</span></button>}
-                    {showTextInput && <input type='text' placeholder='Digite como deseja ser chamado!' onChange={nicnameChange} onKeyPress={nicnameChange}/>}
-                    {showCapInput && <input type='text' placeholder='Digite o apelido da cap!' onChange={capNameChange} onKeyPress={capNameChange}/>}
+                    {showInput && !showTextInput && !showCapInput && !confirmNames && !noInput &&<button className='button button_capCreator' onClick={handleInput}><span>Continuar</span></button>}
+                    {noInput &&<button className='button button_capCreator' onClick={user_update}><span>Continuar</span></button>}
+                    {showTextInput && <input className='text_capCreator' type='text' placeholder='Digite como deseja ser chamado!' onChange={nicnameChange} onKeyPress={nicnameChange}/>}
+                    {showCapInput && <input className='text_capCreator' type='text' placeholder='Digite o apelido da cap!' onChange={capNameChange} onKeyPress={capNameChange}/>}
                     {
                         confirmNames && 
                         <div className='confirm_button'>    
                             <div className='margin_confirm'>
-                                <button className='button' id='confirm' onClick={() =>{confirmChange(true)}}>
+                                <button className='button confirm_button_capCreator' id='confirm' onClick={() =>{confirmChange(true)}}>
                                     <span>Sim, está tudo correto!</span>
                                 </button>
                             </div>
                             <div className='margin_confirm'>
-                                <button className='button' id='deny' onClick={() =>{confirmChange(false)}}>
+                                <button className='button confirm_button_capCreator' id='deny' onClick={() =>{confirmChange(false)}}>
                                     <span>Não, acho que me confundi...</span>
                                 </button>
                             </div>

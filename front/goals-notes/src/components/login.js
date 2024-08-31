@@ -115,9 +115,9 @@ function LoginComponent() {
       {loading && <Loading />}
       {primeiraVez && (
         <form className="LoginForm" onSubmit={login_user}>
-          <h1 className="textos">Acesse sua conta</h1>
+          <h1 className="textos Title_login">Acesse sua conta</h1>
           <input
-            className="textos"
+            className="textos Input_Login_Form"
             type="email"
             required="required"
             onChange={emailChange}
@@ -126,7 +126,7 @@ function LoginComponent() {
           />
 
           <input
-            className="textos"
+            className="textos Input_Login_Form"
             type="password"
             required="required"
             onChange={passwordChange}
