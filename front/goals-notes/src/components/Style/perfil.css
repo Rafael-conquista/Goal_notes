@@ -45,6 +45,13 @@
   cursor: default !important;
 }
 
+.nav_buttons{
+  padding-top: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .nickname_input_editando {
     cursor: text;
     margin: 0;
@@ -107,7 +114,6 @@
 }
 
 .amigo_main, .amigo_main_geral {
-    display: flex;
     align-items: center;
 }
 
@@ -211,10 +217,12 @@
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0 0 0;
+    max-width: 80%;
 }
 
 .texto_alerta {
     background: rgb(215, 215, 0);
+    margin-left: 10vw;
 }
 
 .texto_sucesso {
@@ -253,7 +261,6 @@ input[type="number"]::-webkit-outer-spin-button {
     height: calc(100vh - 110px);
     overflow-y: auto;
     overflow-x: hidden;
-    width: 33.5vw;
 }
 
 .amizades_consult {
@@ -265,6 +272,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .amizades_geral, .amizades_pendente {
     border-right: solid #e5a24c55 2px;
+    padding-top: 9vh;
 }
 
 .amizades::-webkit-scrollbar {
@@ -279,7 +287,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .amizades_pesquisar {
     height: calc(100vh - 110px);
     overflow: auto;
-    width: 33vw;
+    padding-top: 5vh;
 }
 
 .amizades_amigos {
@@ -288,12 +296,21 @@ input[type="number"]::-webkit-outer-spin-button {
     justify-items: center;
     width: 100%;
 }
+
+.amizades_amigos p{
+  padding: 5vh;
+}
+
+.search-box{
+  max-width: 90%;
+  padding-left: 10vw;
+}
+
 .wrap-input-17 * {
     box-sizing: border-box;
 }
    
 .wrap-input-17 .search-box{
-    width: fit-content;
     height: fit-content;
     position: relative;
     width: 100%;
@@ -336,7 +353,6 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0px;  
 }
 .wrap-input-17 .btn-search:focus ~ .input-search{
-    width: 50%;
     border-radius: 0px;
     background-color: 
    transparent;
@@ -345,7 +361,6 @@ input[type="number"]::-webkit-outer-spin-button {
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 }
 .wrap-input-17 .input-search:focus{
-    width: 50%;
     border-radius: 0px;
     background-color: 
    transparent;

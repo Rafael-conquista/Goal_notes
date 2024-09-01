@@ -44,9 +44,7 @@ export async function makeFriend(idUsuario, idAmigo) {
     });
     var requestOptions = {
       method: 'POST',
-      headers: {
-        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
-      },
+      headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
@@ -85,9 +83,7 @@ export async function aceitar_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: {
-        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
-      },
+      headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
@@ -110,9 +106,7 @@ export async function negar_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: {
-        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
-      },
+      headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
@@ -135,9 +129,7 @@ export async function desfazer_amizade(idAmizade) {
     });
     var requestOptions = {
       method: 'PUT',
-      headers: {
-        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
-      },
+      headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };
