@@ -36,7 +36,7 @@ export async function getAmigosUser(id, ultimos) {
 export async function makeFriend(idUsuario, idAmigo) {
   try{
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.set("Content-Type", "application/json"); // Use set instead of append
 
     var raw = JSON.stringify({
       "user_id": idUsuario,
@@ -76,7 +76,7 @@ export async function getAmigosUserPendente(id) {
 export async function aceitar_amizade(idAmizade) {
   try{
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.set("Content-Type", "application/json");
 
     var raw = JSON.stringify({
       "id_amizade": idAmizade,
@@ -99,7 +99,7 @@ export async function aceitar_amizade(idAmizade) {
 export async function negar_amizade(idAmizade) {
   try{
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.set("Content-Type", "application/json");
 
     var raw = JSON.stringify({
       "id_amizade": idAmizade,
@@ -111,7 +111,7 @@ export async function negar_amizade(idAmizade) {
       redirect: 'follow'
     };
   
-    let response = await fetch(apiUrl+`AmigoNegarSolicitacao`, requestOptions)
+    let response = await fetch(apiUrl+'AmigoNegarSolicitacao', requestOptions)
     return response.json()
   } catch(e){
       console.log(e)
@@ -122,7 +122,7 @@ export async function negar_amizade(idAmizade) {
 export async function desfazer_amizade(idAmizade) {
   try{
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    myHeaders.set("Content-Type", "application/json");
 
     var raw = JSON.stringify({
       "id_amizade": idAmizade,
