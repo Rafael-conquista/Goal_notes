@@ -21,7 +21,7 @@ class AmigosController:
             .filter_by(
                 id_usuario_enviado=user_id,
                 id_usuario_recebido=user_friend_id,
-                excluido=0,
+                excluido=False,
             )
             .first()
         )
@@ -30,7 +30,7 @@ class AmigosController:
             .filter_by(
                 id_usuario_enviado=user_friend_id,
                 id_usuario_recebido=user_id,
-                excluido=0,
+                excluido=False,
             )
             .first()
         )
@@ -39,7 +39,7 @@ class AmigosController:
             .filter_by(
                 id_usuario_enviado=user_id,
                 id_usuario_recebido=user_friend_id,
-                excluido=1,
+                excluido=True,
             )
             .first()
         )
@@ -48,7 +48,7 @@ class AmigosController:
             .filter_by(
                 id_usuario_enviado=user_friend_id,
                 id_usuario_recebido=user_id,
-                excluido=1,
+                excluido=True,
             )
             .first()
         )
@@ -60,7 +60,7 @@ class AmigosController:
             amigo = existing_amigo_deletado
             amigo2 = existing_amigo_2_deletado
             if amigo:
-                amigo.excluido = 0
+                amigo.excluido = False
                 amigo.data_solicitacao_aceita = None
                 amigo.data_solicitacao = banco.func.now()
                 main_queries.save_query(amigo)
@@ -71,7 +71,7 @@ class AmigosController:
                 amigo2.id_usuario_recebido = user_friend_id
                 amigo2.data_solicitacao_aceita = None
                 amigo2.data_solicitacao = banco.func.now()
-                amigo2.excluido = 0
+                amigo2.excluido = False
                 main_queries.save_query(amigo2)
                 main_queries.close_conection()
                 return {"message": "Solicitação enviada"}, 200
@@ -260,7 +260,7 @@ class AmigosController:
         try:
             amigo = main_queries.find_query(AmigosModel, id)
             if amigo:
-                amigo.excluido = 1
+                amigo.excluido = True
                 main_queries.save_query(amigo)
                 main_queries.close_conection()
                 return {"message": "Amigo atualizado com sucesso"}, 200
@@ -286,7 +286,7 @@ class AmigosController:
             try:
                 amigo = main_queries.find_query(AmigosModel, id_amizade)
                 if amigo:
-                    amigo.excluido = 1
+                    amigo.excluido = True
                     main_queries.save_query(amigo)
                     main_queries.close_conection()
                     return {"message": "Solicitação Aceita"}, 200
