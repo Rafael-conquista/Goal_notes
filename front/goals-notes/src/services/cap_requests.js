@@ -6,7 +6,7 @@ export async function get_cap(id) {
   try {
     let response = await fetch(apiUrl + `users_cap/${id}`, {
       headers: {
-        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
+        'ngrok-skip-browser-warning': 'true', 
       }
     })
     let user = await response.json()
@@ -18,11 +18,7 @@ export async function get_cap(id) {
 
 export async function update_cap(data, id) {
   try {
-    let response = await fetch(apiUrl + `users_cap/${id}`, {
-      headers: {
-        'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
-      }
-    })
+    let response = await fetch(apiUrl + `users_cap/${id}`)
     let user = await response.json()
     try {
       var myHeaders = new Headers();
@@ -33,9 +29,7 @@ export async function update_cap(data, id) {
       });
       var requestOptions = {
         method: 'PUT',
-        headers: {
-          'ngrok-skip-browser-warning': 'true',  // Adiciona o cabeçalho personalizado
-        },
+        headers: myHeaders,
         body: raw,
         redirect: 'follow'
       };
