@@ -181,6 +181,11 @@
     box-shadow: 0px 0px 20px #EEAD2D;
   }
 
+  .botao_editar_loja {
+    position: absolute;
+    top: 110px;
+  }
+
   @media screen and (max-width: 1000px) {
     .card_store {
       width: 10em;
@@ -206,3 +211,4 @@
       grid-template-columns: repeat(auto-fit, minmax(150px, auto))
     }
   }
+  

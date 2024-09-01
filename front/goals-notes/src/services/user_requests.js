@@ -31,7 +31,7 @@ export async function get_user(id){
         "newPassword": data.newPassword,
         "excluido": data.excluir,
         "sencivel": data.sencivel,
-        "capCoins": data.capCoins
+        "capcoins": data.capcoins
       });
       var requestOptions = {
         method: 'PUT',

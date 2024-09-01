@@ -152,6 +152,7 @@ class UsersController:
             return {
                 "name": user.name,
                 "id": user.id,
+                "admin": user.admin,
                 "email": user.email,
                 "surname": user.surname,
                 "capcoins": user.capcoins,

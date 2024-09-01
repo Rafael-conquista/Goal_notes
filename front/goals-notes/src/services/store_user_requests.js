@@ -27,7 +27,7 @@ export async function getImage(id){
   }
 }
 
-export async function postCompra(preco, capCoins, idUsuario, idStore){
+export async function postCompra(preco, capcoins, idUsuario, idStore){
   try{
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -35,7 +35,7 @@ export async function postCompra(preco, capCoins, idUsuario, idStore){
     
     var raw = JSON.stringify({
       "preco": preco,
-      "capCoins": capCoins,
+      "capcoins": capcoins,
       "idUsuario": idUsuario,
       "idStore": idStore 
     });

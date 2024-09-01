@@ -24,7 +24,9 @@ const Store = () => {
   const [vez, setVez] = useState(false);
   const [idToken, setIdToken] = useState()
   const { id } = useParams();
-  const [capCoins, setCapCoins] = useState()
+  const [capcoins, setcapcoins] = useState()
+  const [admin, setAdmin] = useState(false)
+  const [editarPrecos, setEditarPrecos] = useState(false)
   
   async function verify_user(token){
     const token_id = await verify(token)
@@ -40,7 +42,7 @@ const Store = () => {
       window.location.href = `/`;
     }
     const user = await get_user(token_id)
-    setCapCoins(user.capCoins) 
+    setcapcoins(user.capcoins) 
     return { id: token_id };
   }
 
@@ -77,7 +79,6 @@ const Store = () => {
     }
     else if (type == 2) {
       return getImageSrc(id)
-      // getBackground(id)
     }
   };
 
@@ -98,10 +99,22 @@ const Store = () => {
     }
   };
 
+  async function get_admin(id){
+    const user = await get_user(id);
+    setAdmin(user.admin) 
+  }
+
+  useEffect(() => {
+    if (!vez) {
+      get_admin(id)
+      setVez(true)
+    }
+  })
+
   async function comprarSkin(preco, idStore) {
-    if (preco <= capCoins) {
-      const response = await postCompra(preco, capCoins, idToken, idStore);
-      setCapCoins(capCoins - preco)
+    if (preco <= capcoins) {
+      const response = await postCompra(preco, capcoins, idToken, idStore);
+      setcapcoins(capcoins - preco)
       getSkins().then((skins) => {
         const result = skins.skins
         setSkin(result);
@@ -123,9 +136,22 @@ const Store = () => {
     return skinPossue.some(skin => skin.id_store === idStore);
   };
 
+  async function EditarPrecos() {
+    if (editarPrecos == true)
+      setEditarPrecos(false)
+    else 
+      setEditarPrecos(true)
+  };
+
   return (
     <>
       <Navbar currentPage="Store" />
+      {admin == true && !editarPrecos &&
+        <a className='botao_editar_loja'><button onClick={() => EditarPrecos()} className='botao_amigos'>Editar Preços</button></a>
+      }
+      {admin == true && editarPrecos &&
+        <a className='botao_editar_loja'><button onClick={() => EditarPrecos()} className='botao_amigos'>Salvar</button></a>
+      }
       <section className='capScreen homeScreenStore store'>
         <div className="store_component_cima">
           <h1 className='tituloStore'>Compre algumas skins da Cap</h1>
@@ -138,13 +164,20 @@ const Store = () => {
                         <div className="image_store">
                           <span className="text_store"><img className='img_store' src={verifyIten(store.enum, store.type)}></img></span>
                         </div>
-                        <span className="price">¢{store.price}</span>
-                        <div className='campoCompra_store'>
-                          <button onClick={() => comprarSkin(store.price, store.id)} type="button" className="button_perfil_store button_perfil">
-                            <span className="button__text">Comprar</span>
-                            <span className="button__icon"><svg viewBox="0 0 16 16" className="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path></svg></span>
-                          </button>
-                        </div>
+                          {!editarPrecos &&
+                            <>
+                              <span className="price">¢{store.price}</span>
+                              <div className='campoCompra_store'>
+                                <button onClick={() => comprarSkin(store.price, store.id)} type="button" className="button_perfil_store button_perfil">
+                                  <span className="button__text">Comprar</span>
+                                  <span className="button__icon"><svg viewBox="0 0 16 16" className="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path></svg></span>
+                                </button>
+                              </div>
+                            </>
+                          }
+                          {editarPrecos &&
+                            <input value={store.price} placeholder='valor da skin'></input>
+                          }
                       </div>
                   }
                 </>
@@ -156,9 +189,14 @@ const Store = () => {
                         <span className="text_store"><img className='img_store' src={verifyIten(store.enum, store.type)}></img></span>
                       </div>
                       <div className='campoCompra_store_comprada campoCompra_store'>
-                        <button type="button" className="button_perfil_store_comprada">
-                          <span className="button__text button_text">Comprada</span>
-                        </button>
+                        {!editarPrecos &&
+                          <button type="button" className="button_perfil_store_comprada">
+                            <span className="button__text button_text">Comprada</span>
+                          </button>
+                        }
+                        {editarPrecos &&
+                          <input value={store.price} placeholder='valor da skin'></input>
+                        }
                       </div>
                     </div>
                   }
@@ -178,13 +216,20 @@ const Store = () => {
                         <div className="image_store">
                           <span className="text_store"><div className={`img_store background_${store.enum}`}></div></span>
                         </div>
-                        <span className="price">¢{store.price}</span>
-                        <div className='campoCompra_store'>
-                          <button onClick={() => comprarSkin(store.price, store.id)} type="button" className="button_perfil_store button_perfil">
-                            <span className="button__text">Comprar</span>
-                            <span className="button__icon"><svg viewBox="0 0 16 16" className="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path></svg></span>
-                          </button>
-                        </div>
+                          {!editarPrecos &&
+                            <>
+                              <span className="price">¢{store.price}</span>
+                              <div className='campoCompra_store'>
+                                <button onClick={() => comprarSkin(store.price, store.id)} type="button" className="button_perfil_store button_perfil">
+                                  <span className="button__text">Comprar</span>
+                                  <span className="button__icon"><svg viewBox="0 0 16 16" className="bi bi-cart2" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path></svg></span>
+                                </button>
+                              </div>
+                            </>
+                          }
+                          {editarPrecos &&
+                            <input  Value={store.price} placeholder='valor da skin'></input>
+                          }
                       </div>
                   }
                 </>
@@ -196,9 +241,14 @@ const Store = () => {
                         <span className="text_store"><div className={`img_store background_${store.enum}`}></div></span>
                       </div>
                       <div className='campoCompra_store_comprada campoCompra_store'>
-                        <button type="button" className="button_perfil_store_comprada">
-                          <span className="button__text button_text">Comprada</span>
-                        </button>
+                        {!editarPrecos &&
+                          <button type="button" className="button_perfil_store_comprada">
+                            <span className="button__text button_text">Comprada</span>
+                          </button>
+                        }
+                        {editarPrecos &&
+                          <input value={store.price} placeholder='valor da skin'></input>
+                        }
                       </div>
                     </div>
                   }
@@ -206,7 +256,7 @@ const Store = () => {
               )
             )) : <p>Ainda não skins sendo vendidas.</p>}
           </div>
-          <CapMessage ref={capMessageRef} message={"Ah não, parece que você não tem CapCoins o suficiente."} id_user={id} />
+          <CapMessage ref={capMessageRef} message={"Ah não, parece que você não tem capcoins o suficiente."} id_user={id} />
         </div>
       </section>
     </>
