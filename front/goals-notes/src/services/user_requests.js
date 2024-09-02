@@ -22,7 +22,6 @@ export async function get_user(id){
     try{
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append('ngrok-skip-browser-warning', 'true')
   
       var raw = JSON.stringify({
         "email": data.email,
@@ -30,8 +29,8 @@ export async function get_user(id){
         "password": data.password,
         "newPassword": data.newPassword,
         "excluido": data.excluir,
-        "sencivel": data.sencivel,
-        "capcoins": data.capcoins
+        "sensivel": data.sensivel,
+        "capCoins": data.capCoins
       });
       var requestOptions = {
         method: 'PUT',
@@ -52,7 +51,6 @@ export async function get_user(id){
     try{
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append('ngrok-skip-browser-warning', 'true')
   
       var raw = JSON.stringify({
         "apelido": apelido,
