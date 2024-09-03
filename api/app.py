@@ -40,6 +40,7 @@ from Routes.Caps import Cap_register, Cap, Users_cap
 from Routes.Store import Store_skins, Store, Store_register
 from Routes.Store_Users import Itens_by_user, Itens_active_by_user, Itens_register_by_user, Active_iten_user
 from Routes.VerifyJWT import VerifyJWT
+from Routes.Reviews import review_register
 from Routes.Conquistas import Conquistas
 from Routes.Conquistas import Conquista
 from Routes.ConquistasByUser import ConquistasByUser
@@ -95,7 +96,9 @@ api.add_resource(Itens_by_user,"/Itens_by_user/<int:user_id>")
 api.add_resource(Itens_active_by_user,"/Itens_by_user_active/<int:user_id>/<int:type>")
 api.add_resource(Itens_register_by_user, "/itens_register_by_user")
 api.add_resource(Active_iten_user, "/active_iten_user")
-#Conquistas related Routes
+#Store_User related Routes
+api.add_resource(review_register, "/review")
+
 api.add_resource(Conquistas, "/conquistas")
 api.add_resource(Conquista, "/conquista/<int:id>")
 api.add_resource(ConquistasByUser, "/conquistas_by_user/<int:id>")
