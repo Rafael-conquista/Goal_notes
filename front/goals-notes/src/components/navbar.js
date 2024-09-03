@@ -11,7 +11,7 @@ import "./Style/navbar.css";
 function Navbar() {
   const [show, setShow] = useState(false);
   const { id } = useParams();
-  const [capCoins, setCapCoins] = useState();
+  const [capcoins, setcapcoins] = useState();
   const [loading, setloading] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -29,7 +29,7 @@ function Navbar() {
       if (update_coin) {
         get_coins(id).then((user) => {
           if (user) {
-            setCapCoins(user.capCoins);
+            setcapcoins(user.capcoins);
             setloading(false);
           } else {
             setloading(true);
@@ -45,13 +45,13 @@ function Navbar() {
   useEffect(() => {
     get_coins(id).then((user) => {
       if (user) {
-        setCapCoins(user.capCoins);
+        setcapcoins(user.capcoins);
         setloading(false);
       } else {
         setloading(true);
       }
     });
-  }, [id, capCoins]);
+  }, [id, capcoins]);
 
   return (
     <div>
@@ -64,7 +64,7 @@ function Navbar() {
         </div>
         <div className="cap_coin_nav">
           <img src={cap_coins} alt="vazio" className="cap_coins_img" />
-          <p className="cap_coins">CapCoins {capCoins}</p>
+          <p className="cap_coins">capcoins {capcoins}</p>
         </div>
         <Offcanvas
           show={show}

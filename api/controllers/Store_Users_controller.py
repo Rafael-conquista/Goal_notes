@@ -59,7 +59,7 @@ class StoreUsersController:
         main_queries.close_conection()
         return {"skins": skin_list}, 200
 
-    def iten_create(preco, capCoins, idUsuario, idStore):
+    def iten_create(preco, capcoins, idUsuario, idStore):
         try:
             new_iten = StoreUsersModel()
             store = main_queries.find_query(StoreModel, idStore)
@@ -72,7 +72,7 @@ class StoreUsersController:
             main_queries.save_query(new_iten)
             main_queries.close_conection()
             user = main_queries.find_query(UsersModel, idUsuario)
-            user.capCoins = (capCoins - preco)
+            user.capcoins = (capcoins - preco)
             main_queries.save_query(user)
             main_queries.close_conection()
             return {"message": "the skin has been created"}, 201

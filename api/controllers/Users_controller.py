@@ -17,7 +17,7 @@ class UsersController:
                     "id": user.id,
                     "email": user.email,
                     "surname": user.surname,
-                    "capCoins": user.capCoins,
+                    "capcoins": user.capcoins,
                     "dataCadastro": format_to_string(user.dataCadastro),
                     "age": format_to_string(user.age),
                     "excluido": user.excluido,
@@ -56,7 +56,7 @@ class UsersController:
                         "id": user.id,
                         "email": user.email,
                         "surname": user.surname,
-                        "capCoins": user.capCoins,
+                        "capcoins": user.capcoins,
                         "dataCadastro": format_to_string(user.dataCadastro),
                         "age": format_to_string(user.age),
                         "excluido": user.excluido,
@@ -69,7 +69,7 @@ class UsersController:
                         "id": user.id,
                         "email": user.email,
                         "surname": user.surname,
-                        "capCoins": user.capCoins,
+                        "capcoins": user.capcoins,
                         "dataCadastro": format_to_string(user.dataCadastro),
                         "age": format_to_string(user.age),
                         "excluido": user.excluido,
@@ -82,7 +82,7 @@ class UsersController:
                         "id": user.id,
                         "email": user.email,
                         "surname": user.surname,
-                        "capCoins": user.capCoins,
+                        "capcoins": user.capcoins,
                         "dataCadastro": format_to_string(user.dataCadastro),
                         "age": format_to_string(user.age),
                         "excluido": user.excluido,
@@ -139,7 +139,7 @@ class UsersController:
                 user.email = dados.get("email", user.email)
                 user.age = dados.get("age", user.age)
                 user.admin = dados.get("admin", user.admin)
-                user.capCoins += dados.get("capCoins", user.capCoins)
+                user.capcoins += dados.get("capcoins", user.capcoins)
                 user.password = dados.get("password", user.password)
                 user.dataAlteracao = banco.func.now()
                 main_queries.save_query(user)
@@ -152,9 +152,10 @@ class UsersController:
             return {
                 "name": user.name,
                 "id": user.id,
+                "admin": user.admin,
                 "email": user.email,
                 "surname": user.surname,
-                "capCoins": user.capCoins,
+                "capcoins": user.capcoins,
                 "dataCadastro": format_to_string(user.dataCadastro),
                 "age": format_to_string(user.age),
                 "excluido": user.excluido,
@@ -179,5 +180,5 @@ class UsersController:
     
     def update_user_capcoin(id, new_capcoins):
         user = main_queries.find_query(UsersModel, id)
-        user.capCoins += new_capcoins
+        user.capcoins += new_capcoins
         main_queries.save_query(user)
