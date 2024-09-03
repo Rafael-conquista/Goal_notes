@@ -6,7 +6,6 @@ export async function register(data) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
     var raw = JSON.stringify({
       "email": data.email,
       "name": data.name,
@@ -33,7 +32,6 @@ export async function login(data) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
 
     var raw = JSON.stringify({
       "email": data.email,
@@ -59,7 +57,6 @@ export async function token_verify(token) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
 
     var raw = JSON.stringify({
       "token": token,
@@ -84,7 +81,6 @@ export async function register_cap(data, id) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
     var raw = JSON.stringify({
       "id_user": id,
       "name": data.name

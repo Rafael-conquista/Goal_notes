@@ -34,7 +34,6 @@ export async function createGoal(data) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
     var raw = JSON.stringify({
       "name": data.name,
       "obs": data.obs,
@@ -64,7 +63,6 @@ export async function UpdateGoal(data, id) {
     var raw
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
     if ("end_date" in data) {
       raw = JSON.stringify({
         "end_date": data.end_date
@@ -99,7 +97,6 @@ export async function deleteGoals(id) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
 
     var requestOptions = {
       method: 'DELETE',
@@ -119,7 +116,6 @@ export async function registerItems(data, id) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
     var raw = JSON.stringify({
       "desc": data,
       "goals_id": id
@@ -144,7 +140,6 @@ export async function updateItems(data) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
     var raw = JSON.stringify(data);
 
     var requestOptions = {
@@ -166,7 +161,6 @@ export async function deleteItems(id) {
   try {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('ngrok-skip-browser-warning', 'true')
 
     var requestOptions = {
       method: 'DELETE',

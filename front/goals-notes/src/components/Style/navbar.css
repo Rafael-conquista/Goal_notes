@@ -1,11 +1,12 @@
 .navbar_view {
-  background-color: #131F24;
+  background-color: #131f24;
   top: 0;
   z-index: 100;
   width: 100%;
   max-height: 110px;
   position: fixed;
   justify-content: center;
+  height: 110px;
 }
 
 .offcanvas-header {
@@ -76,8 +77,8 @@
 }
 
 .offcanvas {
-  background-color: #131F24 ;
-  align-items: baseline ;
+  background-color: #131f24;
+  align-items: baseline;
   padding-left: 1vw;
 }
 
@@ -94,6 +95,7 @@
 .item_home {
   width: 100%;
   left: 0;
+  height: 3rem;
 }
 
 .cor {
@@ -133,6 +135,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  height: 3rem;
 }
 
 .btn_navbar_home:hover {
@@ -140,7 +143,7 @@
 }
 
 .item_home::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 1%;
@@ -148,7 +151,7 @@
   z-index: -1;
   transition: all 0.8s;
   left: 0;
-  height: 4%;
+  height: 3rem;
 }
 
 .item_home:hover::before {
@@ -163,6 +166,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  height: 3rem;
 }
 
 .btn_navbar_metas:hover {
@@ -170,7 +174,7 @@
 }
 
 .item_metas::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 1%;
@@ -178,7 +182,7 @@
   z-index: -1;
   transition: all 0.8s;
   left: 0;
-  height: 4%;
+  height: 3rem;
 }
 
 .item_metas:hover::before {
@@ -193,6 +197,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  height: 3rem;
 }
 
 .btn_navbar_loja:hover {
@@ -200,7 +205,7 @@
 }
 
 .item_loja::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 1%;
@@ -208,7 +213,7 @@
   z-index: -1;
   transition: all 0.8s;
   left: 0;
-  height: 4%;
+  height: 3rem;
 }
 
 .item_loja:hover::before {
@@ -223,6 +228,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  height: 3rem;
 }
 
 .btn_navbar_deslogar:hover {
@@ -230,7 +236,7 @@
 }
 
 .item_deslogar::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 1%;
@@ -238,7 +244,7 @@
   z-index: -1;
   transition: all 0.8s;
   left: 0;
-  height: 4%;
+  height: 3rem;
 }
 
 .item_deslogar:hover::before {
@@ -259,8 +265,33 @@
   height: 80px;
 }
 
+.tituloStore {
+  color: #fff;
+  text-shadow: 0px 0px 5px black;
+  font-size: 3rem;
+  padding: 0;
+  margin: 50px;
+}
+
+.store_item {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  justify-items: center;
+  align-items: center;
+  min-height: calc(50vh - (213.4px));
+}
+
 @media screen and (max-width: 1000px) {
   .offcanvas {
-    --bs-offcanvas-width: 300px
+    --bs-offcanvas-width: 300px;
+  }
+
+  .tituloStore {
+    font-size: 1.8rem !important;
+    margin: 10px 5px;
+  }
+
+  .navbar_view .container-fluid h1 {
+    color: #131f24;
   }
 }
