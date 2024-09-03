@@ -153,7 +153,6 @@
     position: relative;
     height: 130px;
     width: 130px;
-    z-index: 100;
     border-radius: 100px;
   }
 
@@ -181,6 +180,95 @@
     box-shadow: 0px 0px 20px #EEAD2D;
   }
 
+  .botao_editar_loja {
+    position: absolute;
+    top: 110px;
+  }
+
+  .tooltip-container {
+    color: #ffffff;
+    --background: goldenrod;
+    background: var(--background);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 17px;
+    padding: 0.7em 1.8em;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px 15px;
+  }
+  
+  .tooltip {
+    background-color: goldenrod;
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    border-radius: 50px;
+  }
+  
+  .tooltip::before {
+    background-color: goldenrod;
+    position: absolute;
+    content: "";
+    height: 0.6em;
+    width: 0.6em;
+    bottom: -0.2em;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+  }
+  
+  .tooltip-container:hover .tooltip {
+    top: -200%;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }  
+
+  .botao_editar_preco {
+    width: 13px;
+    position: absolute;
+    top: 8px;
+    right: -11px;
+    margin-right: 20px;
+    fill: white;
+    transition-duration: 0.3s;
+  }
+
+  .altera_preco_itens {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: white;
+    align-items: center;
+  }
+
+  .altera_preco_itens h2 {
+    font-size: 2rem;
+    margin: 20px;
+  }
+
+  .input_troca_preco {
+    width: 500px;
+    text-align: center;
+    cursor: text;
+  }
+
+  .button_salvar_item {
+    width: 80%;
+    background-color: goldenrod;
+  }
+
+  .button_salvar_item:hover {
+    background-color: darkgoldenrod;
+  }
+
   @media screen and (max-width: 1000px) {
     .card_store {
       width: 10em;
@@ -206,3 +294,4 @@
       grid-template-columns: repeat(auto-fit, minmax(150px, auto))
     }
   }
+  

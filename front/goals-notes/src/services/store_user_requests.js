@@ -27,7 +27,7 @@ export async function getImage(id){
   }
 }
 
-export async function postCompra(preco, capCoins, idUsuario, idStore){
+export async function postCompra(preco, capcoins, idUsuario, idStore){
   try{
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -35,7 +35,7 @@ export async function postCompra(preco, capCoins, idUsuario, idStore){
     
     var raw = JSON.stringify({
       "preco": preco,
-      "capCoins": capCoins,
+      "capcoins": capcoins,
       "idUsuario": idUsuario,
       "idStore": idStore 
     });
@@ -53,6 +53,31 @@ export async function postCompra(preco, capCoins, idUsuario, idStore){
     return false
   }
 }
+
+export async function atualizaPreco(preco, idStore){
+  try{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('ngrok-skip-browser-warning', 'true')
+    
+    var raw = JSON.stringify({
+      "price": preco
+    });
+    var requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+  
+    let response = await fetch(apiUrl+`store/`+idStore, requestOptions)
+    return response.json()
+  } catch(e){
+      console.log(e)
+    return false
+  }
+}
+
 export async function escolherSkin(idSkin, validacao, type){
     if(validacao == true){
       try{

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { token_storage } from "../utils/token_verify";
 import { register } from "../services/api_requests";
+import { token_storage } from "../utils/token_verify";
 import Loading from "./loading.js";
 
-function RegisterComponent() {
+function RegisterComponent({ onPasswordClick }) {
   const [email, setEmail] = useState();
   const [age, setAge] = useState();
   const [surname, setSurname] = useState();
@@ -14,14 +14,21 @@ function RegisterComponent() {
   const [primeiraVez, setPrimeiraVez] = useState(true);
   const [sucesso, setSucesso] = useState(false);
 
-  const emailChange = (e) => setEmail(e.target.value);
-  const surnameChange = (e) => setSurname(e.target.value);
-  const passwordChange = (e) => setPassword(e.target.value);
-  const confirmChange = (e) => setConfirm(e.target.value);
-  const ageChange = (e) => setAge(e.target.value);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const emailChange = (e) => {
+    setEmail(e.target.value);
+    console.log(e.target.value);
+  };
+  const surnameChange = (e) => {
+    setSurname(e.target.value);
+  };
+  const passwordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  const confirmChange = (e) => {
+    setConfirm(e.target.value);
+  };
+  const ageChange = (e) => {
+    setAge(e.target.value);
   };
 
   async function register_user(event) {
@@ -43,11 +50,12 @@ function RegisterComponent() {
     const response = await register(user_json);
     console.log(response);
     if (response.message === "the user has been created") {
-      setMessage("Usuário criado com sucesso");
+      setMessage("usuário criado com sucesso");
       setSucesso(true);
       setPrimeiraVez(false);
       setloading(false);
       token_storage(response.token);
+
       sessionStorage.setItem("first_acess", true);
       window.location.href = "/capCreate";
     } else {
@@ -56,6 +64,19 @@ function RegisterComponent() {
       setloading(false);
     }
   }
+
+  document.addEventListener("mousemove", function (e) {
+    const eyes = document.querySelectorAll(".eye");
+    eyes.forEach((eye) => {
+      const bounds = eye.getBoundingClientRect();
+      const x = bounds.left + bounds.width / 2;
+      const y = bounds.top + bounds.height / 2;
+      const radianAngle = Math.atan2(e.clientY - y, e.clientX - x);
+      const angle = radianAngle * (180 / Math.PI);
+      const distance = Math.min(Math.hypot(e.clientX - x, e.clientY - y), 12);
+      eye.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translate(${distance}px)`;
+    });
+  });
 
   return (
     <>
@@ -75,6 +96,7 @@ function RegisterComponent() {
           id="email"
           placeholder="E-mail"
         />
+
         <input
           className="textos"
           type="text"
@@ -83,6 +105,7 @@ function RegisterComponent() {
           id="surname"
           placeholder="Informe o usuário"
         />
+
         <input
           className="textos"
           type="date"
@@ -91,6 +114,7 @@ function RegisterComponent() {
           id="age"
           placeholder="Data de nascimento"
         />
+
         <input
           className="textos"
           type="password"
@@ -98,6 +122,7 @@ function RegisterComponent() {
           onChange={passwordChange}
           id="password"
           placeholder="Insira sua Senha"
+          onClick={onPasswordClick}
         />
         <input
           className="textos"
@@ -106,23 +131,23 @@ function RegisterComponent() {
           required="required"
           onChange={confirmChange}
           placeholder="Confirme a Senha"
+          onClick={onPasswordClick}
         />
-        <button className="textos botaoRegistrar" type="submit">
+
+        <button className="textos botaoRegistrar" type="submit" value="entar">
           Registrar
         </button>
-        <p
-          className="textos esqueciSenha redirect"
-          onClick={scrollToTop} 
-        >
-          Já possui uma conta? Realize agora seu login!
-        </p>
-        {!primeiraVez && !sucesso && (
-          <div className="alertaRegistro">{message}</div>
-        )}
-        {!primeiraVez && sucesso && (
-          <div className="alertaRegistroSucesso">{message}</div>
-        )}
       </form>
+      {!primeiraVez &&
+        !sucesso &&
+        (message ? <div className="alertaRegistro">{message}</div> : "")}
+      {!primeiraVez &&
+        sucesso &&
+        (message ? (
+          <div className="alertaRegistroSucesso">{message}</div>
+        ) : (
+          ""
+        ))}
     </>
   );
 }

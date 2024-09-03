@@ -21,10 +21,10 @@ class Itens_register_by_user(Resource):
     def post(self):
         dados = request.get_json()
         preco = dados["preco"]
-        capCoins = dados["capCoins"]
+        capcoins = dados["capcoins"]
         idUsuario = dados["idUsuario"]
         idStore = dados["idStore"]
-        return StoreUsersController.iten_create(preco, capCoins, idUsuario, idStore)
+        return StoreUsersController.iten_create(preco, capcoins, idUsuario, idStore)
     
 
 class Active_iten_user(Resource):
