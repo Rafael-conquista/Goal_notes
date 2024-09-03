@@ -7,7 +7,7 @@ import { Modal } from "react-bootstrap";
 import { update_user } from "../services/user_requests.js";
 import Loading from "./loading.js";
 
-function LoginComponent() {
+function LoginComponent({ onPasswordClick }) {
   const [id, set_id] = useState();
   const [email, setEmail] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -21,7 +21,6 @@ function LoginComponent() {
       const response = await token_verify(token);
       const id = response.id;
       if (id) {
-        //quando tivermos a página inicial, passar o id para a url
         window.location.href = `${id}/goals`;
       } else {
         console.log("é necessário realizar o login");
@@ -38,19 +37,6 @@ function LoginComponent() {
 
   const passwordChange = (e) => {
     setPassword(e.target.value);
-  };
-
-  const capivaraOlhos = (focus) => {
-    const olhos = document.getElementById("cap");
-    if (focus) {
-      olhos.classList.add("fecha");
-    } else {
-      olhos.classList.remove("fecha");
-    }
-  };
-
-  const primeiraVezAtualizar = (event) => {
-    setPrimeiraVez(true);
   };
 
   async function active_user() {
@@ -92,7 +78,7 @@ function LoginComponent() {
       handleModal();
       setloading(false);
     } else {
-      setMessage("erro inexperado");
+      setMessage("Erro inesperado");
       setPrimeiraVez(false);
       setloading(false);
     }
@@ -132,6 +118,7 @@ function LoginComponent() {
             onChange={passwordChange}
             id="password"
             placeholder="informe a sua senha"
+            onClick={onPasswordClick}
           />
 
           <button className="textos esqueciSenha">Esqueceu a senha?</button>
@@ -140,50 +127,46 @@ function LoginComponent() {
             Entrar
           </button>
 
-          <p
-            className="textos esqueciSenha redirect"
-            onClick={scrollToBottom}
-          >
+          <p className="textos esqueciSenha redirect" onClick={scrollToBottom}>
             Realizar cadastro
           </p>
-          
         </form>
       )}
       {!primeiraVez && (
-        <form className="LoginForm" onSubmit={login_user}>
-          <h1 className="textos">Acesse sua conta</h1>
-          <input
-            className="textos"
-            type="email"
-            required="required"
-            onChange={emailChange}
-            id="email"
-            placeholder="Informe o E-mail"
-          />
-
-          <input
-            className="textos"
-            type="password"
-            required="required"
-            onChange={passwordChange}
-            id="password"
-            placeholder="informe a sua senha"
-          />
-
-          <button className="textos esqueciSenha">Esqueceu a senha?</button>
-
-          <p
-            className="textos esqueciSenha redirect"
-            onClick={scrollToBottom}
-          >
-            Realizar cadastro
-          </p>
-
-          <button className="textos botaoLogar" type="submit" value="entar">
-            Entrar
-          </button>
-          {message ? <div className="textos alertaLogin">{message}</div> : ""}
-        </form>
+        <>
+          <form className="LoginForm" onSubmit={login_user}>
+            <h1 className="textos">Acesse sua conta</h1>
+            <input
+              className="textos"
+              type="email"
+              required="required"
+              onChange={emailChange}
+              id="email"
+              placeholder="Informe o E-mail"
+            />
+  
+            <input
+              className="textos"
+              type="password"
+              required="required"
+              onChange={passwordChange}
+              id="password"
+              placeholder="informe a sua senha"
+              onClick={onPasswordClick}
+            />
+  
+            <button className="textos esqueciSenha">Esqueceu a senha?</button>
+        
+            <p className="textos esqueciSenha redirect" onClick={scrollToBottom}>
+              Realizar cadastro
+            </p>
+        
+            <button className="textos botaoLogar" type="submit" value="entar">
+              Entrar
+            </button>
+          </form>
+        {message ? <div className="textos alertaLogin">{message}</div> : ""}
+        </>
       )}
       <Modal show={showModal} onHide={handleClose} centered size="xl">
         <Modal.Header>
