@@ -10,6 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { verify } from "./utils/token_verify";
 import React, { useEffect } from 'react';
 import Posts from "./pages/GoalPosts/posts";
+import Feedback from "./pages/Feedback/index";
+
 
   function App() {
     useEffect(() => {
@@ -32,6 +34,7 @@ import Posts from "./pages/GoalPosts/posts";
           <Route path="/:id/Perfil" element={<Perfil />}></Route>
           <Route path="/:id/store" element={<Store />}></Route>
           <Route path="/:id/posts" element={<Posts />}></Route>
+          <Route path="/:id/feedback" element={<Feedback />}></Route>
         </Routes>
     </BrowserRouter>
   );

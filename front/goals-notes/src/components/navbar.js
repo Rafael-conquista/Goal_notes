@@ -98,6 +98,13 @@ function Navbar() {
                 </div>
               </a>
             </li>
+            <li className="menu_item_nav" onClick={handleClose}>
+              <a className="menu_link center" href="feedback">
+                <div className="item_feedback">
+                  <span className="menu_link btn_navbar_feedback">Feedback</span>
+                </div>
+              </a>
+            </li>
             <LogoffButton />
           </ul>
         </Offcanvas>
