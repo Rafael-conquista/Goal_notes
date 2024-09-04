@@ -15,6 +15,7 @@
   margin-top: -40px;
   background-color: #a8dadc79;
   min-height: 100vh;
+  padding-bottom: 25vh;
 }
 
 .buttons {
@@ -267,6 +268,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  padding-bottom: 5vh;
 }
 
 /* Media query para telas menores que 750px */

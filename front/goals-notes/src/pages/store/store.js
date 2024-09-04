@@ -17,6 +17,7 @@ import { getImage } from '../../services/store_user_requests.js';
 import { postCompra } from '../../services/store_user_requests.js';
 import { atualizaPreco } from '../../services/store_user_requests.js';
 import CapMessage from '../../components/CapMessages';
+import Footer from "../../components/footer";
 
 const Store = () => {
 
@@ -299,6 +300,7 @@ const Store = () => {
           <CapMessage ref={capMessageRef} message={"Ah não, parece que você não tem capcoins o suficiente."} id_user={id} />
         </div>
       </section>
+      <Footer/>
     </>
   );
 }
