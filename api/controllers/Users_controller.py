@@ -139,7 +139,7 @@ class UsersController:
                 user.email = dados.get("email", user.email)
                 user.age = dados.get("age", user.age)
                 user.admin = dados.get("admin", user.admin)
-                user.capcoins += dados.get("capcoins", user.capcoins)
+                user.capcoins += dados.get("capCoins", user.capcoins)
                 user.password = dados.get("password", user.password)
                 user.dataAlteracao = banco.func.now()
                 main_queries.save_query(user)

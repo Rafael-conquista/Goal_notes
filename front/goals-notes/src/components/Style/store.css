@@ -23,6 +23,7 @@
 
 .store_component_baixo {
   border-top: 1px black solid;
+  padding-bottom: 20vh;
 }
 
 .homeScreenStore {
@@ -278,7 +279,7 @@
       width: 130px;
     }
     .store_item {
-      grid-template-columns: repeat(auto-fit, minmax(200px, auto))
+      grid-template-columns: repeat(auto-fit, minmax(200px, auto));
     }
   }
 

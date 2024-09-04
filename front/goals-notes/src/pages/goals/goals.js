@@ -9,6 +9,7 @@ import GoalCreator from '../../components/goalCreator.js';
 import Spinner from 'react-bootstrap/Spinner';
 import '../../components/Style/goals_container.css'
 import { getAllTypes } from '../../services/api_requests.js';
+import Footer from "../../components/footer";
 
 function Goals (){
   const [loaded, setLoaded] = useState(false)
@@ -84,6 +85,7 @@ function Goals (){
           <Spinner animation="grow" size="sm" variant="secondary"/>
         </div>
         }
+        <Footer/>
 			</div>
   );
 }

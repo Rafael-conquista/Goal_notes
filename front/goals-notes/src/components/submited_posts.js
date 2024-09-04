@@ -9,14 +9,23 @@ function SubmitedPosts({ posts, id }) {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        // Caso você precise fazer algo com os comments quando posts mudarem
-        setComments(posts.posts);
+        const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+        const filteredPosts = posts.posts.filter(post => !likedPosts.includes(post.id));
+        setComments(filteredPosts);
     }, [posts]);
 
     const capMessageRef = useRef();
 
-    const handleClick = () => {
-      capMessageRef.current.triggerToast();
+    const handleClick = async (index, postId) => {
+        setComments(prevComments => prevComments.filter((_, i) => i !== index));
+
+        const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+        likedPosts.push(postId);
+        localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+
+        await update_user({ "capCoins": 2 }, postId);
+
+        capMessageRef.current.triggerToast();
     };
 
     return (
@@ -24,23 +33,20 @@ function SubmitedPosts({ posts, id }) {
             {comments && comments.length > 0 ? (
                 comments.map((comment, index) => (
                     <div key={index} className='posts'>
-                        <AmigoFotoComponent id = {comment.id_user}/>
+                        <AmigoFotoComponent id={comment.id_user} />
                         <div className='text_style'>
-                        <a className='sender_name' href={`/${comment.id_user}/Perfil`}>
-                            <p className='sender_name'>
-                               Seu amigo {comment.user_name} tem novidades!
-                            </p>
-                        </a>
+                            <a className='sender_name' href={`/${comment.id_user}/Perfil`}>
+                                <p className='sender_name'>
+                                    Seu amigo {comment.user_name} tem novidades!
+                                </p>
+                            </a>
 
                             <p>
                                 Completou a tarefa: {comment.desc}
                             </p>
                         </div>
-                        <div className='fixed_like' onClick={async () => {
-                            await update_user({"capCoins": 2}, comment.id_user);
-                            handleClick()
-                        }}>
-                                <span>❤️</span>
+                        <div className='fixed_like' onClick={() => handleClick(index, comment.id)}>
+                            <span>❤️</span>
                         </div>
                     </div>
                 ))
