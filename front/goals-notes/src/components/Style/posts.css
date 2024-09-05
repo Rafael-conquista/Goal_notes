@@ -63,6 +63,7 @@
     align-items: center;
     flex-direction: column;
     padding-top: 20px;
+    padding-bottom: 20vh;
 }
 
 .feed_container span {
