@@ -136,12 +136,10 @@ function CapCreatorComponent(){
                         </p>
                     </div>
     
-                    {/* Verifica se os campos de texto e os botões de confirmação não estão visíveis para mostrar o botão "Continuar" */}
                     {showInput && !showTextInput && !showCapInput && !confirmNames && !noInput && (
                         <button className='button' onClick={handleInput}><span>Continuar</span></button>
                     )}
     
-                    {/* Verifica se os campos de texto e os botões de confirmação estão ocultos para mostrar o botão "Continuar" de finalização */}
                     {noInput && !showTextInput && !showCapInput && !confirmNames && (
                         <button className='button' onClick={user_update}><span>Continuar</span></button>
                     )}
@@ -164,7 +162,6 @@ function CapCreatorComponent(){
                         />
                     )}
     
-                    {/* Exibe os botões "Sim" e "Não" e garante que o botão "Continuar" não apareça */}
                     {confirmNames && (
                         <div className='confirm_button'>    
                             <div className='margin_confirm'>
