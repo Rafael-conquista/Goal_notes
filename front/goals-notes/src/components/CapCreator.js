@@ -98,18 +98,16 @@ function CapCreatorComponent(){
       }
 
       const confirmChange = (answer) => {
-        if(answer){
-            setConfirmNames(false)
-            handleInput()
-            setNoInput(true)
-        }else{
-            setShowCapInput(true)
-            setShowTextInput(true)
-            setConfirmNames(false)
-            setMessage(confirm_interaction[1])
-            setNoInput(true)
+        if (answer) {
+            user_update();
+        } else {
+            setShowCapInput(true);
+            setShowTextInput(true);
+            setConfirmNames(false);
+            setMessage(confirm_interaction[1]);
+            setNoInput(true);
         }
-      }
+    }
 
     async function user_update() {
         const user_json = {
@@ -137,29 +135,56 @@ function CapCreatorComponent(){
                             />
                         </p>
                     </div>
-                    {showInput && !showTextInput && !showCapInput && !confirmNames && !noInput &&<button className='button' onClick={handleInput}><span>Continuar</span></button>}
-                    {noInput &&<button className='button' onClick={user_update}><span>Continuar</span></button>}
-                    {showTextInput && <input type='text' placeholder='Digite como deseja ser chamado!' onChange={nicnameChange} onKeyPress={nicnameChange}/>}
-                    {showCapInput && <input type='text' placeholder='Digite o apelido da cap!' onChange={capNameChange} onKeyPress={capNameChange}/>}
-                    {
-                        confirmNames && 
+    
+                    {/* Verifica se os campos de texto e os botões de confirmação não estão visíveis para mostrar o botão "Continuar" */}
+                    {showInput && !showTextInput && !showCapInput && !confirmNames && !noInput && (
+                        <button className='button' onClick={handleInput}><span>Continuar</span></button>
+                    )}
+    
+                    {/* Verifica se os campos de texto e os botões de confirmação estão ocultos para mostrar o botão "Continuar" de finalização */}
+                    {noInput && !showTextInput && !showCapInput && !confirmNames && (
+                        <button className='button' onClick={user_update}><span>Continuar</span></button>
+                    )}
+    
+                    {showTextInput && (
+                        <input 
+                            type='text' 
+                            placeholder='Seu Apelido' 
+                            onChange={nicnameChange} 
+                            onKeyPress={nicnameChange}
+                        />
+                    )}
+    
+                    {showCapInput && (
+                        <input 
+                            type='text' 
+                            placeholder='Apelido da cap' 
+                            onChange={capNameChange} 
+                            onKeyPress={capNameChange}
+                        />
+                    )}
+    
+                    {/* Exibe os botões "Sim" e "Não" e garante que o botão "Continuar" não apareça */}
+                    {confirmNames && (
                         <div className='confirm_button'>    
                             <div className='margin_confirm'>
-                                <button className='button' id='confirm' onClick={() =>{confirmChange(true)}}>
-                                    <span>Sim, está tudo correto!</span>
+                                <button className='button' id='confirm' onClick={() => confirmChange(true)}>
+                                    <span>Sim!</span>
                                 </button>
                             </div>
                             <div className='margin_confirm'>
-                                <button className='button' id='deny' onClick={() =>{confirmChange(false)}}>
-                                    <span>Não, acho que me confundi...</span>
+                                <button className='button' id='deny' onClick={() => confirmChange(false)}>
+                                    <span>Não</span>
                                 </button>
                             </div>
                         </div>
-                    }
+                    )}
                 </div>
             </div>
         </>
     )
+    
+    
 }
 
 export default CapCreatorComponent;
