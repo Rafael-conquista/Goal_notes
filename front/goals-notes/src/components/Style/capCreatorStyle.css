@@ -14,6 +14,7 @@ P {
   height: 80vh;
   border-radius: 30px;
   background-color: #131f24ec;
+  margin-top: 40px;
 }
 
 .capScreen {
@@ -73,9 +74,9 @@ P {
 }
 
 .button {
-  width: 50%; /* Mantém a largura automática */
-  min-height: 50px; /* Define uma altura mínima para garantir espaço para o texto */
-  padding: 10px 20px; /* Aumenta o padding para dar mais espaço ao redor do texto */
+  width: 50%; 
+  min-height: 50px; 
+  padding: 10px 20px; 
   cursor: pointer;
   background: transparent;
   border: 1px solid #28b498;
@@ -153,6 +154,10 @@ P {
 }
 
 @media screen and (max-width: 620px) {
+  .button {
+    min-height: 50px; 
+    padding: 20px 60px; 
+  }
   .cap_welcome_page {
     border-radius: 100px;
     width: 90px;
@@ -163,7 +168,7 @@ P {
     grid-template-columns: repeat(1, 2fr);
     height: fit-content;
     margin: 0 auto;
-    margin-top: 20vh;
+    margin-top: 15vh;
   }
   .cap_welcome_page {
     border-radius: 100px;
