@@ -101,3 +101,21 @@
 @media (min-width: 1024px) {
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  align-items: center; /* Se você também quiser centralizar verticalmente */
+  padding-top: 20px; /* Pode ajustar o padding conforme necessário */
+  width: 100%; /* Garante que o contêiner ocupe toda a largura disponível */
+}
+
+.perfilButton {
+  margin-left: 1rem; /* Ajuste para espaçamento entre os botões */
+  z-index: 1;
+  background-color: #83C5BE;
+}
+
+.perfilButton:hover{
+  background-color: #009c7a;
+}

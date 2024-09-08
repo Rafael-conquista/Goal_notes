@@ -1,0 +1,106 @@
+.dashboard_all {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh; /* Garante que o contêiner ocupe toda a altura da viewport */
+}
+
+.dashboard-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-height: 60vh; /* Ajuste a altura máxima para garantir que o conteúdo possa rolar */
+  overflow-y: auto; /* Adiciona rolagem vertical */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; /* Espaçamento entre os blocos */
+  padding-bottom: 20vh;
+}
+
+.goal-card {
+  background-color: #007bff;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 80%; /* Ajuste para garantir que a largura esteja dentro da área visível */
+  max-width: 600px;
+}
+
+.goal-card:hover {
+  background-color: #0056b3;
+}
+
+.dashboard-container section {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container h1 {
+  grid-column: span 2; /* Ocupa as duas colunas do grid */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-container h2 {
+  color: #333;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.dashboard-container p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.dashboard-button-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Até 2 botões por linha */
+  gap: 20px; /* Espaçamento entre os botões */
+}
+
+.dashboard-button {
+  background-color: #83C5BE;
+  color: #fff;
+  padding: 5px 5px; /* Ajuste o padding conforme necessário */
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px; /* Tamanho da fonte menor */
+  border: none;
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+}
+
+.dashboard-card_buttons{
+  background-color: #F1FAEE;
+  color: #000000;
+  padding: 10px 20px; /* Ajuste o padding conforme necessário */
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 14px; /* Tamanho da fonte menor */
+  border: none;
+  margin-top: 3vh;
+}
+
+.dashboard-button:hover {
+  transition: 0.5s ease-in-out;
+  background-color: #009c7a;
+  transform: scale(1.05);
+}
+
+.dashboard-icon{
+  font-size: 7vh;
+  color: #009c7a;
+}
