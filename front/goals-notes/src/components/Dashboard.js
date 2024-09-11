@@ -130,6 +130,12 @@ const Dashboard = () => {
         </Modal.Header>
         <Modal.Body>
           <div className="dashboard-container">
+
+            <section className="modal-section">
+              <h2>Total de metas</h2>
+              <p>Total: {data.total_goals}</p>
+            </section>
+
             <section className="modal-section">
               <h2>Metas Finalizadas</h2>
               <p>Total: {incompletedGoalsCount}</p>
@@ -144,8 +150,8 @@ const Dashboard = () => {
               <h2>Última meta finalizada</h2>
               {lastCompletedGoal ? (
                 <div>
-                  <h3>{lastCompletedGoal.name}</h3>
-                  <p>Finalizada em: {lastCompletedGoal.end_date}</p>
+                  <h4>{lastCompletedGoal.name}</h4>
+                  <p>Finalizada em: {new Date(lastCompletedGoal.end_date).toLocaleDateString('pt-BR')}</p>
                 </div>
               ) : (
                 <p>No completed goals available.</p>
@@ -156,11 +162,11 @@ const Dashboard = () => {
               <h2>Meta mais próxima</h2>
               {nextGoal ? (
                 <div>
-                  <h3>{nextGoal.name}</h3>
-                  <p>Expectativa: {nextGoal.expected_data}</p>
+                  <h4>{nextGoal.name}</h4>
+                  <p>Expectativa: {new Date(nextGoal.expected_data).toLocaleDateString('pt-BR')}</p>
                 </div>
               ) : (
-                <p>No next goals available.</p>
+                <p>Sem próximas metas.</p>
               )}
             </section>
 
@@ -193,6 +199,24 @@ const Dashboard = () => {
               <h2>Total de Amigos</h2>
               <p>{data.len_amigos}</p>
             </section>
+
+            <section className="modal-section">
+              <h2>Total de Amigos(30 dias)</h2>
+              <p>{data.amigos_mes}</p>
+            </section>
+
+            <section className="modal-section">
+              <h2>Amizade mais antiga</h2>
+              <p>{data.oldest_amigo.name}</p>
+              <p>{new Date(data.oldest_amigo.data_cadastro).toLocaleDateString('pt-BR')}</p>
+            </section>
+
+            <section className="modal-section">
+              <h2>Amizade mais antiga</h2>
+              <p>{data.newest_amigo.name}</p>
+              <p>{new Date(data.newest_amigo.data_cadastro).toLocaleDateString('pt-BR')}</p>
+            </section>
+
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -215,6 +239,11 @@ const Dashboard = () => {
               <h2>Ciclos Finalizados</h2>
               <p>{data.total_pomodoro}</p>
             </section>
+
+            <section className="modal-section">
+              <h2>Tempo total(minutos):</h2>
+              <p>{data.time_pomodoro}</p>
+            </section>
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -234,8 +263,18 @@ const Dashboard = () => {
         <Modal.Body>
           <div className="dashboard-container">
             <section className="modal-section">
-              <h2>Total de Skins</h2>
+              <h2>Total de items em geral</h2>
+              <p>{data.total_esteticos}</p>
+            </section>
+
+            <section className="modal-section">
+              <h2>Total de skins</h2>
               <p>{data.total_skins}</p>
+            </section>
+
+            <section className="modal-section">
+              <h2>Total de backgrounds</h2>
+              <p>{data.total_backgrounds}</p>
             </section>
           </div>
         </Modal.Body>
