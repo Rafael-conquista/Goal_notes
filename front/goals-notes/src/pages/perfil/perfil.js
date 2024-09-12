@@ -111,7 +111,7 @@ const Homepage = () => {
           )}
 
           {selectedScreen === 'newScreen' && (
-            <Dashboard/>
+            <Dashboard id={id}/>
           )}
         </div>
       </div>

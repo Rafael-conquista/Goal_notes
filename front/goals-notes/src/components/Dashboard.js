@@ -6,21 +6,24 @@ import { GoGoal } from "react-icons/go";
 import { GiThreeFriends } from "react-icons/gi";
 import { GiTomato } from "react-icons/gi";
 import { AiFillSkin } from "react-icons/ai";
+import get_api_url from "../config";
 
 
-const Dashboard = () => {
+const Dashboard = (id) => {
   const [data, setData] = useState(null);
   const [showGoals, setShowGoals] = useState(false);
   const [showFriendsGoal, setShowFriendsGoal] = useState(false);
   const [showTotalPomodoros, setShowTotalPomodoros] = useState(false);
   const [showTotalSkins, setShowTotalSkins] = useState(false);
 
+  const apiUrl = get_api_url();
+
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/user_infos/1')
+    fetch(apiUrl + '/user_infos/' + id.id )
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error('Error fetching data:', error));
-  }, []);
+  }, [id.id]);
 
   if (!data) {
     return <div>Loading...</div>;
@@ -172,10 +175,14 @@ const Dashboard = () => {
 
             <section className="modal-section">
               <h2>Meta mais valiosa em progresso</h2>
-              <div>
-                <h3>{data.most_valuable_goal.name}</h3>
-                <p>CapCoins: {data.most_valuable_goal.capcoins}  🪙</p>
-              </div>
+              {data.most_valuable_goal ? (
+                <div>
+                  <h3>{data.most_valuable_goal.name}</h3>
+                  <p>CapCoins: {data.most_valuable_goal.capcoins}  🪙</p>
+                </div>
+              ) : (
+                <p>Sem metas valiosas em progresso.</p>
+              )}
             </section>
           </div>
         </Modal.Body>
@@ -258,23 +265,13 @@ const Dashboard = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Total Skins</Modal.Title>
+          <Modal.Title>Skins</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="dashboard-container">
             <section className="modal-section">
-              <h2>Total de items em geral</h2>
-              <p>{data.total_esteticos}</p>
-            </section>
-
-            <section className="modal-section">
-              <h2>Total de skins</h2>
-              <p>{data.total_skins}</p>
-            </section>
-
-            <section className="modal-section">
-              <h2>Total de backgrounds</h2>
-              <p>{data.total_backgrounds}</p>
+              <h2>Total de Skins:</h2>
+              <p>{data.skins_len}</p>
             </section>
           </div>
         </Modal.Body>
@@ -284,6 +281,6 @@ const Dashboard = () => {
       </Modal>
     </div>
   );
-};
+}
 
 export default Dashboard;

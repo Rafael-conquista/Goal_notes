@@ -41,20 +41,22 @@ class GoalsController:
             .filter(GoalsModel.user_id == user_id)\
             .order_by(GoalsModel.goal_value.desc())\
             .first()
-        return {
-            "id": goal.goals_id,
-            "name": goal.name,
-            "importance_degree": goal.importance_degree,
-            "initial_data": format_to_string(goal.initial_data),
-            "expected_data": format_to_string(goal.expected_data),
-            "current_progress": goal.current_progress,
-            "pomodoro_cycles": goal.pomodoro_cycles,
-            "goal_value": goal.goal_value,
-            "obs": goal.obs,
-            "end_date": format_to_string(goal.end_date),
-            "user_id": goal.user_id,
-            "capcoins": goal.goal_value
-        }
+        if goal:
+            return {
+                "id": goal.goals_id,
+                "name": goal.name,
+                "importance_degree": goal.importance_degree,
+                "initial_data": format_to_string(goal.initial_data),
+                "expected_data": format_to_string(goal.expected_data),
+                "current_progress": goal.current_progress,
+                "pomodoro_cycles": goal.pomodoro_cycles,
+                "goal_value": goal.goal_value,
+                "obs": goal.obs,
+                "end_date": format_to_string(goal.end_date),
+                "user_id": goal.user_id,
+                "capcoins": goal.goal_value
+            }
+        return None
 
         
 
