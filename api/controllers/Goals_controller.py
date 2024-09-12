@@ -27,6 +27,36 @@ class GoalsController:
             )
         return goal_list
 
+    def get_total_pomodoros_by_user(user_id):
+        totalPomodoro = 0
+        goals = banco.session.query(GoalsModel)\
+            .filter(GoalsModel.user_id == user_id).all()
+        for goal in goals:
+            totalPomodoro += goal.pomodoro_cycles
+        
+        return totalPomodoro
+    
+    def get_most_value_goal(user_id):
+        goal = banco.session.query(GoalsModel)\
+            .filter(GoalsModel.user_id == user_id)\
+            .order_by(GoalsModel.goal_value.desc())\
+            .first()
+        return {
+            "id": goal.goals_id,
+            "name": goal.name,
+            "importance_degree": goal.importance_degree,
+            "initial_data": format_to_string(goal.initial_data),
+            "expected_data": format_to_string(goal.expected_data),
+            "current_progress": goal.current_progress,
+            "pomodoro_cycles": goal.pomodoro_cycles,
+            "goal_value": goal.goal_value,
+            "obs": goal.obs,
+            "end_date": format_to_string(goal.end_date),
+            "user_id": goal.user_id,
+            "capcoins": goal.goal_value
+        }
+
+        
 
     def find_4_last_finished_goals(user_id):
         today = datetime.now().date()

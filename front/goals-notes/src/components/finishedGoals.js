@@ -53,11 +53,11 @@ function FinishedGoals({ id, mayUpdate, setMayUpdate }) {
                                 </div>
                                 <div className='goal_data'>
                                     <h5 className='goal_obs'>{goal.obs}</h5>
-                                    <p><span>Início:</span> {goal.initial_data}</p>
-                                    <p><span>Expectativa:</span> {goal.expected_data}</p>
+                                    <p><span>Início:</span> {new Date(goal.initial_data).toLocaleDateString('pt-BR')}</p>
+                                    <p><span>Expectativa:</span> {new Date(goal.expected_data).toLocaleDateString('pt-BR')}</p>
                                     <p><span>Tipo:</span> {goal.type_name}</p>
                                     <p><span>Ciclos de Pomodoro: </span> {goal.pomodoro_cycles}</p>
-                                    {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
+                                    {goal.end_date ? <p><span>Finalizada em:</span> {new Date(goal.end_date).toLocaleDateString('pt-BR')}</p> : ''}
                                 </div>
 
                                 <div className='top_left_botao' onClick={() => deactivateTask(false, goal.goals_id)}>
