@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../../components/navbar';
-import cap_default from '../../images/cap_default.jpg';
-import cap_doom from '../../images/capDoom.png';
-import cap_link from '../../images/capLink.png';
-import cap_wizard from '../../images/capWizard.png';
-import cap_percy from '../../images/capPercy.png';
-import cap_witcher from '../../images/capWitcher.png';
+import cap_default from '../../images/cap_default.jpeg';
+import cap_doom from '../../images/capDoom.jpeg';
+import cap_link from '../../images/capLink.jpeg';
+import cap_wizard from '../../images/capWizard.jpeg';
+import cap_percy from '../../images/capPercy.jpeg';
+import cap_witcher from '../../images/capWitcher.jpeg';
 import '../../components/Style/homeStyle.css';
 import '../../components/Style/perfil.css';
 import '../../components/Style/store.css';

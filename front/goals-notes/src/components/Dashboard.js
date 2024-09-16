@@ -8,7 +8,6 @@ import { GiTomato } from "react-icons/gi";
 import { AiFillSkin } from "react-icons/ai";
 import get_api_url from "../config";
 
-
 const Dashboard = (id) => {
   const [data, setData] = useState(null);
   const [showGoals, setShowGoals] = useState(false);
@@ -19,21 +18,20 @@ const Dashboard = (id) => {
   const apiUrl = get_api_url();
 
   useEffect(() => {
-    fetch(apiUrl + '/user_infos/' + id.id )
+    fetch(apiUrl + '/user_infos/' + id.id)
       .then(response => response.json())
       .then(data => setData(data))
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setData({}); // caso haja um erro, setar data como objeto vazio
+      });
   }, [id.id]);
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
+  const incompletedGoalsCount = data?.incompleted_goals ? Object.keys(data.incompleted_goals).length : 0;
+  const completedGoalsCount = data?.completed_goals ? Object.keys(data.completed_goals).length : 0;
 
-  const incompletedGoalsCount = Object.keys(data.incompleted_goals).length;
-  const completedGoalsCount = Object.keys(data.completed_goals).length;
-
-  const lastCompletedGoal = data.last_completed_goals.goals[0];
-  const nextGoal = data.next_goals.goals[0];
+  const lastCompletedGoal = data?.last_completed_goals?.goals?.[0];
+  const nextGoal = data?.next_goals?.goals?.[0];
 
   function setAllOff() {
     setShowFriendsGoal(false);
@@ -51,15 +49,11 @@ const Dashboard = (id) => {
           <div className='dashboard-icon'>
             <GoGoal />
           </div>
-          <h3>
-            {showGoals ? 'Métricas de Metas' : 'Métricas de Metas'}
-          </h3>
-          <p>
-            Você está em constante evolução! Que tal ver o seu progresso?
-          </p>
+          <h3>Métricas de Metas</h3>
+          <p>Você está em constante evolução! Que tal ver o seu progresso?</p>
           <div onClick={() => {
-          setAllOff();
-          setShowGoals(true);
+            setAllOff();
+            setShowGoals(true);
           }} className="dashboard-button">
             Ver minha Evolução
           </div>
@@ -69,15 +63,11 @@ const Dashboard = (id) => {
           <div className='dashboard-icon'>
             <GiTomato />
           </div>
-          <h3>
-            {showTotalPomodoros ? 'Métricas de Pomodoros' : 'Métricas de Pomodoros'}
-          </h3>
-          <p>
-            Veja seus resultados ao realizar o método de Pomodoro!
-          </p>
+          <h3>Métricas de Pomodoros</h3>
+          <p>Veja seus resultados ao realizar o método de Pomodoro!</p>
           <div onClick={() => {
-          setAllOff();
-          setShowTotalPomodoros(true);
+            setAllOff();
+            setShowTotalPomodoros(true);
           }} className="dashboard-button">
             Ver minha Evolução
           </div>
@@ -85,17 +75,13 @@ const Dashboard = (id) => {
 
         <div className='dashboard-card_buttons'>
           <div className='dashboard-icon'>
-            <GiThreeFriends />  
+            <GiThreeFriends />
           </div>
-          <h3>
-            {showFriendsGoal ? 'Métricas de Amigos' : 'Métricas de Amigos'}
-          </h3>
-          <p>
-            Que tal dar uma olhada o quanto você socializou?
-          </p>
+          <h3>Métricas de Amigos</h3>
+          <p>Que tal dar uma olhada o quanto você socializou?</p>
           <div onClick={() => {
-          setAllOff();
-          setShowFriendsGoal(true);
+            setAllOff();
+            setShowFriendsGoal(true);
           }} className="dashboard-button">
             Ver minha Evolução
           </div>
@@ -105,48 +91,37 @@ const Dashboard = (id) => {
           <div className='dashboard-icon'>
             <AiFillSkin />
           </div>
-          <h3>
-            {showTotalPomodoros ? 'Métricas de skins' : 'Métricas de skins'}
-          </h3>
-          <p>
-            Ficar estiloso é sempre bom! Veja suas métricas de skin
-          </p>
+          <h3>Métricas de skins</h3>
+          <p>Ficar estiloso é sempre bom! Veja suas métricas de skin</p>
           <div onClick={() => {
-          setAllOff();
-          setShowTotalSkins(true);
+            setAllOff();
+            setShowTotalSkins(true);
           }} className="dashboard-button">
             Ver minha Evolução
           </div>
         </div>
-
       </div>
 
       {/* Modais */}
-      <Modal
-        show={showGoals}
-        onHide={() => setShowGoals(false)}
-        size="lg"
-        centered
-      >
+      <Modal show={showGoals} onHide={() => setShowGoals(false)} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>Goals</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="dashboard-container">
-
             <section className="modal-section">
               <h2>Total de metas</h2>
-              <p>Total: {data.total_goals}</p>
+              <p>Total: {data?.total_goals || 0}</p>
             </section>
 
             <section className="modal-section">
               <h2>Metas Finalizadas</h2>
-              <p>Total: {incompletedGoalsCount}</p>
+              <p>Total: {completedGoalsCount}</p>
             </section>
 
             <section className="modal-section">
               <h2>Metas em Progresso</h2>
-              <p>Total: {completedGoalsCount}</p>
+              <p>Total: {incompletedGoalsCount}</p>
             </section>
 
             <section className="modal-section">
@@ -157,7 +132,7 @@ const Dashboard = (id) => {
                   <p>Finalizada em: {new Date(lastCompletedGoal.end_date).toLocaleDateString('pt-BR')}</p>
                 </div>
               ) : (
-                <p>No completed goals available.</p>
+                <p>Sem metas finalizadas.</p>
               )}
             </section>
 
@@ -175,10 +150,10 @@ const Dashboard = (id) => {
 
             <section className="modal-section">
               <h2>Meta mais valiosa em progresso</h2>
-              {data.most_valuable_goal ? (
+              {data?.most_valuable_goal ? (
                 <div>
                   <h3>{data.most_valuable_goal.name}</h3>
-                  <p>CapCoins: {data.most_valuable_goal.capcoins}  🪙</p>
+                  <p>CapCoins: {data.most_valuable_goal.capcoins} 🪙</p>
                 </div>
               ) : (
                 <p>Sem metas valiosas em progresso.</p>
@@ -191,12 +166,7 @@ const Dashboard = (id) => {
         </Modal.Footer>
       </Modal>
 
-      <Modal
-        show={showFriendsGoal}
-        onHide={() => setShowFriendsGoal(false)}
-        size="lg"
-        centered
-      >
+      <Modal show={showFriendsGoal} onHide={() => setShowFriendsGoal(false)} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>Friends Goal</Modal.Title>
         </Modal.Header>
@@ -204,26 +174,25 @@ const Dashboard = (id) => {
           <div className="dashboard-container">
             <section className="modal-section">
               <h2>Total de Amigos</h2>
-              <p>{data.len_amigos}</p>
+              <p>{data?.len_amigos || 0}</p>
             </section>
 
             <section className="modal-section">
-              <h2>Total de Amigos(30 dias)</h2>
-              <p>{data.amigos_mes}</p>
-            </section>
-
-            <section className="modal-section">
-              <h2>Amizade mais antiga</h2>
-              <p>{data.oldest_amigo.name}</p>
-              <p>{new Date(data.oldest_amigo.data_cadastro).toLocaleDateString('pt-BR')}</p>
+              <h2>Total de Amigos (30 dias)</h2>
+              <p>{data?.amigos_mes || 0}</p>
             </section>
 
             <section className="modal-section">
               <h2>Amizade mais antiga</h2>
-              <p>{data.newest_amigo.name}</p>
-              <p>{new Date(data.newest_amigo.data_cadastro).toLocaleDateString('pt-BR')}</p>
+              <p>{data?.oldest_amigo?.name || 'N/A'}</p>
+              <p>{data?.oldest_amigo?.data_cadastro ? new Date(data.oldest_amigo.data_cadastro).toLocaleDateString('pt-BR') : 'N/A'}</p>
             </section>
 
+            <section className="modal-section">
+              <h2>Amizade mais nova</h2>
+              <p>{data?.newest_amigo?.name || 'N/A'}</p>
+              <p>{data?.newest_amigo?.data_cadastro ? new Date(data.newest_amigo.data_cadastro).toLocaleDateString('pt-BR') : 'N/A'}</p>
+            </section>
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -231,12 +200,7 @@ const Dashboard = (id) => {
         </Modal.Footer>
       </Modal>
 
-      <Modal
-        show={showTotalPomodoros}
-        onHide={() => setShowTotalPomodoros(false)}
-        size="lg"
-        centered
-      >
+      <Modal show={showTotalPomodoros} onHide={() => setShowTotalPomodoros(false)} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>Total Pomodoros</Modal.Title>
         </Modal.Header>
@@ -244,12 +208,12 @@ const Dashboard = (id) => {
           <div className="dashboard-container">
             <section className="modal-section">
               <h2>Ciclos Finalizados</h2>
-              <p>{data.total_pomodoro}</p>
+              <p>{data?.total_pomodoro || 0}</p>
             </section>
 
             <section className="modal-section">
-              <h2>Tempo total(minutos):</h2>
-              <p>{data.time_pomodoro}</p>
+              <h2>Tempo total (minutos)</h2>
+              <p>{data?.time_pomodoro || 0}</p>
             </section>
           </div>
         </Modal.Body>
@@ -258,20 +222,15 @@ const Dashboard = (id) => {
         </Modal.Footer>
       </Modal>
 
-      <Modal
-        show={showTotalSkins}
-        onHide={() => setShowTotalSkins(false)}
-        size="lg"
-        centered
-      >
+      <Modal show={showTotalSkins} onHide={() => setShowTotalSkins(false)} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>Skins</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="dashboard-container">
             <section className="modal-section">
-              <h2>Total de Skins:</h2>
-              <p>{data.skins_len}</p>
+              <h2>Total de Skins</h2>
+              <p>{data?.total_skins || 0}</p>
             </section>
           </div>
         </Modal.Body>
@@ -281,6 +240,6 @@ const Dashboard = (id) => {
       </Modal>
     </div>
   );
-}
+};
 
 export default Dashboard;

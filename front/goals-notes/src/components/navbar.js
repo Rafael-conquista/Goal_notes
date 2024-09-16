@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import cap_coins from "../images/capCoin.png";
+import cap_coins from "../images/capCoin.jpeg";
 import { TiThMenu } from "react-icons/ti";
 import { useParams } from "react-router-dom";
 import AmigoFotoComponent from "../components/amigoFoto.js";

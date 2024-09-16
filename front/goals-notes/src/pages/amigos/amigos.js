@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../components/navbar";
-import cap_default from "../../images/cap_default.jpg";
+import cap_default from "../../images/cap_default.jpeg";
 import "../../components/Style/homeStyle.css";
 
 const Homepage = () => {

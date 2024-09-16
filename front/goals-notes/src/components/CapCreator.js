@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import cap_default from '../images/cap_default.jpg';
+import cap_default from '../images/cap_default.jpeg';
 import { EscritaAutomatica } from '../utils/EscritaAutomatica';
 import { update_user } from '../services/user_requests';
 import { register_cap } from '../services/api_requests';
