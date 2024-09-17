@@ -50,6 +50,10 @@ function CapUpdateComponent({ idToken, id, nameAntigo }) {
     const alterFoto = (e) => {
         setAlterarFotoPerfil(true)
     }
+
+    const handleCloseFotoPerfil = () => {
+        setAlterarFotoPerfil(false);
+      };    
     
     return (
         <div className={`component_cap ${editar ? 'border' : 'border_esquerda'}`}>
@@ -63,9 +67,7 @@ function CapUpdateComponent({ idToken, id, nameAntigo }) {
                         <AmigoFotoComponent id = {id} perfil={true} alterando={true}/>
                     </a>
                 }
-                {alterarFotoPerfil &&
-                    <UsuarioFotoComponent idToken = {idToken}/>
-                }
+                {alterarFotoPerfil && <UsuarioFotoComponent idToken={id} onClose={handleCloseFotoPerfil} />}
                 { id == idToken &&
                     <>
                         {!editar &&

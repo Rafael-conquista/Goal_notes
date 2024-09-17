@@ -184,14 +184,26 @@ const Dashboard = (id) => {
 
             <section className="modal-section">
               <h2>Amizade mais antiga</h2>
-              <p>{data?.oldest_amigo?.name || 'N/A'}</p>
-              <p>{data?.oldest_amigo?.data_cadastro ? new Date(data.oldest_amigo.data_cadastro).toLocaleDateString('pt-BR') : 'N/A'}</p>
+              {data?.oldest_amigo ? (
+                <>
+                  <p>{data.oldest_amigo.name}</p>
+                  <p>{data.oldest_amigo.data_cadastro ? new Date(data.oldest_amigo.data_cadastro).toLocaleDateString('pt-BR') : 'N/A'}</p>
+                </>
+              ) : (
+                <p>Sem amizades antigas.</p>
+              )}
             </section>
 
             <section className="modal-section">
               <h2>Amizade mais nova</h2>
-              <p>{data?.newest_amigo?.name || 'N/A'}</p>
-              <p>{data?.newest_amigo?.data_cadastro ? new Date(data.newest_amigo.data_cadastro).toLocaleDateString('pt-BR') : 'N/A'}</p>
+              {data?.newest_amigo ? (
+                <>
+                  <p>{data.newest_amigo.name}</p>
+                  <p>{data.newest_amigo.data_cadastro ? new Date(data.newest_amigo.data_cadastro).toLocaleDateString('pt-BR') : 'N/A'}</p>
+                </>
+              ) : (
+                <p>Sem amizades recentes.</p>
+              )}
             </section>
           </div>
         </Modal.Body>
@@ -224,7 +236,7 @@ const Dashboard = (id) => {
 
       <Modal show={showTotalSkins} onHide={() => setShowTotalSkins(false)} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title>Skins</Modal.Title>
+          <Modal.Title>Total Skins</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="dashboard-container">

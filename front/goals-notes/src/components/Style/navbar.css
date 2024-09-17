@@ -251,6 +251,22 @@
   width: 100%;
 }
 
+.item_gallery::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 1%;
+  background-color: rgb(204, 92, 92);
+  z-index: -1;
+  transition: all 0.8s;
+  left: 0;
+  height: 3rem;
+}
+
+.item_gallery:hover::before {
+  width: 100%;
+}
+
 .cap_coin_nav {
   position: fixed;
   top: 0;
