@@ -224,15 +224,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             <p><span>Expectativa:</span> {new Date(goal.expected_data).toLocaleDateString('pt-BR')}</p>
                                             <p><span>Tipo:</span> {goal.type_name}</p>
                                             <p><span>Ciclos de Pomodoro: </span> {goal.pomodoro_cycles}</p>
-<<<<<<< HEAD
-                                            {goal.end_date ? <p><span>Finalizada em:</span> {goal.end_date}</p> : ''}
-=======
-                                            <p>
-                                                <span>Recompensa: </span>
-                                                {goal.goal_value === -1 ? 0 : goal.goal_value} 🪙
-                                            </p>
                                             {goal.end_date ? <p><span>Finalizada em:</span> {new Date(goal.end_date).toLocaleDateString('pt-BR')}</p> : ''}
->>>>>>> de902105cc21fcd128b17ad260c88504f660da50
                                         </div>
                                         <p>
                                             <span className='letra_vermelha'>Recompensa: </span>
