@@ -69,7 +69,7 @@
     height: 50vh;
 }
 
-.component_cap h1 {
+.consulta_skins h1 {
     font-size: 2rem;
 }
 
@@ -701,6 +701,7 @@ input[type="number"]::-webkit-outer-spin-button {
     z-index: 1000;
     overflow-x: hidden;
     overflow-y: auto;
+    color: #FFF;
   }
   
   .consulta_skins::-webkit-scrollbar {
@@ -830,7 +831,7 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 100%;
   }
   
-  .component_cap h1 {
+  .consulta_skins h1 {
     position: absolute;
     top: 0;
   }
