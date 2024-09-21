@@ -5,7 +5,7 @@ SECRET_KEY = "generic-secret-word"
 
 
 def jwt_create_token(id):
-    expiration = datetime.utcnow() + timedelta(hours=1)
+    expiration = datetime.utcnow() + timedelta(hours=5)
     payload = {"id": id, "exp": expiration}
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 

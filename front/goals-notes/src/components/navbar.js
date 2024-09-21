@@ -84,7 +84,7 @@ function Navbar() {
           </Offcanvas.Header>
           <ul className="navbar_items">
             <li className="menu_item_nav" onClick={handleClose}>
-              <a className="menu_link center" href="/">
+              <a className="menu_link center" href="Home">
                 <div className="item_home">
                   <span className="menu_link btn_navbar_home">Home</span>
                 </div>
