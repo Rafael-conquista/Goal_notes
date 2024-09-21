@@ -196,7 +196,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                     <GoalCreator id={id} mayUpdate={mayUpdate} setMayUpdate={setMayUpdate} types={types} />
                     <div className='goals_grid'>
                         {empty ? (
-                            <div>
+                            <div className='white-font'>
                                 Você ainda não possui nenhuma meta cadastrada! Mas não seja por isso, crie uma agora mesmo!
                             </div>
                         ) : (
@@ -218,7 +218,7 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
                                             <h3 className='name'><span className='letra_vermelha'>Meta: </span>{goal.name}</h3>
                                             <h4 className='importance'>{goal.importance_degree}★</h4>
                                         </div>
-                                        <h5 className='goal_obs'><span className='letra_vermelha'>Obs: </span>{goal.obs}</h5>
+                                        <h5 className='goal_obs'><span className='letra_vermelha'></span>{goal.obs}</h5>
                                         <div className='goal_data'>
                                             <p><span>Início:</span> {new Date(goal.initial_data).toLocaleDateString('pt-BR')}</p>
                                             <p><span>Expectativa:</span> {new Date(goal.expected_data).toLocaleDateString('pt-BR')}</p>

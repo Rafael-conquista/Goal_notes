@@ -58,8 +58,8 @@ function FinishedGoals({ id, mayUpdate, setMayUpdate }) {
                                     <h3 className='name'>{goal.name}</h3>
                                     <h4 className='importance'>{goal.importance_degree}★</h4>
                                 </div>
+                                <h5 className='goal_obs'>{goal.obs}</h5>
                                 <div className='goal_data'>
-                                    <h5 className='goal_obs'>{goal.obs}</h5>
                                     <p><span>Início:</span> {new Date(goal.initial_data).toLocaleDateString('pt-BR')}</p>
                                     <p><span>Expectativa:</span> {new Date(goal.expected_data).toLocaleDateString('pt-BR')}</p>
                                     <p><span>Tipo:</span> {goal.type_name}</p>
