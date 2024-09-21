@@ -124,7 +124,6 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     justify-items: center;
     height: 35vh;
-    align-items: center;
 }
 
 .amigo_main, .amigo_main_ultimos {
@@ -190,6 +189,7 @@
     font-size: 1.2em;
     align-items: center;
     justify-content: center;
+    padding-top: 10vh;
 }
 
 .text input {
@@ -863,6 +863,10 @@ input[type="number"]::-webkit-outer-spin-button {
   
   .text {
     padding: 0;
+  }
+
+  .text{
+    margin-top: 10vh;
   }
 
   .label_input_user {

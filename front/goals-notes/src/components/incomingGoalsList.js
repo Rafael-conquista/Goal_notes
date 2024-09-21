@@ -37,7 +37,7 @@ function IncomingGoalsList({id}) {
                                 }}>
                                     A tarefa {goals.name} está quase chegando em sua data final❗
                                     <p>
-                                        no dia {goals.expected_data}
+                                        no dia {new Date(goals.expected_data).toLocaleDateString('pt-BR')}
                                     </p>
                                 </div>
                             </div>

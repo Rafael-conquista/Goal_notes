@@ -36,7 +36,7 @@ function LastGoalsList({id}) {
                                 }}>
                                     ✅ Você finalizou a tarefa {goals.name}!
                                     <p>
-                                        no dia {goals.end_date}
+                                        no dia {new Date(goals.end_date).toLocaleDateString('pt-BR')}
                                     </p>
                                 </div>
                             </div>

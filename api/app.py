@@ -44,6 +44,7 @@ from Routes.Reviews import review_register
 from Routes.Conquistas import Conquistas
 from Routes.Conquistas import Conquista
 from Routes.ConquistasByUser import ConquistasByUser
+from Routes.UserInfos import UserInfos
 
 # Users related Routes
 api.add_resource(Users, "/users")
@@ -102,6 +103,8 @@ api.add_resource(review_register, "/review")
 api.add_resource(Conquistas, "/conquistas")
 api.add_resource(Conquista, "/conquista/<int:id>")
 api.add_resource(ConquistasByUser, "/conquistas_by_user/<int:id>")
+#general infos about user
+api.add_resource(UserInfos,"/user_infos/<int:id>")
 
 
 @app.before_first_request
