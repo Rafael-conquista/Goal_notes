@@ -102,7 +102,6 @@ function Navbar() {
           </ul>
         </Offcanvas>
       </nav>
-      <div className="fine_line"></div>
     </div>
   );
 }

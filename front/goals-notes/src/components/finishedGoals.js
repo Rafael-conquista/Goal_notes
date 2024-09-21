@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllFinishedGoals } from '../services/goals_request';
 import { UpdateGoal } from '../services/goals_request';
+import { redirect } from 'react-router-dom';
 
 function FinishedGoals({ id, mayUpdate, setMayUpdate }) {
 
@@ -20,9 +21,12 @@ function FinishedGoals({ id, mayUpdate, setMayUpdate }) {
     const buttonHandle = () => {
         if (empty === true) {
             getFinishedGoals()
+            window.location.href = `#goals_end`;
+        }
+        if (empty === false) {
+            window.location.href = `#titulo_goals`;
         }
         setEmpty(!empty)
-
     }
 
     const deactivateTask = async (end_date = false, goals_id) => {
@@ -34,10 +38,13 @@ function FinishedGoals({ id, mayUpdate, setMayUpdate }) {
 
     return (
         <div>
-            <div className='new_goal_button' onClick={buttonHandle}>
-                Ver metas já finalizadas!
-            </div>
-            <div className='goals_grid'>
+            <button onClick={buttonHandle} class="Btn_goal_add new_goal_button Btn_goal_end">
+            {empty ? ('Ver metas já finalizadas!'):('Ocultar metas já finalizadas')}
+                <span className="button__icon">
+                    <img height="80%" className='bi bi-cart2 img_goal' src="https://img.icons8.com/windows/32/view.png" alt="add--v1"></img>
+                </span>
+            </button>
+            <div id='goals_end' className='goals_grid'>
                 {empty ? (
                     <div>
 

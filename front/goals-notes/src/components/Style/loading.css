@@ -278,3 +278,38 @@
       transform: rotate(-1turn);
     }
   }
+
+  .pomodoro_timer__5uiCr {
+    display: flex;
+    align-items: center;
+  }  
+
+  .Pomodoro_running {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: Pomodoro_running linear 1s;
+    animation-fill-mode: forwards;
+}
+
+.pomodoro_eye_open, .pomodoro_eye_close {
+  cursor: pointer;
+}
+
+.pomodoro_eye_close {
+  margin-left: 10px;
+}
+
+@keyframes Pomodoro_running {
+  0% {
+    background: #0000;
+  }
+  100% {
+    background: #131f24;
+  }
+}

@@ -23,17 +23,23 @@
 
 .store_component_baixo {
   border-top: 1px black solid;
-  padding-bottom: 27vh;
 }
 
 .homeScreenStore {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - (110px + 100px));
+  margin: 110px 0 0 0;
+  background-image: url("../../images/fundoCasa.jpeg");
+}
+
+.homeScreenPerfil {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 110px);
   margin: 110px 0 0 0;
   background-image: url("../../images/fundoCasa.jpeg");
 }
-
 .store_item {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, auto));
@@ -280,6 +286,9 @@
     }
     .store_item {
       grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    }
+    .store_component_baixo {
+      padding-bottom: 10vh;
     }
   }
 

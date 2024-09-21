@@ -5,12 +5,14 @@ import './Style/goals_container.css';
 import styles from './Style/pomodoro.module.css';
 import { UpdateGoal } from '../services/goals_request';
 import CapMessage from './CapMessages';
+import Orientation from 'react-native-orientation-locker';
 
 function PomodoroModel({ id, key, goal_name }) {
     const [showModal, setShowModal] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [secondsLeft, setSecondsLeft] = useState(25 * 60); // 25 minutes
     const [isRunning, setIsRunning] = useState(false);
+    const [timerVisible, setTimerVisible] = useState(true);
     const [mode, setMode] = useState('work'); // 'work', 'shortBreak', 'longBreak'
     const [cycles, setCycles] = useState(0);
     const capMessageRef = useRef();
@@ -72,6 +74,14 @@ function PomodoroModel({ id, key, goal_name }) {
 
     const handleStartPause = () => {
         setIsRunning(prev => !prev);
+        
+        if (!isRunning) {
+            Orientation.lockToLandscape();
+        }
+    };
+
+    const handleInvisibleTime = () => {
+        setTimerVisible(prev => !prev);
     };
 
     const handleReset = () => {
@@ -81,7 +91,7 @@ function PomodoroModel({ id, key, goal_name }) {
     };
 
     return (
-        <div>
+        <div className='goal_geral_tela'>
             <div
                 key={key}
                 onMouseEnter={() => setHoveredIndex(key)}
@@ -110,11 +120,26 @@ function PomodoroModel({ id, key, goal_name }) {
                         </div>
                         <div className={styles.buttons}>
                             <button onClick={handleStartPause}>
-                                {isRunning ? 'Pausar' : 'Começar'}
+                                {isRunning ? 'Começar' : 'Começar'}
                             </button>
                             <button className={styles.resetButton} onClick={handleReset}>
                                 Reset
                             </button>
+                            {isRunning ?
+                            <div className='Pomodoro_running'>
+                                <div className={styles.pomodoroTimer}>
+                                    <h2 className={styles.title}>{mode === 'work' ? 'Hora de se concentrar!' : mode === 'shortBreak' ? 'Descanso Curto' : 'Descanso Longo'}</h2>
+                                    <div className={styles.timer} >
+                                        {timerVisible ?<>{formatTime(secondsLeft)}</>:<></>}
+                                        {timerVisible ? <img className='pomodoro_eye_close' onClick={handleInvisibleTime} width="50" height="50" src="https://img.icons8.com/fluency-systems-filled/50/visible.png" alt="visible"/>:
+                                        <img className='pomodoro_eye_close' onClick={handleInvisibleTime} width="60" height="60" src="https://img.icons8.com/ios-glyphs/60/closed-eye--v2.png" alt="closed-eye--v2"/>}
+                                    </div>
+                                    <button onClick={handleStartPause}>
+                                        {isRunning ? 'Voltar' : ''}
+                                    </button>
+                                </div>
+                            </div> 
+                             : <></>}
                         </div>
                     </div>
                 </Modal.Body>

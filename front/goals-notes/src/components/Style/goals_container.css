@@ -2,20 +2,21 @@
 
 /* Estilos gerais */
 .goals_view {
-  width: 95vw;
-  padding-left: 20px;
-  margin-top: 150px;
-}
-
-.goals_view h1 {
-  color: #1D3557;
+  padding: 0px 50px;
+  min-height: calc(100vh - 111px);
+  background-color: #131F2455;
 }
 
 .goal_creator_buttons {
-  margin-top: -40px;
-  background-color: #a8dadc79;
-  min-height: 100vh;
-  padding-bottom: 25vh;
+  margin-top: 110px;
+  min-height: calc(100vh - 110px);
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  justify-items: center;
+  align-items: center;
+  background-image: url("../../images/fundoCasa.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: center;
 }
 
 .buttons {
@@ -39,8 +40,24 @@
 }
 
 .modal-content {
-  background-color: #F1FAEE !important;
+  background-color: #131f24;  
 }
+
+.pomodoro_pomodoroTimer__y5PYo {
+  background-color: #222E33 !important;  
+}
+
+.pomodoro_pomodoroTimer__y5PYo h2 {
+  color: white;
+}
+
+.pomodoro_timer__uDPla {
+  color: white !important;
+}
+
+.modal_title {
+  color: white !important;
+} 
 
 .modal-header {
   border-bottom: var(--bs-modal-header-border-width) solid #F1FAEE !important;
@@ -156,7 +173,8 @@
 }
 
 .goal_card {
-  background-color: #F1FAEE;
+  background-color: #222E33;
+  color: #FFF;
   position: relative;
   margin-top: 20px;
   border-radius: 10px;
@@ -165,6 +183,7 @@
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   z-index: 0;
+  text-align: center;
 }
 
 .goal_card:hover {
@@ -187,7 +206,6 @@
   text-align: center;
   margin: 0;
   font-size: 1.5em;
-  color: #FF6B6B;
 }
 
 .goal_title h4 {
@@ -199,7 +217,7 @@
 
 .goal_card p {
   margin: 10px 0;
-  color: #555;
+  color: #FFF;
   font-size: 1em;
 }
 
@@ -224,6 +242,10 @@
 }
 
 .goal_data span{
+  color: #FF6B6B !important; 
+}
+
+.letra_vermelha {
   color: #FF6B6B !important; 
 }
 
@@ -368,7 +390,7 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
-  color: #054e47; 
+  color: gold; 
   padding: 5px 10px;
   text-align: center;
   border-radius: 5px; 
@@ -468,9 +490,115 @@
   box-sizing: border-box;
 }
 
+.Btn_goal_add {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border: none;
+  padding: 0px 20px;
+  background-color: #3aa856;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+  justify-content: center;
+  margin: 0px;
+}
+
+.Btn_goal_add:hover {
+  color: transparent;
+  background-color: #3aa856;
+}
+  
+.Btn_goal_add:hover img {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.Btn_goal_add {
+  background-color: #3aa856;
+}
+
+.button__icon {
+  transition: 1s;
+  position: relative;
+}
+
+.Btn_goal_add:hover .button__icon {
+  width: 100%;
+  transition: 1s;
+  position: absolute;
+}
+
+.Btn_goal_add:active {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+  background-color: #3aa856;
+}
+
+.Btn_goal_end {
+  background-color: #0076bb;
+}
+
+.Btn_goal_end:active {
+  background-color: #0076bb;
+}
+
+.Btn_goal_end:hover {
+  background-color: #0076bb;
+}
+
+.img_goal {
+  filter: invert(1);
+}
+
+.goal_geral_tela .Toastify__toast-container {
+  position: absolute !important;
+}
+
+.botao_direita {
+  top: 20px !important;
+  right: 20px !important;
+}
+
+.finalizar_meta {
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  padding: 0.7em 1.8em;
+  border-radius: 10px;
+  position: absolute;
+  padding: 15px 15px;
+}
+
+.tooltip_finalizar_meta {
+  background-color: #4CAF50 !important;
+}
+  
+.tooltip_finalizar_meta::before {
+  background-color: #4CAF50 !important;
+}
+
+.finalizar_meta:hover .tooltip_finalizar_meta {
+  top: -200%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}  
+
+
 @media screen and (max-width: 900px) {
   .goal_update{
     width: 100%;
+  }
+  .goal_creator_buttons {
+    padding-bottom: 25vh;
   }
 }
 
