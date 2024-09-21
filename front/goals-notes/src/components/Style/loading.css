@@ -279,6 +279,7 @@
     }
   }
 
+<<<<<<< HEAD
   .pomodoro_timer__5uiCr {
     display: flex;
     align-items: center;
@@ -313,3 +314,24 @@
     background: #131f24;
   }
 }
+=======
+  .close_gallery{
+    display: flex;
+    justify-content: flex-end; /* Alinha o conteúdo ao final do contêiner */
+    align-items: center; /* Alinha o conteúdo verticalmente ao centro, se necessário */
+    padding: 10px; /* Adiciona um pouco de espaço ao redor */
+  }
+
+  .close-gallery-button {
+    border: none;
+    font-size: 24px;
+    color: #000000; /* Cor do ícone do botão */
+    cursor: pointer;
+    background-color: rgb(164, 165, 165);
+  }
+
+  .close-gallery-button:hover{
+    color: red;
+    background-color: #580c0c;
+  }
+>>>>>>> 2edb9da996905ea62d9e90cbfe28e48c3de83a8a

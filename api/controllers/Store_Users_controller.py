@@ -108,7 +108,6 @@ class StoreUsersController:
         elif (validacao == True):
             valida = False
             idUser = idSkin
-
             skins = main_queries.find_all_query(StoreUsersModel)
             if not isinstance(skins, list):
                 skins = [skins]
@@ -117,7 +116,7 @@ class StoreUsersController:
                 skins = []
 
             for skin in skins:
-                if (skin.id_usuario == idUser and skin.type == type):
+                if (skin.id_usuario == int(idUser) and skin.type == type):
                     skin.using = 0
                     main_queries.save_query(skin)
                     valida = True
