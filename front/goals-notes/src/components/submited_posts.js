@@ -16,15 +16,16 @@ function SubmitedPosts({ posts, id }) {
 
     const capMessageRef = useRef();
 
-    const handleClick = async (index, postId) => {
+    const handleClick = async (index, postId, user_id) => {
         setComments(prevComments => prevComments.filter((_, i) => i !== index));
-
+        
         const likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
         likedPosts.push(postId);
         localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-
-        await update_user({ "capCoins": 2 }, postId);
-
+        await update_user({ "capCoins": 2 }, id);
+        await update_user({ "capCoins": 2 }, user_id);
+        const myObject = { update_coin: true };
+        sessionStorage.setItem('update_coin', JSON.stringify(myObject));
         capMessageRef.current.triggerToast();
     };
 
@@ -45,7 +46,7 @@ function SubmitedPosts({ posts, id }) {
                                 Completou a tarefa: {comment.desc}
                             </p>
                         </div>
-                        <div className='fixed_like' onClick={() => handleClick(index, comment.id)}>
+                        <div className='fixed_like' onClick={() => handleClick(index, comment.id, comment.id_user)}>
                             <span>❤️</span>
                         </div>
                     </div>

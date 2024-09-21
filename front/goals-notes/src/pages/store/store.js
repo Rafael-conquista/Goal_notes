@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../../components/navbar';
-import cap_default from '../../images/cap_default.jpg';
-import cap_doom from '../../images/capDoom.png';
-import cap_link from '../../images/capLink.png';
-import cap_wizard from '../../images/capWizard.png';
-import cap_percy from '../../images/capPercy.png';
-import cap_witcher from '../../images/capWitcher.png';
+import cap_default from '../../images/cap_default.jpeg';
+import cap_doom from '../../images/capDoom.jpeg';
+import cap_link from '../../images/capLink.jpeg';
+import cap_wizard from '../../images/capWizard.jpeg';
+import cap_percy from '../../images/capPercy.jpeg';
+import cap_witcher from '../../images/capWitcher.jpeg';
 import '../../components/Style/homeStyle.css';
 import '../../components/Style/perfil.css';
 import '../../components/Style/store.css';
@@ -18,6 +18,7 @@ import { postCompra } from '../../services/store_user_requests.js';
 import { atualizaPreco } from '../../services/store_user_requests.js';
 import CapMessage from '../../components/CapMessages';
 import Footer from "../../components/footer";
+import { escolherSkin } from '../../services/store_user_requests.js'
 
 const Store = () => {
 
@@ -170,6 +171,20 @@ const Store = () => {
     setEditarPrecos(false)
   }
 
+  async function escolherFundo(id, type) {
+    const item = skinPossue.find(element => element.id_store === id);
+    console.log(item);
+    if (item){
+      const response = await escolherSkin(item.id, false, type);
+      if (response === 'Alterado') {
+        console.log(response)
+        window.location.reload();
+        sessionStorage.removeItem('fetched_skins');
+      }
+    }
+  }
+  
+
   return (
     <>
       <Navbar currentPage="Store" />
@@ -231,8 +246,8 @@ const Store = () => {
                       </div>
                       }
                       <div className='campoCompra_store_comprada campoCompra_store'>
-                        <button type="button" className="button_perfil_store_comprada">
-                          <span className="button__text button_text">Comprada</span>
+                        <button onClick={() => escolherFundo(store.id, 1)} type="button" className="button_perfil_store_comprada">
+                          <span className="button__text button_text">Equipar</span>
                         </button>
                       </div>
                     </div>
@@ -288,7 +303,7 @@ const Store = () => {
                       }
                       <div className='campoCompra_store_comprada campoCompra_store'>
                         <button type="button" className="button_perfil_store_comprada">
-                          <span className="button__text button_text">Comprada</span>
+                          <span className="button__text button_text">Equipar</span>
                         </button>
                       </div>
                     </div>

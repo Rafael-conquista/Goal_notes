@@ -1,6 +1,6 @@
 import './Style/userStyle.css';
 import React, { useState, useEffect } from 'react';
-import cap_default from '../images/cap_default.jpg';
+import cap_default from '../images/cap_default.jpeg';
 import Loading from './loading.js';
 import { getAmigosUser } from '../services/amigos_requests.js';
 import { makeFriend } from '../services/amigos_requests.js';

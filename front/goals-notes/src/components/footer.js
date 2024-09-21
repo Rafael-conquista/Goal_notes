@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaDiscord } from 'react-icons/fa';
 import './Style/footer.css';
 
 function Footer() {
@@ -15,6 +15,9 @@ function Footer() {
                 </li>
                 <li className="social_list li">
                     <FaInstagram />
+                </li>
+                <li className="social_list li">
+                    <FaDiscord />
                 </li>
             </ul>
             <p className="copy_right">&copy; 2024. Todos os direitos reservados a <span>Capy ❤</span></p>

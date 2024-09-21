@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Style/userStyle.css';
-import cap_default from '../images/cap_default.jpg';
-import cap_doom from '../images/capDoom.png';
-import cap_link from '../images/capLink.png';
-import cap_wizard from '../images/capWizard.png';
-import cap_percy from '../images/capPercy.png';
-import cap_witcher from '../images/capWitcher.png';
+import cap_default from '../images/cap_default.jpeg';
+import cap_doom from '../images/capDoom.jpeg';
+import cap_link from '../images/capLink.jpeg';
+import cap_wizard from '../images/capWizard.jpeg';
+import cap_percy from '../images/capPercy.jpeg';
+import cap_witcher from '../images/capWitcher.jpeg';
 import { getItensActive } from '../services/store_user_requests.js';
 import { escolherSkin } from '../services/store_user_requests.js';
 import Loading from './loading.js';

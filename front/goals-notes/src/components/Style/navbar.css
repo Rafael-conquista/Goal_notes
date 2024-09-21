@@ -20,7 +20,7 @@
 }
 
 .burguer_menu {
-  color: rgb(165, 65, 252);
+  color: #3db4a8;
   font-size: 50px;
   cursor: pointer;
 }
@@ -248,6 +248,22 @@
 }
 
 .item_deslogar:hover::before {
+  width: 100%;
+}
+
+.item_gallery::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 1%;
+  background-color: rgb(204, 92, 92);
+  z-index: -1;
+  transition: all 0.8s;
+  left: 0;
+  height: 3rem;
+}
+
+.item_gallery:hover::before {
   width: 100%;
 }
 
