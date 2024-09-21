@@ -57,6 +57,10 @@
     margin: 0;
   }
 
+.nickname_input_editando:focus {
+  background-color: #131f24ec;
+}
+
 .infosUser {
     display: flex;
     width: 100%;
@@ -66,7 +70,7 @@
 .component_cap_main {
     width: 100vw;
     display: flex;
-    height: 50vh;
+    height: calc(75vh - 110px);
 }
 
 .consulta_skins h1 {
@@ -107,7 +111,7 @@
 }
 
 .component_amigos {
-    height: 100%;
+    height: 100vh;
 }
 
 .component_amigos_main {
@@ -123,11 +127,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, auto));
     justify-items: center;
-    height: 35vh;
-}
-
-.amigo_main, .amigo_main_ultimos {
-    height: 50%;
+    align-items: center;
 }
 
 .amigo_main_geral {

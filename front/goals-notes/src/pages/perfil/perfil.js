@@ -67,7 +67,7 @@ const Homepage = () => {
   return (
     <div>
       <Navbar currentPage="perfil" />
-      <div className='capScreen homeScreenPerfil'>
+      <div className='capScreen homeScreenStore homeScreenPerfil'>
         {idToken != id &&
           <a href={`/${idToken}/perfil`}><button className='botao_amigos'>Voltar para seu perfil</button></a>
         }
