@@ -1,0 +1,96 @@
+.conquista {
+    position: fixed;
+    bottom: calc(0px - 150px);
+    right: 0px;
+    z-index: 10000;
+    background-color: #333;
+    height: 150px;
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    padding: 10px;
+    animation: Conquista_aparece linear 5s;
+}
+
+.conquista img {
+    margin: 0px;
+}
+
+.text_conquista {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.conquista h2 {
+    font-size: 2rem;
+    text-shadow: 1px 1px 0px black;
+    margin: 0px;
+}
+
+.conquista p {
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 0px black;
+}
+
+@keyframes Conquista_aparece {
+    0% {
+        bottom: calc(0px - 150px);
+    }
+    15% {
+        bottom: calc(0px);
+    }
+    85% {
+        bottom: calc(0px);
+    }
+    100% {
+        bottom: calc(0px - 150px);
+    }
+}
+
+.box_shadow_conquistas {
+    display: flex;
+    width: 500px;
+    background-color: #333;
+    color: white;
+    align-items: center;
+    padding: 10px;
+}
+
+.img_conquista, .img_conquista_pendente {
+    border-radius: 0px !important;
+}
+
+.img_conquista::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 1%;
+    background-color: darkgoldenrod;
+    z-index: -1;
+    transition: all 0.8s;
+    left: 0;
+    height: 3rem;
+  }
+  
+.img_conquista_pendente {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(360deg);
+    }
+    50% {
+        box-shadow: 0px 0px 5px yellow;
+    }
+    100% {
+        box-shadow: 0px 0px 15px yellow;
+    }
+}

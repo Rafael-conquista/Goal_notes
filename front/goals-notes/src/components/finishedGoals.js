@@ -34,6 +34,14 @@ function FinishedGoals({ id, mayUpdate, setMayUpdate }) {
         await UpdateGoal(goal_json, goals_id);
         getFinishedGoals()
         setMayUpdate(true)
+
+        const atualizaConquista = JSON.parse(sessionStorage.getItem('conquistas_userMeta'));
+        if (atualizaConquista && atualizaConquista.progresso !== undefined) {
+            if (atualizaConquista.progresso > 0){
+                atualizaConquista.progresso -= 1;
+            }
+            sessionStorage.setItem('conquistas_userMeta', JSON.stringify(atualizaConquista));
+        }
     };
 
     return (

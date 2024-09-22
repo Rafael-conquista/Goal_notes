@@ -72,4 +72,32 @@ export async function get_user(id){
     }
   }
 
-  
+  export async function get_user_conquistas(id){
+    try{
+      let response = await fetch(apiUrl + `userConquistas/${id}`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        }
+      })
+      let user = await response.json()
+      
+      return user
+    } catch(e){
+      console.log(e)
+    }
+  }
+
+  export async function get_conquistas(id){
+    try{
+      let response = await fetch(apiUrl + `ConquistasAll/${id}`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        }
+      })
+      let user = await response.json()
+      
+      return user
+    } catch(e){
+      console.log(e)
+    }
+  }

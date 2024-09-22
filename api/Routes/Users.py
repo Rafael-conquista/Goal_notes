@@ -46,3 +46,13 @@ class User_register(Resource):
         main_queries.save_query(user)
         token = jwt_methods.jwt_create_token(user.id)
         return {"message": "the user has been created", "token": token}, 201
+
+class User_Conquista(Resource):
+    def get(self, user_id):
+        user = UsersController.find_user_conquistas(user_id)
+        return user
+
+class ConquistaAll(Resource):
+    def get(self, user_id):
+        conquistas = UsersController.find_conquistas(user_id)
+        return conquistas
