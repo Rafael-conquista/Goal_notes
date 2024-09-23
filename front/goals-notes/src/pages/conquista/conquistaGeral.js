@@ -59,7 +59,7 @@ const ConquistaGeral = () => {
           <div className="store_item">
             {conquista.length > 0 && conquista.map((conquistaItem) => (
               <>
-                {conquistaItem.id_user !== null &&
+                {conquistaItem.finalizada === 1 &&
                   <div className='box_shadow_conquistas' key={conquistaItem.id || conquistaItem.enum}>
                     <img src={getImageSrc(conquistaItem.enum)} alt='vazio' className='cap_welcome_page img_conquista' />
                     <div className='text_conquista'>
@@ -68,7 +68,7 @@ const ConquistaGeral = () => {
                     </div>
                   </div>
                 }
-                {conquistaItem.id_user === null &&
+                {conquistaItem.finalizada === 0 &&
                   <div className='box_shadow_conquistas' key={conquistaItem.id || conquistaItem.enum}>
                     <img src={getImageSrc(conquistaItem.enum)} alt='vazio' className='cap_welcome_page img_conquista_pendente' />
                     <div className='text_conquista'>

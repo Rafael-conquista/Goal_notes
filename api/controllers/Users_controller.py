@@ -226,6 +226,7 @@ class UsersController:
                     "finalizacao": int(conquista.finalizacao_meta),
                     "enum": int(conquista.enum_meta),
                     "id_user": conquista.id_user,
+                    "finalizada": conquista.finalizada,
                 }
             )
 
