@@ -9,7 +9,6 @@ import { aceitar_amizade } from '../services/amigos_requests.js';
 import { negar_amizade } from '../services/amigos_requests.js';
 import { desfazer_amizade } from '../services/amigos_requests.js';
 import { searchFriend } from '../services/user_requests.js';
-import { useParams } from 'react-router-dom';
 import Conquista from './Conquista';
 import AmigoFotoComponent from '../components/amigoFoto.js';
 import { get_user_conquistas } from "../services/user_requests";
