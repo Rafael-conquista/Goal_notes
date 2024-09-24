@@ -52,6 +52,14 @@
   min-height: calc(50vh - (121.4px ));
 }
 
+.conquistas_item {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(800px,auto));
+  justify-items: center;
+  align-items: center;
+  min-height: calc(50vh - (121.4px ));
+}
+
 .card_store {
     position: relative;
     width: 11.875em;
