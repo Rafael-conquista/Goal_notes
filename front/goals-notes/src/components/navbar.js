@@ -82,7 +82,7 @@ function Navbar() {
       <nav className="navbar navbar-light shadow navbar_view">
         <div className="container-fluid">
           <h1 className="menu_title">
-            <a className="menu_link" href="Home">Goal notes</a>
+            <a className="menu_link title" href="Home">Goal Notes</a>
           </h1>
           <TiThMenu className="burguer_menu" onClick={handleShow} />
         </div>

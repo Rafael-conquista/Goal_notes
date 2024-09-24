@@ -63,6 +63,7 @@
 .modal-header {
   border-bottom: var(--bs-modal-header-border-width) solid #F1FAEE !important;
   justify-content: space-around;
+  color: white;
 }
 
 .modal-footer {
@@ -98,7 +99,7 @@
 }
 
 .botao span {
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   font-size: 18px;
   font-weight: 100;
 }
@@ -200,6 +201,7 @@
   padding-bottom: 10px;
   margin-bottom: 15px;
   margin-top: 5vh;
+  color: white;
 }
 
 .goal_title h3 {
@@ -364,6 +366,7 @@
   align-items: center;
   border-bottom: 1px solid #ddd;
   grid-template-columns: repeat(3, 1fr);
+  color: white;
 }
 
 .subtask_item label {
@@ -467,7 +470,7 @@
 }
 
 .goal_update{
-  background-color: #F1FAEE;
+  background-color: #222E33;
   width: 70%;
   margin: 0 auto;
   position: relative;
@@ -489,6 +492,10 @@
   justify-content: center;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.goal_update_body h3, label{
+  color: white;
 }
 
 .Btn_goal_add {
@@ -613,4 +620,14 @@
 
 input[type="checkbox"]{
   background-color: black !important;
+}
+
+.goal_obs {
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.white-font{
+  color: white;
 }

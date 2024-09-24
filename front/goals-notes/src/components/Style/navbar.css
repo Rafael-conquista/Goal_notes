@@ -301,6 +301,10 @@
   .offcanvas {
     --bs-offcanvas-width: 300px;
   }
+  
+  .title {
+    display: none;
+  }
 
   .tituloStore {
     font-size: 1.8rem !important;
