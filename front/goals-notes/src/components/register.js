@@ -122,7 +122,7 @@ function RegisterComponent({ onPasswordClick }) {
           onChange={passwordChange}
           id="password"
           placeholder="Insira sua Senha"
-          onClick={onPasswordClick}
+          onFocus={onPasswordClick}
         />
         <input
           className="textos"
@@ -131,7 +131,7 @@ function RegisterComponent({ onPasswordClick }) {
           required="required"
           onChange={confirmChange}
           placeholder="Confirme a Senha"
-          onClick={onPasswordClick}
+          onFocus={onPasswordClick}
         />
 
         <button className="textos botaoRegistrar" type="submit" value="entar">

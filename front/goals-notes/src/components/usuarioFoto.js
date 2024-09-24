@@ -48,9 +48,6 @@ const UsuarioFoto = ({ idToken, onClose }) => {
       {loading && <Loading />}
       <div className='clicar' onClick={() => alerta()}></div>
       <div className='consulta_skins'>
-		<div className='close_gallery'>
-			<button onClick={onClose} className='close-gallery-button'>X</button>
-		</div>
         <h1>Aqui estão as skins compradas</h1>
         <div className='amizades_amigos consulta_skins_images'>
           {skin.length > 0 ? skin.map((skinsUsuario) => (

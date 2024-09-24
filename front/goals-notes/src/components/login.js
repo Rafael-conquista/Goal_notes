@@ -118,7 +118,7 @@ function LoginComponent({ onPasswordClick }) {
             onChange={passwordChange}
             id="password"
             placeholder="informe a sua senha"
-            onClick={onPasswordClick}
+            onFocus={onPasswordClick}
           />
 
           <button className="textos esqueciSenha">Esqueceu a senha?</button>
@@ -152,7 +152,7 @@ function LoginComponent({ onPasswordClick }) {
               onChange={passwordChange}
               id="password"
               placeholder="informe a sua senha"
-              onClick={onPasswordClick}
+              onFocus={onPasswordClick}
             />
   
             <button className="textos esqueciSenha">Esqueceu a senha?</button>

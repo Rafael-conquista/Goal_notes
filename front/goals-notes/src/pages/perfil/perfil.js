@@ -67,7 +67,10 @@ const Homepage = () => {
   return (
     <div>
       <Navbar currentPage="perfil" />
-      <div className="capScreen homeScreenStore">
+      <div className='capScreen homeScreenStore homeScreenPerfil'>
+        {idToken != id && !amigosGeral &&
+          <a href={`/${idToken}/perfil`}><button className='botao_amigos'>Voltar para seu perfil</button></a>
+        }
         <div className="cap_component_perfil">
           <div className="button-container">
             <button onClick={() => setSelectedScreen('newScreen')} className="perfilButton">visão geral</button>

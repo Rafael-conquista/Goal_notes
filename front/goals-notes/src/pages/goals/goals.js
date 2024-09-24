@@ -85,7 +85,6 @@ function Goals (){
           <Spinner animation="grow" size="sm" variant="secondary"/>
         </div>
         }
-        <Footer/>
 			</div>
   );
 }

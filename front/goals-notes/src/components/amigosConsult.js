@@ -132,6 +132,7 @@ function AmigosConsultComponent({ idToken, id }) {
                                 <div key={friend.id} className='amigo'>
                                     <AmigoFotoComponent id = {friend.userId}/>
                                     <p>{friend.name} #{friend.userId}</p>
+                                    { id == idToken &&
                                         <button type="button" onClick={() => desfazerAmizade(friend.id)} class="button_perfil_negar">
                                             <span class="button__text">Remover</span>
                                             <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" height="25" width="25">
@@ -139,6 +140,7 @@ function AmigosConsultComponent({ idToken, id }) {
                                                 </svg>
                                             </span>
                                         </button>
+                                    }
                                 </div>
                             )) : <p>Você ainda não fez nenhuma amizade.</p>}
                         </div>
@@ -171,7 +173,7 @@ function AmigosConsultComponent({ idToken, id }) {
                                         <div key={friendPendente.id} className='amigo'>
                                             <AmigoFotoComponent id = {friendPendente.userId}/>
                                             <p>{friendPendente.name} #{friendPendente.userId}</p>
-                                            {friendPendente.id_usuario_enviado != id &&
+                                            {friendPendente.id_usuario_enviado != id && id == idToken &&
                                                 <div className='botoes_amigos'>
                                                     <button type="button" onClick={() => aceitarAmizade(friendPendente.id)} class="button_perfil">
                                                       <span class="button__text">Aceitar</span>
@@ -186,7 +188,7 @@ function AmigosConsultComponent({ idToken, id }) {
                                                     </button>
                                                 </div>
                                             }
-                                            {friendPendente.id_usuario_enviado == id &&
+                                            {friendPendente.id_usuario_enviado == id && id == idToken &&
                                                 <div className='botoes_amigos'>
                                                     <button type="button" onClick={() => negarAmizade(friendPendente.id)} class="button_perfil_negar">
                                                         <span class="button__text">Cancelar</span>
@@ -199,7 +201,7 @@ function AmigosConsultComponent({ idToken, id }) {
                                             }
                                         </div>
                                     }
-                                    {consultarRecebidoPendente && !consultarEnviadoPendente && friendPendente.id_usuario_enviado == id &&
+                                    {consultarRecebidoPendente && !consultarEnviadoPendente && friendPendente.id_usuario_enviado == id && id == idToken &&
                                         <div key={friendPendente.id} className='amigo'>
                                             <AmigoFotoComponent id = {friendPendente.userId}/>
                                             <p>{friendPendente.name} #{friendPendente.userId}</p>
@@ -214,7 +216,7 @@ function AmigosConsultComponent({ idToken, id }) {
                                             </div>
                                         </div>
                                     }
-                                    {!consultarRecebidoPendente && consultarEnviadoPendente && friendPendente.id_usuario_enviado != id &&
+                                    {!consultarRecebidoPendente && consultarEnviadoPendente && friendPendente.id_usuario_enviado != id && id == idToken &&
                                         <div key={friendPendente.id} className='amigo'>
                                             <AmigoFotoComponent id = {friendPendente.userId}/>
                                             <p>{friendPendente.name} #{friendPendente.userId}</p>

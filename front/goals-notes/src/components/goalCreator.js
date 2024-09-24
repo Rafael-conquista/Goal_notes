@@ -83,11 +83,14 @@ function GoalCreator({ id, mayUpdate, setMayUpdate, types }) {
 
     return (
         <div>
-            <h1>Metas</h1>
+            <h1 id='titulo_goals' className='tituloStore'>Crie e consulte suas metas aqui!</h1>
             <div className='new_goal_container'>
-                <div className='new_goal_button' onClick={handleModal}>
-                    Criar nova Meta +
-                </div>
+                <button onClick={handleModal} class="Btn_goal_add new_goal_button">
+                    Criar nova Meta
+                    <span className="button__icon">
+                        <img height="80%" className='bi bi-cart2 img_goal' src="https://img.icons8.com/windows/32/spiral-bound-booklet.png" alt="add--v1"></img>
+                    </span>
+                </button>
             </div>
             <Modal show={showModal} onHide={handleClose} centered size="xl" dialogClassName="custom-modal">
                 <Modal.Header>
