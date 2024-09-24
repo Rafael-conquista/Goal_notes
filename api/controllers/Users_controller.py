@@ -1,4 +1,5 @@
 from sql_alchemy import banco
+from sqlalchemy import text
 from utils import main_queries, jwt_methods
 from models.Users_model import UsersModel
 from utils.format_date import format_to_string
@@ -182,3 +183,53 @@ class UsersController:
         user = main_queries.find_query(UsersModel, id)
         user.capcoins += new_capcoins
         main_queries.save_query(user)
+
+    def find_user_conquistas(id):
+        result = banco.session.execute(text("SELECT * FROM sp_conquista_por_usuario(:id)"), {"id": id})
+        conquistas = result.fetchall()
+
+        conquista_list = []
+        for conquista in conquistas:
+            conquista_list.append(
+                {
+                    "id_usuario": int(conquista.id),
+                    "id_conquista": int(conquista.id_conquista),
+                    "name": conquista.name,
+                    "surname": conquista.surname,
+                    "email": conquista.email,
+                    "nome_conquista": conquista.nome_conquista,
+                    "tipo_descrisao": conquista.tipo_descr,
+                    "percentual_atual": float(conquista.percentualatual),
+                    "data_finalizada": format_to_string(conquista.data_finalizada),
+                    "progresso": int(conquista.progresso),
+                    "finalizacao": int(conquista.finalizacao),
+                    "enum_image": int(conquista.enum),
+                }
+            )
+
+        return {"conquistas": conquista_list}, 200
+
+    def find_conquistas(id):
+        result = banco.session.execute(text("select * from sp_conquistas(:id)"), {"id": id})
+        conquistas = result.fetchall()
+
+        conquista_list = []
+        for conquista in conquistas:
+            conquista_list.append(
+                {
+                    "id": int(conquista.id_meta),
+                    "nome": conquista.nome_meta,
+                    "recompensa": int(conquista.recompensa_meta),
+                    "data_cadastro": format_to_string(conquista.data_cadastro_meta),
+                    "descrisao": conquista.descricao_meta,
+                    "tipo": conquista.tipo_meta,
+                    "finalizacao": int(conquista.finalizacao_meta),
+                    "enum": int(conquista.enum_meta),
+                    "id_user": conquista.id_user,
+                    "finalizada": conquista.finalizada,
+                }
+            )
+
+        return {"conquistas": conquista_list}, 200
+
+

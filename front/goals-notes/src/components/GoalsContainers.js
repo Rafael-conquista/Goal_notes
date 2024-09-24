@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { UpdateGoal, deleteGoals, deleteItems, getItemsByGoal, registerItems, updateItems } from '../services/goals_request';
 import PomodoroModel from './pomodoroModal';
+import Conquista from './Conquista';
 import CapMessage from './CapMessages';
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
@@ -26,6 +27,8 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
     const [descriptions, setDescriptions] = useState({});
     const [showModal, setShowModal] = useState(false);
     const [notificationMessage, setNotificationMessage] = useState('');
+    const [enumConquista, setEnumConquista] = useState('');
+    const [nomeConquista, setNomeConquista] = useState('');
 
     useEffect(() => {
         setEmpty(Object.keys(goals).length === 0);
@@ -70,6 +73,21 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
         setMayUpdate(true);
         const myObject = { update_coin: true };
         sessionStorage.setItem('update_coin', JSON.stringify(myObject));
+
+        const atualizaConquista = JSON.parse(sessionStorage.getItem('conquistas_userMeta'));
+        if (atualizaConquista && atualizaConquista.progresso !== undefined) {  
+            if ((atualizaConquista.progresso + 1) < atualizaConquista.Meta) {
+                setEnumConquista('')
+                setNomeConquista('')
+                atualizaConquista.progresso++
+                sessionStorage.setItem('conquistas_userMeta', JSON.stringify(atualizaConquista));
+            }
+            else if ((atualizaConquista.progresso + 1) == atualizaConquista.Meta){
+                setEnumConquista(atualizaConquista.enum_image);
+                setNomeConquista(atualizaConquista.nome_conquista);
+                sessionStorage.removeItem('conquistas_userMeta');
+            }
+        }
     };
 
     const handleCheckboxChange = async (item) => {
@@ -129,6 +147,11 @@ function GoalsContainer({ goals, id, mayUpdate, setMayUpdate, types }) {
 
     return (
         <div className='goals_view' style={{ overflowX: 'hidden' }}>
+            {enumConquista != '' && nomeConquista != '' &&
+                <Conquista 
+                idImage={enumConquista}
+                name={nomeConquista}/>
+            }
             {goalClickedUpdate ? (
                 <div className='goal_update'>
                     <div className='goal_update_body'>

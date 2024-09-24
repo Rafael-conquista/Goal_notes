@@ -10,7 +10,9 @@ import { negar_amizade } from '../services/amigos_requests.js';
 import { desfazer_amizade } from '../services/amigos_requests.js';
 import { searchFriend } from '../services/user_requests.js';
 import { useParams } from 'react-router-dom';
+import Conquista from './Conquista';
 import AmigoFotoComponent from '../components/amigoFoto.js';
+import { get_user_conquistas } from "../services/user_requests";
 
 function AmigosConsultComponent({ idToken, id }) {
     const [message, setMessage] = useState('');
@@ -22,7 +24,9 @@ function AmigosConsultComponent({ idToken, id }) {
     const [friends, setFriends] = useState([]);
     const [friendsPendente, setFriendsPendente] = useState([]);
     const [friendsConsult, setFriendsConsult] = useState([]);
-    const [activeSection, setActiveSection] = useState('amigos'); // Define a seção ativa inicialmente como 'amigos'
+    const [activeSection, setActiveSection] = useState('amigos');
+    const [enumConquista, setEnumConquista] = useState('');
+    const [nomeConquista, setNomeConquista] = useState('');
 
     const friendSearchApelidoChange = (e) => {
         setfriendSearchApelido(e.target.value);
@@ -34,8 +38,42 @@ function AmigosConsultComponent({ idToken, id }) {
 
     async function aceitarAmizade(idAmizade) {
         await aceitar_amizade(idAmizade.toString());
+        const atualizaConquista = JSON.parse(sessionStorage.getItem('conquistas_userAmigo'));
+        if (atualizaConquista && atualizaConquista.progresso !== undefined) {  
+            if ((atualizaConquista.progresso + 1) < atualizaConquista.Meta) {
+                console.log(atualizaConquista.progresso)
+                console.log(atualizaConquista.Meta)
+                setEnumConquista('')
+                setNomeConquista('')
+                atualizaConquista.progresso++
+                sessionStorage.setItem('conquistas_userAmigo', JSON.stringify(atualizaConquista));
+            }
+            else if ((atualizaConquista.progresso + 1) == atualizaConquista.Meta){
+                console.log(atualizaConquista.progresso)
+                console.log(atualizaConquista.Meta)
+                setEnumConquista(atualizaConquista.enum_image)
+                setNomeConquista(atualizaConquista.nome_conquista)
+                sessionStorage.removeItem('conquistas_userAmigo');
+            }
+        }
         loadFriends();
     }
+    
+    useEffect(() => {
+      if (!sessionStorage.getItem('conquistas_userAmigo')) {
+        get_user_conquistas(id).then((conquistas) => {
+            const conquistasFiltradas = conquistas.conquistas.filter(conquista => conquista.data_finalizada === null);
+            console.log(conquistasFiltradas)
+            if (conquistasFiltradas.length > 0) {
+              for (let i = 0; i < conquistasFiltradas.length; i++) {
+                  const element = conquistasFiltradas[i];
+                  sessionStorage.setItem('conquistas_user' + element.tipo_descrisao, JSON.stringify({ progresso: element.progresso, Meta: element.finalizacao, Type: element.tipo_descrisao, id_conquista: element.id_conquista, enum_image: element.enum_image, nome_conquista: element.nome_conquista }));
+              }
+            }else {
+              sessionStorage.setItem('conquistas_userAmigo', JSON.stringify({ progresso: 0, Meta: 1, Type: 'Amigo', id_conquista: 2, enum_image: 2, nome_conquista: "Faça um amigo" }));
+            }
+        });
+    }});
 
     async function negarAmizade(idAmizade) {
         await negar_amizade(idAmizade.toString());
@@ -117,6 +155,11 @@ function AmigosConsultComponent({ idToken, id }) {
 
     return (
         <section className='component_amigos_main'>
+            {enumConquista != '' && nomeConquista != '' &&
+                <Conquista 
+                idImage={enumConquista}
+                name={nomeConquista}/>
+            }
             <div className='amigo_main_geral'>
                 <div className="nav_buttons">
                     <button onClick={() => setActiveSection('amigos')} className={`nav_button ${activeSection === 'amigos' ? 'active' : ''}`}>Amigos</button>

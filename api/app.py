@@ -29,7 +29,7 @@ banco = SQLAlchemy(app)
 api = Api(app)
 
 # Import your routes here
-from Routes.Users import User, Users, User_register, User_login, User_consult
+from Routes.Users import User, Users, User_register, User_login, User_consult, User_Conquista, ConquistaAll
 from Routes.Goals import Goal, Goals, Goals_by_user
 from Routes.Types import Type, Types, Type_register
 from Routes.Items import Item, Items, Item_register, ItemsByGoals
@@ -52,6 +52,8 @@ api.add_resource(User, "/user/<int:user_id>")
 api.add_resource(User_consult, "/userConsult")
 api.add_resource(User_register, "/register")
 api.add_resource(User_login, "/login")
+api.add_resource(User_Conquista, "/userConquistas/<int:user_id>")
+api.add_resource(ConquistaAll, "/ConquistasAll/<int:user_id>")
 # users and Goals related Routes
 api.add_resource(Goals_by_user, "/usergoals/<int:user_id>")
 # Goals related Routes

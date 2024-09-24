@@ -4,6 +4,7 @@ import Goals from "./pages/goals/goals"
 import CapCreate from "./pages/CapCreate/CapCreate";
 import Amigos from "./pages/amigos/amigos";
 import Perfil from "./pages/perfil/perfil";
+import ConquistaGeral from "./pages/conquista/conquistaGeral";
 import Store from "./pages/store/store";
 import { Route,Routes, BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,6 +33,7 @@ import Posts from "./pages/GoalPosts/posts";
           <Route path="/:id/Perfil" element={<Perfil />}></Route>
           <Route path="/:id/store" element={<Store />}></Route>
           <Route path="/:id/posts" element={<Posts />}></Route>
+          <Route path="/:id/conquistas" element={<ConquistaGeral />}></Route>
         </Routes>
     </BrowserRouter>
   );

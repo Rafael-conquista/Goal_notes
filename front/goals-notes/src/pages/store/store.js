@@ -159,14 +159,7 @@ const Store = () => {
   const possuiSkin = (idStore) => {
     return skinPossue.some(skin => skin.id_store === idStore);
   };
-
-  async function EditarPrecos() {
-    if (editarPrecos == true)
-      setEditarPrecos(false)
-    else 
-      setEditarPrecos(true)
-  };
-
+  
 	async function alerta() {
     setEditarPrecos(false)
   }
