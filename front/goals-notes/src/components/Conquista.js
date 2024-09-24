@@ -5,6 +5,8 @@ import cap_amiga_um from '../images/capivaraAmigaUm.png';
 import cap_amiga_dez from '../images/capivaraAmigaDez.png';
 import cap_tarefa_um from '../images/capivaraTarefaUm.png';
 import cap_tarefa_dez from '../images/capivaraTarefaDez.png';
+import cap_tarefa_vinte from '../images/capivaraTarefaVinte.png';
+import cap_tarefa_trinta from '../images/capivaraTarefaTrinta.png';
 
 function Conquista({ idImage, name }) {
 
@@ -21,6 +23,10 @@ function Conquista({ idImage, name }) {
             return cap_amiga_dez;
           case 4:
             return cap_tarefa_dez;
+          case 5:
+            return cap_tarefa_vinte;
+          case 6:
+            return cap_tarefa_trinta;
           default:
             return cap_amiga_um;
         }

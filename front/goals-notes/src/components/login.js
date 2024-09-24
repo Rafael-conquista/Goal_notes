@@ -121,7 +121,6 @@ function LoginComponent({ onPasswordClick }) {
             onFocus={onPasswordClick}
           />
 
-          <button className="textos esqueciSenha">Esqueceu a senha?</button>
 
           <button className="textos botaoLogar" type="submit" value="entar">
             Entrar
@@ -155,7 +154,6 @@ function LoginComponent({ onPasswordClick }) {
               onFocus={onPasswordClick}
             />
   
-            <button className="textos esqueciSenha">Esqueceu a senha?</button>
         
             <p className="textos esqueciSenha redirect" onClick={scrollToBottom}>
               Realizar cadastro
