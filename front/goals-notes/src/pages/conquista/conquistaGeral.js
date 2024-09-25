@@ -62,7 +62,7 @@ const ConquistaGeral = () => {
       <section className='capScreen homeScreenStore store'>
         <div className="store_component_cima tela_conquistas">
           <h1 className='tituloStore'>Museu de conquistas</h1>
-          <div className="store_item">
+          <div className="conquistas_item">
             {conquista.length > 0 && conquista.map((conquistaItem) => (
               <>
                 {conquistaItem.finalizada === 1 &&

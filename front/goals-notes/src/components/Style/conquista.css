@@ -94,3 +94,14 @@
         box-shadow: 0px 0px 15px yellow;
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .conquistas_item {
+        grid-template-columns: repeat(auto-fit,minmax(350px,auto)) !important
+    }
+    .box_shadow_conquistas {
+        width: 350px;
+        margin-bottom: 10px;
+    }
+}
+
