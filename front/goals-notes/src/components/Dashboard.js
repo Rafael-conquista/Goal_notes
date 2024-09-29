@@ -115,12 +115,12 @@ const Dashboard = (id) => {
             </section>
 
             <section className="modal-section">
-              <h2>Metas Finalizadas</h2>
+              <h2>Metas em Andamento</h2>
               <p>Total: {completedGoalsCount}</p>
             </section>
 
             <section className="modal-section">
-              <h2>Metas em Progresso</h2>
+              <h2>Metas finalizadas</h2>
               <p>Total: {incompletedGoalsCount}</p>
             </section>
 
@@ -132,7 +132,7 @@ const Dashboard = (id) => {
                   <p>Finalizada em: {new Date(lastCompletedGoal.end_date).toLocaleDateString('pt-BR')}</p>
                 </div>
               ) : (
-                <p>Sem metas finalizadas.</p>
+                <p>Sem metas em progresso.</p>
               )}
             </section>
 
