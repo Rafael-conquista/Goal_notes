@@ -9,7 +9,7 @@ function AmigosConsultComponent({ idToken, id }) {
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {
-        getAmigosUser(id, false).then((amigos) => {
+        getAmigosUser(id, true).then((amigos) => {
             if (amigos && Array.isArray(amigos)) {
                 setFriends(amigos);
             } else {
