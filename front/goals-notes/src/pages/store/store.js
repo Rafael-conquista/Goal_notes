@@ -1,6 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../../components/navbar';
 import cap_default from '../../images/cap_default.jpeg';
+import batman from '../../images/batman.jpg';
+import barbie from '../../images/barbie.png'
+import casaco from '../../images/casaco.jpg'
+import dark from '../../images/dark.jpg'
+import draculaura from '../../images/draculaura.jpg'
+import dragon from '../../images/dragon.jpg'
+import esquilo from '../../images/esquilo.jpg'
+import fantasia from '../../images/fantasia.jpg'
+import gatinho from '../../images/gatinho.jpg'
+import kratos from '../../images/kratos.jpg'
+import luigi from '../../images/luigi.jpg'
+import mario from '../../images/mario.jpg'
+import megaman from '../../images/megaman.jpg'
+import menina from '../../images/menina.jpg'
+import mine from '../../images/mine.jpg'
+import sonic from '../../images/sonic.jpg'
+import souls from '../../images/souls.jpg'
+import stiche from '../../images/stiche.jpg'
+import yoshi from '../../images/yoshi.jpg'
+import charizard from '../../images/charizard.jpg'
 import cap_doom from '../../images/capDoom.jpeg';
 import cap_link from '../../images/capLink.jpeg';
 import cap_wizard from '../../images/capWizard.jpeg';
@@ -105,6 +125,46 @@ const Store = () => {
         return cap_percy;
       case 5:
         return cap_witcher;
+      case 6:
+        return barbie
+      case 7:
+        return batman
+      case 8:
+        return casaco
+      case 9:
+        return dark
+      case 10:
+        return draculaura
+      case 11:
+        return dragon
+      case 12:
+        return esquilo
+      case 13:
+        return fantasia
+      case 14:
+        return gatinho
+      case 15:
+        return kratos
+      case 16:
+        return luigi
+      case 17:
+        return mario
+      case 18:
+        return megaman
+      case 19:
+        return menina
+      case 20:
+        return mine
+      case 21:
+        return sonic
+      case 22:
+        return souls
+      case 23:
+        return stiche
+      case 24:
+        return yoshi
+      case 25:
+        return charizard
       default:
         return cap_default;
     }
